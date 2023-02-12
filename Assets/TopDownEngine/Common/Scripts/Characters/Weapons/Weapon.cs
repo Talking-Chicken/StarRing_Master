@@ -209,6 +209,9 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("whether or not this weapon can be interrupted")]
 		public bool Interruptable = false;
 
+		[Header("Range")]
+		public float Range = 10.0f;
+
 		/// the name of the inventory item corresponding to this weapon. Automatically set (if needed) by InventoryEngineWeapon
 		public string WeaponID { get; set; }
 		/// the weapon's owner
