@@ -12,9 +12,7 @@ Material:
   m_ValidKeywords:
   - N_F_EAL_ON
   - N_F_ESSAO_ON
-  - N_F_O_ON
   - N_F_RDC_ON
-  - N_F_RELGI_ON
   - N_F_RL_ON
   - N_F_SL_ON
   - N_F_SS_ON
@@ -48,7 +46,8 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -190,7 +189,7 @@ Material:
     - _DstBlend: 0
     - _DynamicNoisyOutline: 0
     - _EnvironmentReflections: 1
-    - _EnvironmentalLightingIntensity: 1
+    - _EnvironmentalLightingIntensity: 0
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 1
@@ -240,7 +239,7 @@ Material:
     - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
-    - _N_F_O: 1
+    - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
@@ -268,7 +267,7 @@ Material:
     - _Parallax: 0.02
     - _PointSpotlightIntensity: 0
     - _QueueOffset: 0
-    - _RELG: 1
+    - _RELG: 0
     - _ReceiveShadows: 1
     - _ReduSha: 0
     - _RefMetallic: 0
@@ -285,8 +284,8 @@ Material:
     - _STIL: 0
     - _Saturation: 1
     - _SelfLitHighContrast: 1
-    - _SelfLitIntensity: 0.112
-    - _SelfLitPower: 21.26
+    - _SelfLitIntensity: 0.708
+    - _SelfLitPower: 10
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
     - _SelfShadowRealTimeShadowColorPower: 1
@@ -339,7 +338,7 @@ Material:
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SSAOColor: {r: 0, g: 0, b: 0, a: 0}
-    - _SelfLitColor: {r: 0.37123778, g: 0.22322798, b: 0.10946172, a: 1}
+    - _SelfLitColor: {r: 0.43529412, g: 0.24313726, b: 0.20784314, a: 1}
     - _SelfShadowRealTimeShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowTColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

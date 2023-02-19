@@ -11,12 +11,15 @@ Material:
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_ValidKeywords:
   - N_F_EAL_ON
+  - N_F_FR_ON
   - N_F_GLO_ON
-  - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
+  - N_F_RL_ON
+  - N_F_R_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
+  - N_F_TRANS_ON
   m_InvalidKeywords:
   - N_F_TRANSAFFSHA
   - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
@@ -45,9 +48,11 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -167,8 +172,8 @@ Material:
     m_Floats:
     - _AlphaBaseCutout: 1
     - _AlphaClip: 0
-    - _BleModDest: 0
-    - _BleModSour: 1
+    - _BleModDest: 10
+    - _BleModSour: 5
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -196,12 +201,12 @@ Material:
     - _GlossColorPower: 10
     - _GlossIntensity: 1
     - _GlossMapScale: 1
-    - _GlossSoftness: 0
+    - _GlossSoftness: 0.178
     - _GlossTextureFollowLight: 0
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
     - _GlossTextureSoftness: 0
-    - _Glossiness: 0.439
+    - _Glossiness: 0.578
     - _GlossyReflections: 1
     - _Glow_Edge_Width: 1
     - _HighlightColorPower: 1
@@ -229,7 +234,7 @@ Material:
     - _N_F_DDMD: 0
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
-    - _N_F_FR: 0
+    - _N_F_FR: 1
     - _N_F_GLO: 1
     - _N_F_GLOT: 0
     - _N_F_HDLS: 0
@@ -239,12 +244,12 @@ Material:
     - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
-    - _N_F_O: 1
+    - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
-    - _N_F_R: 0
+    - _N_F_R: 1
     - _N_F_RDC: 1
-    - _N_F_RL: 0
+    - _N_F_RL: 1
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
@@ -255,10 +260,10 @@ Material:
     - _NoisyOutlineIntensity: 1
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0.051
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
-    - _OutlineWidth: 0.1
+    - _OutlineWidth: 0
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 0
     - _OverallShadowColorPower: 1
@@ -272,7 +277,7 @@ Material:
     - _ReduSha: 0.5
     - _RefMetallic: 0
     - _RefVal: 0
-    - _ReflectionIntensity: 0
+    - _ReflectionIntensity: 0.333
     - _ReflectionRoughtness: 0
     - _RimLigInt: 1
     - _RimLightColorPower: 10
@@ -311,7 +316,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TEXMCOLINT: 1
-    - _TRANSMODE: 0
+    - _TRANSMODE: 1
     - _TexturePatternStyle: 0
     - _TransAffSha: 1
     - _TransparentThreshold: 0
