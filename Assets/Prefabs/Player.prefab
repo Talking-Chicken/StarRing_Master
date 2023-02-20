@@ -220,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375987935339358687}
   m_LocalRotation: {x: 0.9642972, y: -0.00039376505, z: -0.017964289, w: 0.26421246}
-  m_LocalPosition: {x: 0.0007, y: 0.00046, z: 0.00129}
+  m_LocalPosition: {x: 0.00083, y: 0.0005, z: 0.00117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2190,7 +2190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4178278683965125045}
   m_LocalRotation: {x: 0.94781923, y: -0.0006190082, z: 0.017947603, w: 0.31830224}
-  m_LocalPosition: {x: -0.00072, y: 0.00063, z: 0.00123}
+  m_LocalPosition: {x: -0.00072, y: 0.00058, z: 0.00115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2499,7 +2499,23 @@ SkinnedMeshRenderer:
   - {fileID: 7618590553915666296}
   - {fileID: 3240810334479943310}
   - {fileID: 3572214455299105543}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 100
+  - 100
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 100
+  - 0
+  - 0
+  - 0
   m_RootBone: {fileID: 761635501094945833}
   m_AABB:
     m_Center: {x: 0.00011700392, y: -0.0021612803, z: 0.00028076652}
@@ -4595,6 +4611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MouseControlsBrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674092302985828051, guid: 49a121fad1442e441bcc6f43b7dc8ff6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2026419313473068116, guid: 49a121fad1442e441bcc6f43b7dc8ff6,
         type: 3}

@@ -25,10 +25,8 @@ Material:
   m_ValidKeywords:
   - N_F_EAL_ON
   - N_F_GLO_ON
-  - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
-  - N_F_SL_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   m_InvalidKeywords:
@@ -56,12 +54,13 @@ Material:
   - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
   - _VERTEXCOLORGREENCONTROLSELFSHADOWTHRESHOLD_OFF
   - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -253,14 +252,14 @@ Material:
     - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
-    - _N_F_O: 1
+    - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
     - _N_F_RL: 0
     - _N_F_SCT: 0
-    - _N_F_SL: 1
+    - _N_F_SL: 0
     - _N_F_SON: 0
     - _N_F_SS: 1
     - _N_F_ST: 0
@@ -345,7 +344,7 @@ Material:
     - _GlossColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.21698111, g: 0.20981665, b: 0.20981665, a: 1}
+    - _MainColor: {r: 0.0754717, g: 0.057326138, b: 0.048771806, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
