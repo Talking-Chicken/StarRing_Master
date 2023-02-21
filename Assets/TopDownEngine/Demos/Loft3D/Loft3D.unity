@@ -4450,7 +4450,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
+  m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: f3be6d7d246feaf4e91af06eb7475bc4, type: 2}
 --- !u!4 &627456237
@@ -4779,6 +4779,11 @@ PrefabInstance:
     - target: {fileID: 4796342324616292, guid: d4529f47989526241929319abfdfc29d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 20055413374703424, guid: d4529f47989526241929319abfdfc29d,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 20055413374703424, guid: d4529f47989526241929319abfdfc29d,
         type: 3}
@@ -5565,7 +5570,8 @@ PrefabInstance:
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 1160353690}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114015822488491818, guid: d4529f47989526241929319abfdfc29d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d4529f47989526241929319abfdfc29d, type: 3}
 --- !u!1 &658620816 stripped
 GameObject:
