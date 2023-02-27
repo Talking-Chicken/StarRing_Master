@@ -124,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4142866814125310061}
+  - component: {fileID: 1338075951087861970}
   - component: {fileID: 4142866814125310050}
   - component: {fileID: 4142866814125310079}
   - component: {fileID: 4142866814125310078}
@@ -163,6 +164,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1338075951087861970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142866814125310060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ddd6a56a49be048998293fa4f59f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4142866814125310050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +375,7 @@ MonoBehaviour:
   InputAuthorized: 1
   AnalogInput: 0
   ScriptDrivenInput: 0
-  WalkSpeed: 3
+  WalkSpeed: 2
   ShouldSetMovement: 1
   IdleThreshold: 0.05
   Acceleration: 1000
@@ -391,7 +404,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
-  RunSpeed: 16
+  RunSpeed: 4
   AutoRun: 0
   AutoRunThreshold: 0.6
 --- !u!114 &4142866814125310054
@@ -617,7 +630,7 @@ MonoBehaviour:
   DoubleClickInterval: 0.15
   TargetLayerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 8396800
 --- !u!1001 &3070714456226519915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -717,6 +730,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4142866814125310061}
     m_Modifications:
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[22]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[25]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[26]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[27]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[29]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[49]
+      value: 32.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 730372917265084494, guid: 7ca510386036a3844ab2b3ad1798dfd5,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[51]
+      value: 41.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5979339951906164372, guid: 7ca510386036a3844ab2b3ad1798dfd5,
         type: 3}
       propertyPath: m_RootOrder

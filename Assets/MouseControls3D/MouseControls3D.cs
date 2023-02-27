@@ -2,6 +2,7 @@
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 using UnityEngine;
+using Yarn.Unity;
 
 namespace TopDownEngineExtensions
 {
@@ -17,12 +18,19 @@ namespace TopDownEngineExtensions
         private AIBrain _brain;
         private AIState _initialState;
 
+        //yarn
+        private DialogueRunner _dialogueRunner;
+        //state machine
+        private PlayerManager _player;
+
         protected override void Awake()
         {
             base.Awake();
             _brain = _character.CharacterBrain;
             _initialState = _brain.States[0];
             _characterRun = _character.FindAbility<CharacterRun>();
+            _dialogueRunner = FindObjectOfType<DialogueRunner>();
+            _player = GetComponent<PlayerManager>();
         }
 
         private IEnumerator DoubleClick()
@@ -58,9 +66,20 @@ namespace TopDownEngineExtensions
 #endif
             if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, TargetLayerMask))
             {
-                _brain.Target = hitInfo.transform;
-                _characterPathfinder3D.SetNewDestination(_brain.Target);
-                return;
+                //custom codes
+                if (hitInfo.transform.gameObject.layer.Equals(23)) {
+                    NPC npc;
+                    hitInfo.transform.gameObject.TryGetComponent<NPC>(out npc);
+
+                    if (!_dialogueRunner.IsDialogueRunning) {
+                        _dialogueRunner.StartDialogue(npc.StartNodeBase + "-" + (npc.GetProgress(npc.StartNodeBase)+1));
+                        _player.ChangeState(_player.stateDialogue);
+                    }
+                } else {
+                    _brain.Target = hitInfo.transform; //not cus
+                    _characterPathfinder3D.SetNewDestination(_brain.Target); //not cus
+                }
+                return; //not cus
             }
             _brain.Target = null;
             if (_brain.CurrentState != _initialState) _brain.TransitionToState(_initialState.StateName);

@@ -16,6 +16,6 @@ public class PlayerStateUI : PlayerStateBase
 
     public override void LeaveState(PlayerManager player)
     {
-        
+        player.previousState = this;
     }
 }

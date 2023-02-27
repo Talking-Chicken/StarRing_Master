@@ -6,7 +6,7 @@ public class PlayerStateDialogue : PlayerStateBase
 {
     public override void EnterState(PlayerManager player)
     {
-        
+        player.limitMovement();
     }
 
     public override void UpdateState(PlayerManager player)
@@ -16,6 +16,6 @@ public class PlayerStateDialogue : PlayerStateBase
 
     public override void LeaveState(PlayerManager player)
     {
-        
+        player.previousState = this;
     }
 }
