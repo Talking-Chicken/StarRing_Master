@@ -108,15 +108,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
-    agentHeight: 2
+    agentRadius: 0.2
+    agentHeight: 1.5
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.06666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -124,7 +124,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 17567046473318e42a204b4295ade788, type: 2}
 --- !u!1001 &29813158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2074,8 +2074,8 @@ Transform:
   - {fileID: 1729776008705786785}
   - {fileID: 7685259906632381452}
   - {fileID: 3612539099927847012}
-  - {fileID: 29813159}
   - {fileID: 5811517545258017644}
+  - {fileID: 29813159}
   - {fileID: 8616562852446946667}
   - {fileID: 8622353167510606275}
   - {fileID: 4005393329626393512}
@@ -2405,7 +2405,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -2413,7 +2413,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.05
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: c63bd39c6b691324f95e677f915199aa, type: 2}
 --- !u!4 &1144515818
@@ -24912,8 +24912,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.014354888, y: 0.0067397095, z: 0.02}
-  m_Center: {x: -0.0000000034924597, y: 3.4924597e-10, z: -0.000000004656613}
+  m_Size: {x: 0.014354888, y: 0.013770565, z: 0.020000003}
+  m_Center: {x: -0.000000003721205, y: 0.0035154244, z: -0.0000000042528057}
 --- !u!4 &4972747894613526549
 Transform:
   m_ObjectHideFlags: 0
@@ -26461,8 +26461,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03178555, y: 0.020000001, z: 0.02}
-  m_Center: {x: -0.005892776, y: 0, z: 0}
+  m_Size: {x: 0.031785548, y: 0.020000001, z: 0.020155499}
+  m_Center: {x: -0.005892776, y: -1.1839138e-18, z: 0.000077742545}
 --- !u!33 &5586862584683438807
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27199,7 +27199,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 986147349}
-  m_RootOrder: 205
+  m_RootOrder: 204
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5813186242728002724
 GameObject:
@@ -29247,8 +29247,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.014354888, y: 0.0067397095, z: 0.02}
-  m_Center: {x: -0.0000000034924597, y: 3.4924597e-10, z: -0.000000004656613}
+  m_Size: {x: 0.014354888, y: 0.0135695245, z: 0.020000003}
+  m_Center: {x: -0.000000003721205, y: 0.0034149028, z: -0.0000000042528057}
 --- !u!4 &6490625522234344657
 Transform:
   m_ObjectHideFlags: 0
