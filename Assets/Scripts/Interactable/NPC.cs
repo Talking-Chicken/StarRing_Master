@@ -8,6 +8,9 @@ public class NPC : MonoBehaviour, ITalkable
 {
     [SerializeField, BoxGroup("Dialogue")] private string startNodeBase;
     [ShowNonSerializedField, BoxGroup("Dialogue")] private Dictionary<string,int> interactCount = new Dictionary<string, int>();
+    private DialogueRunner dialogueRunner;
+    [SerializeField, BoxGroup("Dialogue")] private List<Transform> talkingPositions;
+
     //getters & setters
     public string StartNodeBase {get=>startNodeBase;set=>startNodeBase=value;}
     
@@ -31,5 +34,10 @@ public class NPC : MonoBehaviour, ITalkable
             return interactCount[nodeBase];
         else
             return 0;
+    }
+
+    /*return the closest position from a transform*/
+    public void getClosestPosition(Transform target) {
+        
     }
 }

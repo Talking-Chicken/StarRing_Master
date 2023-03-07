@@ -72,7 +72,7 @@ namespace TopDownEngineExtensions
                     hitInfo.transform.gameObject.TryGetComponent<NPC>(out npc);
 
                     if (!_dialogueRunner.IsDialogueRunning) {
-                        _dialogueRunner.StartDialogue(npc.StartNodeBase + "-" + (npc.GetProgress(npc.StartNodeBase)+1));
+                        _dialogueRunner.StartDialogue(npc.StartNodeBase + "_" + (npc.GetProgress(npc.StartNodeBase)+1));
                         _player.ChangeState(_player.stateDialogue);
                     }
                 } else {
@@ -81,6 +81,7 @@ namespace TopDownEngineExtensions
                 }
                 return; //not cus
             }
+            
             _brain.Target = null;
             if (_brain.CurrentState != _initialState) _brain.TransitionToState(_initialState.StateName);
             if (!_playerPlane.Raycast(ray, out var distance)) return;

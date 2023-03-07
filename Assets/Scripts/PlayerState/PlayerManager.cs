@@ -4,12 +4,17 @@ using UnityEngine;
 using NaughtyAttributes;
 using MoreMountains.TopDownEngine;
 using Yarn.Unity;
+using UnityEngine.AI;
 
 public class PlayerManager : MonoBehaviour
 {
     [ShowNonSerializedField, BoxGroup("Info")] private CharacterPathfinder3D _characterPathFinder;
     [ShowNonSerializedField, BoxGroup("Info")] private CharacterMovement _characterMovement;
     [ShowNonSerializedField, BoxGroup("Info")] private DialogueRunner dialogueRunner;
+    [ShowNonSerializedField, BoxGroup("Dialogue")] private NavMeshHit navHit;  
+
+    [SerializeField, BoxGroup("test")] private GameObject testObj;
+    private GameObject gg;
 
 
     //FSM
@@ -70,14 +75,25 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+
+        
+        if (Input.GetKeyDown(KeyCode.H)) {
+            gg = Instantiate(testObj, transform.position, Quaternion.identity);
+        }
+
+        if (Input.GetKeyDown(KeyCode.J)) {
+            _characterPathFinder.SetNewDestination(gg.transform);
+        }
     }
 
     public void limitMovement() {
-        _characterMovement.AbilityPermitted = false;
         _characterPathFinder.SetNewDestination(transform);
+        _characterMovement.AbilityPermitted = false;
+        Instantiate(testObj, transform.position, Quaternion.identity);
     }
 
     public void releaseMovement() {
         _characterMovement.AbilityPermitted = true;
     }
+
 }
