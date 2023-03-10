@@ -198,7 +198,7 @@ Cloth:
   m_BendingStiffness: 0
   m_UseTethers: 1
   m_UseGravity: 1
-  m_Damping: 0.01
+  m_Damping: 0.3
   m_ExternalAcceleration: {x: 0, y: 0, z: 0}
   m_RandomAcceleration: {x: 0, y: 0, z: 0}
   m_WorldVelocityScale: 0.5
@@ -21870,7 +21870,9 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.0001
     collisionSphereDistance: 3.4028235e+38
-  m_CapsuleColliders: []
+  m_CapsuleColliders:
+  - {fileID: 4971622542386358239}
+  - {fileID: 7147598106002858912}
   m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 0.2
@@ -23752,6 +23754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5983001937278184171}
+  - component: {fileID: 7147598106002858912}
   m_Layer: 0
   m_Name: upper_leg.R
   m_TagString: Untagged
@@ -23775,6 +23778,20 @@ Transform:
   m_Father: {fileID: 146471669223995789}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7147598106002858912
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5949486024883088813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.001102249
+  m_Height: 0.0071004443
+  m_Direction: 1
+  m_Center: {x: 1.414843e-10, y: 0.0027748449, z: 0}
 --- !u!1 &6040256108923547191
 GameObject:
   m_ObjectHideFlags: 0
@@ -24854,6 +24871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1673231900909339848}
+  - component: {fileID: 4971622542386358239}
   m_Layer: 0
   m_Name: upper_leg.L
   m_TagString: Untagged
@@ -24877,6 +24895,20 @@ Transform:
   m_Father: {fileID: 146471669223995789}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4971622542386358239
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636886327737238084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.001102249
+  m_Height: 0.0071004443
+  m_Direction: 1
+  m_Center: {x: 1.414843e-10, y: 0.0027748449, z: 0}
 --- !u!1 &7700600016434214734
 GameObject:
   m_ObjectHideFlags: 0
