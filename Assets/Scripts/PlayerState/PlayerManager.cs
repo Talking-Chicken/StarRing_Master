@@ -5,11 +5,13 @@ using NaughtyAttributes;
 using MoreMountains.TopDownEngine;
 using Yarn.Unity;
 using UnityEngine.AI;
+using TopDownEngineExtensions;
 
 public class PlayerManager : MonoBehaviour
 {
     [ShowNonSerializedField, BoxGroup("Info")] private CharacterPathfinder3D _characterPathFinder;
     [ShowNonSerializedField, BoxGroup("Info")] private CharacterMovement _characterMovement;
+    [ShowNonSerializedField, BoxGroup("Info")] private MouseControls3D _mouseControl3D;
     [ShowNonSerializedField, BoxGroup("Info")] private DialogueRunner dialogueRunner;
     [ShowNonSerializedField, BoxGroup("Dialogue")] private NavMeshHit navHit;  
 
@@ -69,6 +71,9 @@ public class PlayerManager : MonoBehaviour
         _characterMovement = GetComponent<CharacterMovement>();
         if (_characterMovement == null)
             Debug.LogWarning("Can't find CharacterMovement");
+        _mouseControl3D = GetComponent<MouseControls3D>();
+        if (_mouseControl3D == null)
+            Debug.LogWarning("Can't find MouseControl3D");
     }
 
     
@@ -88,12 +93,11 @@ public class PlayerManager : MonoBehaviour
 
     public void limitMovement() {
         _characterPathFinder.SetNewDestination(transform);
-        _characterMovement.AbilityPermitted = false;
-        Instantiate(testObj, transform.position, Quaternion.identity);
+        _mouseControl3D.AbilityPermitted = false;
     }
 
     public void releaseMovement() {
-        _characterMovement.AbilityPermitted = true;
+        _mouseControl3D.AbilityPermitted = true;
     }
 
 }
