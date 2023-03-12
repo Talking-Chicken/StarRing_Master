@@ -50,7 +50,6 @@ public class PlayerManager : MonoBehaviour
 
     public void ChangeToPreviousState() {
         if (currentState != previousState) {
-            Debug.Log("changed from " + currentState + " to " + previousState);
             ChangeState(previousState);
         }
     }
