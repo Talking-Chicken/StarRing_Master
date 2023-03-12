@@ -6,11 +6,20 @@ public class PlayerStateExplore : PlayerStateBase
 {
     public override void EnterState(PlayerManager player)
     {
-        player.releaseMovement();
+        player.ReleaseMovement();
     }
 
     public override void UpdateState(PlayerManager player)
     {
+        //go to the point where Amo can talk
+        if (player.TargetNPC !=null) {
+            Transform targetTalkPosition = player.WalkToNearestTalkPosition(player.TargetNPC);
+            if (targetTalkPosition != null) {
+                if (player.isReadyToTalk(targetTalkPosition)) { //talk with character
+                    player.StartDialogue(player.TargetNPC);
+                }
+            }
+        }
         
     }
 

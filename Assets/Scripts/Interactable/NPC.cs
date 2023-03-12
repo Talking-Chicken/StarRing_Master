@@ -13,6 +13,7 @@ public class NPC : MonoBehaviour, ITalkable
 
     //getters & setters
     public string StartNodeBase {get=>startNodeBase;set=>startNodeBase=value;}
+    public List<Transform> TalkingPositions {get=>talkingPositions; private set=>talkingPositions=value;}
     
     void Update() {
         if (Input.GetKeyDown(KeyCode.G))

@@ -9,15 +9,19 @@ using TopDownEngineExtensions;
 
 public class PlayerManager : MonoBehaviour
 {
-    [ShowNonSerializedField, BoxGroup("Info")] private CharacterPathfinder3D _characterPathFinder;
-    [ShowNonSerializedField, BoxGroup("Info")] private CharacterMovement _characterMovement;
-    [ShowNonSerializedField, BoxGroup("Info")] private MouseControls3D _mouseControl3D;
-    [ShowNonSerializedField, BoxGroup("Info")] private DialogueRunner dialogueRunner;
-    [ShowNonSerializedField, BoxGroup("Dialogue")] private NavMeshHit navHit;  
+    [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterPathfinder3D _characterPathFinder;
+    [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterMovement _characterMovement;
+    [ReadOnly, SerializeField, BoxGroup("Info")] private MouseControls3D _mouseControl3D;
+    [ReadOnly, SerializeField, BoxGroup("Info")] private DialogueRunner _dialogueRunner;
+    [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
+    [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
+    [SerializeField, BoxGroup("Dialogue")] private GameObject targetTalkPosition;
 
     [SerializeField, BoxGroup("test")] private GameObject testObj;
     private GameObject gg;
 
+    //getters & setters
+    public NPC TargetNPC {get=>targetNpc; set=>targetNpc=value;}
 
     //FSM
     private PlayerStateBase currentState;
@@ -74,6 +78,9 @@ public class PlayerManager : MonoBehaviour
         _mouseControl3D = GetComponent<MouseControls3D>();
         if (_mouseControl3D == null)
             Debug.LogWarning("Can't find MouseControl3D");
+        _dialogueRunner = FindObjectOfType<DialogueRunner>();
+        if (_dialogueRunner == null)
+            Debug.LogWarning("Can't find DialogueRunner");
     }
 
     
@@ -87,17 +94,46 @@ public class PlayerManager : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.J)) {
-            _characterPathFinder.SetNewDestination(gg.transform);
+            if (TargetNPC != null)
+                WalkToNearestTalkPosition(TargetNPC);
         }
     }
 
-    public void limitMovement() {
+    public void LimitMovement() {
         _characterPathFinder.SetNewDestination(transform);
         _mouseControl3D.AbilityPermitted = false;
     }
 
-    public void releaseMovement() {
+    public void ReleaseMovement() {
         _mouseControl3D.AbilityPermitted = true;
+    }
+
+    public Transform WalkToNearestTalkPosition(NPC npc) {
+        NavMeshHit myNavHit;
+        if(NavMesh.SamplePosition(npc.TalkingPositions[0].position, out myNavHit, 100 , -1))
+        {
+            GameObject talkingPosition = Instantiate(targetTalkPosition, myNavHit.position, Quaternion.identity);
+            _characterPathFinder.SetNewDestination(talkingPosition.transform);
+            return talkingPosition.transform;
+        }
+        return null;
+    }
+
+    public bool isReadyToTalk(Transform destination) {
+        if (Vector3.Distance(transform.position, destination.position) <= 0.2f) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public bool StartDialogue(NPC npc) {
+        if (!_dialogueRunner.IsDialogueRunning) {
+            _dialogueRunner.StartDialogue(npc.StartNodeBase + "_" + (npc.GetProgress(npc.StartNodeBase)+1));
+            ChangeState(stateDialogue);
+            return true;
+        }
+        return false;
     }
 
 }
