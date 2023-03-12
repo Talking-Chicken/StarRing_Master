@@ -6,6 +6,7 @@ using MoreMountains.TopDownEngine;
 using Yarn.Unity;
 using UnityEngine.AI;
 using TopDownEngineExtensions;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     //getters & setters
     public NPC TargetNPC {get=>targetNpc; set=>targetNpc=value;}
 
-    //FSM
+    #region FSM
     private PlayerStateBase currentState;
     public PlayerStateBase previousState;
     public PlayerStateExplore stateExplore = new PlayerStateExplore();
@@ -49,19 +50,11 @@ public class PlayerManager : MonoBehaviour
 
     public void ChangeToPreviousState() {
         if (currentState != previousState) {
-            if (currentState != null)
-            {
-                currentState.LeaveState(this);
-            }
-
-            currentState = previousState;
-
-            if (currentState != null)
-            {
-                currentState.EnterState(this);
-            }
+            Debug.Log("changed from " + currentState + " to " + previousState);
+            ChangeState(previousState);
         }
     }
+    #endregion
 
     void Start()
     {
@@ -81,6 +74,9 @@ public class PlayerManager : MonoBehaviour
         _dialogueRunner = FindObjectOfType<DialogueRunner>();
         if (_dialogueRunner == null)
             Debug.LogWarning("Can't find DialogueRunner");
+        
+        //add exit dialogue state function to dialogue runner's OnDialogueComplete event
+        _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
 
     
