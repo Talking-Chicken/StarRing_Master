@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{535B14D6-1491-445C-AFBD-5FEA32F73A0F}" SchemaVersion="110">
+	<Presets>
+		<WorkUnit Name="Factory Reflect" ID="{535B14D6-1491-445C-AFBD-5FEA32F73A0F}" PersistMode="Standalone">
+			<ChildrenList>
+				<AuxBus Name="Legacy Early Reflection Auxiliary Bus" ID="{DDC46735-BD4D-4F4D-9378-FCF754D26077}">
+					<PropertyList>
+						<Property Name="BusChannelConfig" Type="int32">
+							<ValueList>
+								<Value>16641</Value>
+							</ValueList>
+						</Property>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
+						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Effect0" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
+							<ObjectRef Name="Wwise_Reflect" ID="{37779A87-4754-4420-8175-3236FA46AA12}"/>
+						</Reference>
+					</ReferenceList>
+				</AuxBus>
+				<AuxBus Name="Simplified Early Reflection Auxiliary Bus" ID="{8B2398C9-04F5-49E2-8F50-7DB7C4E51496}">
+					<PropertyList>
+						<Property Name="BusChannelConfig" Type="int32">
+							<ValueList>
+								<Value>768</Value>
+							</ValueList>
+						</Property>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
+						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Effect0" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
+							<ObjectRef Name="Wwise_Reflect_Simplified" ID="{C2C5213F-A445-43AC-ADE9-F6A537B95051}" WorkUnitID="{534D700C-08C6-4169-BA6A-550548BBC8F7}"/>
+						</Reference>
+					</ReferenceList>
+				</AuxBus>
+			</ChildrenList>
+		</WorkUnit>
+	</Presets>
+</WwiseDocument>
