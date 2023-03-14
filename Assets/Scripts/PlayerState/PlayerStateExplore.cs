@@ -20,7 +20,6 @@ public class PlayerStateExplore : PlayerStateBase
                 }
             }
         }
-        
     }
 
     public override void LeaveState(PlayerManager player)
