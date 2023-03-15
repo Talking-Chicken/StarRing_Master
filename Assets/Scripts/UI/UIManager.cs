@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Tools;
+using MoreMountains.TopDownEngine;
 
 public class UIManager : MMSingleton<UIManager>
 {
@@ -51,5 +52,7 @@ public class UIManager : MMSingleton<UIManager>
     void Update()
     {
         currentState.UpdateState(this);
+        if (Input.GetKeyDown(KeyCode.P))
+            GameManager.Instance.Pause(PauseMethods.NoPauseMenu);
     }
 }

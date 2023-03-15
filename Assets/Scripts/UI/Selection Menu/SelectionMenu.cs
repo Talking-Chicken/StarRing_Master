@@ -21,16 +21,12 @@ public class SelectionMenu : MonoBehaviour
         transform.Rotate(new Vector3(0, 225, 0), Space.World);
 
         options.AddRange(GetComponentsInChildren<Button>());
+
+        Debug.Log("start");
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O)) {
-            transform.Rotate(new Vector3(0, 90, 0), Space.World);
-        }
-        if (Input.GetKeyDown(KeyCode.P)) {
-            transform.Rotate(new Vector3(0, -90, 0), Space.World);
-        }
     }
 
     //used in options OnClick() functions
@@ -56,6 +52,5 @@ public class SelectionMenu : MonoBehaviour
             yield return null;
         }
         currentTime = 0.0f;
-
     }
 }

@@ -6,7 +6,6 @@ using MoreMountains.TopDownEngine;
 using Yarn.Unity;
 using UnityEngine.AI;
 using TopDownEngineExtensions;
-using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
     [SerializeField, BoxGroup("Dialogue")] private GameObject targetTalkPosition;
+    [SerializeField, BoxGroup("Selection Menu")] private SelectionMenu SelectionMenu;
 
     [SerializeField, BoxGroup("test")] private GameObject testObj;
     private GameObject gg;
@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerStateBase currentState;
     public PlayerStateBase previousState;
     public PlayerStateExplore stateExplore = new PlayerStateExplore();
+    public PlayerStateMrRabbit stateMrRabbit = new PlayerStateMrRabbit();
     public PlayerStateDialogue stateDialogue = new PlayerStateDialogue();
     public PlayerStateUI stateUI = new PlayerStateUI();
 
@@ -94,6 +95,23 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    #region detect input
+    public void DetectInputExploreState() {
+        //go to mr rabbit state
+        if (Input.GetMouseButtonDown(1)) {
+            ChangeState(stateMrRabbit);
+        }
+    }
+
+    public void DetectInputMrRabbitState() {
+        //go to explore state
+        if (Input.GetMouseButtonDown(1)) {
+            ChangeState(stateExplore);
+        }
+    }
+    #endregion
+
+
     public void LimitMovement() {
         _characterPathFinder.SetNewDestination(transform);
         _mouseControl3D.AbilityPermitted = false;
@@ -114,7 +132,7 @@ public class PlayerManager : MonoBehaviour
         return null;
     }
 
-    public bool isReadyToTalk(Transform destination) {
+    public bool IsReadyToTalk(Transform destination) {
         if (Vector3.Distance(transform.position, destination.position) <= 0.2f) {
             return true;
         } else {
@@ -131,4 +149,13 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
+    public void OpenSelectionMenu() {
+        SelectionMenu.gameObject.SetActive(true);
+        SelectionMenu.CurrentOptionIndex = 1;
+    }
+
+    public void CloseSelectionMenu() {
+        SelectionMenu.gameObject.SetActive(false);
+        SelectionMenu.CurrentOptionIndex = 1;
+    }
 }
