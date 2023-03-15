@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Tools;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MMSingleton<UIManager>
 {
-    
+    public GameObject selectionMenu;
     #region FSM
     private UIStateBase currentState;
     public UIStateBase previousState;
@@ -42,6 +43,9 @@ public class UIManager : MonoBehaviour
     {
         currentState = stateNone;
         previousState = currentState;
+
+        //set selection menu
+        // selectionMenu.transform.parent = FindObjectOfType<PlayerManager>().gameObject.transform;
     }
     
     void Update()

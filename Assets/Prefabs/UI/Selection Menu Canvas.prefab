@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881399710189538818}
-  - component: {fileID: 313393838632877227}
+  - component: {fileID: 4970117468572425129}
   m_Layer: 5
   m_Name: Selection Menu Container
   m_TagString: Untagged
@@ -29,8 +29,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 384245751623992721}
   - {fileID: 2650286334772665695}
+  - {fileID: 384245751623992721}
   - {fileID: 2183019482123769262}
   m_Father: {fileID: 2830539802879543744}
   m_RootOrder: 0
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &313393838632877227
+--- !u!114 &4970117468572425129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
+  options: []
+  currentOptionIndex: 0
 --- !u!1 &184432872640288502
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +303,7 @@ GameObject:
   - component: {fileID: 6806450478031086893}
   - component: {fileID: 3564103925406496423}
   - component: {fileID: 2641619368347529938}
-  - component: {fileID: 3307385852770732231}
+  - component: {fileID: 5459292070979595862}
   m_Layer: 5
   m_Name: Inventory Button
   m_TagString: Untagged
@@ -323,7 +325,7 @@ RectTransform:
   m_Children:
   - {fileID: 4723553327837481934}
   m_Father: {fileID: 1881399710189538818}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -411,8 +413,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3564103925406496423}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3307385852770732231
+      m_Calls:
+      - m_Target: {fileID: 4970117468572425129}
+        m_TargetAssemblyTypeName: SelectionMenu, Assembly-CSharp
+        m_MethodName: ChangeOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5459292070979595862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -440,7 +454,7 @@ GameObject:
   - component: {fileID: 8797071978048339613}
   - component: {fileID: 8647258101858106960}
   - component: {fileID: 3745146899469658625}
-  - component: {fileID: 1085662483540210684}
+  - component: {fileID: 7356395998852764517}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -550,8 +564,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8647258101858106960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1085662483540210684
+      m_Calls:
+      - m_Target: {fileID: 4970117468572425129}
+        m_TargetAssemblyTypeName: SelectionMenu, Assembly-CSharp
+        m_MethodName: ChangeOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7356395998852764517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -714,7 +740,7 @@ GameObject:
   - component: {fileID: 2587769536348320372}
   - component: {fileID: 1106286626020524468}
   - component: {fileID: 926117749220690276}
-  - component: {fileID: 3153410454292530946}
+  - component: {fileID: 1637337730695064073}
   m_Layer: 5
   m_Name: Logic Map Button
   m_TagString: Untagged
@@ -736,7 +762,7 @@ RectTransform:
   m_Children:
   - {fileID: 5706842995901911538}
   m_Father: {fileID: 1881399710189538818}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -824,8 +850,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106286626020524468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3153410454292530946
+      m_Calls:
+      - m_Target: {fileID: 4970117468572425129}
+        m_TargetAssemblyTypeName: SelectionMenu, Assembly-CSharp
+        m_MethodName: ChangeOption
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1637337730695064073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
