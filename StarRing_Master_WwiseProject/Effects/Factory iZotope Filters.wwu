@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{21A39892-7119-4A14-BD66-4C27E5F51D58}" SchemaVersion="110">
+	<Effects>
+		<WorkUnit Name="Factory iZotope Filters" ID="{21A39892-7119-4A14-BD66-4C27E5F51D58}" PersistMode="Standalone">
+			<ChildrenList>
+				<Effect Name="Next_Door" ID="{C4C6B57E-78BF-475D-9E86-56F205E17C84}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="230"/>
+						<Property Name="Filter1Resonance" Type="Real32" Value="0.3"/>
+						<Property Name="Filter2Frequency" Type="Real32" Value="175"/>
+						<Property Name="Filter2LFOType" Type="int32" Value="4"/>
+						<Property Name="Filter2Res" Type="Real32" Value="0.6"/>
+						<Property Name="Filter2Type" Type="int32" Value="15"/>
+						<Property Name="Filter3Frequency" Type="Real32" Value="175"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Lo_Pass_500Hz" ID="{0BF46B44-95E4-4C84-B41C-0BDDBF5A6215}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="500"/>
+						<Property Name="Filter1Resonance" Type="Real32" Value="0"/>
+						<Property Name="Filter1Type" Type="int32" Value="10"/>
+						<Property Name="Filter2Type" Type="int32" Value="0"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Hi_Pass_500Hz" ID="{F6A780CE-9164-471F-96E5-940AC1C427D2}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="500"/>
+						<Property Name="Filter1Type" Type="int32" Value="20"/>
+						<Property Name="Filter2Q" Type="Real32" Value="0.5"/>
+						<Property Name="Filter2Type" Type="int32" Value="0"/>
+						<Property Name="Filter3Frequency" Type="Real32" Value="175"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Punch_150Hz" ID="{0B23C86A-E715-4576-B21C-5BF9972D4541}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="150"/>
+						<Property Name="Filter1Gain" Type="Real32" Value="12"/>
+						<Property Name="Filter1Q" Type="Real32" Value="2"/>
+						<Property Name="Filter1Resonance" Type="Real32" Value="0.3"/>
+						<Property Name="Filter1Type" Type="int32" Value="6"/>
+						<Property Name="Filter2Frequency" Type="Real32" Value="150"/>
+						<Property Name="Filter2Res" Type="Real32" Value="0.4"/>
+						<Property Name="Filter2Type" Type="int32" Value="0"/>
+						<Property Name="Filter3Frequency" Type="Real32" Value="150"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Wind_Sweeper" ID="{23C005C6-CE65-49CA-82A8-D3CDB1E650A6}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<Comment>Tip: Assign RTPC to Filter 1 LFO Period to vary wind. Good for repurposing existing wind loops.</Comment>
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="5000"/>
+						<Property Name="Filter1Gain" Type="Real32" Value="6"/>
+						<Property Name="Filter1LFOPeriod" Type="Real32" Value="8000"/>
+						<Property Name="Filter1LFOTargetFreq" Type="Real32" Value="250"/>
+						<Property Name="Filter1LFOTargetRes" Type="Real32" Value="0"/>
+						<Property Name="Filter1Q" Type="Real32" Value="1"/>
+						<Property Name="Filter1Resonance" Type="Real32" Value="0.7"/>
+						<Property Name="Filter1Trigger" Type="int32" Value="1"/>
+						<Property Name="Filter1Type" Type="int32" Value="7"/>
+						<Property Name="Filter2Res" Type="Real32" Value="0"/>
+						<Property Name="Filter2Type" Type="int32" Value="0"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Sonar_Pulse" ID="{66761ED4-89A5-4DDF-A1E2-55AA836DF904}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<Comment>Good with underwater loops to help simulate sonar pulses. Change the speed by adjusting the LFO Period.</Comment>
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="500"/>
+						<Property Name="Filter1Gain" Type="Real32" Value="25"/>
+						<Property Name="Filter1LFOPeriod" Type="Real32" Value="4000"/>
+						<Property Name="Filter1LFOTargetFreq" Type="Real32" Value="500"/>
+						<Property Name="Filter1LFOTargetGain" Type="Real32" Value="6"/>
+						<Property Name="Filter1Q" Type="Real32" Value="12"/>
+						<Property Name="Filter1Resonance" Type="Real32" Value="1"/>
+						<Property Name="Filter1Trigger" Type="int32" Value="1"/>
+						<Property Name="Filter1Type" Type="int32" Value="6"/>
+						<Property Name="Filter2Type" Type="int32" Value="0"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Transistor_Radio" ID="{8C91A73C-D888-4A53-A46B-A6323766CAD6}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter1Frequency" Type="Real32" Value="2750"/>
+						<Property Name="Filter1Type" Type="int32" Value="12"/>
+						<Property Name="Filter2Frequency" Type="Real32" Value="3070"/>
+						<Property Name="Filter2Res" Type="Real32" Value="0.5"/>
+						<Property Name="Filter2Type" Type="int32" Value="26"/>
+						<Property Name="Filter3Frequency" Type="Real32" Value="4000"/>
+						<Property Name="Filter3LFOPeriod" Type="Real32" Value="125"/>
+						<Property Name="Filter3LFOTargetFreq" Type="Real32" Value="3100"/>
+						<Property Name="Filter3LFOTargetQ" Type="Real32" Value="6.8"/>
+						<Property Name="Filter3LFOTargetRes" Type="Real32" Value="0.6"/>
+						<Property Name="Filter3LFOType" Type="int32" Value="4"/>
+						<Property Name="Filter3Resonance" Type="Real32" Value="0.3"/>
+						<Property Name="Filter3Trigger" Type="int32" Value="1"/>
+						<Property Name="Filter3Type" Type="int32" Value="10"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Wah_Wah_Bass" ID="{48D4F892-4BAE-437B-B30F-6D933CE1EBF0}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter2Frequency" Type="Real32" Value="1100"/>
+						<Property Name="Filter2LFOPeriod" Type="Real32" Value="250"/>
+						<Property Name="Filter2TargetFreq" Type="Real32" Value="50"/>
+						<Property Name="Filter2Trigger" Type="int32" Value="1"/>
+						<Property Name="Filter2Type" Type="int32" Value="36"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Crazy_Copter" ID="{1F653944-1DA2-4A49-9F91-F7AFFC1F7304}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<PropertyList>
+						<Property Name="Filter1LFOTargetRes" Type="Real32" Value="0.3"/>
+						<Property Name="Filter2Frequency" Type="Real32" Value="760"/>
+						<Property Name="Filter2LFOPeriod" Type="Real32" Value="120"/>
+						<Property Name="Filter2Res" Type="Real32" Value="0"/>
+						<Property Name="Filter2TargetFreq" Type="Real32" Value="50"/>
+						<Property Name="Filter2Trigger" Type="int32" Value="1"/>
+						<Property Name="Filter2Type" Type="int32" Value="9"/>
+						<Property Name="Filter3Type" Type="int32" Value="0"/>
+					</PropertyList>
+				</Effect>
+				<Effect Name="Filter_Sweep" ID="{EDEA6E45-DFDF-44F5-A67A-90E1AE66BD72}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
+					<Comment>Tip 1: Assign Filter 3 Frequency and Resonance to RTPC's and use on interacvite music to create breakdowns. 
+Tip 2: Assign Filter 3 Frequency to cut the bottom end during heavy SFX scenes, like engines, to help them sit better in the game mix and not get lost in the explosions.</Comment>
+					<PropertyList>
+						<Property Name="Filter2Type" Type="int32" Value="0"/>
+						<Property Name="Filter3Frequency" Type="Real32" Value="8000"/>
+						<Property Name="Filter3LFOPeriod" Type="Real32" Value="8000"/>
+						<Property Name="Filter3LFOTargetFreq" Type="Real32" Value="50"/>
+						<Property Name="Filter3LFOTargetGain" Type="Real32" Value="30"/>
+						<Property Name="Filter3Trigger" Type="int32" Value="1"/>
+						<Property Name="Filter3Type" Type="int32" Value="12"/>
+					</PropertyList>
+				</Effect>
+			</ChildrenList>
+		</WorkUnit>
+	</Effects>
+</WwiseDocument>
