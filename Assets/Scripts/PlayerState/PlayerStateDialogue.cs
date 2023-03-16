@@ -16,6 +16,7 @@ public class PlayerStateDialogue : PlayerStateBase
 
     public override void LeaveState(PlayerManager player)
     {
+        player.TargetNPC = null;
         player.previousState = this;
     }
 }

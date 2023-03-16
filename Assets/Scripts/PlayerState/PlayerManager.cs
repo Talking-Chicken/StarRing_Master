@@ -56,6 +56,7 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
+    #region Start and Update
     void Start()
     {
         currentState = stateExplore;
@@ -94,6 +95,7 @@ public class PlayerManager : MonoBehaviour
                 WalkToNearestTalkPosition(TargetNPC);
         }
     }
+    #endregion
 
     #region detect input
     public void DetectInputExploreState() {
@@ -111,7 +113,7 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-
+    /*restrict the ability to use mouse control 3d*/
     public void LimitMovement() {
         _characterPathFinder.SetNewDestination(transform);
         _mouseControl3D.AbilityPermitted = false;
@@ -121,11 +123,18 @@ public class PlayerManager : MonoBehaviour
         _mouseControl3D.AbilityPermitted = true;
     }
 
+    /*nave mesh find the npc's nearest talking position (all talking positions are inside NPC)
+      if there's no talking point in the scene, instantiate one
+      if there's one, change the position of it*/
     public Transform WalkToNearestTalkPosition(NPC npc) {
         NavMeshHit myNavHit;
         if(NavMesh.SamplePosition(npc.TalkingPositions[0].position, out myNavHit, 100 , -1))
         {
-            GameObject talkingPosition = Instantiate(targetTalkPosition, myNavHit.position, Quaternion.identity);
+            GameObject talkingPosition = GameObject.Find("TalkingPosition");
+            if (talkingPosition == null)
+                talkingPosition = Instantiate(targetTalkPosition, myNavHit.position, Quaternion.identity);
+            else
+                talkingPosition.transform.position = myNavHit.position;
             _characterPathFinder.SetNewDestination(talkingPosition.transform);
             return talkingPosition.transform;
         }
