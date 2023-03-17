@@ -8,11 +8,16 @@ public class SelectionMenu : MonoBehaviour
 {
     [ReadOnly, SerializeField, BoxGroup("Info")] private Transform playerTransform;
     [ReadOnly, SerializeField, BoxGroup("Info")] private List<Button> options = new List<Button>();
+    [SerializeField, BoxGroup("Info")] private Button logicMapButton, inventoryButton, closeButton, timeManagementButton;
     [ReadOnly, SerializeField, BoxGroup("Info")] private int currentOptionIndex = 1;
     [ReadOnly, SerializeField, BoxGroup("Info")] private float currentTime = 0;
 
     //getters & setters
     public int CurrentOptionIndex {get=>currentOptionIndex; set=>currentOptionIndex=value;}
+    public Button LogicMapButton {get=>logicMapButton;}
+    public Button InventoryButton {get=>inventoryButton;}
+    public Button CloseButton {get=>closeButton;}
+    public Button TimeManagementButton {get=>timeManagementButton;}
 
     void Start()
     {

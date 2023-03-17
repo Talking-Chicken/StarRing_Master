@@ -56,7 +56,14 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-    #region Start and Update
+    #region Awake, Start, and Update
+    void Awake() {
+        if (SelectionMenu != null)
+            UIManager.Instance.selectionMenu = SelectionMenu;
+        else
+            SelectionMenu = GetComponentInChildren<SelectionMenu>();
+    }
+
     void Start()
     {
         currentState = stateExplore;
@@ -66,12 +73,15 @@ public class PlayerManager : MonoBehaviour
         _characterPathFinder = GetComponent<CharacterPathfinder3D>();
         if (_characterPathFinder == null)
             Debug.LogWarning("Can't find CharacterPathfinder3D");
+
         _characterMovement = GetComponent<CharacterMovement>();
         if (_characterMovement == null)
             Debug.LogWarning("Can't find CharacterMovement");
+
         _mouseControl3D = GetComponent<MouseControls3D>();
         if (_mouseControl3D == null)
             Debug.LogWarning("Can't find MouseControl3D");
+
         _dialogueRunner = FindObjectOfType<DialogueRunner>();
         if (_dialogueRunner == null)
             Debug.LogWarning("Can't find DialogueRunner");
@@ -159,11 +169,13 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void OpenSelectionMenu() {
+        UIManager.Instance.ChangeState(UIManager.Instance.stateSelecting);
         SelectionMenu.gameObject.SetActive(true);
         SelectionMenu.CurrentOptionIndex = 1;
     }
 
     public void CloseSelectionMenu() {
+        
         SelectionMenu.gameObject.SetActive(false);
         SelectionMenu.CurrentOptionIndex = 1;
     }

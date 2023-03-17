@@ -59,11 +59,9 @@ public class DialogueAudio : MonoBehaviour
         for(int i=0; i < dialogue.text.Length;)
         {
             char c = dialogue.text[i];
-            Debug.Log("in loop");
             if (!punctuation.Contains(c))
             {
                 LetterSound(c);
-                Debug.Log("Played sound");
                 yield return new WaitForSeconds(0.03f);
             }
             else {
