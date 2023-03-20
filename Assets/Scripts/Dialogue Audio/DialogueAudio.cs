@@ -2,9 +2,25 @@
 using UnityEngine;
 using TMPro;
 using AK.Wwise;
+using System;
+using System.Collections.Generic;
 
 using System.Collections;
 //using DG.Tweening;
+
+
+[System.Serializable]
+
+public class FacialExpression
+{
+   
+    public string char_name;
+    public string gameobject_name;
+    public Animator char_anime;
+
+
+}
+
 
 public class DialogueAudio : MonoBehaviour
 {
@@ -15,12 +31,21 @@ public class DialogueAudio : MonoBehaviour
     //public AudioClip[] voices;
     // public AudioClip[] punctuations;
     [Space]
-    string current_dialogue=null;
+    string current_dialogue = null;
+    // Animator animator;
     // public AudioSource voiceSource;
     //  public AudioSource punctuationSource;
-  //  public AudioSource effectSource;
+    //  public AudioSource effectSource;
     public TextMeshProUGUI dialogue;
+    public TextMeshProUGUI character_name;
+    string current_character = null;
     string punctuation = ",.':;!? ";
+    bool run_once = false;
+    Animator last_anime;
+    //public Animator[] facial_expression;
+    [SerializeField]
+    private List<FacialExpression> facial_bank;
+ 
     //[Space]
     // public AudioClip sparkleClip;
     // public AudioClip rainClip;
@@ -33,23 +58,55 @@ public class DialogueAudio : MonoBehaviour
         // animatedText = InterfaceManager.instance.animatedText;
 
         // animatedText.onTextReveal.AddListener((newChar) => ReproduceSound(newChar));
+        foreach ( FacialExpression facialExpression in facial_bank)
+        {
+            facialExpression.char_anime = GameObject.Find(facialExpression.gameobject_name).transform.Find("Face").GetComponent<Animator>();
+        }
+        last_anime = null;
     }
 
     void Update()
     {
-     
-            if (current_dialogue != dialogue.text)
+
+        
+       
+             if (current_dialogue != dialogue.text)
             {
                 StopAllCoroutines();
 
                 StartCoroutine(ReproduceSound());
 
                 current_dialogue = dialogue.text;
-            Debug.Log("length:"+dialogue.text);
+                Debug.Log("length:"+dialogue.text);
+          
            
-        }
+            }
 
+             if (current_character != character_name.text)
+            {
+                 run_once = true;
+       
+
+            current_character = character_name.text;
+            }
+
+            if (run_once)
+           {
+            Debug.Log("test");
+            if (last_anime!=null) {
+                last_anime.Play("stop_talking");
+            }
         
+
+                run_once = false;
+
+          
+
+                PlayAnimation(character_name.text);
+           }
+     
+
+
     }
  
 
@@ -99,6 +156,21 @@ public class DialogueAudio : MonoBehaviour
         letter = char.ToUpper(letter);
         AkSoundEngine.PostEvent("Play_" + letter, gameObject);
 
+    }
+   
+    public AnimationClip PlayAnimation(string character_name)
+    {
+
+        foreach (FacialExpression facialExpression in facial_bank)
+        {
+            if (facialExpression.char_name == character_name) 
+            {
+                facialExpression.char_anime.Play("talking");
+                last_anime=facialExpression.char_anime;
+            }
+        }
+        return null;
+        
     }
 }
   
