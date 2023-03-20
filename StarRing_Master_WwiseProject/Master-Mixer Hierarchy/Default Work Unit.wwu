@@ -9,13 +9,32 @@
 							<ObjectRef Name="System" ID="{C1183B60-9AFD-4232-AC99-57AE21CF347C}" WorkUnitID="{87E242FD-2103-400D-AE09-37FD743E4D32}"/>
 						</Reference>
 					</ReferenceList>
-				</Bus>
-				<Bus Name="Motion Factory Bus" ID="{2AF9B9C6-6EF1-46E9-B5F2-E30C9E602C74}">
-					<ReferenceList>
-						<Reference Name="AudioDevice" PluginName="System" CompanyID="0" PluginID="174" PluginType="7">
-							<ObjectRef Name="System" ID="{C1183B60-9AFD-4232-AC99-57AE21CF347C}" WorkUnitID="{87E242FD-2103-400D-AE09-37FD743E4D32}"/>
-						</Reference>
-					</ReferenceList>
+					<ChildrenList>
+						<Bus Name="NPCMaster" ID="{696DD649-D3F1-4059-86E4-BD5E78D433A0}"/>
+						<Bus Name="AmbientMaster" ID="{14436E90-CC1B-4AB3-A58E-18782AEEBB1E}">
+							<ChildrenList>
+								<Bus Name="2DAmbience" ID="{8E2DAC07-36D2-432B-A647-111B73A6A845}"/>
+								<Bus Name="3DAmbience" ID="{519AB672-7915-434A-9BD0-6108F0622B62}"/>
+								<Bus Name="AmbientBeds" ID="{E1C5E6E3-0241-41DC-8725-52B2438F911D}"/>
+							</ChildrenList>
+						</Bus>
+						<Bus Name="PlayerMaster" ID="{CF2A13ED-9CF0-4B0F-9A98-CEAA9C6E8784}">
+							<ChildrenList>
+								<Bus Name="PlayerFootsteps" ID="{87F25EB1-FABD-4702-B327-FDD798249C07}">
+									<ChildrenList>
+										<Bus Name="PlayerLocomotion" ID="{B5378E6D-604F-46AF-BE28-D2411DEB1874}"/>
+									</ChildrenList>
+								</Bus>
+							</ChildrenList>
+						</Bus>
+						<AuxBus Name="Reverbs" ID="{9377C0D0-0D91-43C0-B436-10CC5584BCB4}">
+							<ChildrenList>
+								<AuxBus Name="LargeRoom" ID="{48A26204-4AEB-465B-936D-4220D8C702DB}"/>
+								<AuxBus Name="SmallRoom" ID="{0BC87409-F45A-4A08-BD65-7F8CD55E8538}"/>
+								<AuxBus Name="Outdoor" ID="{262D5BC4-4B14-4243-8BC6-6CFCD0B61669}"/>
+							</ChildrenList>
+						</AuxBus>
+					</ChildrenList>
 				</Bus>
 			</ChildrenList>
 		</WorkUnit>
