@@ -4,7 +4,7 @@ using TMPro;
 using AK.Wwise;
 using System;
 using System.Collections.Generic;
-
+using MoreMountains.Feedbacks;
 using System.Collections;
 //using DG.Tweening;
 
@@ -45,7 +45,8 @@ public class DialogueAudio : MonoBehaviour
     //public Animator[] facial_expression;
     [SerializeField]
     private List<FacialExpression> facial_bank;
- 
+    public MMF_Player zoom_in;
+    public MMF_Player zoom_out;
     //[Space]
     // public AudioClip sparkleClip;
     // public AudioClip rainClip;
@@ -104,7 +105,8 @@ public class DialogueAudio : MonoBehaviour
 
                 PlayAnimation(character_name.text);
            }
-     
+        
+       
 
 
     }
