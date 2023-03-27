@@ -39,7 +39,7 @@ public class DialogueAudio : MonoBehaviour
     public TextMeshProUGUI dialogue;
     public TextMeshProUGUI character_name;
     string current_character = null;
-    string punctuation = ",.':;!? ";
+    string punctuation = ",.':;!? ...";
     bool run_once = false;
     Animator last_anime;
     //public Animator[] facial_expression;
@@ -113,7 +113,8 @@ public class DialogueAudio : MonoBehaviour
 
     IEnumerator ReproduceSound()
     {
-        for(int i=0; i < dialogue.text.Length;)
+        int dialogue_length = dialogue.text.Length /2;
+        for (int i=0; i < dialogue_length;)
         {
             char c = dialogue.text[i];
             if (!punctuation.Contains(c))
@@ -154,7 +155,7 @@ public class DialogueAudio : MonoBehaviour
     public void LetterSound(char letter)
     {
         letter = char.ToUpper(letter);
-        AkSoundEngine.PostEvent("Play_" + letter, gameObject);
+        AkSoundEngine.PostEvent("Play_" + letter+"_"+ character_name.text, gameObject);
 
     }
    

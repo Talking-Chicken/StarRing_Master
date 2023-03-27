@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{B100ED95-92B7-7616-91CC-F2437FB74709}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{52C3A432-EB40-D3C0-B68B-600573232D54}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -19,9 +19,34 @@
 				</AudioDevices>
 			</Plugins>
 			<Busses>
-				<Bus Id="985987111" Name="Motion Factory Bus"/>
+				<Bus Id="309309195" Name="2DAmbience"/>
+				<Bus Id="1182634443" Name="AmbientBeds"/>
+				<Bus Id="1301074112" Name="3DAmbience"/>
+				<Bus Id="1459460693" Name="AmbientMaster"/>
+				<Bus Id="1681012287" Name="PlayerFootsteps"/>
+				<Bus Id="2033911932" Name="NPCMaster"/>
+				<Bus Id="2343802269" Name="PlayerLocomotion"/>
+				<Bus Id="3538689948" Name="PlayerMaster"/>
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
+			<AuxBusses>
+				<AuxBus Id="144697359" Name="Outdoor">
+					<AuxBusRefs>
+						<AuxBusRef Id="3545700988" Name="Reverbs"/>
+					</AuxBusRefs>
+				</AuxBus>
+				<AuxBus Id="187046019" Name="LargeRoom">
+					<AuxBusRefs>
+						<AuxBusRef Id="3545700988" Name="Reverbs"/>
+					</AuxBusRefs>
+				</AuxBus>
+				<AuxBus Id="2933838247" Name="SmallRoom">
+					<AuxBusRefs>
+						<AuxBusRef Id="3545700988" Name="Reverbs"/>
+					</AuxBusRefs>
+				</AuxBus>
+				<AuxBus Id="3545700988" Name="Reverbs"/>
+			</AuxBusses>
 			<GameParameters>
 				<GameParameter Id="81651837" Name="SS_Air_Fury_01"/>
 				<GameParameter Id="99514311" Name="SS_Air_Fear_01"/>
@@ -151,248 +176,662 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="3154421239" Type="User" Language="SFX" Hash="{C60DEA3B-CE11-E163-9FCE-81C1D4DA6220}">
+		<SoundBank Id="3154421239" Type="User" Language="SFX" Hash="{46E28B2F-DB02-ABB8-DFD1-AE83D9B6C7FA}">
 			<ShortName>Main_Sound_Bank</ShortName>
 			<Path>Main_Sound_Bank.bnk</Path>
 			<Media>
-				<File Id="3782335" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>U.wav</ShortName>
-					<CachePath>SFX/U_10C4C929.wem</CachePath>
+				<File Id="49407388" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>V_Amo.wav</ShortName>
+					<CachePath>SFX/V_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="20191941" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>L.wav</ShortName>
-					<CachePath>SFX/L_10C4C929.wem</CachePath>
+				<File Id="78132080" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>C_Rita.wav</ShortName>
+					<CachePath>SFX/C_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="77331880" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>B.wav</ShortName>
-					<CachePath>SFX/B_10C4C929.wem</CachePath>
+				<File Id="90313989" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>7_Rita.wav</ShortName>
+					<CachePath>SFX/7_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="82255198" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>G.wav</ShortName>
-					<CachePath>SFX/G_10C4C929.wem</CachePath>
+				<File Id="134514194" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>P_Rita.wav</ShortName>
+					<CachePath>SFX/P_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="114581567" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>S.wav</ShortName>
-					<CachePath>SFX/S_10C4C929.wem</CachePath>
+				<File Id="135787571" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>G_Amo.wav</ShortName>
+					<CachePath>SFX/G_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="186329957" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>P.wav</ShortName>
-					<CachePath>SFX/P_10C4C929.wem</CachePath>
+				<File Id="159531640" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>F_Amo.wav</ShortName>
+					<CachePath>SFX/F_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="198112798" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>M.wav</ShortName>
-					<CachePath>SFX/M_10C4C929.wem</CachePath>
+				<File Id="192067879" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>L_Amo.wav</ShortName>
+					<CachePath>SFX/L_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="212449272" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>D.wav</ShortName>
-					<CachePath>SFX/D_10C4C929.wem</CachePath>
+				<File Id="198345545" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>U_Amo.wav</ShortName>
+					<CachePath>SFX/U_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="224402445" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>R.wav</ShortName>
-					<CachePath>SFX/R_10C4C929.wem</CachePath>
+				<File Id="220883084" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>B_Rita.wav</ShortName>
+					<CachePath>SFX/B_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="250953169" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>W.wav</ShortName>
-					<CachePath>SFX/W_10C4C929.wem</CachePath>
+				<File Id="224418650" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>L_Rita.wav</ShortName>
+					<CachePath>SFX/L_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="294579455" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Q.wav</ShortName>
-					<CachePath>SFX/Q_10C4C929.wem</CachePath>
+				<File Id="229020556" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>M_Rita.wav</ShortName>
+					<CachePath>SFX/M_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="304625805" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Y.wav</ShortName>
-					<CachePath>SFX/Y_10C4C929.wem</CachePath>
+				<File Id="236500255" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>D_Amo.wav</ShortName>
+					<CachePath>SFX/D_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="305869567" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>C.wav</ShortName>
-					<CachePath>SFX/C_10C4C929.wem</CachePath>
+				<File Id="236716273" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>4_Rita.wav</ShortName>
+					<CachePath>SFX/4_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="340075811" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Z.wav</ShortName>
-					<CachePath>SFX/Z_10C4C929.wem</CachePath>
+				<File Id="312401953" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>J_Rita.wav</ShortName>
+					<CachePath>SFX/J_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="352579305" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>E.wav</ShortName>
-					<CachePath>SFX/E_10C4C929.wem</CachePath>
+				<File Id="313840240" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>B_Amo.wav</ShortName>
+					<CachePath>SFX/B_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="354213560" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>O.wav</ShortName>
-					<CachePath>SFX/O_10C4C929.wem</CachePath>
+				<File Id="318017944" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>9_Amo.wav</ShortName>
+					<CachePath>SFX/9_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="423915712" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>H.wav</ShortName>
-					<CachePath>SFX/H_10C4C929.wem</CachePath>
+				<File Id="322699271" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Z_Rita.wav</ShortName>
+					<CachePath>SFX/Z_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="495002302" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>N.wav</ShortName>
-					<CachePath>SFX/N_10C4C929.wem</CachePath>
+				<File Id="327613342" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>N_Rita.wav</ShortName>
+					<CachePath>SFX/N_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="525354840" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>T.wav</ShortName>
-					<CachePath>SFX/T_10C4C929.wem</CachePath>
+				<File Id="337697994" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>V_Rita.wav</ShortName>
+					<CachePath>SFX/V_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="574401290" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>I.wav</ShortName>
-					<CachePath>SFX/I_10C4C929.wem</CachePath>
+				<File Id="349736367" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>A_Amo.wav</ShortName>
+					<CachePath>SFX/A_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="619115772" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>X.wav</ShortName>
-					<CachePath>SFX/X_10C4C929.wem</CachePath>
+				<File Id="359739152" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>W_Amo.wav</ShortName>
+					<CachePath>SFX/W_Amo_10C4C929.wem</CachePath>
 				</File>
-				<File Id="796430046" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>V.wav</ShortName>
-					<CachePath>SFX/V_10C4C929.wem</CachePath>
+				<File Id="372336456" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>6_Rita.wav</ShortName>
+					<CachePath>SFX/6_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="966183490" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>A.wav</ShortName>
-					<CachePath>SFX/A_10C4C929.wem</CachePath>
+				<File Id="378898585" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>A_Rita.wav</ShortName>
+					<CachePath>SFX/A_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="1011958945" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>F.wav</ShortName>
-					<CachePath>SFX/F_10C4C929.wem</CachePath>
+				<File Id="379236206" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>2_Rita.wav</ShortName>
+					<CachePath>SFX/2_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="1016762797" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>J.wav</ShortName>
-					<CachePath>SFX/J_10C4C929.wem</CachePath>
+				<File Id="388684463" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>O_Rita.wav</ShortName>
+					<CachePath>SFX/O_Rita_10C4C929.wem</CachePath>
 				</File>
-				<File Id="1047297941" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>K.wav</ShortName>
-					<CachePath>SFX/K_10C4C929.wem</CachePath>
+				<File Id="390860758" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>0_Rita.wav</ShortName>
+					<CachePath>SFX/0_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="417266024" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>I_Amo.wav</ShortName>
+					<CachePath>SFX/I_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="422573078" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Y_Rita.wav</ShortName>
+					<CachePath>SFX/Y_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="428259623" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>T_Rita.wav</ShortName>
+					<CachePath>SFX/T_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="442773236" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>8_Amo.wav</ShortName>
+					<CachePath>SFX/8_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="488076286" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>X_Amo.wav</ShortName>
+					<CachePath>SFX/X_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="488389842" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>U_Rita.wav</ShortName>
+					<CachePath>SFX/U_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="489834284" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>W_Rita.wav</ShortName>
+					<CachePath>SFX/W_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="519498692" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>3_Rita.wav</ShortName>
+					<CachePath>SFX/3_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="530199965" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>5_Amo.wav</ShortName>
+					<CachePath>SFX/5_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="535148485" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>F_Rita.wav</ShortName>
+					<CachePath>SFX/F_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="538148699" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>0_Amo.wav</ShortName>
+					<CachePath>SFX/0_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="570210334" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Y_Amo.wav</ShortName>
+					<CachePath>SFX/Y_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="595291673" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>4_Amo.wav</ShortName>
+					<CachePath>SFX/4_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="630332750" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>E_Amo.wav</ShortName>
+					<CachePath>SFX/E_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="634997054" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>2_Amo.wav</ShortName>
+					<CachePath>SFX/2_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="642200055" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>9_Rita.wav</ShortName>
+					<CachePath>SFX/9_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="661037594" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>H_Rita.wav</ShortName>
+					<CachePath>SFX/H_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="670251503" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>3_Amo.wav</ShortName>
+					<CachePath>SFX/3_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="678023204" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>6_Amo.wav</ShortName>
+					<CachePath>SFX/6_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="706796439" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>5_Rita.wav</ShortName>
+					<CachePath>SFX/5_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="718135376" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>I_Rita.wav</ShortName>
+					<CachePath>SFX/I_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="733424900" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Z_Amo.wav</ShortName>
+					<CachePath>SFX/Z_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="738818568" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Q_Amo.wav</ShortName>
+					<CachePath>SFX/Q_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="749235916" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Q_Rita.wav</ShortName>
+					<CachePath>SFX/Q_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="759093886" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>R_Amo.wav</ShortName>
+					<CachePath>SFX/R_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="764586740" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>7_Amo.wav</ShortName>
+					<CachePath>SFX/7_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="774832970" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>G_Rita.wav</ShortName>
+					<CachePath>SFX/G_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="780715311" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>E_Rita.wav</ShortName>
+					<CachePath>SFX/E_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="804136765" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>8_Rita.wav</ShortName>
+					<CachePath>SFX/8_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="809758047" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>S_Rita.wav</ShortName>
+					<CachePath>SFX/S_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="824300572" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>1_Rita.wav</ShortName>
+					<CachePath>SFX/1_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="827009850" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>R_Rita.wav</ShortName>
+					<CachePath>SFX/R_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="847684636" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>C_Amo.wav</ShortName>
+					<CachePath>SFX/C_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="849881372" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>M_Amo.wav</ShortName>
+					<CachePath>SFX/M_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="854694937" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>H_Amo.wav</ShortName>
+					<CachePath>SFX/H_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="929674531" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>D_Rita.wav</ShortName>
+					<CachePath>SFX/D_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="933595974" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>T_Amo.wav</ShortName>
+					<CachePath>SFX/T_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="946890389" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>O_Amo.wav</ShortName>
+					<CachePath>SFX/O_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="969298356" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>P_Amo.wav</ShortName>
+					<CachePath>SFX/P_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="979256597" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>K_Rita.wav</ShortName>
+					<CachePath>SFX/K_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="985887904" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>J_Amo.wav</ShortName>
+					<CachePath>SFX/J_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="998875408" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>X_Rita.wav</ShortName>
+					<CachePath>SFX/X_Rita_10C4C929.wem</CachePath>
+				</File>
+				<File Id="1011227033" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>S_Amo.wav</ShortName>
+					<CachePath>SFX/S_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="1013688794" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>N_Amo.wav</ShortName>
+					<CachePath>SFX/N_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="1037660659" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>1_Amo.wav</ShortName>
+					<CachePath>SFX/1_Amo_10C4C929.wem</CachePath>
+				</File>
+				<File Id="1072670926" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>K_Amo.wav</ShortName>
+					<CachePath>SFX/K_Amo_10C4C929.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
-				<Event Id="1774091799" Name="Play_A" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="30948754" Name="Play_0_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="966183490"/>
+						<MediaRef Id="538148699"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091796" Name="Play_B" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="641916803" Name="Play_0_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="77331880"/>
+						<MediaRef Id="390860758"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091797" Name="Play_C" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="1916982207" Name="Play_1_Amo" DurationType="OneShot" DurationMin="0.20555556" DurationMax="0.20555556">
 					<MediaRefs>
-						<MediaRef Id="305869567"/>
+						<MediaRef Id="1037660659"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091794" Name="Play_D" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="287371432" Name="Play_1_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="212449272"/>
+						<MediaRef Id="824300572"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091795" Name="Play_E" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3283186560" Name="Play_2_Amo" DurationType="OneShot" DurationMin="0.20555556" DurationMax="0.20555556">
 					<MediaRefs>
-						<MediaRef Id="352579305"/>
+						<MediaRef Id="634997054"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091792" Name="Play_F" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3130060165" Name="Play_2_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="1011958945"/>
+						<MediaRef Id="379236206"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091793" Name="Play_G" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="1459954133" Name="Play_3_Amo" DurationType="OneShot" DurationMin="0.20555556" DurationMax="0.20555556">
 					<MediaRefs>
-						<MediaRef Id="82255198"/>
+						<MediaRef Id="670251503"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091806" Name="Play_H" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="94300442" Name="Play_3_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="423915712"/>
+						<MediaRef Id="519498692"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091807" Name="Play_I" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3671068566" Name="Play_4_Amo" DurationType="OneShot" DurationMin="0.20555556" DurationMax="0.20555556">
 					<MediaRefs>
-						<MediaRef Id="574401290"/>
+						<MediaRef Id="595291673"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091804" Name="Play_J" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3086959351" Name="Play_4_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="1016762797"/>
+						<MediaRef Id="236716273"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091805" Name="Play_K" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="1713615171" Name="Play_5_Amo" DurationType="OneShot" DurationMin="0.20555556" DurationMax="0.20555556">
 					<MediaRefs>
-						<MediaRef Id="1047297941"/>
+						<MediaRef Id="530199965"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091802" Name="Play_L" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="311755628" Name="Play_5_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="20191941"/>
+						<MediaRef Id="706796439"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091803" Name="Play_M" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="2091455460" Name="Play_6_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="198112798"/>
+						<MediaRef Id="678023204"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091800" Name="Play_N" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="1288021129" Name="Play_6_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="495002302"/>
+						<MediaRef Id="372336456"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091801" Name="Play_O" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="805106649" Name="Play_7_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="354213560"/>
+						<MediaRef Id="764586740"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091782" Name="Play_P" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="2270900894" Name="Play_7_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="186329957"/>
+						<MediaRef Id="90313989"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091783" Name="Play_Q" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="776737066" Name="Play_8_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="294579455"/>
+						<MediaRef Id="442773236"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091780" Name="Play_R" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="2243782491" Name="Play_8_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="224402445"/>
+						<MediaRef Id="804136765"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091781" Name="Play_S" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3114250775" Name="Play_9_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="114581567"/>
+						<MediaRef Id="318017944"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091778" Name="Play_T" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3500326912" Name="Play_9_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="525354840"/>
+						<MediaRef Id="642200055"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091779" Name="Play_U" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="1092121135" Name="Play_A_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="3782335"/>
+						<MediaRef Id="349736367"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091776" Name="Play_V" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="2650023288" Name="Play_A_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="796430046"/>
+						<MediaRef Id="378898585"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091777" Name="Play_W" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="2882783024" Name="Play_B_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="250953169"/>
+						<MediaRef Id="313840240"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091790" Name="Play_X" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="465859733" Name="Play_B_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="619115772"/>
+						<MediaRef Id="220883084"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091791" Name="Play_Y" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="3941696005" Name="Play_C_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="304625805"/>
+						<MediaRef Id="847684636"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1774091788" Name="Play_Z" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+				<Event Id="2504335210" Name="Play_C_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
 					<MediaRefs>
-						<MediaRef Id="340075811"/>
+						<MediaRef Id="78132080"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1974274438" Name="Play_D_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="236500255"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="835397703" Name="Play_D_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="929674531"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1005288371" Name="Play_E_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="630332750"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2307778364" Name="Play_E_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="780715311"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2340361940" Name="Play_F_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="159531640"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3661015449" Name="Play_F_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="535148485"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3328425225" Name="Play_G_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="135787571"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4266923822" Name="Play_G_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="774832970"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="984066842" Name="Play_H_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="854694937"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="746370091" Name="Play_H_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="661037594"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2374793095" Name="Play_I_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="417266024"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1615497360" Name="Play_I_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="718135376"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3740997736" Name="Play_J_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="985887904"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3931748109" Name="Play_J_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="312401953"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2327771997" Name="Play_K_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="1072670926"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3904231426" Name="Play_K_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="979256597"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4118433854" Name="Play_L_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="192067879"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="166814463" Name="Play_L_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="224418650"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="758604523" Name="Play_M_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="849881372"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="249803860" Name="Play_M_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="229020556"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3086150252" Name="Play_N_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="1013688794"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2084383217" Name="Play_N_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="327613342"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1262917537" Name="Play_O_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="946890389"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1956119590" Name="Play_O_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="388684463"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="36858194" Name="Play_P_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="969298356"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1949576259" Name="Play_P_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="134514194"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1539907711" Name="Play_Q_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="738818568"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1871430504" Name="Play_Q_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="749235916"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3289096000" Name="Play_R_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="759093886"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="142855493" Name="Play_R_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="827009850"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1507440021" Name="Play_S_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="1011227033"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="935925722" Name="Play_S_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="809758047"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3252417366" Name="Play_T_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="933595974"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="841981879" Name="Play_T_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="428259623"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1336643587" Name="Play_U_Amo" DurationType="OneShot" DurationMin="0.21387754" DurationMax="0.21387754">
+					<MediaRefs>
+						<MediaRef Id="198345545"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1937287980" Name="Play_U_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="488389842"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1714483876" Name="Play_V_Amo" DurationType="OneShot" DurationMin="0.23888889" DurationMax="0.23888889">
+					<MediaRefs>
+						<MediaRef Id="49407388"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2871977033" Name="Play_V_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="337697994"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="428135065" Name="Play_W_Amo" DurationType="OneShot" DurationMin="0.22222222" DurationMax="0.22222222">
+					<MediaRefs>
+						<MediaRef Id="359739152"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3854856798" Name="Play_W_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="489834284"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="358085866" Name="Play_X_Amo" DurationType="OneShot" DurationMin="0.291678" DurationMax="0.291678">
+					<MediaRefs>
+						<MediaRef Id="488076286"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4293875483" Name="Play_X_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="998875408"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2695702743" Name="Play_Y_Amo" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="570210334"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1213876160" Name="Play_Y_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="422573078"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1138288120" Name="Play_Z_Amo" DurationType="OneShot" DurationMin="0.2014059" DurationMax="0.2014059">
+					<MediaRefs>
+						<MediaRef Id="733424900"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3196001917" Name="Play_Z_Rita" DurationType="OneShot" DurationMin="0.33333334" DurationMax="0.33333334">
+					<MediaRefs>
+						<MediaRef Id="322699271"/>
 					</MediaRefs>
 				</Event>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{DEDA8E3C-31BE-A58C-0472-4088BE68DD53}</FileHash>
+	<FileHash>{37DAF4E0-D512-D1B7-E2A4-00FB4EB770F1}</FileHash>
 </SoundBanksInfo>
