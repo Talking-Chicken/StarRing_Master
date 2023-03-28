@@ -4,13 +4,13 @@ using UnityEngine;
 using MoreMountains.Feedbacks;
 public class PlayerStateDialogue : PlayerStateBase
 {
-     MMF_Player zoom_in= GameObject.Find("MMF Zoom_in").transform.GetComponent<MMF_Player>();
-    MMF_Player zoom_out= GameObject.Find("MMF Zoom_out").transform.GetComponent<MMF_Player>();
+   
     public override void EnterState(PlayerManager player)
     {
-        
+       
         player.LimitMovement();
-        zoom_in.PlayFeedbacks();
+        DialogueAudio.Instance.ZoomIn();
+        NPCFace.Instance.FaceEachOther();
     }
 
     public override void UpdateState(PlayerManager player)
@@ -22,6 +22,7 @@ public class PlayerStateDialogue : PlayerStateBase
     {
         player.TargetNPC = null;
         player.previousState = this;
-        zoom_out.PlayFeedbacks();
+        DialogueAudio.Instance.ZoomOut();
+
     }
 }

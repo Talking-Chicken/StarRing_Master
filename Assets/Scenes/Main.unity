@@ -1761,6 +1761,81 @@ MonoBehaviour:
   GameOverScene: 
   Points: 0
   PauseGameWhenInventoryOpens: 1
+--- !u!1001 &604738652
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1413093790}
+    m_Modifications:
+    - target: {fileID: 435766716819567852, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_Name
+      value: FacingPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7576284
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -99.65823
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.2236905
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 435766716819567853, guid: e0168a5aa6828d048bcba46f536d2a7c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0168a5aa6828d048bcba46f536d2a7c, type: 3}
+--- !u!1 &604738653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 435766716819567852, guid: e0168a5aa6828d048bcba46f536d2a7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 604738652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &625089128 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4935123090281167011, guid: 67dde1b92175d4745aaea386e7555d40,
@@ -3861,6 +3936,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383513010}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1413093789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7670947206432578048, guid: 21a82408f3d7b5445981dac260815b6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 233443763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1413093790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7092935992426380297, guid: 21a82408f3d7b5445981dac260815b6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 233443763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1413093791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413093789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93640f2c82bd3ec41a766ebb04bac226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingPosition: {fileID: 604738653}
 --- !u!1 &1416451213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,8 +5272,8 @@ MonoBehaviour:
   - char_name: Helmet
     gameobject_name: helmet_chan_project
     char_anime: {fileID: 0}
-  zoom_in: {fileID: 0}
-  zoom_out: {fileID: 0}
+  zoomIn: {fileID: 1416451215}
+  zoomOut: {fileID: 1842385862}
 --- !u!1 &1987339578
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterMovement _characterMovement;
     [ReadOnly, SerializeField, BoxGroup("Info")] private MouseControls3D _mouseControl3D;
     [ReadOnly, SerializeField, BoxGroup("Info")] private DialogueRunner _dialogueRunner;
+    [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterOrientation3D _characterOrientation;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
     [SerializeField, BoxGroup("Dialogue")] private GameObject targetTalkPosition;
@@ -20,9 +21,11 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField, BoxGroup("test")] private GameObject testObj;
     private GameObject gg;
+    [SerializeField, BoxGroup("Dialogue")] private GameObject virtualCamera;
 
     //getters & setters
-    public NPC TargetNPC {get=>targetNpc; set=>targetNpc=value;}
+    public NPC TargetNPC { get => targetNpc; set => targetNpc = value; }
+    public GameObject VirtualCamera{get => virtualCamera; }
 
     #region FSM
     private PlayerStateBase currentState;
@@ -85,7 +88,10 @@ public class PlayerManager : MonoBehaviour
         _dialogueRunner = FindObjectOfType<DialogueRunner>();
         if (_dialogueRunner == null)
             Debug.LogWarning("Can't find DialogueRunner");
-        
+
+        _characterOrientation = GetComponent<CharacterOrientation3D>();
+        if (_characterOrientation == null)
+            Debug.LogWarning("Can't find Character Orientation");
         //add exit dialogue state function to dialogue runner's OnDialogueComplete event
         _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
@@ -129,7 +135,17 @@ public class PlayerManager : MonoBehaviour
         _mouseControl3D.AbilityPermitted = false;
     }
 
+    public void LimiteMovementCompletely()
+    {
+        _characterPathFinder.ResetAbility();
+        _mouseControl3D.ResetAbility();
+        _characterPathFinder.Target = null;
+        _characterPathFinder.AbilityPermitted = false;
+
+    }
+
     public void ReleaseMovement() {
+        _characterPathFinder.AbilityPermitted = true;
         _mouseControl3D.AbilityPermitted = true;
     }
 
@@ -178,5 +194,8 @@ public class PlayerManager : MonoBehaviour
         
         SelectionMenu.gameObject.SetActive(false);
         SelectionMenu.CurrentOptionIndex = 1;
+    }
+    public void PlayerFace(Vector2 angle) {
+        _characterMovement.SetMovement(angle);
     }
 }

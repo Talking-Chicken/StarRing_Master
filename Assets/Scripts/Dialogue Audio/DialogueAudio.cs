@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using System.Collections;
+using MoreMountains.Tools;
 //using DG.Tweening;
 
 
@@ -22,7 +23,7 @@ public class FacialExpression
 }
 
 
-public class DialogueAudio : MonoBehaviour
+public class DialogueAudio : MMSingleton<DialogueAudio>
 {
     //private VillagerScript villager;
     // private TMP_Animated animatedText;
@@ -45,8 +46,8 @@ public class DialogueAudio : MonoBehaviour
     //public Animator[] facial_expression;
     [SerializeField]
     private List<FacialExpression> facial_bank;
-    public MMF_Player zoom_in;
-    public MMF_Player zoom_out;
+  public MMF_Player zoomIn;
+  public MMF_Player zoomOut;
     //[Space]
     // public AudioClip sparkleClip;
     // public AudioClip rainClip;
@@ -160,7 +161,8 @@ public class DialogueAudio : MonoBehaviour
         AkSoundEngine.PostEvent("Play_" + letter+"_"+ character_name.text, gameObject);
 
     }
-   
+    public void ZoomOut() { zoomOut.PlayFeedbacks(); }
+    public void ZoomIn() { zoomIn.PlayFeedbacks(); }
     public AnimationClip PlayAnimation(string character_name)
     {
 
