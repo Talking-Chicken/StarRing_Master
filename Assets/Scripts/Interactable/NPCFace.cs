@@ -19,13 +19,7 @@ public class NPCFace : MMSingleton<NPCFace>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.O))
-        {
-            _playerManager.PlayerFace(new Vector3(1, 0, 2));
-        } else
-        {
-            _playerManager.ReleaseMovement();
-        }
+        
     }
     public void FaceEachOther ()
     {

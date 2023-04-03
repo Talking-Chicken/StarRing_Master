@@ -15,7 +15,6 @@ public class PlayerStateDialogue : PlayerStateBase
 
     public override void UpdateState(PlayerManager player)
     {
-        
     }
 
     public override void LeaveState(PlayerManager player)
