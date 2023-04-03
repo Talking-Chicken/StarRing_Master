@@ -51,8 +51,9 @@ public class UIManager : MMSingleton<UIManager>
         previousState = currentState;
 
         //add open ui function to selection menu's buttons' OnClick()
-        selectionMenu.LogicMapButton.onClick.AddListener(OpenLogicMap);
+        
         selectionMenu.InventoryButton.onClick.AddListener(OpenInventory);
+        selectionMenu.LogicMapButton.onClick.AddListener(OpenLogicMap);
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
     }

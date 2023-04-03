@@ -46,8 +46,8 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
     //public Animator[] facial_expression;
     [SerializeField]
     private List<FacialExpression> facial_bank;
-  public MMF_Player zoomIn;
-  public MMF_Player zoomOut;
+    public MMF_Player zoomIn;
+    public MMF_Player zoomOut;
     //[Space]
     // public AudioClip sparkleClip;
     // public AudioClip rainClip;
