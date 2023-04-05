@@ -72,10 +72,6 @@ namespace TopDownEngineExtensions
                     hitInfo.transform.gameObject.TryGetComponent<NPC>(out npc);
                     _player.TargetNPC = npc;
 
-                    // if (!_dialogueRunner.IsDialogueRunning) {
-                    //     _dialogueRunner.StartDialogue(npc.StartNodeBase + "_" + (npc.GetProgress(npc.StartNodeBase)+1));
-                    //     _player.ChangeState(_player.stateDialogue);
-                    // }
                 } else {
                     _brain.Target = hitInfo.transform; //not cus
                     _characterPathfinder3D.SetNewDestination(_brain.Target); //not cus
@@ -83,7 +79,7 @@ namespace TopDownEngineExtensions
                 return; //not cus
             }
             
-            _player.TargetNPC = null;
+            _player.TargetNPC = null; //cus code
             _brain.Target = null;
             if (_brain.CurrentState != _initialState) _brain.TransitionToState(_initialState.StateName);
             if (!_playerPlane.Raycast(ray, out var distance)) return;
