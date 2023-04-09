@@ -149,12 +149,42 @@ public class PlayerManager : MonoBehaviour
         _mouseControl3D.AbilityPermitted = true;
     }
 
+    /*compare all talking positions of the NPC
+      return the nearrest transform*/
+    public Vector3 FindNearestTalkPosition(NPC npc) {
+        if (npc.TalkingSettings.Count <= 0)
+            return transform.position;
+        
+        Vector3 nearestPosition = transform.position;
+        float minDistance = -1.0f;
+        for (int i = 0; i < npc.TalkingSettings.Count; i++) {
+            NavMeshPath path = new NavMeshPath();
+            NavMesh.CalculatePath(transform.position, npc.TalkingSettings[i].TalkingPosition, NavMesh.AllAreas, path);
+
+            //get the total distance of the path
+            float distance = 0.0f;
+            for (int j = 0; j < path.corners.Length - 1; j++)
+                distance += Vector3.Distance(path.corners[j], path.corners[j + 1]);
+
+            //compare minDistance with the current path distance
+            if (minDistance < 0 || minDistance > distance) {
+                minDistance = distance;
+                nearestPosition = npc.TalkingSettings[i].TalkingPosition;
+            }
+        }
+        return nearestPosition;
+    }
+
     /*nave mesh find the npc's nearest talking position (all talking positions are inside NPC)
       if there's no talking point in the scene, instantiate one
       if there's one, change the position of it*/
     public Transform WalkToNearestTalkPosition(NPC npc) {
         NavMeshHit myNavHit;
-        if(NavMesh.SamplePosition(npc.TalkingPositions[0].position, out myNavHit, 100 , -1))
+        Vector3 targetPosition = FindNearestTalkPosition(npc);
+        if (targetPosition == null)
+            return null;
+
+        if(NavMesh.SamplePosition(targetPosition, out myNavHit, 100 , -1))
         {
             GameObject talkingPosition = GameObject.Find("TalkingPosition");
             if (talkingPosition == null)

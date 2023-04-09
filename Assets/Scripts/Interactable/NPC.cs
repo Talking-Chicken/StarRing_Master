@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using Yarn.Unity;
-using Cinemachine;
 
 public class NPC : MonoBehaviour, ITalkable
 {
@@ -11,11 +10,13 @@ public class NPC : MonoBehaviour, ITalkable
     [SerializeField, BoxGroup("Dialogue")] private string startNodeBase;
     [ShowNonSerializedField, BoxGroup("Dialogue")] private Dictionary<string,int> interactCount = new Dictionary<string, int>();
     [SerializeField, BoxGroup("Dialogue")] private List<Transform> talkingPositions;
+    [SerializeField, BoxGroup("Dialogue")] private List<TalkingSetting> talkingSettings;
 
     //getters & setters
     public bool IsInteractable {get=>isInteractable;set=>isInteractable=value;}
     public string StartNodeBase {get=>startNodeBase;set=>startNodeBase=value;}
     public List<Transform> TalkingPositions {get=>talkingPositions; private set=>talkingPositions=value;}
+    public List<TalkingSetting> TalkingSettings {get=>talkingSettings; set=>talkingSettings=value;}
 
     #region FSM
     private NPCStateBase currentState;

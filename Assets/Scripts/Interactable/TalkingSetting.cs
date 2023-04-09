@@ -5,7 +5,7 @@ using Cinemachine;
 
 [CreateAssetMenu(fileName = "Talking Setting", menuName = "Star Ring/Talking Setting", order = 1)]
 public class TalkingSetting : ScriptableObject{
-    [SerializeField] private string startNodeName;
-    [SerializeField] private CinemachineVirtualCamera talkingCamera;
-    [SerializeField] private Transform talkingPosition;
+    public string StartNodeName;
+    public CinemachineVirtualCamera TalkingCamera;
+    public Vector3 TalkingPosition;
 }
