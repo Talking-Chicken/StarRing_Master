@@ -1062,6 +1062,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3664870462629692996}
+  - {fileID: 1809100583134499186}
   m_Father: {fileID: 3391628988512110675}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1319,7 +1320,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7535021233771463198}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1833853048217846998
 SkinnedMeshRenderer:
@@ -1570,7 +1571,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7535021233771463198}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &446025494047547662
 SkinnedMeshRenderer:
@@ -2042,13 +2043,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5007275221859490981}
-  m_LocalRotation: {x: -0.6845733, y: -0.12009747, z: -0.119497746, w: 0.7089826}
-  m_LocalPosition: {x: 0.008523863, y: 0.001992777, z: -0.012597725}
-  m_LocalScale: {x: 100.00001, y: 100.00003, z: 100.00001}
+  m_LocalRotation: {x: -0.95840836, y: 0.000008583069, z: 0.017968845, w: -0.28483427}
+  m_LocalPosition: {x: 0.00069838064, y: 0.00054287707, z: 0.0011559458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7535021233771463198}
-  m_RootOrder: 8
+  m_Father: {fileID: 8012713935037268763}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5894720674138293367
 MeshFilter:
@@ -2846,7 +2847,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7535021233771463198}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &4914160790598407553
 SkinnedMeshRenderer:
@@ -3069,8 +3070,6 @@ Transform:
   - {fileID: 4076400349939234594}
   - {fileID: 629283882673873319}
   - {fileID: 7035937828216883166}
-  - {fileID: 8551202422182556422}
-  - {fileID: 1809100583134499186}
   - {fileID: 4236766125441309585}
   - {fileID: 7880209577221125709}
   - {fileID: 1084674106640560563}
@@ -3702,7 +3701,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.9
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -3967,13 +3966,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8041508805550212303}
-  m_LocalRotation: {x: -0.7047609, y: -0.00000006235554, z: -0.00000003084958, w: 0.7094449}
-  m_LocalPosition: {x: -0.000000014901161, y: 0.0018568337, z: -0.025897887}
-  m_LocalScale: {x: 100, y: 100.00001, z: 100.00002}
+  m_LocalRotation: {x: -0.95840883, y: -0.000011523252, z: -0.017958172, w: -0.2848333}
+  m_LocalPosition: {x: -0.000698351, y: 0.00054286636, z: 0.0011559724}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7535021233771463198}
-  m_RootOrder: 7
+  m_Father: {fileID: 4602604370644097538}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8428006395206213619
 MeshFilter:
@@ -4280,6 +4279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8835143416191611892}
+  - {fileID: 8551202422182556422}
   m_Father: {fileID: 5057842429869384924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4575,6 +4575,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104411597558422580, guid: 72e59e5e595409f45b4cf31213695c43,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104411597558422580, guid: 72e59e5e595409f45b4cf31213695c43,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 8737631341543157794, guid: 72e59e5e595409f45b4cf31213695c43,
         type: 3}
