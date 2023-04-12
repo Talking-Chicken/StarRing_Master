@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using AK.Wwise;
 using System;
@@ -14,12 +13,9 @@ using MoreMountains.Tools;
 
 public class FacialExpression
 {
-   
     public string char_name;
     public string gameobject_name;
     public Animator char_anime;
-
-
 }
 
 
@@ -60,7 +56,7 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
         // animatedText = InterfaceManager.instance.animatedText;
 
         // animatedText.onTextReveal.AddListener((newChar) => ReproduceSound(newChar));
-        foreach ( FacialExpression facialExpression in facial_bank)
+        foreach (FacialExpression facialExpression in facial_bank)
         {
             facialExpression.char_anime = GameObject.Find(facialExpression.gameobject_name).transform.Find("Face").GetComponent<Animator>();
         }
@@ -69,55 +65,51 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
 
     void Update()
     {
+        if (current_dialogue != dialogue.text)
+        {
+            StopAllCoroutines();
 
-        
-       
-             if (current_dialogue != dialogue.text)
-            {
-                StopAllCoroutines();
+            StartCoroutine(ReproduceSound());
 
-                StartCoroutine(ReproduceSound());
+            current_dialogue = dialogue.text;
+            Debug.Log("length:" + dialogue.text);
+        }
 
-                current_dialogue = dialogue.text;
-                Debug.Log("length:"+dialogue.text);
-          
-           
-            }
+        if (current_character != character_name.text)
+        {
+            run_once = true;
 
-             if (current_character != character_name.text)
-            {
-                 run_once = true;
-       
 
             current_character = character_name.text;
-            }
+        }
 
-            if (run_once)
-           {
+        if (run_once)
+        {
             Debug.Log("test");
-            if (last_anime!=null) {
+            if (last_anime != null)
+            {
                 last_anime.Play("stop_talking");
             }
-        
 
-                run_once = false;
 
-          
+            run_once = false;
 
-                PlayAnimation(character_name.text);
-           }
-        
-       
+
+
+            PlayAnimation(character_name.text);
+        }
+
+
 
 
     }
- 
+
 
 
     IEnumerator ReproduceSound()
     {
-        int dialogue_length = dialogue.text.Length /2;
-        for (int i=0; i < dialogue_length;)
+        int dialogue_length = dialogue.text.Length / 2;
+        for (int i = 0; i < dialogue_length;)
         {
             char c = dialogue.text[i];
             if (!punctuation.Contains(c))
@@ -125,10 +117,11 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
                 LetterSound(c);
                 yield return new WaitForSeconds(0.03f);
             }
-            else {
+            else
+            {
                 yield return new WaitForSeconds(0.05f);
             }
-            
+
             i++;
         }
 
@@ -158,26 +151,24 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
     public void LetterSound(char letter)
     {
         letter = char.ToUpper(letter);
-        AkSoundEngine.PostEvent("Play_" + letter+"_"+ character_name.text, gameObject);
+        AkSoundEngine.PostEvent("Play_" + letter + "_" + character_name.text, gameObject);
 
     }
     public void ZoomOut() { zoomOut.PlayFeedbacks(); }
     public void ZoomIn() { zoomIn.PlayFeedbacks(); }
     public AnimationClip PlayAnimation(string character_name)
     {
-
         foreach (FacialExpression facialExpression in facial_bank)
         {
-            if (facialExpression.char_name == character_name) 
+            if (facialExpression.char_name == character_name)
             {
                 facialExpression.char_anime.Play("talking");
-                last_anime=facialExpression.char_anime;
+                last_anime = facialExpression.char_anime;
             }
         }
         return null;
-        
     }
 }
-  
-    
+
+
 

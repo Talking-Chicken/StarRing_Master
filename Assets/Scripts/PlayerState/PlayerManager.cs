@@ -9,22 +9,23 @@ using TopDownEngineExtensions;
 
 public class PlayerManager : MonoBehaviour
 {
-    [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterPathfinder3D _characterPathFinder;
-    [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterMovement _characterMovement;
-    [ReadOnly, SerializeField, BoxGroup("Info")] private MouseControls3D _mouseControl3D;
-    [ReadOnly, SerializeField, BoxGroup("Info")] private DialogueRunner _dialogueRunner;
-    [ReadOnly, SerializeField, BoxGroup("Info")] private CharacterOrientation3D _characterOrientation;
+    [ReadOnly, SerializeField, Foldout("Info")] private CharacterPathfinder3D _characterPathFinder;
+    [ReadOnly, SerializeField, Foldout("Info")] private CharacterMovement _characterMovement;
+    [ReadOnly, SerializeField, Foldout("Info")] private MouseControls3D _mouseControl3D;
+    [ReadOnly, SerializeField, Foldout("Info")] private DialogueRunner _dialogueRunner;
+    [ReadOnly, SerializeField, Foldout("Info")] private CharacterOrientation3D _characterOrientation;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
+    [ReadOnly, SerializeField, BoxGroup("Dialogue")] private TalkingSetting targetTalkingSetting;
     [SerializeField, BoxGroup("Dialogue")] private GameObject targetTalkPosition;
     [SerializeField, BoxGroup("Selection Menu")] private SelectionMenu SelectionMenu;
 
     [SerializeField, BoxGroup("test")] private GameObject testObj;
-    private GameObject gg;
     [SerializeField, BoxGroup("Dialogue")] private GameObject virtualCamera;
 
     //getters & setters
     public NPC TargetNPC { get => targetNpc; set => targetNpc = value; }
+    public TalkingSetting TargetTalkingSetting {get=>targetTalkingSetting; set=>targetTalkingSetting=value;}
     public GameObject VirtualCamera{get => virtualCamera; }
 
     #region FSM
@@ -101,11 +102,6 @@ public class PlayerManager : MonoBehaviour
     {
         currentState.UpdateState(this);
 
-        
-        if (Input.GetKeyDown(KeyCode.H)) {
-            gg = Instantiate(testObj, transform.position, Quaternion.identity);
-        }
-
         if (Input.GetKeyDown(KeyCode.J)) {
             if (TargetNPC != null)
                 WalkToNearestTalkPosition(TargetNPC);
@@ -151,11 +147,12 @@ public class PlayerManager : MonoBehaviour
 
     /*compare all talking positions of the NPC
       return the nearrest transform*/
-    public Vector3 FindNearestTalkPosition(NPC npc) {
+    public TalkingSetting FindNearestTalkSetting(NPC npc) {
         if (npc.TalkingSettings.Count <= 0)
-            return transform.position;
+            return null;
         
         Vector3 nearestPosition = transform.position;
+        TalkingSetting nearestTalkingSetting = null;
         float minDistance = -1.0f;
         for (int i = 0; i < npc.TalkingSettings.Count; i++) {
             NavMeshPath path = new NavMeshPath();
@@ -170,9 +167,10 @@ public class PlayerManager : MonoBehaviour
             if (minDistance < 0 || minDistance > distance) {
                 minDistance = distance;
                 nearestPosition = npc.TalkingSettings[i].TalkingPosition;
+                nearestTalkingSetting = npc.TalkingSettings[i];
             }
         }
-        return nearestPosition;
+        return TargetTalkingSetting = nearestTalkingSetting;
     }
 
     /*nave mesh find the npc's nearest talking position (all talking positions are inside NPC)
@@ -180,16 +178,21 @@ public class PlayerManager : MonoBehaviour
       if there's one, change the position of it*/
     public Transform WalkToNearestTalkPosition(NPC npc) {
         NavMeshHit myNavHit;
-        Vector3 targetPosition = FindNearestTalkPosition(npc);
+        FindNearestTalkSetting(npc);
+        Vector3 targetPosition = TargetTalkingSetting.TalkingPosition;
+
+        if (TargetTalkingSetting == null)
+            return null;
         if (targetPosition == null)
             return null;
 
         if(NavMesh.SamplePosition(targetPosition, out myNavHit, 100 , -1))
         {
             GameObject talkingPosition = GameObject.Find("TalkingPosition");
-            if (talkingPosition == null)
+            if (talkingPosition == null) {
                 talkingPosition = Instantiate(targetTalkPosition, myNavHit.position, Quaternion.identity);
-            else
+                talkingPosition.name = "TalkingPosition";
+            } else
                 talkingPosition.transform.position = myNavHit.position;
             _characterPathFinder.SetNewDestination(talkingPosition.transform);
             return talkingPosition.transform;
@@ -198,7 +201,16 @@ public class PlayerManager : MonoBehaviour
     }
 
     public bool IsReadyToTalk(Transform destination) {
-        if (Vector3.Distance(transform.position, destination.position) <= 0.2f) {
+        if (Vector3.Distance(transform.position, destination.position) <= 0.25f) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public bool IsReadyToTalk(Vector3 destination) {
+        Debug.Log(Vector3.Distance(transform.position, destination));
+        if (Vector3.Distance(transform.position, destination) <= 0.25f) {
             return true;
         } else {
             return false;

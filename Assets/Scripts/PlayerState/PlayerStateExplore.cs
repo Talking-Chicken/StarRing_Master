@@ -13,13 +13,9 @@ public class PlayerStateExplore : PlayerStateBase
     {
         player.DetectInputExploreState();
 
-        //go to the point where Amo can talk
-        if (player.TargetNPC !=null && player.TargetNPC.IsInteractable) {
-            Transform targetTalkPosition = player.WalkToNearestTalkPosition(player.TargetNPC);
-            if (targetTalkPosition != null) {
-                if (player.IsReadyToTalk(targetTalkPosition)) { //talk with character
-                    player.StartDialogue(player.TargetNPC);
-                }
+        if (player.TargetTalkingSetting != null) {
+            if (player.IsReadyToTalk(player.TargetTalkingSetting.TalkingPosition)) {
+                player.StartDialogue(player.TargetNPC);
             }
         }
     }
