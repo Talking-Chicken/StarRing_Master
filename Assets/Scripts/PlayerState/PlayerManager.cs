@@ -209,7 +209,6 @@ public class PlayerManager : MonoBehaviour
     }
 
     public bool IsReadyToTalk(Vector3 destination) {
-        Debug.Log(Vector3.Distance(transform.position, destination));
         if (Vector3.Distance(transform.position, destination) <= 0.25f) {
             return true;
         } else {
