@@ -2318,11 +2318,17 @@ MonoBehaviour:
   _mouseControl3D: {fileID: 0}
   _dialogueRunner: {fileID: 0}
   _characterOrientation: {fileID: 0}
+  hoveringInteractable: {fileID: 0}
+  targetInteractable: {fileID: 0}
+  interactionRaycastMask:
+    serializedVersion: 2
+    m_Bits: 8388608
   targetNpc: {fileID: 0}
+  targetTalkingSetting: {fileID: 0}
   targetTalkPosition: {fileID: 6462931015700587776}
+  virtualCamera: {fileID: 1880493660378279211}
   SelectionMenu: {fileID: 5955374989854480271}
   testObj: {fileID: 6295403935392570374, guid: 4dd40a2ba6108b743aaf7c689f2f66ae, type: 3}
-  virtualCamera: {fileID: 1880493660378279211}
 --- !u!114 &4142866814125310050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2479,6 +2485,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   RotationMode: 1
   CharacterRotationAuthorized: 1
   ShouldRotateToFaceMovementDirection: 1
@@ -2518,6 +2525,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   Movement: 0
   InputAuthorized: 1
   AnalogInput: 0
@@ -2551,6 +2559,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   RunSpeed: 4
   AutoRun: 0
   AutoRunThreshold: 0.6
@@ -2574,6 +2583,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   PreventJumpInButtonActivatedZone: 1
   ButtonActivatedZone: {fileID: 0}
 --- !u!114 &4142866814125310049
@@ -2596,6 +2606,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   MuteSfxTrackSounds: 1
   MuteUITrackSounds: 0
   MuteMusicTrackSounds: 0
@@ -2626,6 +2637,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   Mode: 1
   TimeScale: 0.5
   OneTimeDuration: 1
@@ -2704,6 +2716,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   InitialWeapon: {fileID: 0}
   CanPickupWeapons: 1
   WeaponUseFeedback: {fileID: 0}
@@ -2717,6 +2730,7 @@ MonoBehaviour:
   UseSecondaryAxisThresholdToShoot: 0
   ForceWeaponAimControl: 0
   ForcedWeaponAimControl: 1
+  ForceAlwaysShoot: 0
   BufferInput: 0
   NewInputExtendsBuffer: 0
   MaximumBufferDuration: 0.25
@@ -2742,10 +2756,14 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   Target: {fileID: 0}
   DistanceToWaypointThreshold: 0.2
   ClosestPointThreshold: 0.5
   MinimumDelayBeforePollingNavmesh: 0.1
+  PathRefreshMode: 0
+  RefreshSpeedThreshold: 1
+  RefreshInterval: 2
   DebugDrawPath: 1
   Waypoints: []
   NextWaypointIndex: 0
@@ -2771,6 +2789,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
+  BlockingWeaponStates: 
   MouseButtonIndex: 0
   OnClickFeedbacks: {fileID: 0}
   UIShouldBlockInput: 1
@@ -2890,12 +2909,19 @@ MonoBehaviour:
     OnComplete:
       m_PersistentCalls:
         m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 3803215525299617792
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   ForceStopFeedbacksOnDisable: 1
+  PlayCount: 0
   references:
     version: 2
     RefIds:
@@ -2931,6 +2957,9 @@ MonoBehaviour:
           TrackID: 0
           Quantized: 0
           TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
         RandomizeOutput: 0
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0

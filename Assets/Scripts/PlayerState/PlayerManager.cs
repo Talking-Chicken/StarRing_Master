@@ -6,24 +6,43 @@ using MoreMountains.TopDownEngine;
 using Yarn.Unity;
 using UnityEngine.AI;
 using TopDownEngineExtensions;
+using MoreMountains.Tools;
 
 public class PlayerManager : MonoBehaviour
 {
+    //info
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterPathfinder3D _characterPathFinder;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterMovement _characterMovement;
     [ReadOnly, SerializeField, Foldout("Info")] private MouseControls3D _mouseControl3D;
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueRunner _dialogueRunner;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterOrientation3D _characterOrientation;
+    private Camera _mainCamera;
+
+    //interactions
+    [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable hoveringInteractable;
+    [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable targetInteractable;
+    [ReadOnly, SerializeField, BoxGroup("Interaction")] private Transform interactionPosition;
+    [ReadOnly, SerializeField, BoxGroup("Interaction")] private bool isInteracting = false;
+    [SerializeField, BoxGroup("Interaction")] private LayerMask interactionRaycastMask;
+
+    //Dialogues
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private TalkingSetting targetTalkingSetting;
     [SerializeField, BoxGroup("Dialogue")] private GameObject targetTalkPosition;
+    [SerializeField, BoxGroup("Dialogue")] private GameObject virtualCamera;
+
+    //selection menu
     [SerializeField, BoxGroup("Selection Menu")] private SelectionMenu SelectionMenu;
 
     [SerializeField, BoxGroup("test")] private GameObject testObj;
-    [SerializeField, BoxGroup("Dialogue")] private GameObject virtualCamera;
+    
 
     //getters & setters
+    public Interactable HoveringInteractable {get=>hoveringInteractable;set=>hoveringInteractable=value;}
+    public Interactable TargetInteractable {get=>targetInteractable;private set=>targetInteractable=value;}
+    public Transform InteractionPosition {get=>interactionPosition;private set=>interactionPosition=value;}
+    public bool IsInteracting {get=>isInteracting;private set=>isInteracting=value;}
     public NPC TargetNPC { get => targetNpc; set => targetNpc = value; }
     public TalkingSetting TargetTalkingSetting {get=>targetTalkingSetting; set=>targetTalkingSetting=value;}
     public GameObject VirtualCamera{get => virtualCamera; }
@@ -93,6 +112,9 @@ public class PlayerManager : MonoBehaviour
         _characterOrientation = GetComponent<CharacterOrientation3D>();
         if (_characterOrientation == null)
             Debug.LogWarning("Can't find Character Orientation");
+        
+        _mainCamera = Camera.main;
+
         //add exit dialogue state function to dialogue runner's OnDialogueComplete event
         _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
@@ -111,6 +133,25 @@ public class PlayerManager : MonoBehaviour
 
     #region detect input
     public void DetectInputExploreState() {
+        //detect interact
+        if (Input.GetMouseButtonUp(0)) {
+            if (HoveringInteractable != null) {
+                TargetInteractable = HoveringInteractable;
+                switch (TargetInteractable.Type) {
+                    case InteractableType.OBJ:
+                        InteractObj obj = TargetInteractable.GetComponent<InteractObj>();
+                        InteractionPosition = obj.InteractPosition;
+                        WalkToInteractingPosition(obj.InteractPosition);
+                        // (targetInteractable as InteractObj).Interact();
+                        break;
+                    case InteractableType.EXM:
+                        break;
+                    case InteractableType.NPC:
+                        break;
+                }
+            }
+        }
+
         //go to mr rabbit state
         if (Input.GetMouseButtonDown(1)) {
             ChangeState(stateMrRabbit);
@@ -131,18 +172,75 @@ public class PlayerManager : MonoBehaviour
         _mouseControl3D.AbilityPermitted = false;
     }
 
-    public void LimiteMovementCompletely()
-    {
-        _characterPathFinder.ResetAbility();
-        _mouseControl3D.ResetAbility();
-        _characterPathFinder.Target = null;
-        _characterPathFinder.AbilityPermitted = false;
-
-    }
-
     public void ReleaseMovement() {
         _characterPathFinder.AbilityPermitted = true;
         _mouseControl3D.AbilityPermitted = true;
+    }
+
+    public void ResetInteractTargets() {
+        TargetInteractable = null;
+        InteractionPosition = null;
+        IsInteracting = false;
+    }
+
+    /// rotate player character to face target transform's position
+    public void RotateToward(Transform target) {
+        if (target == null) {
+            Debug.Log("rotation toward target is null");
+            return;
+        }
+        Vector3 targetAngle = new Vector3(target.position.x -target.position.x, 0, target.position.z - target.position.z).normalized;
+        PlayerFace(new Vector2(targetAngle.x,targetAngle.z));
+    }
+ 
+    /// ray cast from camera to mouse world position,
+    /// it detects if anything is interactable
+    public Interactable DetectInteractable() {
+        if (MMGUI.PointOrTouchBlockedByUI()) return null;
+
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+#if UNITY_EDITOR
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.blue);
+#endif
+        Interactable interactable = null;
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, interactionRaycastMask))
+        {
+            hitInfo.transform.TryGetComponent<Interactable>(out interactable);
+        }
+        return interactable;
+    }
+
+    /// interact with target
+    /// do corresponding things based on their type
+    public void Interact(Interactable target) {
+        if (target == null)
+            return;
+        
+        switch (target.Type) {
+            case InteractableType.OBJ:
+                InteractObj obj = TargetInteractable.GetComponent<InteractObj>();
+                obj.Interact();
+                break;
+            case InteractableType.EXM:
+                break;
+            case InteractableType.NPC:
+                break;
+        }
+        IsInteracting = true;
+    }
+
+    /// go to the interacting position
+    public void WalkToInteractingPosition(Transform interactingPosition) {
+        _characterPathFinder.SetNewDestination(interactingPosition);
+    }
+
+    /// return whether player is close enough to interact
+    public bool IsReadyToInteract(Transform destination) {
+        if (Vector3.Distance(transform.position, destination.position) <= 0.25f) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*compare all talking positions of the NPC
@@ -236,6 +334,7 @@ public class PlayerManager : MonoBehaviour
         SelectionMenu.gameObject.SetActive(false);
         SelectionMenu.CurrentOptionIndex = 1;
     }
+
     public void PlayerFace(Vector2 angle) {
         _characterMovement.SetMovement(angle);
     }

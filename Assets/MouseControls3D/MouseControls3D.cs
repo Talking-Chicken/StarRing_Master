@@ -73,7 +73,8 @@ namespace TopDownEngineExtensions
                     _player.TargetNPC = npc;
 
                     //start to walk to nearest position
-                    _player.WalkToNearestTalkPosition(npc);
+                    if (npc != null)
+                        _player.WalkToNearestTalkPosition(npc);
                 } else {
                     _brain.Target = hitInfo.transform; //not cus
                     _characterPathfinder3D.SetNewDestination(_brain.Target); //not cus

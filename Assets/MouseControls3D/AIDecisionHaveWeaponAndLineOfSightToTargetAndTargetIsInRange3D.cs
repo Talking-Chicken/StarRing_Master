@@ -12,7 +12,7 @@ namespace TopDownEngineExtensions
         {
             base.Awake();
             _character = GetComponentInParent<Character>();
-            _characterHandleWeapon = _character.FindAbility<CharacterHandleWeapon>();;
+            _characterHandleWeapon = _character.FindAbility<CharacterHandleWeapon>();
         }
 
         public override bool Decide()

@@ -13,7 +13,6 @@ public class NPCFace : MMSingleton<NPCFace>
     {
         _playerManager = FindObjectOfType<PlayerManager>();
         if (_playerManager == null) { Debug.Log("cannot find player manager"); }
-        else Debug.Log("player Manager " + _playerManager.name);
     }
 
     // Update is called once per frame
