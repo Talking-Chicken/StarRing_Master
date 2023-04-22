@@ -3022,6 +3022,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 638065608767093443, guid: 01e02fdd15c9ee4419ed16b5b134f08a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 670179383881394896, guid: 01e02fdd15c9ee4419ed16b5b134f08a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3531,6 +3536,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7320567217527925760}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1272020121876006179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8372471630106896675, guid: 01e02fdd15c9ee4419ed16b5b134f08a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7320567217527925760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1212721703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272020121876006179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &4924966171616718048 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2436200809790734560, guid: 01e02fdd15c9ee4419ed16b5b134f08a,
