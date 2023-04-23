@@ -5,7 +5,6 @@ using MoreMountains.Feedbacks;
 using MoreMountains.FeedbacksForThirdParty;
 public class PlayerStateDialogue : PlayerStateBase
 {
-   
     public override void EnterState(PlayerManager player)
     {
         player.LimitMovement();

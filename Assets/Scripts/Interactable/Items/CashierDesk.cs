@@ -19,6 +19,7 @@ public class CashierDesk : InteractObj, IInteractable
     public override bool Interact() {
         base.Interact();
         Debug.Log("interacting with " + name);
+        TimeManager.Instance.ChangeToNextState();
         return true;
     }
 }
