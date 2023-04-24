@@ -20,10 +20,12 @@ public class IK_Manager : MonoBehaviour
     }
     private void OnAnimatorIK()
     {
-        if (animator)
+       if (animator.GetCurrentAnimatorStateInfo(0).IsName("ready_look"))
+      
         {
+
             animator.SetLookAtWeight(0.5f);
-            animator.SetLookAtPosition(Player.transform.position);
+            animator.SetLookAtPosition(Player.transform.position + new Vector3(0, 1.5f, 0));
         }
     }
 }
