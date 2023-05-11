@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3553838991448517669
+--- !u!114 &-4986853844293968210
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,17 +20,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material.125
+  m_Name: space_suit
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_ValidKeywords:
   - N_F_EAL_ON
-  - N_F_GLO_ON
-  - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
+  - N_F_SL_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   m_InvalidKeywords:
+  - N_F_TRANSAFFSHA
   - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
   - _GIFLATSHADE_OFF
   - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
@@ -54,12 +54,13 @@ Material:
   - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
   - _VERTEXCOLORGREENCONTROLSELFSHADOWTHRESHOLD_OFF
   - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -213,7 +214,7 @@ Material:
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
     - _GlossTextureSoftness: 0
-    - _Glossiness: 0.6
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Glow_Edge_Width: 1
     - _HighlightColorPower: 1
@@ -242,7 +243,7 @@ Material:
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 1
+    - _N_F_GLO: 0
     - _N_F_GLOT: 0
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
@@ -251,14 +252,14 @@ Material:
     - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
-    - _N_F_O: 1
+    - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
     - _N_F_RL: 0
     - _N_F_SCT: 0
-    - _N_F_SL: 0
+    - _N_F_SL: 1
     - _N_F_SON: 0
     - _N_F_SS: 1
     - _N_F_ST: 0
@@ -270,7 +271,7 @@ Material:
     - _Opacity: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
-    - _OutlineWidth: 0.12
+    - _OutlineWidth: 0.5
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 0
     - _OverallShadowColorPower: 1
@@ -296,14 +297,14 @@ Material:
     - _STIL: 0
     - _Saturation: 1
     - _SelfLitHighContrast: 1
-    - _SelfLitIntensity: 0
+    - _SelfLitIntensity: 0.111
     - _SelfLitPower: 2
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
     - _SelfShadowRealTimeShadowColorPower: 1
     - _SelfShadowRealtimeShadowIntensity: 1
     - _SelfShadowShadowTAtViewDirection: 0
-    - _SelfShadowThreshold: 0.93
+    - _SelfShadowThreshold: 0.724
     - _ShadowColorTexturePower: 0
     - _ShadowHardness: 0
     - _ShadowTColorPower: 1
@@ -317,7 +318,7 @@ Material:
     - _SimTrans: 0
     - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
-    - _Smoothness: 0.59999996
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -343,10 +344,10 @@ Material:
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.8214372, g: 0.8214372, b: 0.8214372, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _OverallShadowColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SSAOColor: {r: 0, g: 0, b: 0, a: 0}
