@@ -6,7 +6,6 @@ public class PlayerStateMrRabbit : PlayerStateBase
 {
     public override void EnterState(PlayerManager player)
     {
-        UIManager.Instance.ChangeState(UIManager.Instance.stateSelecting);
         player.OpenSelectionMenu();
     }
 
