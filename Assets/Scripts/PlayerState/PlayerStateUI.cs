@@ -6,6 +6,7 @@ public class PlayerStateUI : PlayerStateBase
 {
     public override void EnterState(PlayerManager player)
     {
+        player.OpenUIFeedback.PlayFeedbacks();
         player.LimitMovement();
     }
 

@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
+using NaughtyAttributes;
+using MoreMountains.Feedbacks;
 
-public class UIManager : MMSingleton<UIManager>
+public class UIManager : MonoBehaviour
 {
-    public SelectionMenu selectionMenu;
     public GameObject inventoryContainer, logicMapContainer, TimeManagementContainer;
+    [SerializeField, Foldout("Feedbacks")] private MMF_Player selectSettingFB, selectInventoryFB, selectLogicMapFB;
+
+    #region getters & setters
+    public MMF_Player SelectSettingFB {get=>selectSettingFB;}
+    public MMF_Player SelectInventoryFB {get=>selectInventoryFB;}
+    public MMF_Player SelectLogicMapFB {get=>selectLogicMapFB;}
+    #endregion
 
     #region FSM
     private UIStateBase currentState;
     public UIStateBase previousState;
     public UIStateNone stateNone = new UIStateNone();
     public UIStatePause statePause = new UIStatePause();
+    public UIStateSelectionMenu stateSelectionMenu = new UIStateSelectionMenu();
     public UIStateSelecting stateSelecting = new UIStateSelecting();
     public UIStateInventory stateInventory = new UIStateInventory();
     public UIStateLogicMap stateLogicMap = new UIStateLogicMap();
-    public UIStateTimeManagement stateTimeManagement = new UIStateTimeManagement();
 
     public void ChangeState(UIStateBase newState)
     {
@@ -52,10 +60,6 @@ public class UIManager : MMSingleton<UIManager>
 
         //add open ui function to selection menu's buttons' OnClick()
         
-        selectionMenu = FindObjectOfType<SelectionMenu>();
-
-        selectionMenu.InventoryButton.onClick.AddListener(OpenInventory);
-        selectionMenu.LogicMapButton.onClick.AddListener(OpenLogicMap);
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
     }
@@ -86,15 +90,5 @@ public class UIManager : MMSingleton<UIManager>
     public void CloseLogicMap() {
         ChangeState(stateNone);
         logicMapContainer.SetActive(false);
-    }
-
-    public void OpenTimeManagement() {
-        ChangeState(stateTimeManagement);
-        TimeManagementContainer.SetActive(true);
-    }
-
-    public void CloseTimeManagement() {
-        ChangeState(stateNone);
-        TimeManagementContainer.SetActive(false);
     }
 }

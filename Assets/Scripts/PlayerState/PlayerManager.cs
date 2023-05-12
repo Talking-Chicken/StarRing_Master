@@ -7,6 +7,7 @@ using Yarn.Unity;
 using UnityEngine.AI;
 using TopDownEngineExtensions;
 using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -37,15 +38,19 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField, BoxGroup("test")] private GameObject testObj;
     
+    //feedbacks
+    [SerializeField, Foldout("Feedbacks")] private MMF_Player openUIFeedback;
 
-    //getters & setters
+    #region getters & setters
     public Interactable HoveringInteractable {get=>hoveringInteractable;set=>hoveringInteractable=value;}
     public Interactable TargetInteractable {get=>targetInteractable;private set=>targetInteractable=value;}
     public Transform InteractionPosition {get=>interactionPosition;private set=>interactionPosition=value;}
     public bool IsInteracting {get=>isInteracting;private set=>isInteracting=value;}
     public NPC TargetNPC { get => targetNpc; set => targetNpc = value; }
     public TalkingSetting TargetTalkingSetting {get=>targetTalkingSetting; set=>targetTalkingSetting=value;}
-    public GameObject VirtualCamera{get => virtualCamera; }
+    public GameObject VirtualCamera{get => virtualCamera;}
+    public MMF_Player OpenUIFeedback {get=>openUIFeedback;}
+    #endregion
 
     #region FSM
     private PlayerStateBase currentState;
@@ -80,12 +85,7 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     #region Awake, Start, and Update
-    void Awake() {
-        if (SelectionMenu != null)
-            UIManager.Instance.selectionMenu = SelectionMenu;
-        else
-            SelectionMenu = GetComponentInChildren<SelectionMenu>();
-    }
+    void Awake() {}
 
     void Start()
     {
@@ -152,9 +152,9 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        //go to mr rabbit state
+        //go to UI state
         if (Input.GetMouseButtonDown(1)) {
-            ChangeState(stateMrRabbit);
+            ChangeState(stateUI);
         }
     }
 
@@ -324,7 +324,6 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void OpenSelectionMenu() {
-        UIManager.Instance.ChangeState(UIManager.Instance.stateSelecting);
         SelectionMenu.gameObject.SetActive(true);
         SelectionMenu.CurrentOptionIndex = 1;
     }
