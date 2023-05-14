@@ -25777,7 +25777,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818921084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.116, y: -4.153, z: 1.866}
+  m_LocalPosition: {x: -4.116, y: -4.184, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28639,8 +28639,8 @@ PlayableDirector:
     value: {fileID: 2005454026}
   - key: {fileID: 5984896440207521560, guid: 6f54e06f28d05fe4fb867c3c57d77d37, type: 2}
     value: {fileID: 335475595}
-  - key: {fileID: -2719885925357050002, guid: 6f54e06f28d05fe4fb867c3c57d77d37, type: 2}
-    value: {fileID: 1783468581}
+  - key: {fileID: -434376969139363399, guid: 6f54e06f28d05fe4fb867c3c57d77d37, type: 2}
+    value: {fileID: 1550600998}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1136945024
@@ -30709,7 +30709,12 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Index Intermediate.L'\n\tTransform 'Ring Proximal.R'\n\tTransform
+    'Middle Distal.R'\n\tTransform 'Index Distal.R'\n\tTransform 'shoulder.R'\n\tTransform
+    'LeftEye'\n\tTransform 'Thumb Intermediate.R'\n\tTransform 'Little Proximal.R'\n\tTransform
+    'Index Distal.L'\n\tTransform 'Neck'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -30910,6 +30915,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 238286694031707918, guid: eb0a15c8b526ee0418d3216c8493d876,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100004, guid: e1660ca55686a7b41a9382f564cb1ae8, type: 3}
+    - target: {fileID: 238286694031707918, guid: eb0a15c8b526ee0418d3216c8493d876,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1da1923f796e07439a0fb19588fb836, type: 2}
     - target: {fileID: 766681929626382183, guid: eb0a15c8b526ee0418d3216c8493d876,
         type: 3}
       propertyPath: m_Lens.FieldOfView
@@ -30963,12 +30978,12 @@ PrefabInstance:
     - target: {fileID: 766681931084342530, guid: eb0a15c8b526ee0418d3216c8493d876,
         type: 3}
       propertyPath: m_Intensity
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 766681931084342530, guid: eb0a15c8b526ee0418d3216c8493d876,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1135472964620549889, guid: eb0a15c8b526ee0418d3216c8493d876,
         type: 3}
