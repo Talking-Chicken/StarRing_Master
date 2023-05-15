@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using System.Collections;
 using MoreMountains.Tools;
+using Yarn.Unity;
 //using DG.Tweening;
 
 
@@ -44,6 +45,7 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
     private List<FacialExpression> facial_bank;
     public MMF_Player zoomIn;
     public MMF_Player zoomOut;
+    private DialogueRunner dialogueRunner;
     //[Space]
     // public AudioClip sparkleClip;
     // public AudioClip rainClip;
@@ -56,6 +58,12 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
         // animatedText = InterfaceManager.instance.animatedText;
 
         // animatedText.onTextReveal.AddListener((newChar) => ReproduceSound(newChar));
+
+        ///set up
+        dialogueRunner = FindObjectOfType<DialogueRunner>();
+        if (dialogueRunner == null)
+            Debug.Log("Can't find Dialogue Runner in " + name);
+
         foreach (FacialExpression facialExpression in facial_bank)
         {
             facialExpression.char_anime = GameObject.Find(facialExpression.gameobject_name).transform.Find("Face").GetComponent<Animator>();
@@ -65,38 +73,40 @@ public class DialogueAudio : MMSingleton<DialogueAudio>
 
     void Update()
     {
-        if (current_dialogue != dialogue.text)
-        {
-            StopAllCoroutines();
-
-            StartCoroutine(ReproduceSound());
-
-            current_dialogue = dialogue.text;
-            Debug.Log("length:" + dialogue.text);
-        }
-
-        if (current_character != character_name.text)
-        {
-            run_once = true;
-
-
-            current_character = character_name.text;
-        }
-
-        if (run_once)
-        {
-            Debug.Log("test");
-            if (last_anime != null)
+        if (dialogueRunner.IsDialogueRunning) {
+            if (current_dialogue != dialogue.text)
             {
-                last_anime.Play("stop_talking");
+                StopAllCoroutines();
+
+                StartCoroutine(ReproduceSound());
+
+                current_dialogue = dialogue.text;
+                Debug.Log("length:" + dialogue.text);
             }
 
+            if (current_character != character_name.text)
+            {
+                run_once = true;
 
-            run_once = false;
+
+                current_character = character_name.text;
+            }
+
+            if (run_once)
+            {
+                Debug.Log("test");
+                if (last_anime != null)
+                {
+                    last_anime.Play("stop_talking");
+                }
+
+
+                run_once = false;
 
 
 
-            PlayAnimation(character_name.text);
+                PlayAnimation(character_name.text);
+            }
         }
 
 
