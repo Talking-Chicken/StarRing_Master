@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8513321055660518876
+--- !u!114 &-1375528565205946673
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,14 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material.002
+  m_Name: tomato red
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_ValidKeywords:
   - N_F_EAL_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
-  - N_F_R_ON
-  - N_F_SL_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   m_InvalidKeywords:
@@ -55,12 +53,11 @@ Material:
   - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
   - _VERTEXCOLORGREENCONTROLSELFSHADOWTHRESHOLD_OFF
   - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
   m_SavedProperties:
@@ -191,7 +188,7 @@ Material:
     - _Compa: 4
     - _ComputeMeshIndex: 0
     - _Cull: 2
-    - _Culling: 0
+    - _Culling: 2
     - _CustomLightDirectionFollowObjectRotation: 0
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.5
@@ -216,7 +213,7 @@ Material:
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
     - _GlossTextureSoftness: 0
-    - _Glossiness: 1
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Glow_Edge_Width: 1
     - _HighlightColorPower: 1
@@ -228,7 +225,7 @@ Material:
     - _LightFalloffSoftness: 1
     - _LightIntensity: 1
     - _MCIALO: 0
-    - _MCapIntensity: 0.263
+    - _MCapIntensity: 1
     - _MVCOL: 0
     - _MaiColPo: 0.8
     - _MaxFadDistance: 2
@@ -257,11 +254,11 @@ Material:
     - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
-    - _N_F_R: 1
+    - _N_F_R: 0
     - _N_F_RDC: 1
     - _N_F_RL: 0
     - _N_F_SCT: 0
-    - _N_F_SL: 1
+    - _N_F_SL: 0
     - _N_F_SON: 0
     - _N_F_SS: 1
     - _N_F_ST: 0
@@ -299,7 +296,7 @@ Material:
     - _STIL: 0
     - _Saturation: 1
     - _SelfLitHighContrast: 1
-    - _SelfLitIntensity: 0.059
+    - _SelfLitIntensity: 0
     - _SelfLitPower: 2
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
@@ -320,7 +317,7 @@ Material:
     - _SimTrans: 0
     - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
-    - _Smoothness: 1
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -339,17 +336,17 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9063317, g: 0.7755208, b: 0, a: 1}
-    - _Color: {r: 0.9063317, g: 0.7755208, b: 0, a: 1}
+    - _BaseColor: {r: 0.9063318, g: 0.31913733, b: 0.24975708, a: 1}
+    - _Color: {r: 0.9063318, g: 0.31913728, b: 0.24975705, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 2, g: 0.98039216, b: 0, a: 1}
+    - _MainColor: {r: 0.9811321, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OverallShadowColor: {r: 0.6603774, g: 0.052954797, b: 0.052954797, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SSAOColor: {r: 0, g: 0, b: 0, a: 0}
