@@ -5,10 +5,14 @@ using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 using NaughtyAttributes;
 using MoreMountains.Feedbacks;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject inventoryContainer, logicMapContainer, TimeManagementContainer;
+    [BoxGroup("UI References")] public GameObject selectionMenuContainer, inventoryContainer, logicMapContainer, TimeManagementContainer, topBarContainer, topBarButtons;
+    [SerializeField, BoxGroup("UI References")] private GameObject blackOverlay;
+    public CanvasGroup logicMapCanvasGroup;
+    [ReadOnly, SerializeField, Foldout("Other References")] private PlayerManager _playerManager;
     [SerializeField, Foldout("Feedbacks")] private MMF_Player selectSettingFB, selectInventoryFB, selectLogicMapFB;
 
     #region getters & setters
@@ -23,7 +27,6 @@ public class UIManager : MonoBehaviour
     public UIStateNone stateNone = new UIStateNone();
     public UIStatePause statePause = new UIStatePause();
     public UIStateSelectionMenu stateSelectionMenu = new UIStateSelectionMenu();
-    public UIStateSelecting stateSelecting = new UIStateSelecting();
     public UIStateInventory stateInventory = new UIStateInventory();
     public UIStateLogicMap stateLogicMap = new UIStateLogicMap();
 
@@ -50,16 +53,27 @@ public class UIManager : MonoBehaviour
             ChangeState(previousState);
         }
     }
+
+    ///used for button OnClick()
+    public void ChangeToInventoryState() {ChangeState(stateInventory);}
+    public void ChangeToLogicMapState() {ChangeState(stateLogicMap);}
     #endregion
 
     #region Start and Update
     void Start()
     {
+        ///set references
+        _playerManager = FindObjectOfType<PlayerManager>();
+        if (_playerManager == null)
+            Debug.LogWarning("Can't find Player Manager in " + name);
+        
         currentState = stateNone;
         previousState = currentState;
 
-        //add open ui function to selection menu's buttons' OnClick()
-        
+        logicMapCanvasGroup.alpha = 0;
+        logicMapCanvasGroup.interactable = false;
+
+        ///add open ui function to selection menu's buttons' OnClick()
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
     }
@@ -72,23 +86,38 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    ///this will make player change back to explore state and close the black overlay
+    public void CloseUI() {
+        blackOverlay.SetActive(false);
+        _playerManager.ChangeState(_playerManager.stateExplore);
+        ChangeState(stateNone);
+    }
+
+    public void OpenSelectionMenu() {
+        selectionMenuContainer.SetActive(true);
+    }
+
+    public void CloseSelectionMenu() {
+        selectionMenuContainer.SetActive(false);
+    }
+
     public void OpenInventory() {
-        ChangeState(stateInventory);
+        blackOverlay.SetActive(true);
         inventoryContainer.SetActive(true);
     }
 
     public void CloseInventory() {
-        ChangeState(stateNone);
         inventoryContainer.SetActive(false);
     }
 
     public void OpenLogicMap() {
-        ChangeState(stateLogicMap);
-        logicMapContainer.SetActive(true);
+        blackOverlay.SetActive(true);
+        logicMapCanvasGroup.alpha = 1;
+        logicMapCanvasGroup.interactable = true;
     }
 
     public void CloseLogicMap() {
-        ChangeState(stateNone);
-        logicMapContainer.SetActive(false);
+        logicMapCanvasGroup.alpha = 0;
+        logicMapCanvasGroup.interactable = false;
     }
 }

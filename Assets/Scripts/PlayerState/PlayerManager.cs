@@ -36,6 +36,9 @@ public class PlayerManager : MonoBehaviour
     //selection menu
     [SerializeField, BoxGroup("Selection Menu")] private SelectionMenu SelectionMenu;
 
+    //UI general
+    [ReadOnly, SerializeField, BoxGroup("UI General")] private UIManager _uiManager;
+
     [SerializeField, BoxGroup("test")] private GameObject testObj;
     
     //feedbacks
@@ -112,6 +115,10 @@ public class PlayerManager : MonoBehaviour
         _characterOrientation = GetComponent<CharacterOrientation3D>();
         if (_characterOrientation == null)
             Debug.LogWarning("Can't find Character Orientation");
+
+        _uiManager = FindObjectOfType<UIManager>();
+        if (_uiManager == null)
+            Debug.LogWarning("Can't find UI Manager in " + name);
         
         _mainCamera = Camera.main;
 
@@ -154,6 +161,7 @@ public class PlayerManager : MonoBehaviour
 
         //go to UI state
         if (Input.GetMouseButtonDown(1)) {
+            _uiManager.ChangeState(_uiManager.stateSelectionMenu);
             ChangeState(stateUI);
         }
     }

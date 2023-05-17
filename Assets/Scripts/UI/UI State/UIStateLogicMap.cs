@@ -11,6 +11,7 @@ public class UIStateLogicMap : UIStateBase
     public override void UpdateState(UIManager ui) {}
     public override void LeaveState(UIManager ui) {
         ui.SelectLogicMapFB.PlayFeedbacksInReverse();
+        ui.CloseLogicMap();
         ui.previousState = this;
     }
 }

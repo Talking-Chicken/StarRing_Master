@@ -11,6 +11,7 @@ public class UIStateInventory : UIStateBase
     public override void UpdateState(UIManager ui) {}
     public override void LeaveState(UIManager ui) {
         ui.SelectInventoryFB.PlayFeedbacksInReverse();
+        ui.CloseInventory();
         ui.previousState = this;
     }
 }
