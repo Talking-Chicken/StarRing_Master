@@ -4299,6 +4299,7 @@ GameObject:
   - component: {fileID: 8006129783817801792}
   - component: {fileID: 8006129783817801823}
   - component: {fileID: 8006129783817801822}
+  - component: {fileID: 95626655953499422}
   - component: {fileID: 8006129783817801821}
   - component: {fileID: 8006129783817801820}
   - component: {fileID: 8006129783817801819}
@@ -4347,8 +4348,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8ba01be1431c74c9a71ebafe56c0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   isInteractable: 1
+  outlineMats:
+  - {fileID: 2100000, guid: a3e9b3ba3eb3b25479059310ad0af447, type: 2}
+  - {fileID: 2100000, guid: 12b876561a3dd7f48b0bc6a165843c43, type: 2}
   startNodeBase: Helmet_1
   talkingPositions:
   - {fileID: 1020854483052424427}
@@ -4531,6 +4535,39 @@ MonoBehaviour:
   RotationOffsetSmoothSpeed: 1
   ForcedRotation: 0
   ForcedRotationDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &95626655953499422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8006129783817801817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443ebf149b5f47147a1076bea95f5134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityStartSfx: {fileID: 0}
+  AbilityInProgressSfx: {fileID: 0}
+  AbilityStopSfx: {fileID: 0}
+  AbilityStartFeedbacks: {fileID: 0}
+  AbilityStopFeedbacks: {fileID: 0}
+  AbilityPermitted: 1
+  BlockingMovementStates: 
+  BlockingConditionStates: 
+  BlockingWeaponStates: 
+  Target: {fileID: 0}
+  DistanceToWaypointThreshold: 1
+  ClosestPointThreshold: 3
+  MinimumDelayBeforePollingNavmesh: 0.1
+  PathRefreshMode: 0
+  RefreshSpeedThreshold: 1
+  RefreshInterval: 2
+  DebugDrawPath: 0
+  Waypoints: []
+  NextWaypointIndex: 0
+  NextWaypointDirection: {x: 0, y: 0, z: 0}
+  DistanceToNextWaypoint: 0
 --- !u!114 &8006129783817801821
 MonoBehaviour:
   m_ObjectHideFlags: 0

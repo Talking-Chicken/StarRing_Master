@@ -8,7 +8,7 @@ public class TrailerManager : MonoBehaviour
 {
     private DialogueRunner dialogueRunner;
     [SerializeField] private LineView lineView;
-    [SerializeField] private MMF_Player solutionAppearFB;
+    [SerializeField] private MMF_Player solutionAppearFB, popupFB;
     void Start()
     {
         dialogueRunner = FindObjectOfType<DialogueRunner>();        
@@ -27,6 +27,9 @@ public class TrailerManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R)) {
             solutionAppearFB.PlayFeedbacksInReverse();
+        }
+        if (Input.GetKeyDown(KeyCode.T)) {
+            popupFB.PlayFeedbacks();
         }
     }
 }

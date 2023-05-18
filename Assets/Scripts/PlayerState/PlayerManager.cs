@@ -8,6 +8,7 @@ using UnityEngine.AI;
 using TopDownEngineExtensions;
 using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
+using UnityEngine.EventSystems;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class PlayerManager : MonoBehaviour
     private Camera _mainCamera;
 
     //interactions
-    [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable hoveringInteractable;
+    [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable hoveringInteractable = null;
+    [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable preHoveringInteractable = null;
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable targetInteractable;
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Transform interactionPosition;
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private bool isInteracting = false;
@@ -46,6 +48,7 @@ public class PlayerManager : MonoBehaviour
 
     #region getters & setters
     public Interactable HoveringInteractable {get=>hoveringInteractable;set=>hoveringInteractable=value;}
+    public Interactable PreHoveringInteractable {get=>preHoveringInteractable;set=>preHoveringInteractable=value;}
     public Interactable TargetInteractable {get=>targetInteractable;private set=>targetInteractable=value;}
     public Transform InteractionPosition {get=>interactionPosition;private set=>interactionPosition=value;}
     public bool IsInteracting {get=>isInteracting;private set=>isInteracting=value;}
@@ -61,6 +64,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerStateExplore stateExplore = new PlayerStateExplore();
     public PlayerStateMrRabbit stateMrRabbit = new PlayerStateMrRabbit();
     public PlayerStateDialogue stateDialogue = new PlayerStateDialogue();
+    public PlayerStateInteract stateInteract = new PlayerStateInteract();
     public PlayerStateUI stateUI = new PlayerStateUI();
 
     public void ChangeState(PlayerStateBase newState)
@@ -218,6 +222,24 @@ public class PlayerManager : MonoBehaviour
         return interactable;
     }
 
+    ///when the raycast detect that mouse is hovering over [a new thing] for the first time
+    public void OnMouseStartHoverInterOBJ() {
+        if (HoveringInteractable != null) {
+            ///draw outlines
+            foreach (Material mat in HoveringInteractable.OutlineMats)
+                mat.SetFloat("_OutlineWidth", 2.5f);
+        }
+    }
+
+    ///when the raycase detect that mouse is leaving
+    public void OnMouseEndHoverInterOBJ() {
+        if (PreHoveringInteractable != null) {
+            ///clear outlines
+            foreach (Material mat in PreHoveringInteractable.OutlineMats)
+                mat.SetFloat("_OutlineWidth", 0.0f);
+        }
+    }
+
     /// interact with target
     /// do corresponding things based on their type
     public void Interact(Interactable target) {
@@ -244,13 +266,14 @@ public class PlayerManager : MonoBehaviour
 
     /// return whether player is close enough to interact
     public bool IsReadyToInteract(Transform destination) {
-        if (Vector3.Distance(transform.position, destination.position) <= 0.25f) {
+        if (Vector3.Distance(transform.position, destination.position) <= 0.3f) {
             return true;
         } else {
             return false;
         }
     }
 
+    #region Dialogue
     /*compare all talking positions of the NPC
       return the nearrest transform*/
     public TalkingSetting FindNearestTalkSetting(NPC npc) {
@@ -331,18 +354,30 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
-    public void OpenSelectionMenu() {
-        SelectionMenu.gameObject.SetActive(true);
-        SelectionMenu.CurrentOptionIndex = 1;
-    }
-
-    public void CloseSelectionMenu() {
-        
-        SelectionMenu.gameObject.SetActive(false);
-        SelectionMenu.CurrentOptionIndex = 1;
-    }
-
     public void PlayerFace(Vector2 angle) {
         _characterMovement.SetMovement(angle);
+    }
+    #endregion
+
+    ///for debug purpose, using this can let me know which UI is blocking my raycast
+    public void DetectUIElement() {
+        /// get wut mouse is hover over
+        // Create a pointer event
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+
+        // Set the pointer event position to the mouse position
+        pointerEventData.position = Input.mousePosition;
+
+        // Raycast using the pointer event
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+
+        // Check if the mouse is hovering over a UI element
+        if (results.Count > 0)
+        {
+            // Get the name of the UI object
+            string objectName = results[0].gameObject.name;
+            Debug.Log("Mouse is hovering over UI object named: " + objectName);
+        }
     }
 }

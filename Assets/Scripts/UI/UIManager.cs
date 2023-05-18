@@ -5,6 +5,7 @@ using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 using NaughtyAttributes;
 using MoreMountains.Feedbacks;
+using MoreMountains.FeedbacksForThirdParty;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -13,12 +14,14 @@ public class UIManager : MonoBehaviour
     [SerializeField, BoxGroup("UI References")] private GameObject blackOverlay;
     public CanvasGroup logicMapCanvasGroup;
     [ReadOnly, SerializeField, Foldout("Other References")] private PlayerManager _playerManager;
-    [SerializeField, Foldout("Feedbacks")] private MMF_Player selectSettingFB, selectInventoryFB, selectLogicMapFB;
+    [SerializeField, Foldout("Feedbacks")] private MMF_Player selectSettingFB, selectInventoryFB, selectLogicMapFB, selectionMenuFBIN, selectionMenuFBOUT;
 
     #region getters & setters
     public MMF_Player SelectSettingFB {get=>selectSettingFB;}
     public MMF_Player SelectInventoryFB {get=>selectInventoryFB;}
     public MMF_Player SelectLogicMapFB {get=>selectLogicMapFB;}
+    public MMF_Player SelectionMenuFBIN {get=>selectionMenuFBIN;}
+    public MMF_Player SelectionMenuFBOUT {get=>selectionMenuFBOUT;}
     #endregion
 
     #region FSM
@@ -37,8 +40,6 @@ public class UIManager : MonoBehaviour
             {
                 currentState.LeaveState(this);
             }
-
-            Debug.Log("changing from " + currentState + " to " + newState);
             currentState = newState;
 
             if (currentState != null)
@@ -65,13 +66,14 @@ public class UIManager : MonoBehaviour
         ///set references
         _playerManager = FindObjectOfType<PlayerManager>();
         if (_playerManager == null)
-            Debug.LogWarning("Can't find Player Manager in " + name);
-        
+            Debug.LogWarning("Can't find Player Manager in " + name);   
+
         currentState = stateNone;
         previousState = currentState;
 
         logicMapCanvasGroup.alpha = 0;
         logicMapCanvasGroup.interactable = false;
+        logicMapCanvasGroup.blocksRaycasts = false;
 
         ///add open ui function to selection menu's buttons' OnClick()
         // selectionMenu.LogicMapButton.onClick.AddListener(OpenInventory);
@@ -114,10 +116,12 @@ public class UIManager : MonoBehaviour
         blackOverlay.SetActive(true);
         logicMapCanvasGroup.alpha = 1;
         logicMapCanvasGroup.interactable = true;
+        logicMapCanvasGroup.blocksRaycasts = true;
     }
 
     public void CloseLogicMap() {
         logicMapCanvasGroup.alpha = 0;
         logicMapCanvasGroup.interactable = false;
+        logicMapCanvasGroup.blocksRaycasts = false;
     }
 }
