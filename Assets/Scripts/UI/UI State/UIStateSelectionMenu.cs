@@ -6,6 +6,7 @@ public class UIStateSelectionMenu : UIStateBase
 {
     public override void EnterState(UIManager ui)
     {
+        ui.SelectionMenuFBIN.PlayFeedbacks();
         ui.topBarButtons.SetActive(true);
         ui.OpenSelectionMenu();
     }
@@ -17,6 +18,7 @@ public class UIStateSelectionMenu : UIStateBase
 
     public override void LeaveState(UIManager ui)
     {   
+        ui.SelectionMenuFBOUT.PlayFeedbacks();
         ui.CloseSelectionMenu();
         ui.previousState = this;
     }

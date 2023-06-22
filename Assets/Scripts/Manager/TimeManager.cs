@@ -55,6 +55,8 @@ public class TimeManager : MMSingleton<TimeManager>
     void Update()
     {
         currentState.UpdateState(this);
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(0);
     }
 
     public void SceneTransitionTo(string sceneName) {
