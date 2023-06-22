@@ -36,7 +36,7 @@ public class RitaLaptop : InteractObj, IInteractable
 
         if (currentTime >= timeToDownload) {
             if (!hasWindowShowed) {
-                popupWindow.SetActive(true);
+                StartCoroutine(DelayToSetActive(popupWindow, true, 0.3f));
                 hasWindowShowed = true;
             }
         }
@@ -84,5 +84,10 @@ public class RitaLaptop : InteractObj, IInteractable
             else
                 passwordFills[i].SetActive(false);
         }
+    }
+
+    IEnumerator DelayToSetActive(GameObject obj, bool toActive, float time) {
+        yield return new WaitForSeconds (time);
+        obj.SetActive(toActive);
     }
 }

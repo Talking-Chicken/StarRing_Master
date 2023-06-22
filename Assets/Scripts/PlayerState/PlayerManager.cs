@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, BoxGroup("Interaction")] private LayerMask interactionRaycastMask;
 
     //Dialogues
+    [ReadOnly, SerializeField, BoxGroup("Dialogue")] private LineView _lineView;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private TalkingSetting targetTalkingSetting;
@@ -124,6 +125,10 @@ public class PlayerManager : MonoBehaviour
         if (_uiManager == null)
             Debug.LogWarning("Can't find UI Manager in " + name);
         
+        _lineView = FindObjectOfType<LineView>();
+        if (_lineView == null)
+            Debug.LogWarning("Can't find Line View in " + name);
+
         _mainCamera = Camera.main;
 
         //add exit dialogue state function to dialogue runner's OnDialogueComplete event
@@ -249,7 +254,7 @@ public class PlayerManager : MonoBehaviour
         switch (target.Type) {
             case InteractableType.OBJ:
                 InteractObj obj = TargetInteractable.GetComponent<InteractObj>();
-                obj.Interact();
+                StartCoroutine(DelayStartInteract(obj));
                 break;
             case InteractableType.EXM:
                 break;
@@ -379,5 +384,22 @@ public class PlayerManager : MonoBehaviour
             string objectName = results[0].gameObject.name;
             Debug.Log("Mouse is hovering over UI object named: " + objectName);
         }
+    }
+
+    ///delay couple seconds to start interact
+    IEnumerator DelayStartInteract(InteractObj obj) {
+        yield return new WaitForSeconds(obj.DelayStartInteract);
+        obj.Interact();
+    }
+
+    public void ContinueDialogue() {
+        if (Input.GetMouseButtonUp(0)) {
+            _lineView.OnContinueClicked();
+        }
+    }
+
+    public void EnsureLineView() {
+        if (_lineView == null)
+            _lineView = FindObjectOfType<LineView>();
     }
 }

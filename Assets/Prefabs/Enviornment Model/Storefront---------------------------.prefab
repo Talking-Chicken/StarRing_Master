@@ -2390,6 +2390,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8f0d1cb508aaa8f44b38f56e376f1458, type: 2}
   isChangingToInteractState: 1
   interactPosition: {fileID: 1730119113894650978}
+  delayStartInteract: 0.8
   wall: {fileID: 7578314726206501849}
   cameraFBIN: {fileID: 3328999145710105138}
   cameraFBOUT: {fileID: 2299843952768962489}
@@ -2399,10 +2400,11 @@ MonoBehaviour:
   - {fileID: 5535063950287903996}
   - {fileID: 7264856427850631246}
   - {fileID: 8927266835666459212}
+  popupWindow: {fileID: 0}
   laptopCanvas: {fileID: 6066883247014117038}
   downloadBar: {fileID: 1827121715746098465}
   downloadBarFill: {fileID: 3360169944837435838}
-  timeToDownload: 0.8
+  timeToDownload: 0.5
 --- !u!1 &652369621060941756
 GameObject:
   m_ObjectHideFlags: 0
@@ -19896,9 +19898,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   isInteractable: 1
-  outlineMats: []
+  outlineMats:
+  - {fileID: 2100000, guid: 15d19060122534b4eb03c832e04ba6fe, type: 2}
   isChangingToInteractState: 0
   interactPosition: {fileID: 2662229929216376495}
+  delayStartInteract: 0.2
 --- !u!1 &5535063950287903996
 GameObject:
   m_ObjectHideFlags: 0

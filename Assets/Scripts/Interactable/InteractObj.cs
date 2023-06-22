@@ -8,10 +8,12 @@ public class InteractObj : Interactable
     private PlayerManager player;
     [SerializeField, BoxGroup("Properties")] private bool isChangingToInteractState;
     [SerializeField, BoxGroup("Properties")] private Transform interactPosition;
+    [SerializeField, BoxGroup("Properties")] private float delayStartInteract;
 
     //getters & setters
     public Transform InteractPosition {get=>interactPosition;}
     protected PlayerManager Player {get=>player;}
+    public float DelayStartInteract {get=>delayStartInteract;}
 
     protected override void Start()
     {

@@ -20,6 +20,8 @@ public class PlayerStateDialogue : PlayerStateBase
 
     public override void UpdateState(PlayerManager player)
     {
+        player.EnsureLineView();
+        player.ContinueDialogue();
     }
 
     public override void LeaveState(PlayerManager player)
