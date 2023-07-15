@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [BoxGroup("UI References"), SerializeField] private UIListener _UIListener; 
     [BoxGroup("UI References")] public GameObject selectionMenuContainer, inventoryContainer, logicMapContainer, TimeManagementContainer, topBarContainer, topBarButtons;
     [SerializeField, BoxGroup("UI References")] private GameObject blackOverlay;
     public CanvasGroup logicMapCanvasGroup;
@@ -60,7 +61,16 @@ public class UIManager : MonoBehaviour
     public void ChangeToLogicMapState() {ChangeState(stateLogicMap);}
     #endregion
 
-    #region Start and Update
+    #region Start, Update, onEnable...
+    void OnEnable() {
+        _UIListener.OnCreated(this);
+    }
+
+    void OnDisable() {
+        _UIListener.openRabbitEvent.RemoveAllListeners();
+        _UIListener.closeRabbitEvent.RemoveAllListeners();
+    }
+
     void Start()
     {
         ///set references
@@ -95,11 +105,15 @@ public class UIManager : MonoBehaviour
         ChangeState(stateNone);
     }
 
+    ///open Rabbit UI Menu (the menu that allows player to select inventory/logic map/system settings)
     public void OpenSelectionMenu() {
+        _UIListener.OpenRabbitUI();
         selectionMenuContainer.SetActive(true);
     }
 
+    ///close Rabbit UI Menu
     public void CloseSelectionMenu() {
+        _UIListener.closeRabbitUI();
         selectionMenuContainer.SetActive(false);
     }
 
