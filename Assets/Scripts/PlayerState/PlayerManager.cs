@@ -16,8 +16,12 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterPathfinder3D _characterPathFinder;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterMovement _characterMovement;
     [ReadOnly, SerializeField, Foldout("Info")] private MouseControls3D _mouseControl3D;
+    [ReadOnly, SerializeField, Foldout("Info")] private DialogueUIManager _dialogueManager;
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueRunner _dialogueRunner;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterOrientation3D _characterOrientation;
+    [SerializeField, Foldout("Listeners")] private PlayerListener _playerListener;
+    [SerializeField, Foldout("Listeners")] private DialogueListener _dialogueListener;
+    [SerializeField, Foldout("Listeners")] private UIListener _uiListener;
     private Camera _mainCamera;
 
     //interactions
@@ -92,8 +96,18 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-    #region Awake, Start, and Update
-    void Awake() {}
+    #region Awake, Start, and Update...
+    void OnEnable() {
+        _playerListener.OnCreated(this);
+
+        _dialogueListener.onCreatedEvent.AddListener(SetDialogueManager);
+        _uiListener.onCreatedEvent.AddListener(SetUIManager);
+    }
+
+    void OnDisable() {
+        _uiListener.onCreatedEvent.RemoveAllListeners();
+        _dialogueListener.onCreatedEvent.RemoveAllListeners();
+    }
 
     void Start()
     {
@@ -113,26 +127,30 @@ public class PlayerManager : MonoBehaviour
         if (_mouseControl3D == null)
             Debug.LogWarning("Can't find MouseControl3D");
 
-        _dialogueRunner = FindObjectOfType<DialogueRunner>();
-        if (_dialogueRunner == null)
-            Debug.LogWarning("Can't find DialogueRunner");
+        // _dialogueRunner = FindObjectOfType<DialogueRunner>();
+        // if (_dialogueRunner == null)
+        //     Debug.LogWarning("Can't find DialogueRunner");
 
         _characterOrientation = GetComponent<CharacterOrientation3D>();
         if (_characterOrientation == null)
             Debug.LogWarning("Can't find Character Orientation");
 
-        _uiManager = FindObjectOfType<UIManager>();
-        if (_uiManager == null)
-            Debug.LogWarning("Can't find UI Manager in " + name);
+        if (_dialogueRunner == null && _dialogueListener.IsCreated) {
+            _dialogueRunner = _dialogueListener.Manager.DialogueRunner;
+            _lineView = _dialogueListener.Manager.LineView;
+        }
+        // _uiManager = FindObjectOfType<UIManager>();
+        // if (_uiManager == null)
+        //     Debug.LogWarning("Can't find UI Manager in " + name);
         
-        _lineView = FindObjectOfType<LineView>();
-        if (_lineView == null)
-            Debug.LogWarning("Can't find Line View in " + name);
+        // _lineView = FindObjectOfType<LineView>();
+        // if (_lineView == null)
+        //     Debug.LogWarning("Can't find Line View in " + name);
 
         _mainCamera = Camera.main;
 
         //add exit dialogue state function to dialogue runner's OnDialogueComplete event
-        _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
+        // _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
 
     
@@ -144,6 +162,23 @@ public class PlayerManager : MonoBehaviour
             if (TargetNPC != null)
                 WalkToNearestTalkPosition(TargetNPC);
         }
+    }
+    #endregion
+
+    #region Funtion of Setting References
+    public void SetUIManager(UIManager manager) {
+        if (manager != null) {
+            _uiManager = manager;
+        } else
+            Debug.Log("Cannot set UI Manager for " + gameObject.name);
+    }
+
+    private void SetDialogueManager(DialogueUIManager manager) {
+        if (manager != null) {
+            _dialogueRunner = manager.DialogueRunner;
+            _lineView = manager.LineView;
+        } else 
+            Debug.Log("Cannot set Dialogue Manager for " + gameObject.name);
     }
     #endregion
 
@@ -185,6 +220,7 @@ public class PlayerManager : MonoBehaviour
 
     /*restrict the ability to use mouse control 3d*/
     public void LimitMovement() {
+        // merely stopping mouse control 3d will make player moving toward the destination non-stopping, so we need to set the new destination where player tranfrom at
         _characterPathFinder.SetNewDestination(transform);
         _mouseControl3D.AbilityPermitted = false;
     }
@@ -230,18 +266,24 @@ public class PlayerManager : MonoBehaviour
     ///when the raycast detect that mouse is hovering over [a new thing] for the first time
     public void OnMouseStartHoverInterOBJ() {
         if (HoveringInteractable != null) {
-            ///draw outlines
+            // draw outlines
             foreach (Material mat in HoveringInteractable.OutlineMats)
                 mat.SetFloat("_OutlineWidth", 2.5f);
+            
+            // invoke events
+            _playerListener.OnMouseStartHoverInteractable(HoveringInteractable);
         }
     }
 
     ///when the raycase detect that mouse is leaving
     public void OnMouseEndHoverInterOBJ() {
         if (PreHoveringInteractable != null) {
-            ///clear outlines
+            // clear outlines
             foreach (Material mat in PreHoveringInteractable.OutlineMats)
                 mat.SetFloat("_OutlineWidth", 0.0f);
+
+            // invoke events
+            _playerListener.OnMouseEndHoverInteractable(HoveringInteractable);
         }
     }
 
@@ -279,8 +321,8 @@ public class PlayerManager : MonoBehaviour
     }
 
     #region Dialogue
-    /*compare all talking positions of the NPC
-      return the nearrest transform*/
+    /// compare all talking positions of the NPC
+    /// return the nearrest transform
     public TalkingSetting FindNearestTalkSetting(NPC npc) {
         if (npc.TalkingSettings.Count <= 0)
             return null;

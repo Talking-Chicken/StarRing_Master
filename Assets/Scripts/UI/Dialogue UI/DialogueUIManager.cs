@@ -2,16 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
+using NaughtyAttributes;
 
 public class DialogueUIManager : MonoBehaviour
 {
-    private LineView _lineView;
-    [SerializeField] private CanvasGroup _dialogueCanvasGroup;
+    [SerializeField, BoxGroup("Listeners")] private DialogueListener _dialogueListener;
+    [SerializeField, BoxGroup("References")] private DialogueRunner _dialogueRunner;
+    [SerializeField, BoxGroup("References")] private LineView _lineView;
+    [SerializeField, BoxGroup("References")] private CanvasGroup _dialogueCanvasGroup;
+
+    //getters & setters
+    public DialogueRunner DialogueRunner {get=>_dialogueRunner;}
+    public LineView LineView {get=>_lineView;}
+
+    private void OnEnable() {
+        _dialogueListener.OnCreated(this);
+    }
 
     void Start() {
-        _lineView = GetComponentInChildren<LineView>();
-        if (_lineView == null)
-            Debug.Log("can't find line view in " + name);
     }
 
     public void HideDialogueBox() {
