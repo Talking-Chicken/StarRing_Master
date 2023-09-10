@@ -139,18 +139,18 @@ public class PlayerManager : MonoBehaviour
             _dialogueRunner = _dialogueListener.Manager.DialogueRunner;
             _lineView = _dialogueListener.Manager.LineView;
         }
-        // _uiManager = FindObjectOfType<UIManager>();
-        // if (_uiManager == null)
-        //     Debug.LogWarning("Can't find UI Manager in " + name);
+        _uiManager = FindObjectOfType<UIManager>();
+        if (_uiManager == null)
+            Debug.LogWarning("Can't find UI Manager in " + name);
         
-        // _lineView = FindObjectOfType<LineView>();
-        // if (_lineView == null)
-        //     Debug.LogWarning("Can't find Line View in " + name);
+        _lineView = FindObjectOfType<LineView>();
+        if (_lineView == null)
+            Debug.LogWarning("Can't find Line View in " + name);
 
         _mainCamera = Camera.main;
 
         //add exit dialogue state function to dialogue runner's OnDialogueComplete event
-        // _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
+        _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
 
     
@@ -162,6 +162,8 @@ public class PlayerManager : MonoBehaviour
             if (TargetNPC != null)
                 WalkToNearestTalkPosition(TargetNPC);
         }
+
+        // print(Display.currentResolution);    
     }
     #endregion
 

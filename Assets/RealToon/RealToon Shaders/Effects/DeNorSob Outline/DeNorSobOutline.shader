@@ -170,10 +170,11 @@ Shader  "Hidden/URP/RealToon/Effects/DeNorSobOutline"
     half4 Frag(Varyings input) : SV_Target
     {
         UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+        float2 uv = UnityStereoTransformScreenSpaceTex(input.texcoord);
 
-        float3 ful_scr_so = SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, input.uv).rgb;
+        float3 ful_scr_so = SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, uv).rgb;
 
-        float denorsobOut = EdgeDetect(input.uv, input.positionCS);
+        float denorsobOut = EdgeDetect(uv, input.positionCS);
 
         float3 coloutmix = lerp(_OutlineColor * _OutlineColorIntensity, lerp(ful_scr_so * ful_scr_so, ful_scr_so , _OutlineColorIntensity) * _OutlineColor, _ColOutMiSel);
         return float4( lerp( coloutmix, lerp( ful_scr_so , 1.0, _OutOnSel ) , (1.0 - denorsobOut) ) ,1.0);

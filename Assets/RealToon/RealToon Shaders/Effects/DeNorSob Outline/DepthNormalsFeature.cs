@@ -56,8 +56,10 @@ namespace RealToon.Effects
 
                 ref CameraData cameraData = ref renderingData.cameraData;
                 Camera camera = cameraData.camera;
-                if (cameraData.isStereoEnabled)
-                    context.StartMultiEye(camera);
+
+                //Skipped for awhile
+                //if (cameraData.isStereoEnabled)
+                    //context.StartMultiEye(camera);
 
 
                 drawSettings.overrideMaterial = depthNormalsMaterial;
