@@ -40,9 +40,10 @@ namespace MiniGame
 
                     //rotate us over time according to speed until we are in the required rotation
                     transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotateSpeed);
+
+                    StickAxis = Vector2.zero;
                 }
-                Vector3 axis = head.position - transform.position;
-                StickAxis = new Vector2(axis.x, axis.y).normalized;
+                
             }
 
             private void OnMouseDrag()
@@ -68,6 +69,12 @@ namespace MiniGame
 
                 //rotate us over time according to speed until we are in the required rotation
                 transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotateSpeed);
+
+
+                Vector3 axis = head.position - transform.position;
+                StickAxis = new Vector2(axis.x, axis.y)/range;
+
+                Debug.Log(StickAxis);
             }
         }
     }
