@@ -54,11 +54,13 @@ public class WeaponTransform : MonoBehaviour
         if (DoDistortion)
         {
             TransformMaterial.SetInt("_TurnOnDistortion", 1);
+            float a = Random.Range(0.1f, 0.4f);
+            TransformMaterial.SetFloat("_DistortionAmount", a);
             int x = Random.Range(10, 500);
             int y = Random.Range(10, 500);
             Vector2 RandomSeed = new Vector2(x, y);
             TransformMaterial.SetVector("_RandomSeed", RandomSeed);
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.1f);
             TransformMaterial.SetInt("_TurnOnDistortion", 0);
         }
         else
@@ -66,7 +68,8 @@ public class WeaponTransform : MonoBehaviour
             TransformMaterial.SetInt("_TurnOnDistortion", 0);
         }
 
-        yield return new WaitForSeconds(.05f);
+        float waittime = Random.Range(0.1f, 0.5f);
+        yield return new WaitForSeconds(waittime);
         StartCoroutine(EnableDistortion());
     }
 }
