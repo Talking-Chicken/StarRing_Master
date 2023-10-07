@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6230824743318678298}
   - component: {fileID: 2342716348213149602}
   - component: {fileID: 6116611001207181681}
+  - component: {fileID: 4374218006258586794}
   m_Layer: 0
   m_Name: Oden Food
   m_TagString: Untagged
@@ -148,6 +149,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2873d183f5520d48ab7867260cc32ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterSurface: {fileID: 0}
+  water: {fileID: 0}
   depthRange: {x: 0, y: 0}
   floatForce: 1
+--- !u!114 &4374218006258586794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806762320715439725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fb86f6e34651a4691f5f74f05bbc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
