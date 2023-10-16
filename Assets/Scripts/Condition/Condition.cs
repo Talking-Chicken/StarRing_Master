@@ -7,12 +7,14 @@ using System.Reflection.Emit;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
+
 [JsonObject]
 public class Condition
 {
-    [JsonProperty] public readonly string name;
-    [JsonProperty] public readonly string type;
-    public Condition(string name, string type)
+    public enum Type { Int, Float, String, Bool }
+    [JsonProperty] public string name;
+    [JsonProperty] public Type type;
+    public Condition(string name, Type type)
     {
         this.name = name;
         this.type = type;
@@ -30,7 +32,7 @@ public class Condition
 public class BoolCondition : Condition
 {
     [JsonProperty] private bool value;
-    public BoolCondition(string name, bool value) : base(name, "bool")
+    public BoolCondition(string name, bool value) : base(name, Type.Bool)
     {
         this.value = value;
     }
@@ -47,7 +49,7 @@ public class BoolCondition : Condition
 public class IntCondition : Condition
 {
     [JsonProperty] private int value;
-    public IntCondition(string name, int value) : base(name, "int")
+    public IntCondition(string name, int value) : base(name, Type.Int)
     {
         this.value = value;
     }
@@ -64,7 +66,7 @@ public class IntCondition : Condition
 public class FloatCondition : Condition
 {
     [JsonProperty] private float value;
-    public FloatCondition(string name, float value) : base(name, "float")
+    public FloatCondition(string name, float value) : base(name, Type.Float)
     {
         this.value = value;
     }
@@ -81,7 +83,7 @@ public class FloatCondition : Condition
 public class StringCondition : Condition
 {
     [JsonProperty] private string value;
-    public StringCondition(string name, string value) : base(name, "string")
+    public StringCondition(string name, string value) : base(name, Type.String)
     {
         this.value = value;
     }
@@ -102,13 +104,27 @@ public class ConditionConverter : JsonConverter<Condition>
     {
         JObject jsonObject = JObject.Load(reader);
         string name = jsonObject.GetValue("name").ToString();
-        string type = jsonObject.GetValue("type").ToString();
+        Condition.Type type = (Condition.Type)jsonObject.GetValue("type").Value<int>();
 
 
         /*JObject jsonObject = JObject.Load(reader);
         return serializer.Deserialize<IntCondition>(jsonObject.CreateReader());*/
+        switch (type)
+        {
+            case Condition.Type.Bool:
+                return new BoolCondition(name, jsonObject.GetValue("value").Value<bool>());
+            case Condition.Type.String:
+                return new StringCondition(name, jsonObject.GetValue("value").ToString());
+            case Condition.Type.Float:
+                return new FloatCondition(name, jsonObject.GetValue("value").Value<float>());
+            case Condition.Type.Int:
+                return new IntCondition(name, jsonObject.GetValue("value").Value<int>());
+            default:
+                Debug.LogError("Type not found");
+                return null;
 
-        if (type == "bool")
+        }
+        /*if (type == "bool")
         {
             return new BoolCondition(name, bool.Parse(jsonObject.GetValue("value").ToString()));
         }
@@ -128,7 +144,7 @@ public class ConditionConverter : JsonConverter<Condition>
         {
             Debug.LogError("Type not found");
             return null;
-        }
+        }*/
     }
 
     public override void WriteJson(JsonWriter writer, Condition value, JsonSerializer serializer)

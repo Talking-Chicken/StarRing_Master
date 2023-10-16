@@ -21,7 +21,12 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(BoolCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+            return false;
+        }
+        else if (condition.GetType() == typeof(BoolCondition))
         {
             return ((BoolCondition)condition).GetValue();
         }
@@ -38,7 +43,11 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(BoolCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+        }
+        else if (condition.GetType() == typeof(BoolCondition))
         {
             ((BoolCondition)condition).SetValue(value);
             SaveManager.SaveConditions(conditions);
@@ -56,7 +65,12 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(IntCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+            return 0;
+        }
+        else if (condition.GetType() == typeof(IntCondition))
         {
             return ((IntCondition)condition).GetValue();
         }
@@ -73,7 +87,12 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(IntCondition))
+
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+        }
+        else if (condition.GetType() == typeof(IntCondition))
         {
             ((IntCondition)condition).SetValue(value);
             SaveManager.SaveConditions(conditions);
@@ -90,7 +109,12 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(FloatCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+            return 0;
+        }
+        else if (condition.GetType() == typeof(FloatCondition))
         {
             return ((FloatCondition)condition).GetValue();
         }
@@ -107,7 +131,11 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(FloatCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+        }
+        else if (condition.GetType() == typeof(FloatCondition))
         {
             ((FloatCondition)condition).SetValue(value);
             SaveManager.SaveConditions(conditions);
@@ -124,7 +152,12 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(StringCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+            return null;
+        }
+        else if (condition.GetType() == typeof(StringCondition))
         {
             return ((StringCondition)condition).GetValue();
         }
@@ -141,7 +174,11 @@ public static class ConditionSystemManager
             LoadConditions();
         }
         Condition condition = conditions.Where(x => x.name == name).FirstOrDefault();
-        if (condition.GetType() == typeof(StringCondition))
+        if (condition == null)
+        {
+            Debug.Log($"Condition {name} does not exist");
+        }
+        else if (condition.GetType() == typeof(StringCondition))
         {
             ((StringCondition)condition).SetValue(value);
             SaveManager.SaveConditions(conditions);
