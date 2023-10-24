@@ -10,6 +10,10 @@ public class ConditionChecker : MonoBehaviour
     {
         return setsOfConditions[setNum].CheckCondition();
     }
+    public bool CheckCondition(string name)
+    {
+        return setsOfConditions.Find(x => x.name == name).CheckCondition();
+    }
 }
 
 [Serializable]
@@ -39,6 +43,7 @@ public class ComparisonCondition
 [Serializable]
 public class ConditionSet
 {
+    [SerializeField] public string name;
     [SerializeField] public List<ComparisonCondition> conditions;
     public bool CheckCondition()
     {

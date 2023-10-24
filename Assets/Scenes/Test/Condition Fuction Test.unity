@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 499637725}
   - component: {fileID: 499637726}
+  - component: {fileID: 499637727}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -301,6 +302,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1090825768}
+--- !u!114 &499637727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499637723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076bb3dca46e8424bb79d496ffff18aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setsOfConditions:
+  - name: david
+    conditions:
+    - name: david_is_alive
+      type: 3
+      value: true
 --- !u!1 &511735036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,10 +1059,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setsOfConditions:
-  - conditions:
-    - name: loop time
+  - name: david
+    conditions:
+    - name: david_is_alive
+      type: 3
+      value: true
+    - name: Rita_state_night
       type: 0
-      value: 0
+      value: 2
 --- !u!4 &1374622367
 Transform:
   m_ObjectHideFlags: 0
