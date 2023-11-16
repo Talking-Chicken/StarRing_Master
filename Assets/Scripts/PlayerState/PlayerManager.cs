@@ -19,9 +19,11 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueUIManager _dialogueManager;
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueRunner _dialogueRunner;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterOrientation3D _characterOrientation;
-    [SerializeField, Foldout("Listeners")] private PlayerListener _playerListener;
+    // [SerializeField, Foldout("Listeners")] private PlayerListener _playerListener;
+    [SerializeField, Foldout("Listeners")] private PlayerActionListener _playerListener;
     [SerializeField, Foldout("Listeners")] private DialogueListener _dialogueListener;
     [SerializeField, Foldout("Listeners")] private UIListener _uiListener;
+    [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactListener;
     private Camera _mainCamera;
 
     //interactions
@@ -29,7 +31,6 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable preHoveringInteractable = null;
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable targetInteractable;
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Transform interactionPosition;
-    [ReadOnly, SerializeField, BoxGroup("Interaction")] private bool isInteracting = false;
     [SerializeField, BoxGroup("Interaction")] private LayerMask interactionRaycastMask;
 
     //Dialogues
@@ -52,11 +53,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Foldout("Feedbacks")] private MMF_Player openUIFeedback;
 
     #region getters & setters
+    public PlayerProperty Property {get=>Property;}
     public Interactable HoveringInteractable {get=>hoveringInteractable;set=>hoveringInteractable=value;}
     public Interactable PreHoveringInteractable {get=>preHoveringInteractable;set=>preHoveringInteractable=value;}
     public Interactable TargetInteractable {get=>targetInteractable;private set=>targetInteractable=value;}
     public Transform InteractionPosition {get=>interactionPosition;private set=>interactionPosition=value;}
-    public bool IsInteracting {get=>isInteracting;private set=>isInteracting=value;}
     public NPC TargetNPC { get => targetNpc; set => targetNpc = value; }
     public TalkingSetting TargetTalkingSetting {get=>targetTalkingSetting; set=>targetTalkingSetting=value;}
     public GameObject VirtualCamera{get => virtualCamera;}
@@ -98,15 +99,11 @@ public class PlayerManager : MonoBehaviour
 
     #region Awake, Start, and Update...
     void OnEnable() {
-        _playerListener.OnCreated(this);
-
-        _dialogueListener.onCreatedEvent.AddListener(SetDialogueManager);
-        _uiListener.onCreatedEvent.AddListener(SetUIManager);
+        _interactListener.stopInteract.AddListener(StopInteract);
     }
 
     void OnDisable() {
-        _uiListener.onCreatedEvent.RemoveAllListeners();
-        _dialogueListener.onCreatedEvent.RemoveAllListeners();
+        _interactListener.stopInteract.RemoveListener(StopInteract);
     }
 
     void Start()
@@ -174,14 +171,6 @@ public class PlayerManager : MonoBehaviour
         } else
             Debug.Log("Cannot set UI Manager for " + gameObject.name);
     }
-
-    private void SetDialogueManager(DialogueUIManager manager) {
-        if (manager != null) {
-            _dialogueRunner = manager.DialogueRunner;
-            _lineView = manager.LineView;
-        } else 
-            Debug.Log("Cannot set Dialogue Manager for " + gameObject.name);
-    }
     #endregion
 
     #region detect input
@@ -192,7 +181,9 @@ public class PlayerManager : MonoBehaviour
                 TargetInteractable = HoveringInteractable;
                 switch (TargetInteractable.Type) {
                     case InteractableType.OBJ:
-                        InteractObj obj = TargetInteractable.GetComponent<InteractObj>();
+                        InteractableObj obj;
+                        if (!targetInteractable.TryGetComponent(out obj))
+                            return;
                         InteractionPosition = obj.InteractPosition;
                         WalkToInteractingPosition(obj.InteractPosition);
                         // (targetInteractable as InteractObj).Interact();
@@ -232,12 +223,6 @@ public class PlayerManager : MonoBehaviour
         _mouseControl3D.AbilityPermitted = true;
     }
 
-    public void ResetInteractTargets() {
-        TargetInteractable = null;
-        InteractionPosition = null;
-        IsInteracting = false;
-    }
-
     /// rotate player character to face target transform's position
     public void RotateToward(Transform target) {
         if (target == null) {
@@ -273,7 +258,7 @@ public class PlayerManager : MonoBehaviour
                 mat.SetFloat("_OutlineWidth", 2.5f);
             
             // invoke events
-            _playerListener.OnMouseStartHoverInteractable(HoveringInteractable);
+            // _playerListener.OnMouseStartHoverInteractable(HoveringInteractable);
         }
     }
 
@@ -285,27 +270,17 @@ public class PlayerManager : MonoBehaviour
                 mat.SetFloat("_OutlineWidth", 0.0f);
 
             // invoke events
-            _playerListener.OnMouseEndHoverInteractable(HoveringInteractable);
+            // _playerListener.OnMouseEndHoverInteractable(HoveringInteractable);
         }
     }
 
-    /// interact with target
-    /// do corresponding things based on their type
-    public void Interact(Interactable target) {
-        if (target == null)
+    public void StopInteract(Interactable interactable) {
+        if (targetInteractable == null)
             return;
         
-        switch (target.Type) {
-            case InteractableType.OBJ:
-                InteractObj obj = TargetInteractable.GetComponent<InteractObj>();
-                StartCoroutine(DelayStartInteract(obj));
-                break;
-            case InteractableType.EXM:
-                break;
-            case InteractableType.NPC:
-                break;
-        }
-        IsInteracting = true;
+        ChangeState(stateExplore);
+        targetInteractable = null;
+        InteractionPosition = null;
     }
 
     /// go to the interacting position
@@ -408,33 +383,6 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-    ///for debug purpose, using this can let me know which UI is blocking my raycast
-    public void DetectUIElement() {
-        /// get wut mouse is hover over
-        // Create a pointer event
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-
-        // Set the pointer event position to the mouse position
-        pointerEventData.position = Input.mousePosition;
-
-        // Raycast using the pointer event
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, results);
-
-        // Check if the mouse is hovering over a UI element
-        if (results.Count > 0)
-        {
-            // Get the name of the UI object
-            string objectName = results[0].gameObject.name;
-            Debug.Log("Mouse is hovering over UI object named: " + objectName);
-        }
-    }
-
-    ///delay couple seconds to start interact
-    IEnumerator DelayStartInteract(InteractObj obj) {
-        yield return new WaitForSeconds(obj.DelayStartInteract);
-        obj.Interact();
-    }
 
     public void ContinueDialogue() {
         if (Input.GetMouseButtonUp(0)) {

@@ -60,6 +60,8 @@ public class NPC : Interactable, ITalkable
         currentState.UpdateState(this);
     }
 
+    
+
     //ITalkable
     [YarnCommand("SetProgress")]
     public void SetProgress(string nodeBase) {

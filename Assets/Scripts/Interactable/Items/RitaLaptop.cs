@@ -5,7 +5,7 @@ using NaughtyAttributes;
 using MoreMountains.Feedbacks;
 using UnityEngine.UI;
 
-public class RitaLaptop : InteractObj, IInteractable
+public class RitaLaptop : InteractableObj, IInteractable
 {
     [SerializeField, BoxGroup("Relative Objs")] private GameObject wall;
     [SerializeField, BoxGroup("Feedbacks")] private MMF_Player cameraFBIN, cameraFBOUT;
@@ -44,15 +44,14 @@ public class RitaLaptop : InteractObj, IInteractable
 
     /// interact with rita's laptop,
     /// it transit camera to see the laptop
-    public override bool Interact() {
-        base.Interact();
+    public override void Interact(PlayerProperty player) {
+        base.Interact(player);
         wall.layer = 0;
         downloadBarFill.localScale = new Vector3(0,0,0);
         currentTime = 0.0f;
         hasWindowShowed = false;
         laptopCanvas.SetActive(true);
         cameraFBIN.PlayFeedbacks();
-        return true;
     }
 
     public void EndInteract() {
@@ -60,7 +59,7 @@ public class RitaLaptop : InteractObj, IInteractable
         laptopCanvas.SetActive(false);
         popupWindow.SetActive(false);
         cameraFBOUT.PlayFeedbacks();
-        Player.ChangeState(Player.stateExplore);
+        StopInteract();
     }
 
     public void EnterPassword(int num) {

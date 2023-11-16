@@ -7,7 +7,6 @@ public class PlayerStateExplore : PlayerStateBase
     public override void EnterState(PlayerManager player)
     {
         player.ReleaseMovement();
-        player.ResetInteractTargets();
     }
 
     public override void UpdateState(PlayerManager player)
@@ -25,12 +24,13 @@ public class PlayerStateExplore : PlayerStateBase
             player.PreHoveringInteractable = player.HoveringInteractable;
         }
 
-        if (!player.IsInteracting) {
-            if (player.TargetInteractable != null && player.InteractionPosition != null) {
-                if (player.IsReadyToInteract(player.InteractionPosition)) {
-                    player.RotateToward(player.TargetInteractable.transform);
-                    player.Interact(player.TargetInteractable);
-                }
+        if (player.TargetInteractable != null && player.InteractionPosition != null) {
+            Debug.Log("Woaaaaaa");
+            if (player.IsReadyToInteract(player.InteractionPosition)) {
+                Debug.Log("ready");
+                player.RotateToward(player.TargetInteractable.transform);
+                player.ChangeState(player.stateInteract);
+                // player.Interact(player.TargetInteractable);
             }
         }
 

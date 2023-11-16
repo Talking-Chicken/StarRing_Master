@@ -34,7 +34,6 @@ RectTransform:
   - {fileID: 3545129634944946470}
   - {fileID: 8606932623441061067}
   m_Father: {fileID: 8569529154298601332}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -58,7 +57,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
@@ -113,6 +114,7 @@ GameObject:
   - component: {fileID: 8569529154298601332}
   - component: {fileID: 7741050540943549815}
   - component: {fileID: 6405611810557195752}
+  - component: {fileID: 1724436907003978488}
   m_Layer: 0
   m_Name: Star Ring Dialogue System
   m_TagString: Untagged
@@ -127,6 +129,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9004669018094136586}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -134,7 +137,6 @@ Transform:
   m_Children:
   - {fileID: 4076009547050552190}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7741050540943549815
 MonoBehaviour:
@@ -189,6 +191,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDialogueStart:
+    m_PersistentCalls:
+      m_Calls: []
   onDialogueComplete:
     m_PersistentCalls:
       m_Calls:
@@ -235,11 +240,26 @@ MonoBehaviour:
   _dialogueRunner: {fileID: 7741050540943549815}
   _lineView: {fileID: 3545129634944946467}
   _dialogueCanvasGroup: {fileID: 3545129634944946466}
+--- !u!114 &1724436907003978488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9004669018094136586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05867b73c687fe6489a0067672b1f87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueRunner: {fileID: 7741050540943549815}
+  _dialogueListener: {fileID: 11400000, guid: eced2cca1e7cba44bb7b4277bc19a23c, type: 2}
 --- !u!1001 &4835527678589174683
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 4076009547050552190}
     m_Modifications:
     - target: {fileID: 1253922407554615961, guid: f247515ca42ffe64cadfe8cc60b0a5fa,
@@ -466,6 +486,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f247515ca42ffe64cadfe8cc60b0a5fa, type: 3}
 --- !u!225 &3545129634944946466 stripped
 CanvasGroup:
@@ -496,6 +519,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 4076009547050552190}
     m_Modifications:
     - target: {fileID: 2263075490329845941, guid: b294355bd5dd2e24cb4692d479223004,
@@ -644,6 +668,9 @@ PrefabInstance:
       value: -50.11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b294355bd5dd2e24cb4692d479223004, type: 3}
 --- !u!224 &8606932623441061067 stripped
 RectTransform:
