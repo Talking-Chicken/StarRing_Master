@@ -8,7 +8,7 @@ namespace MiniGame
     {
         public class OdenFood : MonoBehaviour
         {
-            public enum FoodType { }
+            public enum FoodType { Daikon, Egg, Fishball, Bamboo, Kelp }
             public FoodType type;
             // Start is called before the first frame update
             void Start()

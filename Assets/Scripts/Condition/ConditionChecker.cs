@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.InventoryEngine;
 
 public class ConditionChecker : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class ConditionSet
 {
     [SerializeField] public string name;
     [SerializeField] public List<ComparisonCondition> conditions;
+    
     public bool CheckCondition()
     {
         foreach (ComparisonCondition condition in conditions)
