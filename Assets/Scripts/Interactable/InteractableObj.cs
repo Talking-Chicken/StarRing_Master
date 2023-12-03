@@ -17,11 +17,6 @@ public class InteractableObj : Interactable
         Type = InteractableType.OBJ;
     }
 
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     public override void Interact(PlayerProperty player)
     {
         base.Interact(player);

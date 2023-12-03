@@ -21,11 +21,6 @@ public class InteractObj : Interactable
         base.Start();
     }
 
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     public virtual bool Interact() {
         if (isChangingToInteractState) {
             Player.ChangeState(Player.stateInteract);

@@ -12,6 +12,8 @@ public class Interactable : MonoBehaviour
     [SerializeField, BoxGroup("properties")] private string interactableName;
     [SerializeField, BoxGroup("Properties")] private bool isInteractable = true;
     [SerializeField, BoxGroup("Properties")] private List<Material> outlineMats;
+    [SerializeField, BoxGroup("Interaction Settings"), Tooltip("whether this interactable needs update each frame")] private bool requiresUpdate = false;
+    [SerializeField, BoxGroup("Interaction Settings")] private List<Transform> interactPositions;
     [SerializeField, Foldout("Listeners")] protected InteractableActionListener _interactListener;
     [SerializeField, Foldout("Listeners")] protected DialogueActionListener _dialogueListener;
 
@@ -22,8 +24,10 @@ public class Interactable : MonoBehaviour
     
     protected virtual void Start() {}
 
-    
-    protected virtual void Update() {}
+    /// <summary>
+    /// will run this function when requiresUpdate is true (substitution of regular Update method)
+    /// </summary>
+    public virtual void InteractableUpdate() {}
 
     public virtual void Interact(PlayerProperty player) {
         if (player == null)

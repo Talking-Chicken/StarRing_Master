@@ -2440,6 +2440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4142866814125310061}
+  - component: {fileID: 4620130283929541689}
   - component: {fileID: 1338075951087861970}
   - component: {fileID: 4142866814125310050}
   - component: {fileID: 4142866814125310079}
@@ -2483,6 +2484,19 @@ Transform:
   - {fileID: 6923826111016368662}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4620130283929541689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142866814125310060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e70e2d8699e44a4da782fab85da03d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 8079671095355240997}
 --- !u!114 &1338075951087861970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,6 +2515,7 @@ MonoBehaviour:
   _dialogueManager: {fileID: 0}
   _dialogueRunner: {fileID: 0}
   _characterOrientation: {fileID: 0}
+  property: {fileID: 4620130283929541689}
   _playerListener: {fileID: 11400000, guid: 415612b2e21bad044bfbcf7096102658, type: 2}
   _dialogueListener: {fileID: 11400000, guid: 71ff246aaf3515d419b5ec6db660db56, type: 2}
   _uiListener: {fileID: 11400000, guid: 2f3f311c0784f1f4ab467c9a1921a647, type: 2}
@@ -2509,7 +2524,6 @@ MonoBehaviour:
   preHoveringInteractable: {fileID: 0}
   targetInteractable: {fileID: 0}
   interactionPosition: {fileID: 0}
-  isInteracting: 0
   interactionRaycastMask:
     serializedVersion: 2
     m_Bits: 8388608

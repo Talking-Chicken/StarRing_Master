@@ -52,13 +52,13 @@ public class NPC : Interactable, ITalkable
         previousState = currentState;
     }
 
-    protected override void Update() {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.G))
-            Debug.Log(interactCount["Helmet_1"]);
+    // protected override void Update() {
+    //     base.Update();
+    //     // if (Input.GetKeyDown(KeyCode.G))
+    //     //     Debug.Log(interactCount["Helmet_1"]);
         
-        currentState.UpdateState(this);
-    }
+    //     currentState.UpdateState(this);
+    // }
 
     
 

@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueUIManager _dialogueManager;
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueRunner _dialogueRunner;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterOrientation3D _characterOrientation;
+    [SerializeField] private PlayerProperty property;
     // [SerializeField, Foldout("Listeners")] private PlayerListener _playerListener;
     [SerializeField, Foldout("Listeners")] private PlayerActionListener _playerListener;
     [SerializeField, Foldout("Listeners")] private DialogueListener _dialogueListener;
@@ -53,7 +54,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Foldout("Feedbacks")] private MMF_Player openUIFeedback;
 
     #region getters & setters
-    public PlayerProperty Property {get=>Property;}
+    public PlayerProperty Property {get=>property;}
     public Interactable HoveringInteractable {get=>hoveringInteractable;set=>hoveringInteractable=value;}
     public Interactable PreHoveringInteractable {get=>preHoveringInteractable;set=>preHoveringInteractable=value;}
     public Interactable TargetInteractable {get=>targetInteractable;private set=>targetInteractable=value;}
@@ -179,20 +180,21 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0)) {
             if (HoveringInteractable != null) {
                 TargetInteractable = HoveringInteractable;
-                switch (TargetInteractable.Type) {
-                    case InteractableType.OBJ:
-                        InteractableObj obj;
-                        if (!targetInteractable.TryGetComponent(out obj))
-                            return;
-                        InteractionPosition = obj.InteractPosition;
-                        WalkToInteractingPosition(obj.InteractPosition);
-                        // (targetInteractable as InteractObj).Interact();
-                        break;
-                    case InteractableType.EXM:
-                        break;
-                    case InteractableType.NPC:
-                        break;
-                }
+                // switch (TargetInteractable.Type) {
+                //     case InteractableType.OBJ:
+                //         InteractableObj obj;
+                //         if (!targetInteractable.TryGetComponent(out obj))
+                //             return;
+                //         InteractionPosition = obj.InteractPosition;
+                //         WalkToInteractingPosition(obj.InteractPosition);
+                //         // (targetInteractable as InteractObj).Interact();
+                //         break;
+                //     case InteractableType.EXM:
+                //         break;
+                //     case InteractableType.NPC:
+                //         break;
+                // }
+                TargetInteractable.Interact(Property);
             }
         }
 

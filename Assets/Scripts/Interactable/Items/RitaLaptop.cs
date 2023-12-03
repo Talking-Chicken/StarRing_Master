@@ -22,25 +22,25 @@ public class RitaLaptop : InteractableObj, IInteractable
         base.Start();
     }
 
-    protected override void Update()
-    {
-        base.Update();
+    // protected override void Update()
+    // {
+    //     base.Update();
 
-        if (password.Count >= 4 && currentTime < timeToDownload) {
-            if (downloadBar.gameObject.activeSelf == false) {
-                downloadBar.gameObject.SetActive(true);
-            }
-            currentTime += Time.deltaTime;
-            downloadBarFill.localScale = new Vector3(Mathf.Lerp(0, 1, currentTime/timeToDownload), 1, 1);
-        }
+    //     if (password.Count >= 4 && currentTime < timeToDownload) {
+    //         if (downloadBar.gameObject.activeSelf == false) {
+    //             downloadBar.gameObject.SetActive(true);
+    //         }
+    //         currentTime += Time.deltaTime;
+    //         downloadBarFill.localScale = new Vector3(Mathf.Lerp(0, 1, currentTime/timeToDownload), 1, 1);
+    //     }
 
-        if (currentTime >= timeToDownload) {
-            if (!hasWindowShowed) {
-                StartCoroutine(DelayToSetActive(popupWindow, true, 0.3f));
-                hasWindowShowed = true;
-            }
-        }
-    }
+    //     if (currentTime >= timeToDownload) {
+    //         if (!hasWindowShowed) {
+    //             StartCoroutine(DelayToSetActive(popupWindow, true, 0.3f));
+    //             hasWindowShowed = true;
+    //         }
+    //     }
+    // }
 
     /// interact with rita's laptop,
     /// it transit camera to see the laptop
