@@ -19,7 +19,7 @@ public class AreaCameraFeedbackPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            
+            areaCamFeedback.RestoreInitialValues();
         }
     }
 
