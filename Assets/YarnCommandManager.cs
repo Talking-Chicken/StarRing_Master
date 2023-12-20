@@ -19,8 +19,13 @@ public class YarnCommandManager : MonoBehaviour
     [YarnCommand("animation")]
     public void Animation(GameObject character,string clipName)
     {
-        characterAnimator = character.GetComponent<Animator>();
+        characterAnimator = character.GetComponentInChildren<Animator>();
 
         characterAnimator.Play(clipName);
+    }
+    [YarnCommand("faceToward")]
+    public void FaceToward(Transform destination, GameObject character)
+    {
+        character.transform.LookAt(destination,Vector3.up);
     }
 }
