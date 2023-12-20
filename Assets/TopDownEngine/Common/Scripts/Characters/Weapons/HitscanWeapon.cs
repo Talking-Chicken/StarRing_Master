@@ -56,6 +56,14 @@ namespace MoreMountains.TopDownEngine
 		/// a list of typed damage definitions that will be applied on top of the base damage
 		[Tooltip("a list of typed damage definitions that will be applied on top of the base damage")]
 		public List<TypedDamage> TypedDamages;
+
+		[MMInspectorGroup("Knockback", true, 29)]
+		/// the type of knockback to apply when causing damage
+		[Tooltip("the type of knockback to apply when causing damage")]
+		public DamageOnTouch.KnockbackStyles DamageCausedKnockbackType = DamageOnTouch.KnockbackStyles.NoKnockback;
+		/// The force to apply to the object that gets damaged
+		[Tooltip("The force to apply to the object that gets damaged")]
+		public Vector3 DamageCausedKnockbackForce = new Vector3(10, 10, 10);
 		
 		[MMInspectorGroup("Hit Damageable", true, 25)]
 		/// a MMFeedbacks to move to the position of the hit and to play when hitting something with a Health component
@@ -86,6 +94,9 @@ namespace MoreMountains.TopDownEngine
 		protected Vector3 _hitPoint;
 		protected Health _health;
 		protected Vector3 _damageDirection;
+		protected Vector3 _knockbackRelativePosition = Vector3.zero;
+		protected Vector3 _knockbackForce = Vector3.zero;
+		protected TopDownController _knockbackTopDownController;
 
 		[MMInspectorButton("TestShoot")]
 		/// a button to test the shoot method
@@ -271,8 +282,37 @@ namespace MoreMountains.TopDownEngine
 					DamageableImpactParticles.transform.LookAt(this.transform);
 					DamageableImpactParticles.Play();
 				}
-			}
 
+				ApplyKnockback();
+			}
+		}
+
+		/// <summary>
+		/// Applies knockback to the hit target if necessary
+		/// </summary>
+		protected virtual void ApplyKnockback()
+		{
+			if (DamageCausedKnockbackType == DamageOnTouch.KnockbackStyles.AddForce)
+			{
+				_knockbackTopDownController = _hitObject.MMGetComponentNoAlloc<TopDownController>();
+				if (_knockbackTopDownController == null)
+				{
+					return;
+				}
+				_knockbackForce = DamageCausedKnockbackForce * _health.KnockbackForceMultiplier;
+				_knockbackForce = _health.ComputeKnockbackForce(_knockbackForce, TypedDamages);
+				if (Mode == Modes.ThreeD)
+				{
+					_knockbackRelativePosition = _hitPoint - Owner.transform.position;
+					_knockbackForce = Quaternion.LookRotation(_knockbackRelativePosition) * _knockbackForce;
+				}
+				else 
+				{
+					_knockbackRelativePosition = _hitPoint - Owner.transform.position;
+					_knockbackForce = Vector3.RotateTowards(_knockbackForce, _knockbackRelativePosition.normalized, 10f, 0f);
+				}
+				_knockbackTopDownController.Impact(_knockbackForce.normalized, _knockbackForce.magnitude);
+			}
 		}
 
 		/// <summary>

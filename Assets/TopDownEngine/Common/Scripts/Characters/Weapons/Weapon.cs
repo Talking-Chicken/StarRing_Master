@@ -27,9 +27,6 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("whether or not the weapon is currently active")]
 		public bool WeaponCurrentlyActive = true;
 
-		/// the range of this weapon, used for MouseControl3D script
-		public float Range = 10f;
-
 		[MMInspectorGroup("Use", true, 10)]
 		/// if this is true, this weapon will be able to read input (usually via the CharacterHandleWeapon ability), otherwise player input will be disabled
 		[Tooltip("if this is true, this weapon will be able to read input (usually via the CharacterHandleWeapon ability), otherwise player input will be disabled")]
@@ -86,6 +83,9 @@ namespace MoreMountains.TopDownEngine
 		/// the delay (in seconds) before weapon destruction if empty
 		[Tooltip("the delay (in seconds) before weapon destruction if empty")]
 		public float AutoDestroyWhenEmptyDelay = 1f;
+		/// if this is true, the weapon won't try and reload if the ammo is empty, when using WeaponAmmo
+		[Tooltip("if this is true, the weapon won't try and reload if the ammo is empty, when using WeaponAmmo")]
+		public bool PreventReloadIfAmmoEmpty = false;
 		/// the current amount of ammo loaded inside the weapon
 		[MMReadOnly]
 		[Tooltip("the current amount of ammo loaded inside the weapon")]
@@ -212,6 +212,9 @@ namespace MoreMountains.TopDownEngine
 		/// the feedback to play when the weapon gets reloaded
 		[Tooltip("the feedback to play when the weapon gets reloaded")]
 		public MMFeedbacks WeaponReloadNeededMMFeedback;
+		/// the feedback to play when the weapon can't reload as there's no more ammo available. You'll need PreventReloadIfAmmoEmpty to be true for this to work
+		[Tooltip("the feedback to play when the weapon can't reload as there's no more ammo available. You'll need PreventReloadIfAmmoEmpty to be true for this to work")]
+		public MMFeedbacks WeaponReloadImpossibleMMFeedback;
         
 		[MMInspectorGroup("Settings", true, 19)]
 		/// If this is true, the weapon will initialize itself on start, otherwise it'll have to be init manually, usually by the CharacterHandleWeapon class
@@ -278,8 +281,10 @@ namespace MoreMountains.TopDownEngine
 		protected int _aliveAnimationParameter;
 		protected int _comboInProgressAnimationParameter;
 		protected int _equippedAnimationParameter;
-		protected float _lastShootRequestAt;
-		protected float _lastTurnWeaponOnAt;
+		protected float _lastShootRequestAt = -float.MaxValue;
+		protected float _lastTurnWeaponOnAt = -float.MaxValue;
+
+		public float Range;
 
 		/// <summary>
 		/// On start we initialize our weapon
@@ -424,7 +429,7 @@ namespace MoreMountains.TopDownEngine
 			}
 			if (PreventAllAimWhileInUse && (_weaponAim != null))
 			{
-				_weaponAim.enabled = false;
+				_weaponAim.AimControlActive = false;
 			}
 		}
 
@@ -827,7 +832,7 @@ namespace MoreMountains.TopDownEngine
 			}
 			if (PreventAllAimWhileInUse && (_weaponAim != null))
 			{
-				_weaponAim.enabled = true;
+				_weaponAim.AimControlActive = true;
 			}
 
 			if (NoInputReload)
@@ -871,6 +876,12 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		public virtual void InitiateReloadWeapon()
 		{
+			if (PreventReloadIfAmmoEmpty && WeaponAmmo && WeaponAmmo.CurrentAmmoAvailable == 0)
+			{
+				WeaponReloadImpossibleMMFeedback?.PlayFeedbacks();
+				return;
+			}
+			
 			// if we're already reloading, we do nothing and exit
 			if (_reloading || !MagazineBased)
 			{
@@ -882,7 +893,7 @@ namespace MoreMountains.TopDownEngine
 			}
 			if (PreventAllAimWhileInUse && (_weaponAim != null))
 			{
-				_weaponAim.enabled = true;
+				_weaponAim.AimControlActive = true;
 			}
 			WeaponState.ChangeState(WeaponStates.WeaponReloadStart);
 			_reloading = true;

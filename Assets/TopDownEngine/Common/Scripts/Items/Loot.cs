@@ -136,6 +136,13 @@ namespace  MoreMountains.TopDownEngine
         
 		public static List<MMSimpleObjectPooler> SimplePoolers = new List<MMSimpleObjectPooler>();
 		public static List<MMMultipleObjectPooler> MultiplePoolers = new List<MMMultipleObjectPooler>();
+		
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			SimplePoolers = new List<MMSimpleObjectPooler>();
+			MultiplePoolers = new List<MMMultipleObjectPooler>();
+		}
 
 		protected Health _health;
 		protected GameObject _objectToSpawn;
@@ -303,7 +310,7 @@ namespace  MoreMountains.TopDownEngine
 		protected virtual IEnumerator SpawnLootCo()
 		{
 			yield return MMCoroutine.WaitFor(Delay);
-			int randomQuantity = Random.Range((int)Quantity.x, (int)Quantity.y);
+			int randomQuantity = Random.Range((int)Quantity.x, (int)Quantity.y + 1);
 			for (int i = 0; i < randomQuantity; i++)
 			{
 				SpawnOneLoot();

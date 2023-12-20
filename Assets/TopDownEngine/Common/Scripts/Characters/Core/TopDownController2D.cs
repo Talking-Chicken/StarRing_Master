@@ -429,5 +429,18 @@ namespace MoreMountains.TopDownEngine
 			_raycastDown = MMDebug.RayCast(this.transform.position + offset, Vector3.down, distance, ObstaclesLayerMask, Color.yellow, true);
 			if (_raycastDown.collider != null) { DetectedObstacleDown = _raycastDown.collider.gameObject; CollidingWithCardinalObstacle = true; } else { DetectedObstacleDown = null; }
 		}
+		
+
+		/// <summary>
+		/// On reset, we reset our rb's velocity
+		/// </summary>
+		public override void Reset()
+		{
+			base.Reset();
+			if (_rigidBody != null)
+			{
+				_rigidBody.velocity = Vector2.zero;	
+			}
+		}
 	}
 }

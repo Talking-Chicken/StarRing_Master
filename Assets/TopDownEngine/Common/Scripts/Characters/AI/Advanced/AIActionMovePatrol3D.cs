@@ -52,6 +52,7 @@ namespace MoreMountains.TopDownEngine
 		protected float _lastObstacleDetectionTimestamp = 0f;        
 		protected int _indexLastFrame = -1;
 		protected float _waitingDelay = 0f;
+		protected float _lastPatrolPointReachedAt = 0f;
                 
 		/// <summary>
 		/// On init we grab all the components we'll need
@@ -78,6 +79,7 @@ namespace MoreMountains.TopDownEngine
 			CurrentPathIndex = 0;
 			_indexLastFrame = -1;
 			LastReachedPatrolPoint = this.transform.position;
+			_lastPatrolPointReachedAt = Time.time;
 		}
 
 		public void ResetPatrol(Vector3 targetPos) // MMPath changed
@@ -100,8 +102,6 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void Patrol()
 		{
-			_waitingDelay -= Time.deltaTime;
-
 			if (_character == null)
 			{
 				return;
@@ -113,7 +113,7 @@ namespace MoreMountains.TopDownEngine
 				return;
 			}
 
-			if (_waitingDelay > 0)
+			if (Time.time - _lastPatrolPointReachedAt < _waitingDelay)
 			{
 				_characterMovement.SetHorizontalMovement(0f);
 				_characterMovement.SetVerticalMovement(0f);
@@ -127,9 +127,10 @@ namespace MoreMountains.TopDownEngine
 			if (CurrentPathIndex != _indexLastFrame)
 			{
 				LastReachedPatrolPoint = _mmPath.CurrentPoint();
-				_waitingDelay = _mmPath.PathElements[CurrentPathIndex].Delay;
+				_lastPatrolPointReachedAt = Time.time;
+				DetermineDelay();
 
-				if (_waitingDelay > 0)
+				if (_waitingDelay > 0f)
 				{
 					_characterMovement.SetHorizontalMovement(0f);
 					_characterMovement.SetVerticalMovement(0f);
@@ -145,6 +146,21 @@ namespace MoreMountains.TopDownEngine
 			_characterMovement.SetVerticalMovement(_direction.z);
 
 			_indexLastFrame = CurrentPathIndex;
+		}
+
+		protected virtual void DetermineDelay()
+		{
+			if ( (_mmPath.Direction > 0 && (CurrentPathIndex == 0))
+			|| (_mmPath.Direction < 0) && (CurrentPathIndex == _mmPath.PathElements.Count - 1))
+			{
+				int previousPathIndex = _mmPath.Direction > 0 ? _mmPath.PathElements.Count - 1 : 1;
+				_waitingDelay = _mmPath.PathElements[previousPathIndex].Delay; 
+			}
+			else 
+			{
+				int previousPathIndex = _mmPath.Direction > 0 ? CurrentPathIndex - 1 : CurrentPathIndex + 1;
+				_waitingDelay = _mmPath.PathElements[previousPathIndex].Delay; 
+			}
 		}
 
 		/// <summary>

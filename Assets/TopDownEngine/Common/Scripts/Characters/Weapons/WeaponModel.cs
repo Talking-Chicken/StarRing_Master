@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Tools;
@@ -75,7 +76,9 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("the feedback to play when the weapon gets reloaded")]
 		public MMFeedbacks WeaponReloadNeededMMFeedback;
 
-		protected CharacterHandleWeapon _handleWeapon;
+		public CharacterHandleWeapon Owner { get; set; }
+		
+		protected List<CharacterHandleWeapon> _handleWeapons;
 		protected WeaponAim _weaponAim;
 		protected Vector3 _rotationDirection;
 
@@ -89,7 +92,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void Start()
 		{
-			_handleWeapon = this.GetComponentInParent<Character>()?.FindAbility<CharacterHandleWeapon>();
+			_handleWeapons = this.GetComponentInParent<Character>()?.FindAbilities<CharacterHandleWeapon>();
 		}
 
 		/// <summary>
@@ -104,10 +107,13 @@ namespace MoreMountains.TopDownEngine
 
 			if (_weaponAim == null)
 			{
-				if (_handleWeapon.CurrentWeapon != null)
+				foreach (CharacterHandleWeapon handleWeapon in _handleWeapons)
 				{
-					_weaponAim = _handleWeapon.CurrentWeapon.gameObject.MMGetComponentNoAlloc<WeaponAim>();
-				}                
+					if (handleWeapon.CurrentWeapon != null)
+					{
+						_weaponAim = handleWeapon.CurrentWeapon.gameObject.MMGetComponentNoAlloc<WeaponAim>();
+					}
+				}               
 			}
 			else
 			{
@@ -120,8 +126,9 @@ namespace MoreMountains.TopDownEngine
 			}
 		}
 
-		public virtual void Show()
+		public virtual void Show(CharacterHandleWeapon handleWeapon)
 		{
+			Owner = handleWeapon;
 			TargetModel.SetActive(true);
 		}
 

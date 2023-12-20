@@ -77,6 +77,9 @@ namespace MoreMountains.TopDownEngine
 		/// The force to apply to the object that gets damaged
 		[Tooltip("The force to apply to the object that gets damaged")]
 		public Vector3 KnockbackForce = new Vector3(10, 2, 0);
+		/// The direction in which to apply the knockback 
+		[Tooltip("The direction in which to apply the knockback ")]
+		public DamageOnTouch.KnockbackDirections KnockbackDirection = DamageOnTouch.KnockbackDirections.BasedOnOwnerPosition;
 		/// The duration of the invincibility frames after the hit (in seconds)
 		[Tooltip("The duration of the invincibility frames after the hit (in seconds)")]
 		public float InvincibilityDuration = 0.5f;
@@ -183,6 +186,8 @@ namespace MoreMountains.TopDownEngine
 			{
 				Rigidbody rigidBody = _damageArea.AddComponent<Rigidbody>();
 				rigidBody.isKinematic = true;
+
+				rigidBody.gameObject.AddComponent<MMRagdollerIgnore>();
 			}
 
 			_damageOnTouch = _damageArea.AddComponent<DamageOnTouch>();
@@ -194,6 +199,7 @@ namespace MoreMountains.TopDownEngine
 			_damageOnTouch.DamageDirectionMode = DamageOnTouch.DamageDirections.BasedOnOwnerPosition;
 			_damageOnTouch.DamageCausedKnockbackType = Knockback;
 			_damageOnTouch.DamageCausedKnockbackForce = KnockbackForce;
+			_damageOnTouch.DamageCausedKnockbackDirection = KnockbackDirection;
 			_damageOnTouch.InvincibilityDuration = InvincibilityDuration;
 			_damageOnTouch.HitDamageableFeedback = HitDamageableFeedback;
 			_damageOnTouch.HitNonDamageableFeedback = HitNonDamageableFeedback;

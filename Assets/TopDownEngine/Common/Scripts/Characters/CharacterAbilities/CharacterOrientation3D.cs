@@ -183,6 +183,11 @@ namespace MoreMountains.TopDownEngine
 		{
 			base.ProcessAbility();
 
+			if (_condition.CurrentState != CharacterStates.CharacterConditions.Normal)
+			{
+				return;
+			}
+
 			if ((MovementRotatingModel == null) && (WeaponRotatingModel == null))
 			{
 				return;

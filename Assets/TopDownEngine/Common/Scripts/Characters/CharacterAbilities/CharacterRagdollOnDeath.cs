@@ -32,9 +32,16 @@ namespace MoreMountains.TopDownEngine
 		[MMInspectorButton("Ragdoll")]
 		[Tooltip("A test button to trigger the ragdoll from the inspector")]
 		public bool RagdollButton;
+		/// A test button to reset the ragdoll from the inspector
+		[MMInspectorButton("ResetRagdoll")]
+		[Tooltip("A test button to reset the ragdoll from the inspector")]
+		public bool ResetRagdollButton;
         
 		protected TopDownController _controller;
 		protected Health _health;
+		protected Transform _initialParent;
+		protected Vector3 _initialPosition;
+		protected Quaternion _initialRotation;
         
 		/// <summary>
 		/// On Awake we initialize our component
@@ -51,6 +58,9 @@ namespace MoreMountains.TopDownEngine
 		{
 			_health = this.gameObject.GetComponent<Health>();
 			_controller = this.gameObject.GetComponent<TopDownController>();
+			_initialParent = Ragdoller.transform.parent;
+			_initialPosition = Ragdoller.transform.localPosition;
+			_initialRotation = Ragdoller.transform.localRotation;
 		}
 
 		/// <summary>
@@ -59,6 +69,12 @@ namespace MoreMountains.TopDownEngine
 		protected virtual void OnDeath()
 		{
 			Ragdoll();
+		}
+
+		protected virtual void OnRevive()
+		{
+			this.transform.position = Ragdoller.GetPosition();
+			ResetRagdoll();
 		}
 
 		/// <summary>
@@ -79,6 +95,25 @@ namespace MoreMountains.TopDownEngine
 			Ragdoller.MainRigidbody.AddForce(_controller.AppliedImpact.normalized * ForceMultiplier, ForceMode.Acceleration);
 		}
 
+		public virtual void ResetRagdoll()
+		{
+			Ragdoller.AllowBlending = false;
+			
+			foreach (GameObject go in ObjectsToDisableOnDeath)
+			{
+				go.SetActive(true);
+			}
+			foreach (MonoBehaviour mono in MonosToDisableOnDeath)
+			{
+				mono.enabled = true;
+			}
+			
+			Ragdoller.transform.SetParent(_initialParent);
+			Ragdoller.Ragdolling = false;
+			Ragdoller.transform.localPosition = _initialPosition;
+			Ragdoller.transform.localRotation = _initialRotation;
+		}
+
 		/// <summary>
 		/// On enable we start listening to OnDeath events
 		/// </summary>
@@ -87,6 +122,7 @@ namespace MoreMountains.TopDownEngine
 			if (_health != null)
 			{
 				_health.OnDeath += OnDeath;
+				_health.OnRevive += OnRevive;
 			}
 		}
         
@@ -98,6 +134,7 @@ namespace MoreMountains.TopDownEngine
 			if (_health != null)
 			{
 				_health.OnDeath -= OnDeath;
+				_health.OnRevive -= OnRevive;
 			}
 		}
 	}

@@ -163,6 +163,7 @@ namespace MoreMountains.TopDownEngine
         
 		public float LastDamage { get; set; }
 		public Vector3 LastDamageDirection { get; set; }
+		public bool Initialized => _initialized;
 
 		// hit delegate
 		public delegate void OnHitDelegate();
@@ -353,7 +354,14 @@ namespace MoreMountains.TopDownEngine
 			}
 			else
 			{
-				CurrentHealth = MasterHealth.CurrentHealth;
+				if (MasterHealth.Initialized)
+				{
+					SetHealth(MasterHealth.CurrentHealth);
+				}
+				else
+				{
+					SetHealth(MasterHealth.InitialHealth);
+				}
 			}
 		}
 
@@ -703,7 +711,7 @@ namespace MoreMountains.TopDownEngine
 		/// <param name="knockbackForce"></param>
 		/// <param name="typedDamages"></param>
 		/// <returns></returns>
-		public virtual Vector2 ComputeKnockbackForce(Vector3 knockbackForce, List<TypedDamage> typedDamages = null)
+		public virtual Vector3 ComputeKnockbackForce(Vector3 knockbackForce, List<TypedDamage> typedDamages = null)
 		{
 			return (TargetDamageResistanceProcessor == null) ? knockbackForce : TargetDamageResistanceProcessor.ProcessKnockbackForce(knockbackForce, typedDamages);;
 

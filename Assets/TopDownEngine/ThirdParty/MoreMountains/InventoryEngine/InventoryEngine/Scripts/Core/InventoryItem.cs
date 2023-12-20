@@ -223,12 +223,17 @@ namespace MoreMountains.InventoryEngine
 				if (Prefab!=null && TargetInventory(playerID).TargetTransform!=null)
 				{
 					GameObject droppedObject=(GameObject)Instantiate(Prefab);
-					if (droppedObject.GetComponent<ItemPicker>()!=null)
+					if (droppedObject.GetComponent<ItemPicker>() != null)
 					{
 						if (ForcePrefabDropQuantity)
 						{
 							droppedObject.GetComponent<ItemPicker>().Quantity = PrefabDropQuantity;
 							droppedObject.GetComponent<ItemPicker>().RemainingQuantity = PrefabDropQuantity;	
+						}
+						else
+						{
+							droppedObject.GetComponent<ItemPicker>().Quantity = Quantity;
+							droppedObject.GetComponent<ItemPicker>().RemainingQuantity = Quantity;	
 						}
 					}
 

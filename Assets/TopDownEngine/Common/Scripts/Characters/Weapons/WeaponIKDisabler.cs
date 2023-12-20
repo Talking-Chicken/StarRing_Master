@@ -12,20 +12,32 @@ namespace MoreMountains.TopDownEngine
 	public class WeaponIKDisabler : TopDownMonoBehaviour
 	{
 		[Header("Animation Parameter Names")] 
-		/// a list of animation parameter names which, if true, should cause IK to be disabled 
+		/// a list of animation parameter names which, if true, should cause IK to be disabled
+		[Tooltip("a list of animation parameter names which, if true, should cause IK to be disabled")]
 		public List<string> AnimationParametersPreventingIK;
         
 		[Header("Attachments")]
 		/// the WeaponAttachment transform to reparent
+		[Tooltip("the WeaponAttachment transform to reparent")]
 		public Transform WeaponAttachment;
 		/// the transform the WeaponAttachment will be reparented to when certain animation parameters are true
+		[Tooltip("the transform the WeaponAttachment will be reparented to when certain animation parameters are true")]
 		public Transform WeaponAttachmentParentNoIK;
+
+		[Header("Settings")]
+		/// whether or not to match parent position when disabling IK
+		[Tooltip("whether or not to match parent position when disabling IK")]
+		public bool FollowParentPosition = false;
+		/// whether or not to disable weapon aim when disabling IK
+		[Tooltip("whether or not to disable weapon aim when disabling IK")]
+		public bool ControlWeaponAim = false;
 
 		protected Transform _initialParent;
 		protected Vector3 _initialLocalPosition;
 		protected Vector3 _initialLocalScale;
 		protected Quaternion _initialRotation;
 		protected WeaponIK _weaponIK;
+		protected WeaponAim _weaponAim;
 		protected Animator _animator;
 		protected List<int> _animationParametersHashes;
 		protected bool _shouldSetIKLast = true;
@@ -43,6 +55,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void Initialization()
 		{
+			_weaponAim = this.gameObject.GetComponent<WeaponAim>();
 			_weaponIK = this.gameObject.GetComponent<WeaponIK>();
 			_animator = this.gameObject.GetComponent<Animator>();
 			_animationParametersHashes = new List<int>();
@@ -106,6 +119,15 @@ namespace MoreMountains.TopDownEngine
 				_weaponIK.AttachLeftHand = false;
 				_weaponIK.AttachRightHand = false;
 				WeaponAttachment.transform.SetParent(WeaponAttachmentParentNoIK);
+
+				if (FollowParentPosition)
+				{
+					WeaponAttachment.transform.localPosition = Vector3.zero;
+					WeaponAttachment.transform.localScale = WeaponAttachmentParentNoIK.transform.localScale;
+					WeaponAttachment.transform.localRotation = Quaternion.identity;	
+				}
+				
+				EnableWeaponAim(false);
 			}
 			else
 			{
@@ -116,7 +138,23 @@ namespace MoreMountains.TopDownEngine
 				WeaponAttachment.transform.localPosition = _initialLocalPosition;
 				WeaponAttachment.transform.localScale = _initialLocalScale;
 				WeaponAttachment.transform.localRotation = _initialRotation;
+
+				EnableWeaponAim(true);
 			}
+		}
+
+		/// <summary>
+		/// Enables or disables weapon aim based on the specified status
+		/// </summary>
+		/// <param name="status"></param>
+		protected virtual void EnableWeaponAim(bool status)
+		{
+			if (!ControlWeaponAim)
+			{
+				return;
+			}
+
+			_weaponAim.enabled = status;
 		}
 	}
 }

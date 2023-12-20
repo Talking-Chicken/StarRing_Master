@@ -1,5 +1,6 @@
 {
     "name": "MoreMountains.TopDownEngine",
+    "rootNamespace": "",
     "references": [
         "GUID:4a1cb1490dc4df8409b2580d6b44e75e",
         "GUID:8087d854c1f812e4b9a74437dfc524e0",
@@ -9,7 +10,8 @@
         "GUID:d60799ab2a985554ea1a39cd38695018",
         "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:ba880a3c55a41254a91d85dd28666dda",
-        "GUID:1dbcca72f42070548a895178556c5bc3"
+        "GUID:1dbcca72f42070548a895178556c5bc3",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -33,6 +35,11 @@
             "name": "com.unity.postprocessing",
             "expression": "1.0.0",
             "define": "MM_POSTPROCESSING"
+        },
+        {
+            "name": "com.unity.textmeshpro",
+            "expression": "1.0.0",
+            "define": "MM_TEXTMESHPRO"
         }
     ],
     "noEngineReferences": false

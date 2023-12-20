@@ -39,6 +39,7 @@ namespace MoreMountains.TopDownEngine
 		protected Vector3 _initialScale;
 		protected MMPath _mmPath;
 		protected float _lastObstacleDetectionTimestamp = 0f;
+		protected float _lastPatrolPointReachedAt = 0f;
 
 		protected int _currentIndex = 0;
 		protected int _indexLastFrame = -1;
@@ -73,6 +74,7 @@ namespace MoreMountains.TopDownEngine
 			_indexLastFrame = -1;
 			_waitingDelay = 0;
 			_initialized = true;
+			_lastPatrolPointReachedAt = Time.time;
 		}
 
 
@@ -89,8 +91,6 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void Patrol()
 		{
-			_waitingDelay -= Time.deltaTime;
-
 			if (_character == null)
 			{
 				return;
@@ -101,7 +101,7 @@ namespace MoreMountains.TopDownEngine
 				return;
 			}
 
-			if (_waitingDelay > 0)
+			if (Time.time - _lastPatrolPointReachedAt < _waitingDelay)
 			{
 				_characterMovement.SetHorizontalMovement(0f);
 				_characterMovement.SetVerticalMovement(0f);
@@ -115,7 +115,8 @@ namespace MoreMountains.TopDownEngine
 			if (_currentIndex != _indexLastFrame)
 			{
 				LastReachedPatrolPoint = _mmPath.CurrentPoint();
-				_waitingDelay = _mmPath.PathElements[_currentIndex].Delay;
+				_lastPatrolPointReachedAt = Time.time;
+				DetermineDelay();
 			}
 
 			_direction = _mmPath.CurrentPoint() - this.transform.position;
@@ -125,6 +126,21 @@ namespace MoreMountains.TopDownEngine
 			_characterMovement.SetVerticalMovement(_direction.y);
 
 			_indexLastFrame = _currentIndex;
+		}
+
+		protected virtual void DetermineDelay()
+		{
+			if ( (_mmPath.Direction > 0 && (_currentIndex == 0))
+			     || (_mmPath.Direction < 0) && (_currentIndex == _mmPath.PathElements.Count - 1))
+			{
+				int previousPathIndex = _mmPath.Direction > 0 ? _mmPath.PathElements.Count - 1 : 1;
+				_waitingDelay = _mmPath.PathElements[previousPathIndex].Delay;
+			}
+			else 
+			{
+				int previousPathIndex = _mmPath.Direction > 0 ? _currentIndex - 1 : _currentIndex + 1;
+				_waitingDelay = _mmPath.PathElements[previousPathIndex].Delay; 
+			}
 		}
 
 		/// <summary>
@@ -183,6 +199,16 @@ namespace MoreMountains.TopDownEngine
 		{
 			_direction = -_direction;
 			_mmPath.ChangeDirection();
+		}
+
+		/// <summary>
+		/// Resets the position of the patrol agent to the start of the path, reinitializes the path
+		/// </summary>
+		public void ResetPatrol()
+		{
+			this.transform.position = _startPosition;
+			_mmPath.Initialization();
+			InitializePatrol();
 		}
         
 		/// <summary>

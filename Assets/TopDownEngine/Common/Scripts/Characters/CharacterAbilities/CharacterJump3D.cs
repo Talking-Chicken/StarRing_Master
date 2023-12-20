@@ -75,6 +75,7 @@ namespace MoreMountains.TopDownEngine
 		{
 			base.Initialization ();
 			ResetNumberOfJumps();
+			_jumpStopped = true;
 			_characterButtonActivation = _character?.FindAbility<CharacterButtonActivation> ();
 			_characterCrouch = _character?.FindAbility<CharacterCrouch> ();
 			JumpStartFeedback?.Initialization(this.gameObject);

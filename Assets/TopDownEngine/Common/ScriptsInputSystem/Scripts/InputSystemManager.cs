@@ -56,6 +56,11 @@ namespace MoreMountains.TopDownEngine
         /// <param name="imButton"></param>
         protected virtual void BindButton(InputAction.CallbackContext context, MMInput.IMButton imButton)
         {
+            if (!InputDetectionActive)
+            {
+                return;
+            }
+        
             var control = context.control;
 
             if (control is ButtonControl button)

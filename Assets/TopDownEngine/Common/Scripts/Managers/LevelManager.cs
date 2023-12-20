@@ -111,6 +111,15 @@ namespace MoreMountains.TopDownEngine
 		protected Vector3 _initialSpawnPointPosition;
 		
 		/// <summary>
+		/// Statics initialization to support enter play modes
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			_instance = null;
+		}
+		
+		/// <summary>
 		/// On awake, instantiates the player
 		/// </summary>
 		protected override void Awake()
@@ -242,7 +251,7 @@ namespace MoreMountains.TopDownEngine
 		protected virtual void CheckpointAssignment()
 		{
 			// we get all respawnable objects in the scene and attribute them to their corresponding checkpoint
-			IEnumerable<Respawnable> listeners = FindObjectsOfType<MonoBehaviour>().OfType<Respawnable>();
+			IEnumerable<Respawnable> listeners = FindObjectsOfType<MonoBehaviour>(true).OfType<Respawnable>();
 			AutoRespawn autoRespawn;
 			foreach (Respawnable listener in listeners)
 			{

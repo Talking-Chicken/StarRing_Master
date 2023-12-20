@@ -21,6 +21,9 @@ namespace MoreMountains.TopDownEngine
 		/// the aim control mode
 		[Tooltip("the selected aim control mode")]
 		public AimControls AimControl = AimControls.SecondaryMovement;
+		/// if this is true, this script will be able to read input from its specified AimControl mode
+		[Tooltip("if this is true, this script will be able to read input from its specified AimControl mode")]
+		public bool AimControlActive = true;
 
 		[Header("Weapon Rotation")]
 		[MMInformation("Here you can define whether the rotation is free, strict in 4 directions (top, bottom, left, right), or 8 directions (same + diagonals). You can also define a rotation speed, and a min and max angle. For example, if you don't want your character to be able to aim in its back, set min angle to -90 and max angle to 90.", MoreMountains.Tools.MMInformationAttribute.InformationType.Info, false)]
@@ -64,7 +67,7 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("if set to true, the reticle will be placed at the mouse's position (like a pointer)")]
 		public bool ReticleAtMousePosition;
 		/// if set to true, the reticle will rotate on itself to reflect the weapon's rotation. If not it'll remain stable.
-		[MMEnumCondition("ReticleType", (int)ReticleTypes.Scene, (int)ReticleTypes.UI)]
+		[MMEnumCondition("ReticleType", (int)ReticleTypes.Scene)]
 		[Tooltip("if set to true, the reticle will rotate on itself to reflect the weapon's rotation. If not it'll remain stable.")]
 		public bool RotateReticle = false;
 		/// if set to true, the reticle will replace the mouse pointer
@@ -121,6 +124,8 @@ namespace MoreMountains.TopDownEngine
 				return 0;
 			}
 		}
+
+		public virtual Weapon TargetWeapon => _weapon;
         
 		protected Camera _mainCamera;
 		protected Vector2 _lastNonNullMovement;

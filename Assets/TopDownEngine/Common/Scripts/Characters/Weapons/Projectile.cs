@@ -273,7 +273,6 @@ namespace MoreMountains.TopDownEngine
 			if (damageOnTouch != null)
 			{
 				damageOnTouch.Owner = newOwner;
-				damageOnTouch.Owner = newOwner;
 				if (!DamageOwner)
 				{
 					damageOnTouch.ClearIgnoreList();
