@@ -18,13 +18,25 @@ public static class SaveManager
         }
         return saveData.conditions;
     }
+    public static List<MindPalaceNodeData> GetMindPalaceNodes()
+    {
+        if (saveData == null)
+        {
+            LoadSaveFile();
+        }
+        return saveData.mindPalaceNodes;
+    }
     public static void SaveConditions(List<Condition> conditions)
     {
         saveData.conditions = conditions;
         Debug.Log(conditions[0].name);
         SaveFile();
     }
-
+    public static void SaveMindPalace(List<MindPalaceNodeData> mindPalaceNodes)
+    {
+        saveData.mindPalaceNodes = mindPalaceNodes;
+        SaveFile();
+    }
     public static void SaveFile()
     {
         // Serialize the object into JSON and save string.
@@ -85,6 +97,7 @@ public static class SaveManager
 public class SaveData
 {
     [JsonProperty] public List<Condition> conditions;
+    [JsonProperty] public List<MindPalaceNodeData> mindPalaceNodes;
     public SaveData(List<Condition> conditions)
     {
         this.conditions = conditions;
