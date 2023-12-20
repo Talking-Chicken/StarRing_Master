@@ -168,7 +168,7 @@ namespace MoreMountains.TopDownEngine
 			if (_weapon.MagazineBased)
 			{
 				int counter = 0;
-				int stock = CurrentAmmoAvailable - _weapon.CurrentAmmoLoaded;
+				int stock = CurrentAmmoAvailable;
                 
 				for (int i = _weapon.CurrentAmmoLoaded; i < _weapon.MagazineSize; i++)
 				{
@@ -314,7 +314,7 @@ namespace MoreMountains.TopDownEngine
 		{
 			this.MMEventStopListening<MMStateChangeEvent<MoreMountains.TopDownEngine.Weapon.WeaponStates>>();
 			this.MMEventStopListening<MMInventoryEvent> ();
-			this.MMEventStartListening<MMGameEvent>();
+			this.MMEventStopListening<MMGameEvent>();
 		}
 	}
 }

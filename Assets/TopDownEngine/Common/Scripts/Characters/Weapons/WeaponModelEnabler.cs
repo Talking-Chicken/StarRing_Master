@@ -23,14 +23,17 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("a list of model bindings. A binding is made of a gameobject, already present on the character, that will act as the visual representation of the weapon, and a name, that has to match the WeaponAnimationID of the actual Weapon")]
 		public WeaponModelBindings[] Bindings;
 
-		protected CharacterHandleWeapon _characterHandleWeapon;
+		public CharacterHandleWeapon HandleWeapon;
 
 		/// <summary>
 		/// On Awake we grab our CharacterHandleWeapon component
 		/// </summary>
 		protected virtual void Awake()
 		{
-			_characterHandleWeapon = this.gameObject.GetComponent<CharacterHandleWeapon>();
+			if (HandleWeapon == null)
+			{
+				HandleWeapon = this.gameObject.GetComponent<CharacterHandleWeapon>();	
+			}
 		}
 
 		/// <summary>
@@ -43,12 +46,12 @@ namespace MoreMountains.TopDownEngine
 				return;
 			}
 
-			if (_characterHandleWeapon == null)
+			if (HandleWeapon == null)
 			{
 				return;
 			}
 
-			if (_characterHandleWeapon.CurrentWeapon == null)
+			if (HandleWeapon.CurrentWeapon == null)
 			{
 				foreach (WeaponModelBindings binding in Bindings)
 				{
@@ -59,7 +62,7 @@ namespace MoreMountains.TopDownEngine
 
 			foreach (WeaponModelBindings binding in Bindings)
 			{
-				if (binding.WeaponAnimationID == _characterHandleWeapon.CurrentWeapon.WeaponAnimationID)
+				if (binding.WeaponAnimationID == HandleWeapon.CurrentWeapon.WeaponAnimationID)
 				{
 					binding.WeaponModel.SetActive(true);
 				}

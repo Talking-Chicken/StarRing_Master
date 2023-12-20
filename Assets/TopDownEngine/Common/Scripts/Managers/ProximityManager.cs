@@ -41,6 +41,15 @@ namespace MoreMountains.TopDownEngine
         public float EvaluationFrequency = 0.5f;
 
         protected float _lastEvaluationAt = 0f;
+        
+        /// <summary>
+        /// Statics initialization to support enter play modes
+        /// </summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        protected static void InitializeStatics()
+        {
+            _instance = null;
+        }
 
         /// <summary>
         /// On start we grab our controlled objects

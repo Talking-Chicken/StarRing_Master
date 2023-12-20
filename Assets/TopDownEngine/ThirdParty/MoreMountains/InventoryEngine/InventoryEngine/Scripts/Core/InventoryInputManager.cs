@@ -475,16 +475,7 @@ namespace MoreMountains.InventoryEngine
 			// if the user presses the 'toggle inventory' key
 			if (_toggleInventoryKeyPressed)
 			{
-				// if the inventory is not open
-				if (!InventoryIsOpen)
-				{
-					OpenInventory();
-				}
-				// if it's open
-				else
-				{
-					CloseInventory();
-				}
+				ToggleInventory();
 			}
 
 			if (_openInventoryKeyPressed)

@@ -540,10 +540,14 @@ namespace MoreMountains.TopDownEngine
 			}
 			foreach (WeaponModel model in _weaponModels)
 			{
-				model.Hide();
+				if (model.Owner == this)
+				{
+					model.Hide();	
+				}
+				
 				if (model.WeaponID == weaponID)
 				{
-					model.Show();
+					model.Show(this);
 					if (model.UseIK)
 					{
 						_weaponIK.SetHandles(model.LeftHandHandle, model.RightHandHandle);

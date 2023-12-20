@@ -42,7 +42,8 @@ namespace MoreMountains.TopDownEngine
 		CharacterSwitch,
 		Repaint,
 		TogglePause,
-		LoadNextScene
+		LoadNextScene,
+		PauseNoMenu
 	}
 
 	/// <summary>
@@ -522,9 +523,11 @@ namespace MoreMountains.TopDownEngine
 				case TopDownEngineEventTypes.Pause:
 					Pause ();
 					break;
-
 				case TopDownEngineEventTypes.UnPause:
 					UnPause ();
+					break;
+				case TopDownEngineEventTypes.PauseNoMenu:
+					Pause(PauseMethods.NoPauseMenu, false);
 					break;
 			}
 		}

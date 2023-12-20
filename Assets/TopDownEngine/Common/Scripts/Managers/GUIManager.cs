@@ -53,6 +53,15 @@ namespace MoreMountains.TopDownEngine
 		protected float _initialJoystickAlpha;
 		protected float _initialButtonsAlpha;
 		protected bool _initialized = false;
+		
+		/// <summary>
+		/// Statics initialization to support enter play modes
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			_instance = null;
+		}
 
 		/// <summary>
 		/// Initialization

@@ -37,5 +37,40 @@ namespace MoreMountains.TopDownEngine
 				_rigidBody2D.AddForce(newDirection * InitialForce, InitialForceMode2D);
 			}
 		}
+		
+		/// <summary>
+		/// Sets the associated rb or rb2D to kinematic or not depending on the state
+		/// </summary>
+		/// <param name="state"></param>
+		protected virtual void SetRigidbody(bool state)
+		{
+			if (_rigidBody != null)
+			{
+				_rigidBody.isKinematic = state;
+			}
+
+			if (_rigidBody2D != null)
+			{
+				_rigidBody2D.isKinematic = state;
+			}
+		}
+		
+		/// <summary>
+		/// On enable, we force our rb to not be kinematic
+		/// </summary>
+		protected override void OnEnable()
+		{
+			base.OnEnable();
+			SetRigidbody(false);
+		}
+
+		/// <summary>
+		/// On disable, we force our rb to be kinematic to kill any remaining velocity
+		/// </summary>
+		protected override void OnDisable()
+		{
+			base.OnDisable();
+			SetRigidbody(true);
+		}
 	}	
 }

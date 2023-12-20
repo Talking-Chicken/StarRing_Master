@@ -10,6 +10,15 @@ namespace MoreMountains.InventoryEngine
 	public class InventoryDemoGameManager : MMSingleton<InventoryDemoGameManager> 
 	{
 		public InventoryDemoCharacter Player { get; protected set; }
+		
+		/// <summary>
+		/// Statics initialization to support enter play modes
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			_instance = null;
+		}
 
 		protected override void Awake () 
 		{

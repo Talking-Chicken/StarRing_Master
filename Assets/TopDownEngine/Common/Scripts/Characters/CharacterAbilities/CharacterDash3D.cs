@@ -98,6 +98,12 @@ namespace MoreMountains.TopDownEngine
 			_mainCamera = Camera.main;
 			Cooldown.Initialization();
 			DashFeedback?.Initialization(this.gameObject);
+
+			if (GUIManager.HasInstance && _character.CharacterType == Character.CharacterTypes.Player)
+			{
+				GUIManager.Instance.SetDashBar(true, _character.PlayerID);
+				UpdateDashBar();
+			}
 		}
 
 		/// <summary>
@@ -231,6 +237,7 @@ namespace MoreMountains.TopDownEngine
 		{
 			base.ProcessAbility();
 			Cooldown.Update();
+			UpdateDashBar();
 
 			if (_dashing)
 			{
@@ -255,6 +262,17 @@ namespace MoreMountains.TopDownEngine
 				{
 					DashStop();                   
 				}
+			}
+		}
+
+		/// <summary>
+		/// Updates the GUI jetpack bar.
+		/// </summary>
+		protected virtual void UpdateDashBar()
+		{
+			if ((GUIManager.HasInstance) && (_character.CharacterType == Character.CharacterTypes.Player))
+			{
+				GUIManager.Instance.UpdateDashBars(Cooldown.CurrentDurationLeft, 0f, Cooldown.ConsumptionDuration, _character.PlayerID);
 			}
 		}
         

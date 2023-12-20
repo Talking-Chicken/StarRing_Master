@@ -129,6 +129,15 @@ namespace MoreMountains.TopDownEngine
 		protected string _axisCamera;
 		
 		/// <summary>
+		/// Statics initialization to support enter play modes
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			_instance = null;
+		}
+		
+		/// <summary>
 		/// On Awake we run our pre-initialization
 		/// </summary>
 		protected override void Awake()
@@ -477,6 +486,11 @@ namespace MoreMountains.TopDownEngine
 		/// <returns></returns>
 		public virtual Vector2 ApplyCameraRotation(Vector2 input)
 		{
+			if (!InputDetectionActive)
+			{
+				return Vector2.zero;
+			}
+			
 			if (RotateInputBasedOnCameraDirection)
 			{
 				if (_camera3D)
@@ -504,10 +518,19 @@ namespace MoreMountains.TopDownEngine
 		{
 			if (!hasFocus && ResetButtonStatesOnFocusLoss && (ButtonList != null))
 			{
-				foreach (MMInput.IMButton button in ButtonList)
-				{
-					button.State.ChangeState(MMInput.ButtonStates.ButtonUp);
-				}
+				ForceAllButtonStatesTo(MMInput.ButtonStates.ButtonUp);
+			}
+		}
+
+		/// <summary>
+		/// Lets you force the state of all buttons in the InputManager to the one specified in parameters
+		/// </summary>
+		/// <param name="newState"></param>
+		public virtual void ForceAllButtonStatesTo(MMInput.ButtonStates newState)
+		{
+			foreach (MMInput.IMButton button in ButtonList)
+			{
+				button.State.ChangeState(newState);
 			}
 		}
 

@@ -61,6 +61,10 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("the speed at which to move the camera target")]
 		[MMCondition("MoveCameraTarget", true)]
 		public float CameraTargetSpeed = 5f;
+		/// if this is true, the camera target will move back to the character if no target is found
+		[Tooltip("if this is true, the camera target will move back to the character if no target is found")]
+		[MMCondition("MoveCameraTarget", true)]
+		public bool MoveCameraToCharacterIfNoTarget = false;
 
 		[Header("Aim Marker")]
 		/// An AimMarker prefab to use to show where this auto aim weapon is aiming
@@ -258,12 +262,27 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void HandleMoveCameraTarget()
 		{
-			if (!MoveCameraTarget || (Target == null) || (_isOwnerNull))
+			bool targetIsNull = (Target == null);
+			
+			if (!MoveCameraTarget || (_isOwnerNull))
 			{
 				return;
 			}
-            
-			_newCamTargetPosition = Vector3.Lerp(_weapon.Owner.transform.position, Target.transform.position, CameraTargetDistance);
+
+			if (!MoveCameraToCharacterIfNoTarget && targetIsNull)
+			{
+				return;
+			}
+
+			if (targetIsNull)
+			{
+				_newCamTargetPosition = _weapon.Owner.transform.position;
+			}
+			else
+			{
+				_newCamTargetPosition = Vector3.Lerp(_weapon.Owner.transform.position, Target.transform.position, CameraTargetDistance);	
+			}
+			
 			_newCamTargetDirection = _newCamTargetPosition - this.transform.position;
             
 			if (_newCamTargetDirection.magnitude > CameraTargetMaxDistance)
