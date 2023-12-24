@@ -4,11 +4,14 @@ using UnityEngine;
 using Yarn.Unity;
 using UnityEngine.AI;
 using MoreMountains.TopDownEngine;
+using MoreMountains.Feedbacks;
+
 
 public class YarnCommandManager : MonoBehaviour
 {
     CharacterPathfinder3D characterAgent;
     Animator characterAnimator;
+  
     [YarnCommand("walk")]
     public void Walk(Transform destination,GameObject character)
     {
@@ -28,4 +31,20 @@ public class YarnCommandManager : MonoBehaviour
     {
         character.transform.LookAt(destination,Vector3.up);
     }
+    [YarnCommand("nodeStatus")]
+    public void NodeStatus(string nodeName)
+    {
+        MindPalaceManager.activeManager.GetNodeActive(nodeName);
+    }
+    [YarnCommand("activeNode")]
+    public void ActiveNode(string nodeName)
+    {
+        MindPalaceManager.activeManager.ActiveNode(nodeName);
+    }
+    [YarnCommand("feedbackPlayer")]
+    public void FeedbackPlayer(MMF_Player feedback)
+    {
+        feedback.PlayFeedbacks(); 
+    }
+
 }
