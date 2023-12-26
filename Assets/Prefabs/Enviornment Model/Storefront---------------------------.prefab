@@ -1024,10 +1024,11 @@ MonoBehaviour:
   isInteractable: 1
   outlineMats:
   - {fileID: 2100000, guid: dcc9d4bf3e0039f498b3e7fee4b75291, type: 2}
+  requiresUpdate: 1
+  interactPositions: []
   _interactListener: {fileID: 11400000, guid: 9302606ea93006445889c8c61b44dbef, type: 2}
   _dialogueListener: {fileID: 11400000, guid: eced2cca1e7cba44bb7b4277bc19a23c, type: 2}
-  interactPosition: {fileID: 8830233288782025836}
-  delayStartInteract: 1
+  _playerListener: {fileID: 11400000, guid: 415612b2e21bad044bfbcf7096102658, type: 2}
 --- !u!65 &8798473955135884309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2489,9 +2490,11 @@ MonoBehaviour:
   outlineMats:
   - {fileID: 2100000, guid: 5390c4c269d6ea94c88c41e49f813629, type: 2}
   - {fileID: 2100000, guid: 8f0d1cb508aaa8f44b38f56e376f1458, type: 2}
-  _interactListener: {fileID: 0}
-  _dialogueListener: {fileID: 0}
-  isChangingToInteractState: 1
+  requiresUpdate: 0
+  interactPositions: []
+  _interactListener: {fileID: 11400000, guid: 9302606ea93006445889c8c61b44dbef, type: 2}
+  _dialogueListener: {fileID: 11400000, guid: eced2cca1e7cba44bb7b4277bc19a23c, type: 2}
+  _playerListener: {fileID: 11400000, guid: 415612b2e21bad044bfbcf7096102658, type: 2}
   interactPosition: {fileID: 1730119113894650978}
   delayStartInteract: 0.8
   wall: {fileID: 7578314726206501849}
@@ -4770,6 +4773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
+  AutoInitialization: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -4848,7 +4852,7 @@ MonoBehaviour:
   - rid: 3263165104282664966
   KeepPlayModeChanges: 0
   PerformanceMode: 0
-  ForceStopFeedbacksOnDisable: 1
+  StopFeedbacksOnDisable: 0
   PlayCount: 0
   references:
     version: 2
@@ -5008,6 +5012,7 @@ MonoBehaviour:
         Mode: 1
         Duration: 0.2
         StartsOff: 0
+        EndsOff: 0
         RelativeValues: 0
         AllowAdditivePlays: 0
         DisableOnStop: 0
@@ -20134,9 +20139,11 @@ MonoBehaviour:
   isInteractable: 1
   outlineMats:
   - {fileID: 2100000, guid: 15d19060122534b4eb03c832e04ba6fe, type: 2}
+  requiresUpdate: 0
+  interactPositions: []
   _interactListener: {fileID: 11400000, guid: 9302606ea93006445889c8c61b44dbef, type: 2}
   _dialogueListener: {fileID: 0}
-  isChangingToInteractState: 0
+  _playerListener: {fileID: 0}
   interactPosition: {fileID: 2662229929216376495}
   delayStartInteract: 0.2
 --- !u!1 &5535063950287903996
@@ -32403,6 +32410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
+  AutoInitialization: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -32481,7 +32489,7 @@ MonoBehaviour:
   - rid: 3263165104282664965
   KeepPlayModeChanges: 0
   PerformanceMode: 0
-  ForceStopFeedbacksOnDisable: 1
+  StopFeedbacksOnDisable: 0
   PlayCount: 15
   references:
     version: 2
@@ -32642,6 +32650,7 @@ MonoBehaviour:
         Mode: 1
         Duration: 0.2
         StartsOff: 0
+        EndsOff: 0
         RelativeValues: 0
         AllowAdditivePlays: 0
         DisableOnStop: 0

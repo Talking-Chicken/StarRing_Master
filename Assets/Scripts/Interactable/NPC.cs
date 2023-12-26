@@ -7,6 +7,7 @@ using Yarn.Unity;
 public class NPC : Interactable, ITalkable
 {
     [SerializeField, BoxGroup("Dialogue")] private string startNodeBase;
+    [SerializeField, BoxGroup("Dialogue")] private string startNode;
     [ShowNonSerializedField, BoxGroup("Dialogue")] private Dictionary<string,int> interactCount = new Dictionary<string, int>();
     [SerializeField, BoxGroup("Dialogue")] private List<Transform> talkingPositions;
     [SerializeField, BoxGroup("Dialogue")] private List<TalkingSetting> talkingSettings;
@@ -15,52 +16,31 @@ public class NPC : Interactable, ITalkable
     public string StartNodeBase {get=>startNodeBase;set=>startNodeBase=value;}
     public List<Transform> TalkingPositions {get=>talkingPositions; private set=>talkingPositions=value;}
     public List<TalkingSetting> TalkingSettings {get=>talkingSettings; set=>talkingSettings=value;}
-
-    #region FSM
-    private NPCStateBase currentState;
-    public NPCStateBase previousState;
-    public NPCStateTransition stateTransition = new NPCStateTransition();
-    public NPCStateExecution stateExecution = new NPCStateExecution();
-
-    public void ChangeState(NPCStateBase newState)
-    {
-        if (currentState != newState) {
-            if (currentState != null)
-            {
-                currentState.LeaveState(this);
-            }
-
-            currentState = newState;
-
-            if (currentState != null)
-            {
-                currentState.EnterState(this);
-            }
-        }
-    }
-
-    public void ChangeToPreviousState() {
-        if (currentState != previousState) {
-            ChangeState(previousState);
-        }
-    }
-    #endregion
     
     protected override void Start() {
         base.Start();
-        currentState = stateExecution;
-        previousState = currentState;
     }
 
     // protected override void Update() {
     //     base.Update();
     //     // if (Input.GetKeyDown(KeyCode.G))
     //     //     Debug.Log(interactCount["Helmet_1"]);
-        
+
     //     currentState.UpdateState(this);
     // }
 
-    
+    public override void Interact(PlayerProperty player)
+    {
+        base.Interact(player);
+        StartDialogue(startNode);
+    }
+
+    protected override void OnDialogueCompleted()
+    {
+        base.OnDialogueCompleted();
+        print("DDDDDDDDDDDDDDDDDDDDD");
+        StopInteract();
+    }
 
     //ITalkable
     [YarnCommand("SetProgress")]

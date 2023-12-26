@@ -357,26 +357,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 6178190}
-    - target: {fileID: 4181697735865739522, guid: 21a82408f3d7b5445981dac260815b6e,
-        type: 3}
-      propertyPath: onCommand.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4181697735865739522, guid: 21a82408f3d7b5445981dac260815b6e,
-        type: 3}
-      propertyPath: onNodeStart.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4181697735865739522, guid: 21a82408f3d7b5445981dac260815b6e,
-        type: 3}
-      propertyPath: onNodeComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4181697735865739522, guid: 21a82408f3d7b5445981dac260815b6e,
-        type: 3}
-      propertyPath: onDialogueComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6942077849172735719, guid: 21a82408f3d7b5445981dac260815b6e,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -540,108 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &277159271
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 277159273}
-  - component: {fileID: 277159272}
-  - component: {fileID: 277159274}
-  m_Layer: 0
-  m_Name: CM vcam2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &277159272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277159271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ExcludedPropertiesInInspector:
-  - m_Script
-  m_LockStageInInspector: 
-  m_StreamingVersion: 20170927
-  m_Priority: 9
-  m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
-  m_Lens:
-    FieldOfView: 40
-    OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
-    Dutch: 0
-    ModeOverride: 0
-    LensShift: {x: 0, y: 0}
-    GateFit: 2
-    FocusDistance: 10
-    m_SensorSize: {x: 1, y: 1}
-  m_Transitions:
-    m_BlendHint: 0
-    m_InheritPosition: 0
-    m_OnCameraLive:
-      m_PersistentCalls:
-        m_Calls: []
-  m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 925146914}
---- !u!4 &277159273
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277159271}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.11721769, y: 0.8811883, z: -0.29440537, w: 0.3508457}
-  m_LocalPosition: {x: -1.14, y: 1.72, z: 1.99}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 925146914}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 36.949, y: 136.58, z: 0}
---- !u!114 &277159274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277159271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8650a79a9f5e38449718559d1d6a2f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimescaleMode: 0
-  ChannelMode: 0
-  Channel: 1
-  MMChannelDefinition: {fileID: 0}
---- !u!114 &288519317 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8999565601421814663, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
-    type: 3}
-  m_PrefabInstance: {fileID: 6056032193322642615}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!21 &294622856
+--- !u!21 &261467090
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -876,6 +755,107 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+--- !u!1 &277159271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 277159273}
+  - component: {fileID: 277159272}
+  - component: {fileID: 277159274}
+  m_Layer: 0
+  m_Name: CM vcam2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &277159272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277159271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 9
+  m_StandbyUpdate: 2
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
+  m_Lens:
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    LensShift: {x: 0, y: 0}
+    GateFit: 2
+    FocusDistance: 10
+    m_SensorSize: {x: 1, y: 1}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
+  m_ComponentOwner: {fileID: 925146914}
+--- !u!4 &277159273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277159271}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.11721769, y: 0.8811883, z: -0.29440537, w: 0.3508457}
+  m_LocalPosition: {x: -1.14, y: 1.72, z: 1.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 925146914}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 36.949, y: 136.58, z: 0}
+--- !u!114 &277159274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277159271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8650a79a9f5e38449718559d1d6a2f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimescaleMode: 0
+  ChannelMode: 0
+  Channel: 1
+  MMChannelDefinition: {fileID: 0}
+--- !u!114 &288519317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8999565601421814663, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6056032193322642615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &486015866
 Material:
   serializedVersion: 8
@@ -1506,7 +1486,9 @@ MonoBehaviour:
   interactPositions: []
   _interactListener: {fileID: 0}
   _dialogueListener: {fileID: 0}
+  _playerListener: {fileID: 0}
   startNodeBase: Helmet_1
+  startNode: 
   talkingPositions:
   - {fileID: 1987339579}
   talkingSettings: []
@@ -2047,6 +2029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
+  AutoInitialization: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -2128,7 +2111,7 @@ MonoBehaviour:
   - rid: 3263165060762304518
   KeepPlayModeChanges: 0
   PerformanceMode: 0
-  ForceStopFeedbacksOnDisable: 1
+  StopFeedbacksOnDisable: 0
   PlayCount: 0
   references:
     version: 2
@@ -2204,6 +2187,7 @@ MonoBehaviour:
         Mode: 0
         Duration: 0.2
         StartsOff: 0
+        EndsOff: 0
         RelativeValues: 0
         AllowAdditivePlays: 1
         DisableOnStop: 0
@@ -2310,6 +2294,7 @@ MonoBehaviour:
         Mode: 0
         Duration: 0.2
         StartsOff: 0
+        EndsOff: 0
         RelativeValues: 0
         AllowAdditivePlays: 0
         DisableOnStop: 0
@@ -6216,6 +6201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
+  AutoInitialization: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -6293,7 +6279,7 @@ MonoBehaviour:
   - rid: 3803215729809424386
   KeepPlayModeChanges: 0
   PerformanceMode: 0
-  ForceStopFeedbacksOnDisable: 1
+  StopFeedbacksOnDisable: 0
   PlayCount: 0
   references:
     version: 2
@@ -6575,7 +6561,7 @@ MonoBehaviour:
   normalStrength: 5
   normalSmoothing: 1
   computingNormal: 0
---- !u!21 &1562278178
+--- !u!21 &1670229199
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -7094,6 +7080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
+  AutoInitialization: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -7171,7 +7158,7 @@ MonoBehaviour:
   - rid: 3803215729809424389
   KeepPlayModeChanges: 0
   PerformanceMode: 0
-  ForceStopFeedbacksOnDisable: 1
+  StopFeedbacksOnDisable: 0
   PlayCount: 0
   references:
     version: 2
@@ -17044,6 +17031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
+  AutoInitialization: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -17125,7 +17113,7 @@ MonoBehaviour:
   - rid: 3263165108087947268
   KeepPlayModeChanges: 0
   PerformanceMode: 0
-  ForceStopFeedbacksOnDisable: 1
+  StopFeedbacksOnDisable: 0
   PlayCount: 0
   references:
     version: 2
@@ -17201,6 +17189,7 @@ MonoBehaviour:
         Mode: 0
         Duration: 0.2
         StartsOff: 0
+        EndsOff: 0
         RelativeValues: 0
         AllowAdditivePlays: 0
         DisableOnStop: 0
@@ -17307,6 +17296,7 @@ MonoBehaviour:
         Mode: 0
         Duration: 0.2
         StartsOff: 0
+        EndsOff: 0
         RelativeValues: 0
         AllowAdditivePlays: 0
         DisableOnStop: 0
@@ -17411,6 +17401,7 @@ MonoBehaviour:
         Owner: {fileID: 2124325562}
         DebugActive: 0
         TargetGameObject: {fileID: 93854479}
+        ExtraTargetGameObjects: []
         SetStateOnInit: 0
         StateOnInit: 1
         SetStateOnPlay: 1
@@ -17421,6 +17412,8 @@ MonoBehaviour:
         StateOnReset: 1
         SetStateOnSkip: 0
         StateOnSkip: 1
+        SetStateOnPlayerComplete: 0
+        StateOnPlayerComplete: 1
     - rid: 3263165108087947268
       type: {class: MMF_TMPTextReveal, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks.TextMeshPro}
       data:

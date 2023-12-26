@@ -48,7 +48,8 @@ public class PlayerManager : MonoBehaviour
     //UI general
     [ReadOnly, SerializeField, BoxGroup("UI General")] private UIManager _uiManager;
 
-    [SerializeField, BoxGroup("test")] private GameObject testObj;
+    [SerializeField, BoxGroup("Debug")] private GameObject testObj;
+    [SerializeField, BoxGroup("Debug"), ReadOnly] private string currentStateName;
     
     //feedbacks
     [SerializeField, Foldout("Feedbacks")] private MMF_Player openUIFeedback;
@@ -100,11 +101,11 @@ public class PlayerManager : MonoBehaviour
 
     #region Awake, Start, and Update...
     void OnEnable() {
-        _interactListener.stopInteract.AddListener(StopInteract);
+        _playerListener.stopInteract.AddListener(StopInteract);
     }
 
     void OnDisable() {
-        _interactListener.stopInteract.RemoveListener(StopInteract);
+        _playerListener.stopInteract.RemoveListener(StopInteract);
     }
 
     void Start()
@@ -161,6 +162,8 @@ public class PlayerManager : MonoBehaviour
                 WalkToNearestTalkPosition(TargetNPC);
         }
 
+        currentStateName = currentState.ToString();
+
         // print(Display.currentResolution);    
     }
     #endregion
@@ -177,23 +180,9 @@ public class PlayerManager : MonoBehaviour
     #region detect input
     public void DetectInputExploreState() {
         //detect interact
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetMouseButtonDown(0)) {
             if (HoveringInteractable != null) {
                 TargetInteractable = HoveringInteractable;
-                // switch (TargetInteractable.Type) {
-                //     case InteractableType.OBJ:
-                //         InteractableObj obj;
-                //         if (!targetInteractable.TryGetComponent(out obj))
-                //             return;
-                //         InteractionPosition = obj.InteractPosition;
-                //         WalkToInteractingPosition(obj.InteractPosition);
-                //         // (targetInteractable as InteractObj).Interact();
-                //         break;
-                //     case InteractableType.EXM:
-                //         break;
-                //     case InteractableType.NPC:
-                //         break;
-                // }
                 TargetInteractable.Interact(Property);
             }
         }
@@ -277,12 +266,16 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void StopInteract(Interactable interactable) {
-        if (targetInteractable == null)
-            return;
+        // if (TargetInteractable == null)
+        //     return;
         
-        ChangeState(stateExplore);
-        targetInteractable = null;
+        print("SSSSSSSSSSSSSSSSSSSSSSS");
+        TargetInteractable = null;
+        HoveringInteractable = null;
+        PreHoveringInteractable = null;
         InteractionPosition = null;
+        ChangeState(stateExplore);
+        
     }
 
     /// go to the interacting position

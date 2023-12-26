@@ -10,7 +10,7 @@ public class InteractableActionListener : ScriptableObject
     /// param: PlayerManager player, string target interactable name
     /// </summary>
     [System.NonSerialized]
-    public UnityEvent<PlayerManager, string> interact;
+    public UnityEvent<PlayerProperty, string> interact;
 
     /// <summary>
     /// param: Interactable target interactable
@@ -20,7 +20,7 @@ public class InteractableActionListener : ScriptableObject
 
     void OnEnable() {
         if (interact == null)
-            interact = new UnityEvent<PlayerManager, string>();
+            interact = new UnityEvent<PlayerProperty, string>();
         if (stopInteract == null)
             stopInteract = new UnityEvent<Interactable>();
     }

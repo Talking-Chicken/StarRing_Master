@@ -9,10 +9,22 @@ public class DialogueActionListener : ScriptableObject
     /// <summary>
     /// param: string start node name
     /// </summary>
-    [System.NonSerialized] public UnityEvent<string> startDialogue;
+    [System.NonSerialized] 
+    public UnityEvent<string> startDialogue;
+    [System.NonSerialized]
+    public UnityEvent nextLine;
+    /// <summary>
+    /// when dialogue has completed, this will be invoked
+    /// </summary>
+    [System.NonSerialized]
+    public UnityEvent dialogueCompleted;
 
     void OnEnable() {
         if (startDialogue == null)
             startDialogue = new UnityEvent<string>();
+        if (nextLine == null)
+            nextLine = new UnityEvent();
+        if (dialogueCompleted == null)
+            dialogueCompleted = new UnityEvent();
     }
 }

@@ -68,13 +68,16 @@ namespace TopDownEngineExtensions
             {
                 //custom codes
                 if (hitInfo.transform.gameObject.layer.Equals(23)) {
-                    NPC npc;
-                    hitInfo.transform.gameObject.TryGetComponent<NPC>(out npc);
-                    _player.TargetNPC = npc;
+                    // NPC npc;
+                    // hitInfo.transform.gameObject.TryGetComponent<NPC>(out npc);
+                    // _player.TargetNPC = npc;
 
-                    //start to walk to nearest position
-                    if (npc != null)
-                        _player.WalkToNearestTalkPosition(npc);
+                    // //start to walk to nearest position
+                    // if (npc != null)
+                    //     _player.WalkToNearestTalkPosition(npc);
+                    Interactable interactable;
+                    hitInfo.transform.gameObject.TryGetComponent<Interactable>(out interactable);
+                    // _player.TargetInteractable = interactable;
                 } else {
                     _brain.Target = hitInfo.transform; //not cus
                     _characterPathfinder3D.SetNewDestination(_brain.Target); //not cus

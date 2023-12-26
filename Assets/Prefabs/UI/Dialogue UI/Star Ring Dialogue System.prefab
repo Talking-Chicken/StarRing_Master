@@ -163,43 +163,19 @@ MonoBehaviour:
   verboseLogging: 1
   onNodeStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 71ff246aaf3515d419b5ec6db660db56, type: 2}
-        m_TargetAssemblyTypeName: DialogueListener, Assembly-CSharp
-        m_MethodName: StartNode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onNodeComplete:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 71ff246aaf3515d419b5ec6db660db56, type: 2}
-        m_TargetAssemblyTypeName: DialogueListener, Assembly-CSharp
-        m_MethodName: NodeComplete
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onDialogueStart:
     m_PersistentCalls:
       m_Calls: []
   onDialogueComplete:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 71ff246aaf3515d419b5ec6db660db56, type: 2}
-        m_TargetAssemblyTypeName: DialogueListener, Assembly-CSharp
-        m_MethodName: DialogueComplete
+      - m_Target: {fileID: 1724436907003978488}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: SendDialogueCompleteEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -211,19 +187,7 @@ MonoBehaviour:
         m_CallState: 2
   onCommand:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 71ff246aaf3515d419b5ec6db660db56, type: 2}
-        m_TargetAssemblyTypeName: DialogueListener, Assembly-CSharp
-        m_MethodName: OnCommand
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6405611810557195752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueRunner: {fileID: 7741050540943549815}
+  _lineView: {fileID: 3545129634944946467}
   _dialogueListener: {fileID: 11400000, guid: eced2cca1e7cba44bb7b4277bc19a23c, type: 2}
 --- !u!1001 &4835527678589174683
 PrefabInstance:

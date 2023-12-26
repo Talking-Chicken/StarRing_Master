@@ -15,7 +15,8 @@ public class PlayerStateInteract : PlayerStateBase
 
     public override void UpdateState(PlayerManager player)
     {
-        
+        if (player.TargetInteractable != null)
+            player.TargetInteractable.InteractableUpdate();
     }
 
     public override void LeaveState(PlayerManager player)
