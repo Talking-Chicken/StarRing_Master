@@ -21,11 +21,14 @@ namespace Yarn.Unity.Example
         [Tooltip("This is the chat message bubble UI object (what we are cloning for each message!)... NOT the container group for all chat bubbles")]
         public GameObject dialogueBubblePrefab;
         public float lettersPerSecond = 10f;
-        
+        [SerializeField] GameObject Portarit;
+        [SerializeField] Image bg;
         bool isFirstMessage = true;
+        bool newSpeaker = false;
 
         // current message bubble styling settings, modified by SetSender
         bool isRightAlignment = true;
+        bool isPortarit = false;
         Color currentBGColor = Color.black, currentTextColor = Color.white;
 
         void Awake()
@@ -47,26 +50,37 @@ namespace Yarn.Unity.Example
         public void SetSenderMe() 
         {
             isRightAlignment = true;
+            isPortarit = false;
             currentBGColor = Color.blue;
             currentTextColor = Color.white;
+            newSpeaker = true;
         }
 
         // YarnCommand <<Them>> does not use YarnCommand C# attribute, registers in Awake() instead
         public void SetSenderThem() 
         {
             isRightAlignment = false;
+            isPortarit = true;
+               
+            
+           
+            
+            
             currentBGColor = Color.white;
             currentTextColor = Color.black;
+
         }
 
         // when we clone a new message box, re-style the message box based on whether SetSenderMe or SetSenderThem was most recently called
         void UpdateMessageBoxSettings() 
         {
-            var bg = dialogueBubblePrefab.GetComponentInChildren<Image>();
+           
             bg.color = currentBGColor;
+            Portarit.SetActive(isPortarit);
             var message = dialogueBubblePrefab.GetComponentInChildren<TMPro.TextMeshProUGUI>();
             message.text = "";
             message.color = currentTextColor;
+            
 
             var layoutGroup = dialogueBubblePrefab.GetComponent<HorizontalLayoutGroup>();
             if ( isRightAlignment ) 
@@ -77,9 +91,10 @@ namespace Yarn.Unity.Example
             }
             else
             {
-                layoutGroup.padding.left = 0;
+                layoutGroup.padding.left = 15;
                 layoutGroup.padding.right = 32;
                 bg.transform.SetAsFirstSibling();
+              //  Portarit.transform.SetAsFirstSibling();
             }
         }
 
@@ -88,10 +103,12 @@ namespace Yarn.Unity.Example
             // if this isn't the very first message, then clone current message box and move it up
             if ( isFirstMessage == false )
             {
-                var oldClone = Instantiate( 
-                    dialogueBubblePrefab, 
-                    dialogueBubblePrefab.transform.position, 
-                    dialogueBubblePrefab.transform.rotation, 
+                Portarit.SetActive(false);
+                var oldClone = Instantiate(
+
+                    dialogueBubblePrefab,
+                    dialogueBubblePrefab.transform.position,
+                    dialogueBubblePrefab.transform.rotation,
                     dialogueBubblePrefab.transform.parent
                 );
                 dialogueBubblePrefab.transform.SetAsLastSibling();
