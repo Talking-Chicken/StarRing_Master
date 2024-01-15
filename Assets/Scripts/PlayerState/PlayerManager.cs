@@ -9,6 +9,7 @@ using TopDownEngineExtensions;
 using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Interactable targetInteractable;
     [ReadOnly, SerializeField, BoxGroup("Interaction")] private Transform interactionPosition;
     [SerializeField, BoxGroup("Interaction")] private LayerMask interactionRaycastMask;
+    [BoxGroup("Interaction")] private Transform interactableDestination;
 
     //Dialogues
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private LineView _lineView;
@@ -168,22 +170,14 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-    #region Funtion of Setting References
-    public void SetUIManager(UIManager manager) {
-        if (manager != null) {
-            _uiManager = manager;
-        } else
-            Debug.Log("Cannot set UI Manager for " + gameObject.name);
-    }
-    #endregion
-
     #region detect input
     public void DetectInputExploreState() {
         //detect interact
         if (Input.GetMouseButtonDown(0)) {
             if (HoveringInteractable != null) {
                 TargetInteractable = HoveringInteractable;
-                TargetInteractable.Interact(Property);
+                StartCoroutine(TryInteract(TargetInteractable));
+                // TargetInteractable.Interact(Property);
             }
         }
 
@@ -266,16 +260,11 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void StopInteract(Interactable interactable) {
-        // if (TargetInteractable == null)
-        //     return;
-        
-        print("SSSSSSSSSSSSSSSSSSSSSSS");
         TargetInteractable = null;
         HoveringInteractable = null;
         PreHoveringInteractable = null;
         InteractionPosition = null;
         ChangeState(stateExplore);
-        
     }
 
     /// go to the interacting position
@@ -290,6 +279,30 @@ public class PlayerManager : MonoBehaviour
         } else {
             return false;
         }
+    }
+
+    // private void TryInteract(Interactable interactable)
+    // {
+    //     if (_characterPathFinder.DistanceToNextWaypoint <= 0.5f)
+    //     {
+
+    //     }
+    // }
+
+    IEnumerator TryInteract(Interactable interactable)
+    {
+        interactableDestination = interactable.GetNearestInteractingPoint(transform);
+        MoveTo(interactableDestination);
+        while (Vector3.Distance(transform.position, interactableDestination.position) > 0.21f)
+        {
+            yield return null;
+        }
+        interactable.Interact(Property);
+    }
+
+    private void MoveTo(Transform destination)
+    {
+        _characterPathFinder.SetNewDestination(destination);
     }
 
     #region Dialogue

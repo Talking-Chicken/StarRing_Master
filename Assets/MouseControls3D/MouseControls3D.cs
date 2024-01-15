@@ -18,19 +18,12 @@ namespace TopDownEngineExtensions
         private AIBrain _brain;
         private AIState _initialState;
 
-        //yarn
-        private DialogueRunner _dialogueRunner;
-        //state machine
-        private PlayerManager _player;
-
         protected override void Awake()
         {
             base.Awake();
             _brain = _character.CharacterBrain;
             _initialState = _brain.States[0];
             _characterRun = _character.FindAbility<CharacterRun>();
-            _dialogueRunner = FindObjectOfType<DialogueRunner>();
-            _player = GetComponent<PlayerManager>();
         }
 
         private IEnumerator DoubleClick()
@@ -85,7 +78,6 @@ namespace TopDownEngineExtensions
                 return; //not cus
             }
             
-            _player.TargetNPC = null; //cus code
             _brain.Target = null;
             if (_brain.CurrentState != _initialState) _brain.TransitionToState(_initialState.StateName);
             if (!_playerPlane.Raycast(ray, out var distance)) return;

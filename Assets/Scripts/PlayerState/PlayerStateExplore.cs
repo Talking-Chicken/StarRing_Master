@@ -34,10 +34,10 @@ public class PlayerStateExplore : PlayerStateBase
         //     }
         // }
 
-        if (player.TargetInteractable != null) {
-            Debug.Log("TARGET INTERACTABLE IS NOT NULL " + player.TargetInteractable.gameObject.name);
-            player.ChangeState(player.stateInteract);
-        }
+        // if (player.TargetInteractable != null) {
+        //     Debug.Log("TARGET INTERACTABLE IS NOT NULL " + player.TargetInteractable.gameObject.name);
+        //     player.ChangeState(player.stateInteract);
+        // }
 
         // if (player.TargetTalkingSetting != null) {
         //     if (player.IsReadyToTalk(player.TargetTalkingSetting.TalkingPosition)) {

@@ -10,11 +10,15 @@ public class PlayerActionListener : ScriptableObject
     public UnityEvent<PlayerManager, Interactable> onInteractWithInteractable; //param: PlayerManager player, Interactable things that player interacting with
     [System.NonSerialized]
     public UnityEvent<Interactable> stopInteract; //param: Interactable the interactable that just stop interacting with
+    [System.NonSerialized]
+    public UnityEvent<Transform> moveToDestination; //param: Transform destination transform
 
     void OnEnable() {
         if (onInteractWithInteractable == null)
             onInteractWithInteractable = new UnityEvent<PlayerManager, Interactable>();
         if (stopInteract == null)
             stopInteract = new UnityEvent<Interactable>();
+        if (moveToDestination == null)
+            moveToDestination = new UnityEvent<Transform>();
     }
 }

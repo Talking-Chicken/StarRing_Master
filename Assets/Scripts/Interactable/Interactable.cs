@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour
     [SerializeField, BoxGroup("Properties")] private List<Material> outlineMats;
     [SerializeField, BoxGroup("Interaction Settings"), Tooltip("whether this interactable needs update each frame")] private bool requiresUpdate = false;
     [SerializeField, BoxGroup("Interaction Settings")] private List<Transform> interactPositions;
+    [SerializeField, BoxGroup("Interaction Settings"), Tooltip("player needs to move closer than this number to start interact")] private float minInteractDistance = 0.2f;
     [SerializeField, Foldout("Listeners")] protected InteractableActionListener _interactListener;
     [SerializeField, Foldout("Listeners")] protected DialogueActionListener _dialogueListener;
     [SerializeField, Foldout("Listeners")] protected PlayerActionListener _playerListener;
@@ -22,7 +23,6 @@ public class Interactable : MonoBehaviour
     public InteractableType Type {get=>type; protected set=>type=value;}
     public bool IsInteractable {get=>isInteractable; set=>isInteractable=value;}
     public List<Material> OutlineMats {get=>outlineMats; protected set =>outlineMats=value;}
-    
 
     #region FSM
     private InteractableStateBase currentState;
@@ -76,6 +76,18 @@ public class Interactable : MonoBehaviour
         currentState.UpdateState(this);
     }
 
+    /// <summary>
+    /// move to interactable position (if havent), then interact
+    /// </summary>
+    /// <param name="player">player property of the player that is trying to interact</param>
+    public virtual void TryInteract(PlayerProperty player)
+    {
+        if (Vector3.Distance(player.transform.position, transform.position) > minInteractDistance)
+        {
+            
+        }
+    }
+
     public virtual void Interact(PlayerProperty player) {
         if (player == null)
             return;
@@ -107,5 +119,17 @@ public class Interactable : MonoBehaviour
 
     public virtual void NextDialogueLine() {
         _dialogueListener.nextLine.Invoke();
+    }
+
+    public virtual Transform GetNearestInteractingPoint(Transform interactor)
+    {
+        if (interactPositions.Count <= 0)
+            return transform;
+
+        Transform nearest = interactPositions[0];
+        foreach (Transform transform in interactPositions)
+            if (Vector3.Distance(interactor.transform.position, transform.position) < Vector3.Distance(interactor.transform.position, nearest.transform.position))
+                nearest = transform;
+        return nearest;
     }
 }
