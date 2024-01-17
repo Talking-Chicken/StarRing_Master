@@ -38,7 +38,6 @@ public class NPC : Interactable, ITalkable
     protected override void OnDialogueCompleted()
     {
         base.OnDialogueCompleted();
-        print("DDDDDDDDDDDDDDDDDDDDD");
         StopInteract();
     }
 

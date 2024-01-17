@@ -5,12 +5,14 @@ using Yarn.Unity;
 using UnityEngine.AI;
 using MoreMountains.TopDownEngine;
 using MoreMountains.Feedbacks;
+using NaughtyAttributes;
 
 
 public class YarnCommandManager : MonoBehaviour
 {
     CharacterPathfinder3D characterAgent;
     Animator characterAnimator;
+    [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
   
     [YarnCommand("walk")]
     public void Walk(Transform destination,GameObject character)
@@ -47,9 +49,9 @@ public class YarnCommandManager : MonoBehaviour
         feedback.PlayFeedbacks(); 
     }
     [YarnCommand("stopInteraction")]
-    public void stopInteraction()
+    public void stopInteraction(string interactableName)
     {
-     Interactable.StopInteract();
+        _interactableListener.stopInteract.Invoke(interactableName);
     }
 
 }

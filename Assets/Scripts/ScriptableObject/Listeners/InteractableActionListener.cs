@@ -13,15 +13,15 @@ public class InteractableActionListener : ScriptableObject
     public UnityEvent<PlayerProperty, string> interact;
 
     /// <summary>
-    /// param: Interactable target interactable
+    /// param: string target interactable
     /// </summary>
     [System.NonSerialized]
-    public UnityEvent<Interactable> stopInteract;
+    public UnityEvent<string> stopInteract;
 
     void OnEnable() {
         if (interact == null)
             interact = new UnityEvent<PlayerProperty, string>();
         if (stopInteract == null)
-            stopInteract = new UnityEvent<Interactable>();
+            stopInteract = new UnityEvent<string>();
     }
 }

@@ -10,7 +10,7 @@ public class PlayerStateInteract : PlayerStateBase
         if (player.TargetInteractable == null)
             player.ChangeState(player.stateExplore);
         
-        player.TargetInteractable.Interact(player.Property);
+        // player.TargetInteractable.Interact(player.Property);
     }
 
     public override void UpdateState(PlayerManager player)

@@ -57,11 +57,13 @@ public class Interactable : MonoBehaviour
 
     protected virtual void OnEnable() {
         _interactListener.interact.AddListener(Interact);
+        _interactListener.stopInteract.AddListener(StopInteract);
         _dialogueListener.dialogueCompleted.AddListener(OnDialogueCompleted);
     }
 
     protected virtual void OnDisable() {
         _interactListener.interact.RemoveListener(Interact);
+        _interactListener.stopInteract.RemoveListener(StopInteract);
         _dialogueListener.dialogueCompleted.RemoveListener(OnDialogueCompleted);
     }
 
@@ -104,6 +106,12 @@ public class Interactable : MonoBehaviour
     public virtual void StopInteract() {
         StopDialogue();
         _playerListener.stopInteract.Invoke(this);
+    }
+
+    private void StopInteract(string interactableName) {
+        if (!interactableName.Equals(this.interactableName, System.StringComparison.OrdinalIgnoreCase))
+            return;
+        StopInteract();
     }
 
     public virtual void StartDialogue(string startNode) {

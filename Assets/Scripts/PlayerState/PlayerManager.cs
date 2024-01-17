@@ -298,6 +298,7 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
         interactable.Interact(Property);
+        ChangeState(stateInteract);
     }
 
     private void MoveTo(Transform destination)
