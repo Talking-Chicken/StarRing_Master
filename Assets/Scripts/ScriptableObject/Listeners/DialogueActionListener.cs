@@ -12,6 +12,8 @@ public class DialogueActionListener : ScriptableObject
     [System.NonSerialized] 
     public UnityEvent<string> startDialogue;
     [System.NonSerialized]
+    public UnityEvent stopDialogue;
+    [System.NonSerialized]
     public UnityEvent nextLine;
     /// <summary>
     /// when dialogue has completed, this will be invoked
@@ -22,6 +24,8 @@ public class DialogueActionListener : ScriptableObject
     void OnEnable() {
         if (startDialogue == null)
             startDialogue = new UnityEvent<string>();
+        if (stopDialogue == null)
+            stopDialogue = new UnityEvent();
         if (nextLine == null)
             nextLine = new UnityEvent();
         if (dialogueCompleted == null)

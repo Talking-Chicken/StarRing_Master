@@ -13,11 +13,13 @@ public class DialogueManager : MonoBehaviour
     void OnEnable() {
         _dialogueListener.startDialogue.AddListener(StartDialogue);
         _dialogueListener.nextLine.AddListener(NextLine);
+        _dialogueListener.stopDialogue.AddListener(StopDialogue);
     }
 
     void OnDisable() {
         _dialogueListener.startDialogue.RemoveListener(StartDialogue);
-        _dialogueListener.nextLine.AddListener(NextLine);
+        _dialogueListener.nextLine.RemoveListener(NextLine);
+        _dialogueListener.stopDialogue.RemoveListener(StopDialogue);
     }
 
     private void StartDialogue(string startNode) {
@@ -30,5 +32,10 @@ public class DialogueManager : MonoBehaviour
 
     public void SendDialogueCompleteEvent() {
         _dialogueListener.dialogueCompleted.Invoke();
+    }
+
+    private void StopDialogue()
+    {
+        _dialogueRunner.Stop();
     }
 }

@@ -120,6 +120,7 @@ public class Interactable : MonoBehaviour
     }
 
     public virtual void StopDialogue() {
+        _dialogueListener.stopDialogue.Invoke();
         ChangeState(stateIdle);
     }
 
