@@ -36,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     private void StopDialogue()
     {
-        _dialogueRunner.Stop();
+        if (_dialogueRunner.IsDialogueRunning)
+            _dialogueRunner.Stop();
     }
 }
