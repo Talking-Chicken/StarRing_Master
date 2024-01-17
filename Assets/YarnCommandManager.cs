@@ -49,7 +49,7 @@ public class YarnCommandManager : MonoBehaviour
         feedback.PlayFeedbacks(); 
     }
     [YarnCommand("stopInteraction")]
-    public void stopInteraction(string interactableName)
+    public void StopInteraction(string interactableName)
     {
         _interactableListener.stopInteract.Invoke(interactableName);
     }
