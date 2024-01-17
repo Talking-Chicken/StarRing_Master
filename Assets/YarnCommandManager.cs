@@ -46,5 +46,10 @@ public class YarnCommandManager : MonoBehaviour
     {
         feedback.PlayFeedbacks(); 
     }
+    [YarnCommand("stopInteraction")]
+    public void stopInteraction()
+    {
+     Interactable.StopInteract();
+    }
 
 }
