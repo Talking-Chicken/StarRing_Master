@@ -11,7 +11,7 @@ public class Radio : Interactable
     public override void Interact(PlayerProperty player)
     {
         base.Interact(player);
-        _dialogueListener.startDialogue.Invoke("Helmet_1_1");
+        _dialogueListener.startDialogue.Invoke("Argument1");
         StopInteract();
     }
 }
