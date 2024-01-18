@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Radio : Interactable
 {
     protected override void Start()
@@ -11,7 +12,8 @@ public class Radio : Interactable
     public override void Interact(PlayerProperty player)
     {
         base.Interact(player);
-        _dialogueListener.startDialogue.Invoke("Argument1");
-        StopInteract();
+       // _dialogueListener.startDialogue.Invoke("Argument1");
+        StartDialogue("Argument1");
+      //  StopInteract();
     }
 }

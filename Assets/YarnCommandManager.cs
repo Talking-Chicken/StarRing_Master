@@ -13,6 +13,7 @@ public class YarnCommandManager : MonoBehaviour
     CharacterPathfinder3D characterAgent;
     Animator characterAnimator;
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
+ 
   
     [YarnCommand("walk")]
     public void Walk(Transform destination,GameObject character)
@@ -36,7 +37,8 @@ public class YarnCommandManager : MonoBehaviour
     [YarnCommand("nodeStatus")]
     public void NodeStatus(string nodeName)
     {
-        MindPalaceManager.activeManager.GetNodeActive(nodeName);
+
+     MindPalaceManager.activeManager.GetNodeActive(nodeName);
     }
     [YarnCommand("activeNode")]
     public void ActiveNode(string nodeName)

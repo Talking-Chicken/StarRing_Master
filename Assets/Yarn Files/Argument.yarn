@@ -1,4 +1,4 @@
-﻿title: Argument1
+title: Argument1
 tags:
 ---
 <<if visited("Argument1")>>
@@ -6,10 +6,10 @@ Lacey: Anyway.
 <<else>>
 Lacey: "Ma'am, I'm really sorry, but I truly cannot allow anyone to do this in the store."
 Rita: "Do you understand how important this is for my research? Just one night of observation and I could gather crucial data."
+//<<activeNode StarRingDialogueSystem NoCampingSign>>
 Lacey: "I understand that your school project is important to you, but I must consider the safety and comfort of all our customers."
 Rita: "Do you really think a small tent could threaten anyone's 'safety and comfort'?"
 Rita: "And don't you dare equate my research with those childish school projects!"
-<<stopInteraction StarRingDialogueSystem Helmet_chan>>
 Lacey: "Honestly, just the idea of camping out in a convenience store with a tent is outlandish enough. And did you bring any other suspicious items besides the tent?"
 Lacey: "I must remind you again, we have rules and regulations in our store, and your actions are already affecting other customers."
 Rita: "Rules and regulations? Some of the products you sell here are more dangerous than what I'm doing. Like, let me think, oh yes! That Mirin-flavored soda that two out of three people complain about after drinking!"
@@ -24,6 +24,7 @@ Lacey: "If 'redefining the world' means I might lose my job, that's quite a diff
 Lacey: "Anyway, I hope you read that sign again. As long as the 'No Camping' sign is up in the store, you can't set up your tent here."
 Rita: "What kind of convenience store even has a 'No Camping' sign?"
 Lacey: "The kind that gets unusual customers wanting to camp out.
-<<NodeStatus StarRingDialogueSystem NoCampingSign>>
+<<stopInteraction StarRingDialogueSystem Radio>>
+<<stopInteraction StarRingDialogueSystem Helmet_chan>>
 <<endif>>
 ===
