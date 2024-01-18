@@ -24,7 +24,22 @@ Lacey: "If 'redefining the world' means I might lose my job, that's quite a diff
 Lacey: "Anyway, I hope you read that sign again. As long as the 'No Camping' sign is up in the store, you can't set up your tent here."
 Rita: "What kind of convenience store even has a 'No Camping' sign?"
 Lacey: "The kind that gets unusual customers wanting to camp out.
+<<endif>>
 <<stopInteraction StarRingDialogueSystem Radio>>
 <<stopInteraction StarRingDialogueSystem Helmet_chan>>
-<<endif>>
+===
+title: NoCampingSign
+tags:
+---
+Amo:Hmmm.
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem NoCampingSign>>
+-> You! Stop kicking the vending machines
+    Amo:Test.
+-> do something
+    <<if $tempBool>>
+        Amo: I can take the poster away.
+    <<else>>
+        Amo: Is there anything I can do? I gotta think, maybe is chance to use mind palace.
+    <<endif>>
 ===

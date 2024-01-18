@@ -13,8 +13,11 @@ public class YarnCommandManager : MonoBehaviour
     CharacterPathfinder3D characterAgent;
     Animator characterAnimator;
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
- 
-  
+    private InMemoryVariableStorage variableStorage;
+    public void Start()
+    {
+        variableStorage = GameObject.FindObjectOfType<InMemoryVariableStorage>();
+    }
     [YarnCommand("walk")]
     public void Walk(Transform destination,GameObject character)
     {
@@ -37,8 +40,8 @@ public class YarnCommandManager : MonoBehaviour
     [YarnCommand("nodeStatus")]
     public void NodeStatus(string nodeName)
     {
-
-     MindPalaceManager.activeManager.GetNodeActive(nodeName);
+       
+        variableStorage.SetValue("$tempBool", MindPalaceManager.activeManager.GetNodeActive(nodeName));
     }
     [YarnCommand("activeNode")]
     public void ActiveNode(string nodeName)
