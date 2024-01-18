@@ -26,6 +26,10 @@ public class MindPalaceManager : MonoBehaviour
         {
             SaveNodes();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            InstantiateSaveFile();
+        }
     }
     public void SaveNodes()
     {
