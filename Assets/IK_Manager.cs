@@ -18,14 +18,14 @@ public class IK_Manager : MonoBehaviour
     {
         
     }
-    private void OnAnimatorIK()
+    public void OnAnimatorIK(GameObject Target)
     {
-       if (animator.GetCurrentAnimatorStateInfo(0).IsName("ready_look"))
+      // if (animator.GetCurrentAnimatorStateInfo(0).IsName("ready_look"))
       
         {
 
             animator.SetLookAtWeight(0.5f);
-            animator.SetLookAtPosition(Player.transform.position + new Vector3(0, 1.5f, 0));
+            animator.SetLookAtPosition(Target.transform.position + new Vector3(0, 1.5f, 0));
         }
     }
 }

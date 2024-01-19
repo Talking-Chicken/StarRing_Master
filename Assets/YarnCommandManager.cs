@@ -12,6 +12,7 @@ public class YarnCommandManager : MonoBehaviour
 {
     CharacterPathfinder3D characterAgent;
     Animator characterAnimator;
+    IK_Manager IKManger;
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
     private InMemoryVariableStorage variableStorage;
     public void Start()
@@ -29,6 +30,7 @@ public class YarnCommandManager : MonoBehaviour
     public void Animation(GameObject character,string clipName)
     {
         characterAnimator = character.GetComponentInChildren<Animator>();
+        Debug.Log(characterAnimator);
 
         characterAnimator.Play(clipName);
     }
@@ -47,6 +49,13 @@ public class YarnCommandManager : MonoBehaviour
     public void ActiveNode(string nodeName)
     {
         MindPalaceManager.activeManager.ActiveNode(nodeName);
+    }
+    [YarnCommand("lookat")]
+    public void LookAt(GameObject character, GameObject target)
+    {
+        IKManger = character.GetComponentInChildren<IK_Manager>();
+
+        IKManger.OnAnimatorIK(target);
     }
     [YarnCommand("feedbackPlayer")]
     public void FeedbackPlayer(MMF_Player feedback)
