@@ -39,6 +39,7 @@ public class YarnCommandManager : MonoBehaviour
     {
         character.transform.LookAt(destination,Vector3.up);
     }
+
     [YarnCommand("nodeStatus")]
     public void NodeStatus(string nodeName)
     {
@@ -54,8 +55,8 @@ public class YarnCommandManager : MonoBehaviour
     public void LookAt(GameObject character, GameObject target)
     {
         IKManger = character.GetComponentInChildren<IK_Manager>();
-
-        IKManger.OnAnimatorIK(target);
+        IKManger.target=target;
+        IKManger.OnAnimatorIK();
     }
     [YarnCommand("feedbackPlayer")]
     public void FeedbackPlayer(MMF_Player feedback)
@@ -66,6 +67,12 @@ public class YarnCommandManager : MonoBehaviour
     public void StopInteraction(string interactableName)
     {
         _interactableListener.stopInteract.Invoke(interactableName);
+    }
+
+    [YarnCommand("setPosition")]
+    public void SetPosition(GameObject object, Transform newposition)
+    {
+        object.Transform.position= newposition.position;
     }
 
 }
