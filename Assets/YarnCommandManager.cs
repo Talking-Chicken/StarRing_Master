@@ -56,7 +56,16 @@ public class YarnCommandManager : MonoBehaviour
     {
         IKManger = character.GetComponentInChildren<IK_Manager>();
         IKManger.target=target;
+        IKManger.lookat = true;
         IKManger.OnAnimatorIK();
+    }
+    [YarnCommand("stoplookat")]
+    public void StopLookAt(GameObject character)
+    {
+        IKManger = character.GetComponentInChildren<IK_Manager>();
+        
+        IKManger.lookat = false;
+     
     }
     [YarnCommand("feedbackPlayer")]
     public void FeedbackPlayer(MMF_Player feedback)
@@ -70,9 +79,9 @@ public class YarnCommandManager : MonoBehaviour
     }
 
     [YarnCommand("setPosition")]
-    public void SetPosition(GameObject object, Transform newposition)
+    public void SetPosition(GameObject character, Transform newposition)
     {
-        object.Transform.position= newposition.position;
+        character.transform.position= newposition.position;
     }
 
 }

@@ -38,11 +38,12 @@ Amo:Hmmm.
     <<if $tempBool>>
     -> do something
         Amo: I can take the poster away.
-        <<walk StarRingDialogueSystem Player Rita>>
+        <<walk StarRingDialogueSystem cone Rita>>
         <<animation StarRingDialogueSystem Player stand-afraid-f>>
         <<lookat StarRingDialogueSystem Rita Player>>
         Amo: Ahhhhhh.So scared
         <<animation StarRingDialogueSystem Player idle>>
+        <<stoplookat StarRingDialogueSystem Rita>>
     -> do nothing
     <<endif>>
 ===
