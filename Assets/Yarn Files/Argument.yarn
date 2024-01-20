@@ -34,15 +34,14 @@ tags:
 Amo:Hmmm.
 <<set $tempBool = false>>
 <<nodeStatus StarRingDialogueSystem NoCampingSign>>
--> You! Stop kicking the vending machines
-    Amo:Test.
-    <<animation StarRingDialogueSystem Player using-laptop>>
-    Amo: Test again!
--> do something
+
     <<if $tempBool>>
+    -> do something
         Amo: I can take the poster away.
-        
-    <<else>>
-        Amo: Is there anything I can do? I gotta think, maybe is chance to use mind palace.
+        <<walk StarRingDialogueSystem Player Rita>>
+        <<animation StarRingDialogueSystem Player stand-afraid-f>>
+        Amo: Ahhhhhh.So scared
+        <<animation StarRingDialogueSystem Player idle>>
+    -> do nothing
     <<endif>>
 ===
