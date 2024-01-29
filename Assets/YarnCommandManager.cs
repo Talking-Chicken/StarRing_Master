@@ -11,9 +11,11 @@ using NaughtyAttributes;
 public class YarnCommandManager : MonoBehaviour
 {
     CharacterPathfinder3D characterAgent;
+    CharacterOrientation3D characterOrient;
     Animator characterAnimator;
     IK_Manager IKManger;
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
+    
     private InMemoryVariableStorage variableStorage;
     public void Start()
     {
@@ -30,13 +32,15 @@ public class YarnCommandManager : MonoBehaviour
     public void Animation(GameObject character,string clipName)
     {
         characterAnimator = character.GetComponentInChildren<Animator>();
-        Debug.Log(characterAnimator);
 
         characterAnimator.Play(clipName);
     }
     [YarnCommand("faceToward")]
-    public void FaceToward(Transform destination, GameObject character)
+    public void FaceToward(GameObject character, Transform destination)
     {
+        
+        characterOrient=character.GetComponent<CharacterOrientation3D>();
+        characterOrient.CharacterRotationAuthorized=true;
         character.transform.LookAt(destination,Vector3.up);
     }
 
@@ -82,6 +86,12 @@ public class YarnCommandManager : MonoBehaviour
     public void SetPosition(GameObject character, Transform newposition)
     {
         character.transform.position= newposition.position;
+    }
+
+   [YarnCommand("active")]
+    public void Active(GameObject gameObject, bool flag)
+    {
+        gameObject.SetActive(flag);
     }
 
 }

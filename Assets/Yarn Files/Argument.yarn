@@ -7,6 +7,8 @@ tags:
         Lacey: "Ma'am, I'm really sorry, but I truly cannot allow anyone to do this in the store."
         Rita: "Do you understand how important this is for my research? Just one night of observation and I could gather crucial data."
         <<activeNode StarRingDialogueSystem NoCampingSign>>
+        <<activeNode StarRingDialogueSystem RitaCamp>>
+        <<activeNode StarRingDialogueSystem RemoveCampingSign>>
         Lacey: "I understand that your school project is important to you, but I must consider the safety and comfort of all our customers."
         Rita: "Do you really think a small tent could threaten anyone's 'safety and comfort'?"
         Rita: "And don't you dare equate my research with those childish school projects!"
@@ -37,17 +39,24 @@ Amo:Hmmm.
 
     <<if $tempBool>>
     -> do something
+        Amo: Lets see what I can do abt the sign, maybe i should take it away!
+        <<feedbackPlayer StarRingDialogueSystem CameraFadeIn>>
+        <<wait 2>>
+        <<active StarRingDialogueSystem camp_sign false>>
         <<setPosition StarRingDialogueSystem Rita LocationCounterFront>>
         <<walk StarRingDialogueSystem LocationCenter1 Rita>>
-        Amo: I can take the poster away.
+        <<feedbackPlayer StarRingDialogueSystem CameraFadeOut>>
+        Amo: Done!
+        Amo: That highschooler really should thx
         <<lookat StarRingDialogueSystem Rita Player>> 
-        <<wait 3>>
         Rita: Wait, are you talking to me.
+        <<lookat StarRingDialogueSystem Player Rita>> 
         <<animation StarRingDialogueSystem Player stand-afraid-f>>
         Amo: Ahhhhhh.So scared
         Amo: Nothing! Is nothing!
         <<animation StarRingDialogueSystem Player idle>>
         <<stoplookat StarRingDialogueSystem Rita>>
     -> do nothing
+        Amo: oki i do nothing.
     <<endif>>
 ===

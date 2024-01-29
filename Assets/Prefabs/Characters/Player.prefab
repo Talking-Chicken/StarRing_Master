@@ -2788,7 +2788,7 @@ MonoBehaviour:
   BlockingMovementStates: 
   BlockingConditionStates: 
   BlockingWeaponStates: 
-  RunSpeed: 4
+  RunSpeed: 3
   AutoRun: 0
   AutoRunThreshold: 0.6
 --- !u!114 &4142866814125310054
@@ -5587,6 +5587,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1081258698647879300}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be66f44ea94b4ba4dacb35d5f7df42e7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9099411560126006473}
   m_SourcePrefab: {fileID: 100100000, guid: be66f44ea94b4ba4dacb35d5f7df42e7, type: 3}
 --- !u!95 &3325192487273159099 stripped
 Animator:
@@ -5620,6 +5624,20 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 4142866814125310061}
     weight: 1
+--- !u!114 &9099411560126006473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8326742891812313467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4d86690114ca44db49a25c497d941d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  lookat: 0
 --- !u!4 &8702458781919544257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be66f44ea94b4ba4dacb35d5f7df42e7,
