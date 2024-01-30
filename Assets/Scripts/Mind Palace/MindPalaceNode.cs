@@ -7,14 +7,34 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using UnityEditor.TerrainTools;
 
-public class AutoConnectNode : MonoBehaviour, IPointerDownHandler
+
+[RequireComponent(typeof(MeadowGames.UINodeConnect4.Node))]
+public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
 {
+    Node _node;
+    public Node Node {
+        get
+        {
+            if (!_node)
+                _node = GetComponent<Node>();
+            return _node;
+        }
+        set => _node = value;
+    }
+
     public bool active;
     private List<ConnectedPorts> connectedPorts = new List<ConnectedPorts>();
     private List<RelatedNode> relatedNodes = new();
 
-    public bool onDragging = false;
+    private bool onDragging = false;
+
+    public enum Type { Information, Question, Solution }
+    public Type type;
+
+    public int State { get; private set; }
+    private MindPalaceContentGroup[] contentGroups;
 
     private RectTransform rectTransform;
     //range of related node
@@ -26,9 +46,11 @@ public class AutoConnectNode : MonoBehaviour, IPointerDownHandler
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+
+        contentGroups = GetComponentsInChildren<MindPalaceContentGroup>();
+
         //record other node
-        Node node = GetComponent<Node>();
-        foreach (Port port in node.ports)
+        foreach (Port port in Node.ports)
         {
             List<MeadowGames.UINodeConnect4.Connection> connectionsList = port.Connections;
             foreach (MeadowGames.UINodeConnect4.Connection conn in connectionsList)
@@ -68,12 +90,12 @@ public class AutoConnectNode : MonoBehaviour, IPointerDownHandler
                 if (related.GetRelatedDistance(rectTransform.anchoredPosition) < relatedRange)
                 {
                     //make other Node react
-                    StartCoroutine(ReactToRelatedNode(related.GetRelatedNode().GetComponent<AutoConnectNode>(), related.GetRevealNode()));
+                    StartCoroutine(ReactToRelatedNode(related.GetRelatedNode().GetComponent<MindPalaceNode>(), related.GetRevealNode()));
                 }
             }
         }
     }
-    private IEnumerator ReactToRelatedNode(AutoConnectNode node, Node nextNode)
+    private IEnumerator ReactToRelatedNode(MindPalaceNode node, Node nextNode)
     {
         Reacting = true;
         float timer = 0;
@@ -93,10 +115,33 @@ public class AutoConnectNode : MonoBehaviour, IPointerDownHandler
         GetComponent<Image>().color = node.GetComponent<Image>().color = Color.white;
         Reacting = false;
     }
+
+    // set current state of the node to index, and active the corresponding content group;
+    public void SetState(int index)
+    {
+        if (index < contentGroups.Length)
+        {
+            contentGroups[State].gameObject.SetActive(false);
+            State = index;
+            contentGroups[State].gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError(Node.ID+$":state index {index} out of range");
+        }
+    }
+
+    //shorten/show active content in content group
+    public void ToggleShortenContent()
+    {
+        contentGroups[State].SetShorten(!contentGroups[State].Shorten);
+    }
+
+    //Deactive this gameObejct, save then remove all connections
     public void DisableSelf()
     {
-        Node node = GetComponent<Node>();
-        foreach (Port port in node.ports)
+        //Node node = GetComponent<Node>();
+        foreach (Port port in Node.ports)
         {
             List<MeadowGames.UINodeConnect4.Connection> connectionsList = port.Connections;
             foreach (MeadowGames.UINodeConnect4.Connection conn in connectionsList)
@@ -104,8 +149,7 @@ public class AutoConnectNode : MonoBehaviour, IPointerDownHandler
                 Port other = conn.port0 != port ? conn.port0 : conn.port1;
                 connectedPorts.Add(new ConnectedPorts(port, other));
                 //Debug.Log(other.node.gameObject);
-                AutoConnectNode otherConnect = other.node.GetComponent<AutoConnectNode>();
-                if (otherConnect != null)
+                if (other.node.TryGetComponent<MindPalaceNode>(out var otherConnect))
                 {
                     otherConnect.AddConnection(port, other);
                 }
@@ -120,6 +164,8 @@ public class AutoConnectNode : MonoBehaviour, IPointerDownHandler
         onDragging = true;
         Debug.Log(this.gameObject.name + " Was Clicked.");
     }
+
+    //save a connection
     public void AddConnection(Port port0, Port port1)
     {
         connectedPorts.Add(new ConnectedPorts(port0, port1));

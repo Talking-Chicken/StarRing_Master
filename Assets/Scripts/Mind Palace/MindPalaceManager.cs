@@ -38,7 +38,7 @@ public class MindPalaceManager : MonoBehaviour
     }
     public List<Node> InstantiateSaveFile()
     {
-        List<Node> activeNodes = nodes.Where(node => node.GetComponent<AutoConnectNode>().active).ToList();
+        List<Node> activeNodes = nodes.Where(node => node.GetComponent<MindPalaceNode>().active).ToList();
         MindPalaceDataSystem.SaveMindPalace(activeNodes);
         return activeNodes;
     }
@@ -57,5 +57,13 @@ public class MindPalaceManager : MonoBehaviour
     public bool GetNodeActive(string name)
     {
         return nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase)).gameObject.activeSelf;
+    }
+    public void SetNodeState(string name, int state)
+    {
+        nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase)).GetComponent<MindPalaceNode>().SetState(state);
+    }
+    public int GetNodeState()
+    {
+        return nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase)).GetComponent<MindPalaceNode>().State;
     }
 }

@@ -8,12 +8,14 @@ public class MindPalaceNodeData
 {
     [JsonProperty] public float posX, posY;
     [JsonProperty] public string name;
+    [JsonProperty] public int state;
 
-    public MindPalaceNodeData(Vector2 position, string name)
+    public MindPalaceNodeData(Vector2 position, string name, int state)
     {
         posX = position.x;
         posY = position.y;
         this.name = name;
+        this.state = state;
     }
 }
 /*[JsonObject]

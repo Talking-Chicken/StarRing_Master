@@ -1,6 +1,7 @@
 using MeadowGames.UINodeConnect4;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class MindPalaceDataSystem
@@ -24,12 +25,13 @@ public static class MindPalaceDataSystem
                 {
                     found = true;
                     node.GetComponent<RectTransform>().anchoredPosition = new Vector2(nodeSave.posX, nodeSave.posY);
+                    node.GetComponent<MindPalaceNode>().SetState(nodeSave.state);
                     break;
                 }
             }
             if (!found)
             {
-                node.GetComponent<AutoConnectNode>().DisableSelf();
+                node.GetComponent<MindPalaceNode>().DisableSelf();
             }
         }
     }
@@ -38,7 +40,7 @@ public static class MindPalaceDataSystem
         List<MindPalaceNodeData> nodeData = new();
         foreach (Node node in nodes)
         {
-            nodeData.Add(new MindPalaceNodeData(node.GetComponent<RectTransform>().anchoredPosition, node.ID));
+            nodeData.Add(new MindPalaceNodeData(node.GetComponent<RectTransform>().anchoredPosition, node.ID, node.GetComponent<MindPalaceNode>().State));
         }
         SaveManager.SaveMindPalace(nodeData);
     }
