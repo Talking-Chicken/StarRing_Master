@@ -15,6 +15,18 @@ public class ConditionChecker : MonoBehaviour
     {
         return setsOfConditions.Find(x => x.name == name).CheckCondition();
     }
+    //check every set of conditions and return true when at least one set is eligible
+    protected bool CheckConditionAll()
+    {
+        for (int i = 0; i < setsOfConditions.Count; i++)
+        {
+            if (CheckCondition(i))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 [Serializable]
@@ -46,12 +58,12 @@ public class ConditionSet
 {
     [SerializeField] public string name;
     [SerializeField] public List<ComparisonCondition> conditions;
-    
+
     public bool CheckCondition()
     {
         foreach (ComparisonCondition condition in conditions)
         {
-            if(!condition.CheckCondition())
+            if (!condition.CheckCondition())
             {
                 return false;
             }
