@@ -6,9 +6,10 @@ tags:
 <<else>>
         Lacey: "Ma'am, I'm really sorry, but I truly cannot allow anyone to do this in the store."
         Rita: "Do you understand how important this is for my research? Just one night of observation and I could gather crucial data."
-        <<activeNode StarRingDialogueSystem NoCampingSign>>
-        <<activeNode StarRingDialogueSystem RitaCamp>>
-        <<activeNode StarRingDialogueSystem RemoveCampingSign>>
+        <<activeNode StarRingDialogueSystem Camper_in_the_store>>
+        <<activeNode StarRingDialogueSystem Rita>>
+         <<activeNode StarRingDialogueSystem Lacey>>
+        <<activeNode StarRingDialogueSystem question_camping>>
         Lacey: "I understand that your school project is important to you, but I must consider the safety and comfort of all our customers."
         Rita: "Do you really think a small tent could threaten anyone's 'safety and comfort'?"
         Rita: "And don't you dare equate my research with those childish school projects!"
@@ -35,7 +36,8 @@ tags:
 ---
 Amo:Hmmm.
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem NoCampingSign>>
+<<activeNode StarRingDialogueSystem No_camping_sign>>
+<<nodeStatus StarRingDialogueSystem remove_sign>>
 
     <<if $tempBool>>
     -> do something
