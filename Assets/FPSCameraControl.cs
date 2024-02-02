@@ -6,13 +6,13 @@ public class FPSCameraControl : MonoBehaviour
 {
 
     public float mouseSensitivity = 100.0f;
-     Transform playerBody; // 用于旋转玩家身体，以便摄像机与玩家同向
+     Transform playerBody;
 
     private float xRotation = 0.0f;
     private float yRotation = 0.0f;
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // 锁定光标到屏幕中心
+      //  Cursor.lockState = CursorLockMode.Locked; 
         playerBody = this.transform;
     }
 
@@ -23,8 +23,21 @@ public class FPSCameraControl : MonoBehaviour
 
         xRotation -= mouseY;
         yRotation += mouseX;
-       // xRotation = Mathf.Clamp(xRotation, -90f, 90f); // 限制上下旋转角度，防止翻转
+        // xRotation = Mathf.Clamp(xRotation, -90f, 90f); 
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                //Select stage    
+                if (hit.transform.name == "lamp")
+                {
+                    Debug.Log("Test");
+                }
+            }
+        }
     }
 }
