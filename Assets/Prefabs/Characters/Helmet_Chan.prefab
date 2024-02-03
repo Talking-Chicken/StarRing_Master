@@ -3784,6 +3784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4d86690114ca44db49a25c497d941d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  lookat: 0
 --- !u!1 &7232795069702786556
 GameObject:
   m_ObjectHideFlags: 0
@@ -4363,7 +4365,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a3e9b3ba3eb3b25479059310ad0af447, type: 2}
   - {fileID: 2100000, guid: 12b876561a3dd7f48b0bc6a165843c43, type: 2}
   requiresUpdate: 1
-  interactPositions: []
+  interactPositions:
+  - {fileID: 1020854483052424427}
+  minInteractDistance: 0.2
   _interactListener: {fileID: 11400000, guid: 9302606ea93006445889c8c61b44dbef, type: 2}
   _dialogueListener: {fileID: 11400000, guid: eced2cca1e7cba44bb7b4277bc19a23c, type: 2}
   _playerListener: {fileID: 11400000, guid: 415612b2e21bad044bfbcf7096102658, type: 2}

@@ -285,6 +285,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3D Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 6483160512696918098, guid: 8d6c09a6f35ab93498a17f1a2b9375a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6711672230207336559, guid: 8d6c09a6f35ab93498a17f1a2b9375a9,
         type: 3}
       propertyPath: allCharacters.Array.data[0]
@@ -846,7 +851,7 @@ RectTransform:
   m_GameObject: {fileID: 177796358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5399.9995}
-  m_LocalScale: {x: 2.719547, y: 2.719547, z: 2.719547}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1505739199}
@@ -33476,7 +33481,6 @@ GameObject:
   - component: {fileID: 595684624}
   - component: {fileID: 595684623}
   - component: {fileID: 595684622}
-  - component: {fileID: 595684621}
   - component: {fileID: 595684630}
   - component: {fileID: 595684631}
   - component: {fileID: 595684632}
@@ -33489,33 +33493,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &595684621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595684620}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8ba01be1431c74c9a71ebafe56c0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  interactableName: Rita
-  isInteractable: 1
-  outlineMats: []
-  requiresUpdate: 0
-  interactPositions: []
-  minInteractDistance: 0.2
-  _interactListener: {fileID: 11400000, guid: 9302606ea93006445889c8c61b44dbef, type: 2}
-  _dialogueListener: {fileID: 11400000, guid: eced2cca1e7cba44bb7b4277bc19a23c, type: 2}
-  _playerListener: {fileID: 11400000, guid: 415612b2e21bad044bfbcf7096102658, type: 2}
-  startNodeBase: Argument1
-  startNode: 
-  talkingPositions:
-  - {fileID: 1711331545}
-  talkingSettings: []
 --- !u!114 &595684622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43204,10 +43181,10 @@ MonoBehaviour:
       dashDistance: 5
       color: {r: 1, g: 1, b: 1, a: 1}
       points:
-      - {x: 1.5620422, y: -9.927124}
-      - {x: 74.91339, y: 257.39636}
+      - {x: 4.21875, y: -26.997559}
+      - {x: 203.73047, y: 700.0034}
       lineStyle: 0
-      length: 277.20438
+      length: 753.8802
       animation:
         isActive: 0
         pointsDistance: 250
@@ -43248,10 +43225,10 @@ MonoBehaviour:
       dashDistance: 5
       color: {r: 1, g: 1, b: 1, a: 1}
       points:
-      - {x: 1.5620422, y: -9.927124}
-      - {x: 88.961, y: 6.989105}
+      - {x: 4.21875, y: -26.997559}
+      - {x: 241.9043, y: 19.004944}
       lineStyle: 0
-      length: 89.02099
+      length: 242.09636
       animation:
         isActive: 0
         pointsDistance: 250
@@ -43291,10 +43268,10 @@ MonoBehaviour:
       dashDistance: 5
       color: {r: 1, g: 1, b: 1, a: 1}
       points:
-      - {x: 1.5620422, y: -9.927124}
-      - {x: 177.2002, y: -195.98756}
+      - {x: 4.21875, y: -26.997559}
+      - {x: 481.875, y: -532.9962}
       lineStyle: 0
-      length: 255.86568
+      length: 695.8377
       animation:
         isActive: 0
         pointsDistance: 250
@@ -43335,10 +43312,10 @@ MonoBehaviour:
       dashDistance: 5
       color: {r: 1, g: 1, b: 1, a: 1}
       points:
-      - {x: 352.052, y: -361.45624}
-      - {x: 494.39172, y: -334.61285}
+      - {x: 957.3926, y: -982.9976}
+      - {x: 1344.4922, y: -909.99756}
       lineStyle: 0
-      length: 144.84875
+      length: 393.92273
       animation:
         isActive: 0
         pointsDistance: 250
@@ -43379,10 +43356,10 @@ MonoBehaviour:
       dashDistance: 5
       color: {r: 1, g: 1, b: 1, a: 1}
       points:
-      - {x: 357.0829, y: -216.94734}
-      - {x: 494.39172, y: -334.61285}
+      - {x: 971.1035, y: -589.9988}
+      - {x: 1344.4922, y: -909.99756}
       lineStyle: 0
-      length: 180.82834
+      length: 491.75027
       animation:
         isActive: 0
         pointsDistance: 250
@@ -57087,7 +57064,7 @@ PrefabInstance:
     - target: {fileID: 254523833975100753, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 508.00003
+      value: 508
       objectReference: {fileID: 0}
     - target: {fileID: 308571626845670721, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
         type: 3}
@@ -63727,7 +63704,7 @@ PrefabInstance:
     - target: {fileID: 5087997306753254181, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0032958984
+      value: 0.023925781
       objectReference: {fileID: 0}
     - target: {fileID: 5087997306753254181, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
         type: 3}
@@ -66017,7 +65994,7 @@ PrefabInstance:
     - target: {fileID: 8938338553212109265, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 457.00003
+      value: 457
       objectReference: {fileID: 0}
     - target: {fileID: 8938338553418322581, guid: 06f9b5ea9d404854eb9f2d2a1ce5356f,
         type: 3}

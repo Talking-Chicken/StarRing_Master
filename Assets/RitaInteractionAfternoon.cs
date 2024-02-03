@@ -10,7 +10,9 @@ public class RitaInteractionAfternoon : Interactable
     }
     public override void Interact(PlayerProperty player)
     {
+        print("AAAAAAAAAAAAAAAAAAAA");
         base.Interact(player);
+        print("BBBBBBBBBBBBBBBBBBBB");
         // _dialogueListener.startDialogue.Invoke("Argument1");
         StartDialogue("Argument1");
         //  StopInteract();
