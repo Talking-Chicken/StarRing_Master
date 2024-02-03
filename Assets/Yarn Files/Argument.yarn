@@ -1,14 +1,23 @@
 title: Argument1
 tags:
 ---
-<<if visited_count("Argument1")>1>>
-        Lacey: Anyway.
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
+
+<<if $tempBool>>
+        <<feedbackPlayer StarRingDialogueSystem ArgumentCameraFeedback>>
+        <<outline StarRingDialogueSystem Sign true>>
+        Lacey: "Like I said, as long as that 'No Camping' sign is up in the store, you can't set up your tent here.""
+        <<outline StarRingDialogueSystem Sign false>>
+        <<feedbackRestore StarRingDialogueSystem ArgumentCameraFeedback>>
 <<else>>
+        <<feedbackPlayer StarRingDialogueSystem ArgumentCameraFeedback>>
+        <<animation StarRingDialogueSystem Rita argument-reject-f>>
         Lacey: "Ma'am, I'm really sorry, but I truly cannot allow anyone to do this in the store."
         Rita: "Do you understand how important this is for my research? Just one night of observation and I could gather crucial data."
         <<activeNode StarRingDialogueSystem Camper_in_the_store>>
         <<activeNode StarRingDialogueSystem Rita>>
-         <<activeNode StarRingDialogueSystem Lacey>>
+        <<activeNode StarRingDialogueSystem Lacey>>
         <<activeNode StarRingDialogueSystem question_camping>>
         Lacey: "I understand that your school project is important to you, but I must consider the safety and comfort of all our customers."
         Rita: "Do you really think a small tent could threaten anyone's 'safety and comfort'?"
@@ -25,8 +34,12 @@ tags:
         Rita: "My father has nothing to do with this. And how many times do I have to tell you how critical my research is! It could redefine our understanding of the world."
         Lacey: "If 'redefining the world' means I might lose my job, that's quite a difficult choice for me."
         Lacey: "Anyway, I hope you read that sign again. As long as the 'No Camping' sign is up in the store, you can't set up your tent here."
+        <<outline StarRingDialogueSystem Sign true>>
+        <<wait 2>>
+        <<outline StarRingDialogueSystem Sign false>>
         Rita: "What kind of convenience store even has a 'No Camping' sign?"
         Lacey: "The kind that gets unusual customers wanting to camp out.
+        <<feedbackRestore StarRingDialogueSystem ArgumentCameraFeedback>>
 <<endif>>
 //<<stopInteraction StarRingDialogueSystem Radio>>
 //<<stopInteraction StarRingDialogueSystem Helmet_chan>>
@@ -36,15 +49,18 @@ tags:
 ---
 Amo:Hmmm.
 <<set $tempBool = false>>
-<<activeNode StarRingDialogueSystem No_camping_sign>>
-<<nodeStatus StarRingDialogueSystem remove_sign>>
-
-    <<if $tempBool>>
+<<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
+<<if $tempBool>>
+Amo: Is this the 'No Camping Sign' they are talking about?
+<<set $tempBool = false>>
+    <<activeNode StarRingDialogueSystem No_camping_sign>>
+    <<nodeStatus StarRingDialogueSystem remove_sign>>
     -> do something
+        <<if $tempBool>>
         Amo: Lets see what I can do abt the sign, maybe i should take it away!
         <<feedbackPlayer StarRingDialogueSystem CameraFadeIn>>
         <<wait 2>>
-        <<active StarRingDialogueSystem camp_sign false>>
+        <<active StarRingDialogueSystem Sign false>>
         <<setPosition StarRingDialogueSystem Rita LocationCounterFront>>
         <<walk StarRingDialogueSystem LocationCenter1 Rita>>
         <<feedbackPlayer StarRingDialogueSystem CameraFadeOut>>
@@ -58,7 +74,10 @@ Amo:Hmmm.
         Amo: Nothing! Is nothing!
         <<animation StarRingDialogueSystem Player idle>>
         <<stoplookat StarRingDialogueSystem Rita>>
+        <<else>>
+        Amo: Wait, what can I do?
+        <<endif>>
     -> do nothing
         Amo: oki i do nothing.
-    <<endif>>
+<<endif>>
 ===

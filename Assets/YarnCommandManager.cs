@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using MoreMountains.TopDownEngine;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
-
+using Cinemachine;
 
 public class YarnCommandManager : MonoBehaviour
 {
@@ -14,6 +14,9 @@ public class YarnCommandManager : MonoBehaviour
     CharacterOrientation3D characterOrient;
     Animator characterAnimator;
     IK_Manager IKManger;
+    CinemachineBrain cinemachineBrain;
+    
+
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
     
     private InMemoryVariableStorage variableStorage;
@@ -76,6 +79,11 @@ public class YarnCommandManager : MonoBehaviour
     {
         feedback.PlayFeedbacks(); 
     }
+    [YarnCommand("feedbackRestore")]
+    public void FeedbackRestore(MMF_Player feedback)
+    {
+        feedback.RestoreInitialValues();
+    }
     [YarnCommand("stopInteraction")]
     public void StopInteraction(string interactableName)
     {
@@ -94,4 +102,22 @@ public class YarnCommandManager : MonoBehaviour
         gameObject.SetActive(flag);
     }
 
+    [YarnCommand("focous")]
+    public void CameraFocous(GameObject gameObject)
+    {
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.LookAt = gameObject.transform;
+    }
+    [YarnCommand("focousRest")]
+    public void CameraFocousRest()
+    {
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.LookAt = null;
+    }
+    [YarnCommand("outline")]
+    public void Outline(GameObject gameObject, bool outlineSwitch)
+    {
+        gameObject.GetComponent<AddOutline>().enableHighlight = outlineSwitch;
+    }
 }
+
