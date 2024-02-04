@@ -9,9 +9,12 @@ public class BubbleText : MonoBehaviour
     
     PlayerManager Amo;
     public bool idle;
-    bool once = true;
-    [SerializeField] DialogueRunner bubbleRunner;
+    [SerializeField] GameObject bubbleText;
+    private bool once = true;
+    DialogueRunner bubbleRunner;
+    [SerializeField] DialogueRunner
     [SerializeField] string nodeName;
+    GameObject spawnedObject;
     void Start()
     {
  
@@ -30,13 +33,18 @@ public class BubbleText : MonoBehaviour
 
             if (Vector3.Distance(transform.position, Amo.transform.position) < 1&&once)
             {
-                bubbleRunner.StartDialogue(nodeName);
                 once = false;
+                spawnedObject = Instantiate(bubbleText);
+                bubbleRunner = spawnedObject.GetComponentInChildren<DialogueRunner>();
+            
+                bubbleRunner.StartDialogue(nodeName);
+               
             }
 
             if (Vector3.Distance(transform.position, Amo.transform.position) >3)
             {
                 once = true;
+                Destroy(spawnedObject);
             }
         }
     }
