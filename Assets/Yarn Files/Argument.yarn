@@ -45,37 +45,42 @@ Amo:Hmmm.
 <<set $tempBool = false>>
 <<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
 <<if $tempBool>>
-Amo: Is this the 'No Camping Sign' they are talking about?
+Amo: Is this the 'No Camping' sign they are talking about?
 <<set $tempBool = false>>
     <<activeNode StarRingDialogueSystem No_camping_sign>>
     <<nodeStatus StarRingDialogueSystem remove_sign>>
     -> do something
         <<if $tempBool>>
-        Lacey: Amo! I
-        Amo: Lets see what I can do abt the sign, maybe i should take it away!
+        Lacey: Amo, I've handled the customer complaint and I'm heading to the front to help with checkout.
+        <<lookat StarRingDialogueSystem Player Lacey-Argument>> 
+        Amo: Ah! Okay... okay, I'll head over as soon as I finish up here.
+        <<stoplookat StarRingDialogueSystem Player>>
+        <<active StarRingDialogueSystem Lacey-Argument false>>
+        Amo: If removing this sign could actually help that girl, might as well try it. I haven't done something like this in previous loops.
         <<feedbackPlayer StarRingDialogueSystem CameraFadeIn>>
         <<wait 2>>
         <<active StarRingDialogueSystem Sign false>>
-        <<setPosition StarRingDialogueSystem Rita LocationCounterFront>>
-        <<walk StarRingDialogueSystem LocationCenter1 Rita>>
+        // <<setPosition StarRingDialogueSystem Rita LocationCounterFront>>
+        // <<walk StarRingDialogueSystem LocationCenter1 Rita>>
         <<feedbackPlayer StarRingDialogueSystem CameraFadeOut>>
-        Amo: Done!
-        Amo: That highschooler really should thx
+        Amo: Next, I just need to wait a little to see what she's planning. Hopefully, her research project can be of some help to me.
         <<lookat StarRingDialogueSystem Rita Player>> 
-        Rita: Wait, are you talking to me.
+        Rita: Hmm? Were you talking to me?
         <<lookat StarRingDialogueSystem Player Rita>> 
         <<animation StarRingDialogueSystem Player stand-afraid-f>>
-        Amo: Ahhhhhh.So scared
+        Amo: Ah, ah, that is, um... no, it's nothing!
         Amo: Nothing! Is nothing!
         <<animation StarRingDialogueSystem Player idle>>
         <<stoplookat StarRingDialogueSystem Rita>>
+        <<conditionINTUpdate StarRingDialogueSystem Rita_state_night 2>>
         <<else>>
-        Amo: Wait, what can I do?
+        Amo: I feel like there is something I can do, but 
+        Mr. Rabbit: I would recommend you to use logic map to ....
         <<endif>>
     -> do nothing
-        Amo: oki i do nothing.
-<<feedbackRestore StarRingDialogueSystem SignCameraFeedback>>
+        Amo: Maybe I shouldn't do anything at this point.
 <<endif>>
+<<feedbackRestore StarRingDialogueSystem SignCameraFeedback>>
 ===
 title: AfterRemoveSign
 tags:

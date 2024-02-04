@@ -119,5 +119,10 @@ public class YarnCommandManager : MonoBehaviour
     {
         gameObject.GetComponent<AddOutline>().enableHighlight = outlineSwitch;
     }
+    [YarnCommand("conditionINTUpdate")]
+    public void ConditionINTUpdate(string conditionName, int newValue)
+    {
+        ConditionSystemManager.SetInt(conditionName, newValue);
+    }
 }
 

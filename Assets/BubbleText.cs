@@ -12,7 +12,6 @@ public class BubbleText : MonoBehaviour
     [SerializeField] GameObject bubbleText;
     private bool once = true;
     DialogueRunner bubbleRunner;
-    [SerializeField] DialogueRunner
     [SerializeField] string nodeName;
     GameObject spawnedObject;
     void Start()
