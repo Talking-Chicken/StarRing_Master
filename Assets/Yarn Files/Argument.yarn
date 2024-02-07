@@ -11,11 +11,10 @@ tags:
         <<outline StarRingDialogueSystem Sign false>>
         <<feedbackRestore StarRingDialogueSystem ArgumentCameraFeedback>>
 <<else>>
-
         <<feedbackPlayer StarRingDialogueSystem ArgumentCameraFeedback>>
         <<animation StarRingDialogueSystem Rita argument-reject-f>>
-        <<lookat StarRingDialogueSystem Rita Lacey>>
-        <<lookat StarRingDialogueSystem Lacey Rita>>  
+        <<lookat StarRingDialogueSystem Rita Lacey-Argument>>
+        <<lookat StarRingDialogueSystem Lacey-Argument Rita>>  
         Rita: I just need one night to collect data, and my research could make a significant breakthrough.
         Rita: Why do you think a tent would affect other customers? Isn't my research more important than some high schoolers' trivial bonding activities?
         Lacey: I'm still trying to wrap my head around someone wanting to camp in a convenience store. You see, we are a legitimate convenience store, therefore we have rules and regulations to..... Wait! Aren't you  a high schooler as well?
@@ -61,6 +60,8 @@ Amo: Is this the 'No Camping' sign they are talking about?
         Amo: If removing this sign could actually help that girl, might as well try it. I haven't done something like this in previous loops.
         <<feedbackPlayer StarRingDialogueSystem CameraFadeIn>>
         <<wait 2>>
+        <<setPosition StarRingDialogueSystem Lacey-Checkout LocationCounterFront>>
+        //<<animation StarRingDialogueSystem Lacey-Checkout market_cashier_checkout_m>>
         <<active StarRingDialogueSystem Sign false>>
         // <<setPosition StarRingDialogueSystem Rita LocationCounterFront>>
         // <<walk StarRingDialogueSystem LocationCenter1 Rita>>
@@ -75,9 +76,11 @@ Amo: Is this the 'No Camping' sign they are talking about?
         <<animation StarRingDialogueSystem Player idle>>
         <<stoplookat StarRingDialogueSystem Rita>>
         <<conditionINTUpdate StarRingDialogueSystem Rita_state_night 2>>
+        Mr. Rabbit: I'm not sure what Lacey would think of this, but trying something we've never done before is always helpful in breaking the loop.
+        Mr. Rabbit: If you want to take a break, we could go to the counter for some coffee and see what impact your actions have.
         <<else>>
-        Amo: I feel like there is something I can do, but 
-        Mr. Rabbit: I would recommend you to use logic map to ....
+        Amo: I feel like there's something I can do here, but my mind is really a mess right now.
+        Mr. Rabbit: I would recommend you to use logic map to organize your information 
         <<endif>>
     -> do nothing
         Amo: Maybe I shouldn't do anything at this point.

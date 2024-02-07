@@ -13,7 +13,8 @@ public class Coffee_Machine : Interactable
     {
         base.Interact(player);
         // _dialogueListener.startDialogue.Invoke("Argument1");
-        SceneManager.LoadScene("Level-Night");
+        // SceneManager.LoadScene("Level-Night");
+        StartDialogue("coffeebreak");
         //  StopInteract();
     }
 }

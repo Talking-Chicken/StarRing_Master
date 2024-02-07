@@ -7,6 +7,7 @@ using MoreMountains.TopDownEngine;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class YarnCommandManager : MonoBehaviour
 {
@@ -97,9 +98,10 @@ public class YarnCommandManager : MonoBehaviour
     }
 
    [YarnCommand("active")]
-    public void Active(GameObject gameObject, bool flag)
+    public void Active(string gameObject, bool flag)
     {
-        gameObject.SetActive(flag);
+     
+        GameObject.Find(gameObject).SetActive(flag);
     }
 
     [YarnCommand("focous")]
@@ -123,6 +125,12 @@ public class YarnCommandManager : MonoBehaviour
     public void ConditionINTUpdate(string conditionName, int newValue)
     {
         ConditionSystemManager.SetInt(conditionName, newValue);
+    }
+
+    [YarnCommand("Load")]
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
 
