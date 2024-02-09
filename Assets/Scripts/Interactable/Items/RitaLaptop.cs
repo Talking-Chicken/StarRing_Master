@@ -5,7 +5,7 @@ using NaughtyAttributes;
 using MoreMountains.Feedbacks;
 using UnityEngine.UI;
 
-public class RitaLaptop : InteractableObj, IInteractable
+public class RitaLaptop : Interactable
 {
     [SerializeField, BoxGroup("Relative Objs")] private GameObject wall;
     [SerializeField, BoxGroup("Feedbacks")] private MMF_Player cameraFBIN, cameraFBOUT;

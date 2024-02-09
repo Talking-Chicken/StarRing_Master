@@ -2498,6 +2498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 8079671095355240997}
+  rotateSpeed: 0
 --- !u!114 &1338075951087861970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2513,13 +2514,11 @@ MonoBehaviour:
   _characterPathFinder: {fileID: 0}
   _characterMovement: {fileID: 0}
   _mouseControl3D: {fileID: 0}
-  _dialogueManager: {fileID: 0}
   _dialogueRunner: {fileID: 0}
   _characterOrientation: {fileID: 0}
   property: {fileID: 4620130283929541689}
   _playerListener: {fileID: 11400000, guid: 415612b2e21bad044bfbcf7096102658, type: 2}
   _dialogueListener: {fileID: 11400000, guid: 71ff246aaf3515d419b5ec6db660db56, type: 2}
-  _uiListener: {fileID: 11400000, guid: 2f3f311c0784f1f4ab467c9a1921a647, type: 2}
   _interactListener: {fileID: 11400000, guid: 9302606ea93006445889c8c61b44dbef, type: 2}
   hoveringInteractable: {fileID: 0}
   preHoveringInteractable: {fileID: 0}
@@ -2527,7 +2526,7 @@ MonoBehaviour:
   interactionPosition: {fileID: 0}
   interactionRaycastMask:
     serializedVersion: 2
-    m_Bits: 8388608
+    m_Bits: 8388672
   _lineView: {fileID: 0}
   targetNpc: {fileID: 0}
   targetTalkingSetting: {fileID: 0}

@@ -12,6 +12,8 @@ public class PlayerActionListener : ScriptableObject
     public UnityEvent<Interactable> stopInteract; //param: Interactable the interactable that just stop interacting with
     [System.NonSerialized]
     public UnityEvent<Transform> moveToDestination; //param: Transform destination transform
+    [System.NonSerialized]
+    public UnityEvent<Transform> rotateToward; //param: Transform aim target
 
     void OnEnable() {
         if (onInteractWithInteractable == null)
@@ -20,5 +22,7 @@ public class PlayerActionListener : ScriptableObject
             stopInteract = new UnityEvent<Interactable>();
         if (moveToDestination == null)
             moveToDestination = new UnityEvent<Transform>();
+        if (rotateToward == null)
+            rotateToward = new UnityEvent<Transform>();
     }
 }

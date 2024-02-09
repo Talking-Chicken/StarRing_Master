@@ -78,21 +78,11 @@ public class Interactable : MonoBehaviour
         currentState.UpdateState(this);
     }
 
-    /// <summary>
-    /// move to interactable position (if havent), then interact
-    /// </summary>
-    /// <param name="player">player property of the player that is trying to interact</param>
-    public virtual void TryInteract(PlayerProperty player)
-    {
-        if (Vector3.Distance(player.transform.position, transform.position) > minInteractDistance)
-        {
-            
-        }
-    }
-
     public virtual void Interact(PlayerProperty player) {
         if (player == null)
             return;
+        
+        _playerListener.rotateToward.Invoke(this.transform);
         
         print("interacting with " + interactableName);
     }
