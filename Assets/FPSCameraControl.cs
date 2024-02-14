@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Cinemachine;
 
 public class FPSCameraControl : MonoBehaviour
 {
     public float longPressDuration = 2.0f; // 长按持续时间
     public float mouseSensitivity = 100.0f;
     Transform playerBody;
-    [SerializeField]float radiogaze=3;
+    [SerializeField] float radiogaze=3;
+    [SerializeField] Canvas canvas;
+    [SerializeField] Image progress;
+    [SerializeField] TextMeshProUGUI item_name;
+    [SerializeField] CinemachineVirtualCamera camera;
     private bool isPressing = false; // 是否正在长按
     private float pressTimer = 0f; // 记录长按时间
     private float xRotation = 0.0f;
@@ -29,13 +36,17 @@ public class FPSCameraControl : MonoBehaviour
         // xRotation = Mathf.Clamp(xRotation, -90f, 90f); 
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
-
+      //  canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider.tag == "Investigation")
             {
+                canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
+                canvas.transform.LookAt(camera.transform.position, Vector3.up);
+                item_name.text = hit.collider.GetComponent<Investigation>().interact_name;
+                //   Debug.Log(hit.collider.GetComponent<Investigation>().interact_name);
                 if (Input.GetMouseButtonDown(0))
                 {
                     isPressing = true; // 标记正在长按
@@ -45,10 +56,10 @@ public class FPSCameraControl : MonoBehaviour
                 else if (Input.GetMouseButtonUp(0))
                 {
                     isPressing = false; // 标记长按结束
+                    pressTimer = 0;
                     if (pressTimer < longPressDuration)
                     {
-                        // 短按逻辑
-                        Debug.Log("Short Press");
+                        hit.collider.GetComponent<Investigation>().InvestigationContent();
                     }
                     else
                     {
@@ -60,8 +71,9 @@ public class FPSCameraControl : MonoBehaviour
                 // 如果正在长按
                 if (isPressing)
                 {
-                    pressTimer += Time.deltaTime; // 更新长按计时器
-                    // 如果长按时间超过指定时间
+
+                    pressTimer += Time.deltaTime;
+                    
                     if (pressTimer >= longPressDuration)
                     {
                         // 长按逻辑
@@ -69,7 +81,16 @@ public class FPSCameraControl : MonoBehaviour
                         // 这里可以添加你想要执行的长按逻辑
                     }
                 }
+                progress.fillAmount = pressTimer / longPressDuration;
             }
+
+        }
+        else
+        {
+            progress.fillAmount = 0;
+            item_name.text = "";
+            
+
         }
     }
 }

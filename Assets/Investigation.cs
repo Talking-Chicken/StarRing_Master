@@ -5,6 +5,8 @@ using UnityEngine;
 public class Investigation : MonoBehaviour
 {
     // Start is called before the first frame update
+    public string interact_name;
+    public Transform ui_location;
     void Start()
     {
         
@@ -13,10 +15,15 @@ public class Investigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        void OnMouseUp()
-        {
-            // 响应鼠标点击事件的代码
-            Debug.Log("游戏对象被点击！");
-        }
+      
+    }
+
+    public void InvestigationContent() 
+    {
+        Debug.Log("test, lamp");
+    }
+    public void ActualInvestigationContent()
+    {
+        Debug.Log("test, lamp");
     }
 }
