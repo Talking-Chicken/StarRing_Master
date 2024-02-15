@@ -22,7 +22,7 @@ public class FPSCameraControl : MonoBehaviour
     private RaycastHit hit;
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; 
+       // Cursor.lockState = CursorLockMode.Locked; 
         playerBody = this.transform;
     }
 
