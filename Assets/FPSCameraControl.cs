@@ -20,14 +20,25 @@ public class FPSCameraControl : MonoBehaviour
     private float xRotation = 0.0f;
     private float yRotation = 0.0f;
     private RaycastHit hit;
+    public bool Activied=false; 
     void Start()
     {
-       // Cursor.lockState = CursorLockMode.Locked; 
+       // 
         playerBody = this.transform;
     }
 
     void Update()
     {
+        if (Activied) 
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            if (Input.GetMouseButtonDown(1)) 
+            {
+                Cursor.lockState= CursorLockMode.None;
+
+                Activied = false;
+            }
+        }
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -38,7 +49,7 @@ public class FPSCameraControl : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
       //  canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+        
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider.tag == "Investigation")
