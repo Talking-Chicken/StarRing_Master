@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using MoreMountains.Tools;
 
 namespace MoreMountains.TopDownEngine
@@ -117,7 +117,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void SwitchModel()
 		{
-			if (CharacterModels.Length <= 1)
+			if (CharacterModels.Length <= 1) 
 			{
 				return;
 			}
@@ -147,8 +147,18 @@ namespace MoreMountains.TopDownEngine
 			{
 				_character.CharacterAnimator = CharacterModels[CurrentIndex].gameObject.MMGetComponentNoAlloc<Animator>();
 				_character.AssignAnimator(true);
-				SendMessage(_bindAnimatorMessage, SendMessageOptions.DontRequireReceiver);                
-			} 
+				SendMessage(_bindAnimatorMessage, SendMessageOptions.DontRequireReceiver);    
+				
+				List<CharacterHandleWeapon> handleWeapons = _character.FindAbilities<CharacterHandleWeapon>();
+				foreach (CharacterHandleWeapon handleWeapon in handleWeapons)
+				{
+					if ((handleWeapon.AutomaticallyBindAnimator) && (handleWeapon.CurrentWeapon != null))
+					{
+						handleWeapon.CharacterAnimator = _character.CharacterAnimator;
+						handleWeapon.CurrentWeapon.SetOwner(_character, handleWeapon);
+					}
+				}
+			}
 
 			// we play our vfx
 			if (_instantiatedVFX != null)

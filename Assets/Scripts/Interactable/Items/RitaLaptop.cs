@@ -5,7 +5,7 @@ using NaughtyAttributes;
 using MoreMountains.Feedbacks;
 using UnityEngine.UI;
 
-public class RitaLaptop : InteractObj, IInteractable
+public class RitaLaptop : InteractableObj, IInteractable
 {
     [SerializeField, BoxGroup("Relative Objs")] private GameObject wall;
     [SerializeField, BoxGroup("Feedbacks")] private MMF_Player cameraFBIN, cameraFBOUT;
@@ -22,37 +22,36 @@ public class RitaLaptop : InteractObj, IInteractable
         base.Start();
     }
 
-    protected override void Update()
-    {
-        base.Update();
+    // protected override void Update()
+    // {
+    //     base.Update();
 
-        if (password.Count >= 4 && currentTime < timeToDownload) {
-            if (downloadBar.gameObject.activeSelf == false) {
-                downloadBar.gameObject.SetActive(true);
-            }
-            currentTime += Time.deltaTime;
-            downloadBarFill.localScale = new Vector3(Mathf.Lerp(0, 1, currentTime/timeToDownload), 1, 1);
-        }
+    //     if (password.Count >= 4 && currentTime < timeToDownload) {
+    //         if (downloadBar.gameObject.activeSelf == false) {
+    //             downloadBar.gameObject.SetActive(true);
+    //         }
+    //         currentTime += Time.deltaTime;
+    //         downloadBarFill.localScale = new Vector3(Mathf.Lerp(0, 1, currentTime/timeToDownload), 1, 1);
+    //     }
 
-        if (currentTime >= timeToDownload) {
-            if (!hasWindowShowed) {
-                StartCoroutine(DelayToSetActive(popupWindow, true, 0.3f));
-                hasWindowShowed = true;
-            }
-        }
-    }
+    //     if (currentTime >= timeToDownload) {
+    //         if (!hasWindowShowed) {
+    //             StartCoroutine(DelayToSetActive(popupWindow, true, 0.3f));
+    //             hasWindowShowed = true;
+    //         }
+    //     }
+    // }
 
     /// interact with rita's laptop,
     /// it transit camera to see the laptop
-    public override bool Interact() {
-        base.Interact();
+    public override void Interact(PlayerProperty player) {
+        base.Interact(player);
         wall.layer = 0;
         downloadBarFill.localScale = new Vector3(0,0,0);
         currentTime = 0.0f;
         hasWindowShowed = false;
         laptopCanvas.SetActive(true);
         cameraFBIN.PlayFeedbacks();
-        return true;
     }
 
     public void EndInteract() {
@@ -60,7 +59,7 @@ public class RitaLaptop : InteractObj, IInteractable
         laptopCanvas.SetActive(false);
         popupWindow.SetActive(false);
         cameraFBOUT.PlayFeedbacks();
-        Player.ChangeState(Player.stateExplore);
+        StopInteract();
     }
 
     public void EnterPassword(int num) {

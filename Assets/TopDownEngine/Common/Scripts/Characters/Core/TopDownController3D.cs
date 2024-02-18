@@ -894,6 +894,10 @@ namespace MoreMountains.TopDownEngine
 			_frameVelocity = Vector3.zero;
 			_hitPoint = Vector3.zero;
 			_lastHitPoint = new Vector3(Mathf.Infinity, 0, 0);
+			if (_rigidBody != null)
+			{
+				_rigidBody.velocity = Vector3.zero;	
+			}
 		}
 
 		#endregion

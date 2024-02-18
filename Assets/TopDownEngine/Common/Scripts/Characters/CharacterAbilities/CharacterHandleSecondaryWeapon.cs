@@ -57,6 +57,7 @@ namespace MoreMountains.TopDownEngine
 			if (inputAuthorized && ((_inputManager.SecondaryShootButton.State.CurrentState == MMInput.ButtonStates.ButtonUp) || (_inputManager.SecondaryShootAxis == MMInput.ButtonStates.ButtonUp)))
 			{
 				ShootStop();
+				CurrentWeapon.WeaponInputReleased();
 			}
 			
 			if ((CurrentWeapon.WeaponState.CurrentState == Weapon.WeaponStates.WeaponDelayBetweenUses)

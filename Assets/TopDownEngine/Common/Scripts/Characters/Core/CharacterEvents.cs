@@ -45,19 +45,19 @@ namespace MoreMountains.TopDownEngine
 	public struct MMLifeCycleEvent
 	{
 		public Health AffectedHealth;
-		public MMLifeCycleEventTypes MMLifeCycleEventTypes;
+		public MMLifeCycleEventTypes MMLifeCycleEventType;
 		
 		public MMLifeCycleEvent(Health affectedHealth, MMLifeCycleEventTypes lifeCycleEventType)
 		{
 			AffectedHealth = affectedHealth;
-			MMLifeCycleEventTypes = lifeCycleEventType;
+			MMLifeCycleEventType = lifeCycleEventType;
 		}
 
 		static MMLifeCycleEvent e;
 		public static void Trigger(Health affectedHealth, MMLifeCycleEventTypes lifeCycleEventType)
 		{
 			e.AffectedHealth = affectedHealth;
-			e.MMLifeCycleEventTypes = lifeCycleEventType;
+			e.MMLifeCycleEventType = lifeCycleEventType;
 			MMEventManager.TriggerEvent(e);
 		}
 	}

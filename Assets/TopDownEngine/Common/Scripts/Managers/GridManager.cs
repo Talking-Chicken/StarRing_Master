@@ -58,6 +58,15 @@ namespace MoreMountains.TopDownEngine
 		protected Vector3 _debugOrigin = Vector3.zero;
 		protected Vector3 _debugDestination = Vector3.zero;
 		protected Vector3Int _workCoordinate = Vector3Int.zero;
+		
+		/// <summary>
+		/// Statics initialization to support enter play modes
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			_instance = null;
+		}
 
 		/// <summary>
 		/// On start we initialize our lists and dictionaries

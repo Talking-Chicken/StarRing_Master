@@ -1,0 +1,97 @@
+title: Argument1
+tags:
+---
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
+
+<<if $tempBool>>
+        <<feedbackPlayer StarRingDialogueSystem ArgumentCameraFeedback>>
+        <<outline StarRingDialogueSystem Sign true>>
+        Lacey: "Like I said, as long as that 'No Camping' sign is up in the store, you can't set up your tent here.""
+        <<outline StarRingDialogueSystem Sign false>>
+        <<feedbackRestore StarRingDialogueSystem ArgumentCameraFeedback>>
+<<else>>
+        <<feedbackPlayer StarRingDialogueSystem ArgumentCameraFeedback>>
+        <<animation StarRingDialogueSystem Rita argument-reject-f>>
+        <<lookat StarRingDialogueSystem Rita Lacey-Argument>>
+        <<lookat StarRingDialogueSystem Lacey-Argument Rita>>  
+        Rita: I just need one night to collect data, and my research could make a significant breakthrough.
+        Rita: Why do you think a tent would affect other customers? Isn't my research more important than some high schoolers' trivial bonding activities?
+        Lacey: I'm still trying to wrap my head around someone wanting to camp in a convenience store. You see, we are a legitimate convenience store, therefore we have rules and regulations to..... Wait! Aren't you  a high schooler as well?
+        Rita: Would a legitimate convenience store sell Mirin-flavored soda? What kind of company would sell a soda that two out of three people complain about?
+        Lacey: What's wrong with Mirin flavor? Ehhhh, I guess everyone has different tastes. ....Besides, sometimes controversy can spark conversation.
+        Mr. Rabbit: Wow, even our own staff admits there's a problem with our products. The marketing department of this convenience store really is a failure.
+        Lacey: Regardless, those products have passed food safety inspections, which is a different matter from camping here. If your parents...
+        Rita: My father has nothing to do with this. And how many times do I have to tell you how crucial my research is! It could redefine our understanding of the world.
+        Lacey: Alright, alright, I hope as you change the world, you'll take another look at that sign over there. As long as there's a 'No Camping' sign in the store, you can't set up your tent here.
+        <<activeNode StarRingDialogueSystem Camper_in_the_store>>
+        <<activeNode StarRingDialogueSystem Rita>>
+        <<activeNode StarRingDialogueSystem Lacey>>
+        <<activeNode StarRingDialogueSystem question_camping>>
+        <<outline StarRingDialogueSystem Sign true>>
+        <<wait 2>>
+        <<outline StarRingDialogueSystem Sign false>>
+        Rita: What kind of convenience store even has a 'No Camping' sign?
+        Lacey: Tthe kind that gets odd customers wanting to camp out? Apparently. 
+        <<feedbackRestore StarRingDialogueSystem ArgumentCameraFeedback>>
+<<endif>>
+//<<stopInteraction StarRingDialogueSystem Radio>>
+//<<stopInteraction StarRingDialogueSystem Helmet_chan>>
+===
+title: NoCampingSign
+tags:
+---
+<<feedbackPlayer StarRingDialogueSystem SignCameraFeedback>>
+Amo:Hmmm.
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
+<<if $tempBool>>
+Amo: Is this the 'No Camping' sign they are talking about?
+<<set $tempBool = false>>
+    <<activeNode StarRingDialogueSystem No_camping_sign>>
+    <<nodeStatus StarRingDialogueSystem remove_sign>>
+    -> do something
+        <<if $tempBool>>
+        Lacey: Amo, I've handled the customer complaint and I'm heading to the front to help with checkout.
+        <<lookat StarRingDialogueSystem Player Lacey-Argument>> 
+        Amo: Ah! Okay... okay, I'll head over as soon as I finish up here.
+        <<stoplookat StarRingDialogueSystem Player>>
+        <<active StarRingDialogueSystem Lacey-Argument false>>
+        Amo: If removing this sign could actually help that girl, might as well try it. I haven't done something like this in previous loops.
+        <<feedbackPlayer StarRingDialogueSystem CameraFadeIn>>
+        <<wait 2>>
+        <<setPosition StarRingDialogueSystem Lacey-Checkout LocationCounterFront>>
+        //<<animation StarRingDialogueSystem Lacey-Checkout market_cashier_checkout_m>>
+        <<active StarRingDialogueSystem Sign false>>
+        // <<setPosition StarRingDialogueSystem Rita LocationCounterFront>>
+        // <<walk StarRingDialogueSystem LocationCenter1 Rita>>
+        <<feedbackPlayer StarRingDialogueSystem CameraFadeOut>>
+        Amo: Next, I just need to wait a little to see what she's planning. Hopefully, her research project can be of some help to me.
+        <<lookat StarRingDialogueSystem Rita Player>> 
+        Rita: Hmm? Were you talking to me?
+        <<lookat StarRingDialogueSystem Player Rita>> 
+        <<animation StarRingDialogueSystem Player stand-afraid-f>>
+        Amo: Ah, ah, that is, um... no, it's nothing!
+        Amo: Nothing! Is nothing!
+        <<animation StarRingDialogueSystem Player idle>>
+        <<stoplookat StarRingDialogueSystem Rita>>
+        <<conditionINTUpdate StarRingDialogueSystem Rita_state_night 2>>
+        Mr. Rabbit: I'm not sure what Lacey would think of this, but trying something we've never done before is always helpful in breaking the loop.
+        Mr. Rabbit: If you want to take a break, we could go to the counter for some coffee and see what impact your actions have.
+        <<else>>
+        Amo: I feel like there's something I can do here, but my mind is really a mess right now.
+        Mr. Rabbit: I would recommend you to use logic map to organize your information 
+        <<endif>>
+    -> do nothing
+        Amo: Maybe I shouldn't do anything at this point.
+<<endif>>
+<<feedbackRestore StarRingDialogueSystem SignCameraFeedback>>
+===
+title: AfterRemoveSign
+tags:
+---
+Amo: Um....
+Rita: I can't believe that clerk wouldn't agree. How can someone be so cold? No, it must be because he's hiding something himself, thinking my presence would interfere with his plans.
+Amo: Lacey? I don't think that's what he meant... He actually seems like a decent person...
+Rita: I have to set up the signal interception device within the next hour. Only then can I... Now my plan is completely thrown off, needing to finish before midnight. Damn, why does he have to be so inflexible!
+===

@@ -95,10 +95,10 @@ namespace MoreMountains.TopDownEngine
 		public KnockbackStyles DamageCausedKnockbackType = KnockbackStyles.AddForce;
 		/// The direction to apply the knockback 
 		[Tooltip("The direction to apply the knockback ")]
-		public KnockbackDirections DamageCausedKnockbackDirection;
+		public KnockbackDirections DamageCausedKnockbackDirection = KnockbackDirections.BasedOnOwnerPosition;
 		/// The force to apply to the object that gets damaged
 		[Tooltip("The force to apply to the object that gets damaged")]
-		public Vector3 DamageCausedKnockbackForce = new Vector3(10, 10, 0);
+		public Vector3 DamageCausedKnockbackForce = new Vector3(10, 10, 10);
 		
 		[Header("Invincibility")]
 		/// The duration of the invincibility frames after the hit (in seconds)
@@ -125,12 +125,16 @@ namespace MoreMountains.TopDownEngine
 		[Tooltip("if in damage over time mode, the type of the repeated damage")] 
 		[MMCondition("RepeatDamageOverTime", true)]
 		public DamageType RepeatedDamageType;
-		
+
 		[MMInspectorGroup("Damage Taken", true, 69)]
-		[MMInformation("After having applied the damage to whatever it collided with, you can have this object hurt itself. " +
-		               "A bullet will explode after hitting a wall for example. Here you can define how much damage it'll take every time it hits something, " +
-		               "or only when hitting something that's damageable, or non damageable. Note that this object will need a Health component too for this to be useful.",
+		[MMInformation(
+			"After having applied the damage to whatever it collided with, you can have this object hurt itself. " +
+			"A bullet will explode after hitting a wall for example. Here you can define how much damage it'll take every time it hits something, " +
+			"or only when hitting something that's damageable, or non damageable. Note that this object will need a Health component too for this to be useful.",
 			MMInformationAttribute.InformationType.Info, false)]
+		/// The Health component on which to apply damage taken. If left empty, will attempty to grab one on this object.
+		[Tooltip("The Health component on which to apply damage taken. If left empty, will attempty to grab one on this object.")]
+		public Health DamageTakenHealth;
 		/// The amount of damage taken every time, whether what we collide with is damageable or not
 		[Tooltip("The amount of damage taken every time, whether what we collide with is damageable or not")]
 		public float DamageTakenEveryTime = 0;
@@ -174,7 +178,6 @@ namespace MoreMountains.TopDownEngine
 		protected Health _colliderHealth;
 		protected TopDownController _topDownController;
 		protected TopDownController _colliderTopDownController;
-		protected Health _health;
 		protected List<GameObject> _ignoredGameObjects;
 		protected Vector3 _knockbackForceApplied;
 		protected CircleCollider2D _circleCollider2D;
@@ -230,7 +233,10 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void GrabComponents()
 		{
-			_health = GetComponent<Health>();
+			if (DamageTakenHealth == null)
+			{
+				DamageTakenHealth = GetComponent<Health>();	
+			}
 			_topDownController = GetComponent<TopDownController>();
 			_boxCollider = GetComponent<BoxCollider>();
 			_sphereCollider = GetComponent<SphereCollider>();
@@ -760,8 +766,7 @@ namespace MoreMountains.TopDownEngine
 						Owner = gameObject;
 					}
 					_relativePosition = _colliderTopDownController.transform.position - Owner.transform.position;
-					_knockbackForce.x = _relativePosition.normalized.x * _knockbackForce.x;
-					_knockbackForce.z = _relativePosition.normalized.z * _knockbackForce.z;
+					_knockbackForce = Quaternion.LookRotation(_relativePosition) * _knockbackForce;
 					break;
 				case KnockbackDirections.BasedOnDirection:
 					var direction = transform.position - _positionLastFrame;
@@ -802,10 +807,10 @@ namespace MoreMountains.TopDownEngine
 		/// <param name="damage">Damage.</param>
 		protected virtual void SelfDamage(float damage)
 		{
-			if (_health != null)
+			if (DamageTakenHealth != null)
 			{
 				_damageDirection = Vector3.up;
-				_health.Damage(damage, gameObject, 0f, DamageTakenInvincibilityDuration, _damageDirection);
+				DamageTakenHealth.Damage(damage, gameObject, 0f, DamageTakenInvincibilityDuration, _damageDirection);
 			}
 
 			// if what we're colliding with is a TopDownController, we apply a knockback force

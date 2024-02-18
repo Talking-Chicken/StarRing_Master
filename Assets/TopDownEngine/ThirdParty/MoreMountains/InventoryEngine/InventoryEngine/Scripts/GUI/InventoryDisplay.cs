@@ -188,6 +188,13 @@ namespace MoreMountains.InventoryEngine
 
 		public static InventoryDisplay CurrentlyBeingMovedFromInventoryDisplay;
 		public static int CurrentlyBeingMovedItemIndex = -1;
+		
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			CurrentlyBeingMovedFromInventoryDisplay = null;
+			CurrentlyBeingMovedItemIndex = -1;
+		}
 
 		protected List<ItemQuantity> _contentLastUpdate;	
 		protected List<int> _comparison;	

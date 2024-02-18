@@ -2,7 +2,8 @@
 tags:
 position: 16,-36
 ---
-Amo: Excuse me… miss…
+Amo: Excuse me... miss...
+<<walk StarRingDialogueSystem Radio Player>>
 Helmet: Huh, what's up with you?
 Amo: Could you please stop kicking our vending machines?
 Helmet: Oh? Then why aren't you guys fixing them? Those vending machines have been here forever and they just! Won't! Work!
@@ -10,7 +11,23 @@ Amo: …Apologies. We will do our best to fix things up as soon as possible.
 Helmet: Just get to it! Ugh, pisses me off.
 Amo: (What an angry customer…)
 Amo: (The helmet girl… guess I'll just refer to her as that internally for now.)
-<<SetProgress Helmet_Chan Helmet_1>>
+===
+title: Helmet_options
+tags:
+position: 16,-36
+---
+-> Do you know anything about the raincoat killer
+	    Amo: Why would she know anything about rain coat killer?
+	    <<jump Helmet_options>>
+-> You! Stop kicking the vending machines
+        Amo: Could you please stop kicking our vending machines?
+        Helmet: Oh? Then why aren't you guys fixing them? Those vending machines have been here forever and they just! Won't! Work!
+        Amo: …Apologies. We will do our best to fix things up as soon as possible.
+        Helmet: Just get to it! Ugh, pisses me off.
+        Amo: (What an angry customer…)
+        Amo: (The helmet girl… guess I'll just refer to her as that internally for now.)
+        <<SetProgress Helmet_Chan Helmet_1>>
+
 ===
 title: Helmet_1_2
 position: 7,235

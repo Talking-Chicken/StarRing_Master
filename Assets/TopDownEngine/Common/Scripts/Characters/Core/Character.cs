@@ -580,14 +580,10 @@ namespace MoreMountains.TopDownEngine
 				}
 			}
 		}
-
-		/// <summary>
-		/// Makes the player respawn at the location passed in parameters
-		/// </summary>
-		/// <param name="spawnPoint">The location of the respawn.</param>
-		public virtual void RespawnAt(Transform spawnPoint, FacingDirections facingDirection)
+		
+		public virtual void RespawnAt(Vector3 spawnPosition, FacingDirections facingDirection)
 		{
-			transform.position = spawnPoint.position;
+			transform.position = spawnPosition;
 			
 			if (!gameObject.activeInHierarchy)
 			{
@@ -612,13 +608,7 @@ namespace MoreMountains.TopDownEngine
 			_controller.enabled = true;
 			_controller.CollisionsOn();
 			_controller.Reset();
-
-			// we kill all potential velocity
-			if (this.gameObject.MMGetComponentNoAlloc<Rigidbody2D>() != null)
-			{
-				this.gameObject.MMGetComponentNoAlloc<Rigidbody2D>().velocity = Vector3.zero;
-			}
-
+			
 			Reset();
 			UnFreeze();
 
@@ -656,6 +646,15 @@ namespace MoreMountains.TopDownEngine
 			{
 				FindAbility<CharacterOrientation3D>().Face(facingDirection); 
 			}
+		}
+
+		/// <summary>
+		/// Makes the player respawn at the location passed in parameters
+		/// </summary>
+		/// <param name="spawnPoint">The location of the respawn.</param>
+		public virtual void RespawnAt(Transform spawnPoint, FacingDirections facingDirection)
+		{
+			RespawnAt(spawnPoint.position, facingDirection);
 		}
 
 		/// <summary>

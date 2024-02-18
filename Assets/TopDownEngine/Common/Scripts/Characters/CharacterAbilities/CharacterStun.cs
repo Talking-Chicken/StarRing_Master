@@ -79,6 +79,11 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		public virtual void ExitStun()
 		{
+			if (_condition.CurrentState != CharacterStates.CharacterConditions.Stunned)
+			{
+				return;
+			}
+			
 			AbilityStopFeedbacks?.PlayFeedbacks();
 			_condition.ChangeState(_previousCondition);
 			AttachIK();

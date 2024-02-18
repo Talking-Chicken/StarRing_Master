@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 namespace MoreMountains.TopDownEngine
 {
 
-	[CustomEditor (typeof(Character))]
+	[CustomEditor (typeof(Character), true)]
 	[CanEditMultipleObjects]
 
 	/// <summary>

@@ -155,6 +155,7 @@ namespace MoreMountains.TopDownEngine
 			if (!ObstacleDetection && _potentialTargets[0] != null)
 			{
 				_brain.Target = _potentialTargets[0].gameObject.transform;
+				_lastReturnValue = true; 
 				return true;
 			}
             

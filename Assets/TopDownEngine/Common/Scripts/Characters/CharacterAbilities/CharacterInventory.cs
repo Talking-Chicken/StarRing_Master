@@ -60,6 +60,12 @@ namespace MoreMountains.TopDownEngine
 		/// if this is true, auto equip will only occur if the main inventory is empty
 		[Tooltip("if this is true, auto equip will only occur if the main inventory is empty")]
 		public bool AutoEquipOnlyIfMainInventoryIsEmpty;
+		/// if this is true, auto equip will only occur if the equipment inventory is empty
+		[Tooltip("if this is true, auto equip will only occur if the equipment inventory is empty")]
+		public bool AutoEquipOnlyIfEquipmentInventoryIsEmpty;
+		/// if this is true, auto equip will also happen on respawn
+		[Tooltip("if this is true, auto equip will also happen on respawn")]
+		public bool AutoEquipOnRespawn = true;
 		/// the target handle weapon ability - if left empty, will pick the first one it finds
 		[Tooltip("the target handle weapon ability - if left empty, will pick the first one it finds")]
 		public CharacterHandleWeapon CharacterHandleWeapon;
@@ -115,6 +121,11 @@ namespace MoreMountains.TopDownEngine
 			}
 			bool canAutoPick = !(AutoPickOnlyIfMainInventoryIsEmpty && !mainInventoryEmpty);
 			bool canAutoEquip = !(AutoEquipOnlyIfMainInventoryIsEmpty && !mainInventoryEmpty);
+
+			if (AutoEquipOnlyIfEquipmentInventoryIsEmpty && (WeaponInventory.NumberOfFilledSlots > 0))
+			{
+				canAutoEquip = false;
+			}
 			
 			// we auto pick items if needed
 			if ((AutoPickItems.Length > 0) && !_initialized && canAutoPick)
@@ -124,14 +135,20 @@ namespace MoreMountains.TopDownEngine
 					MMInventoryEvent.Trigger(MMInventoryEventType.Pick, null, item.Item.TargetInventoryName, item.Item, item.Quantity, 0, PlayerID);
 				}
 			}
-
+			
 			// we auto equip a weapon if needed
 			if ((AutoEquipWeaponOnStart != null) && !_initialized && canAutoEquip)
 			{
-				MMInventoryEvent.Trigger(MMInventoryEventType.Pick, null, AutoEquipWeaponOnStart.TargetInventoryName, AutoEquipWeaponOnStart, 1, 0, PlayerID);
-				EquipWeapon(AutoEquipWeaponOnStart.ItemID);
+				AutoEquipWeapon();
 			}
+
 			_initialized = true;
+		}
+
+		protected virtual void AutoEquipWeapon()
+		{
+			MMInventoryEvent.Trigger(MMInventoryEventType.Pick, null, AutoEquipWeaponOnStart.TargetInventoryName, AutoEquipWeaponOnStart, 1, 0, PlayerID);
+			EquipWeapon(AutoEquipWeaponOnStart.ItemID);
 		}
 
 		public override void ProcessAbility()
@@ -368,6 +385,17 @@ namespace MoreMountains.TopDownEngine
 					}
 				}
 			}
+		}
+		
+		protected override void OnRespawn()
+		{
+			if ((AutoEquipWeaponOnStart == null) || !AutoEquipOnRespawn || (MainInventory == null) || (WeaponInventory == null))
+			{
+				return;
+			}
+			
+			MMInventoryEvent.Trigger(MMInventoryEventType.Destroy, null, MainInventoryName, AutoEquipWeaponOnStart, 1, 0, PlayerID);
+			AutoEquipWeapon();
 		}
 
 		protected override void OnDeath()

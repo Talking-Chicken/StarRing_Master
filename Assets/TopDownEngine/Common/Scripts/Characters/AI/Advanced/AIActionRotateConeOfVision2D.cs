@@ -13,6 +13,11 @@ namespace MoreMountains.TopDownEngine
 	{
 		/// the possible directions we can aim the cone at
 		public enum Modes { Movement, WeaponAim }
+		
+		[Header("Bindings")]
+		/// the cone of vision 2D to rotate
+		[Tooltip("the cone of vision 2D to rotate")]
+		public MMConeOfVision2D TargetConeOfVision2D;
         
 		[Header("Aim")] 
 		/// whether to aim at the AI's movement direction or the weapon aim direction
@@ -32,7 +37,6 @@ namespace MoreMountains.TopDownEngine
 		protected WeaponAim _weaponAim;
 		protected TopDownController _controller;
 		protected Vector3 _newAim;
-		protected MMConeOfVision2D _coneOfVision2D;
 		protected float _angle;
 		protected Vector3 _eulerAngles = Vector3.zero;
         
@@ -45,7 +49,10 @@ namespace MoreMountains.TopDownEngine
 			base.Initialization();
 			_characterHandleWeapon = this.gameObject.GetComponentInParent<Character>()?.FindAbility<CharacterHandleWeapon>();
 			_controller = this.gameObject.GetComponentInParent<TopDownController>();
-			_coneOfVision2D = this.gameObject.GetComponent<MMConeOfVision2D>();
+			if (TargetConeOfVision2D == null)
+			{
+				TargetConeOfVision2D = this.gameObject.GetComponent<MMConeOfVision2D>();	
+			}
 		}
 
 		public override void PerformAction()
@@ -58,7 +65,7 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected virtual void AimCone()
 		{
-			if (_coneOfVision2D == null)
+			if (TargetConeOfVision2D == null)
 			{
 				return;
 			}
@@ -99,7 +106,7 @@ namespace MoreMountains.TopDownEngine
 			_angle = MMMaths.AngleBetween(this.transform.right, _newAim);
 			_eulerAngles.y = -_angle;
             
-			_coneOfVision2D.SetDirectionAndAngles(_newAim, _eulerAngles);
+			TargetConeOfVision2D.SetDirectionAndAngles(_newAim, _eulerAngles);
 		}
         
 		/// <summary>

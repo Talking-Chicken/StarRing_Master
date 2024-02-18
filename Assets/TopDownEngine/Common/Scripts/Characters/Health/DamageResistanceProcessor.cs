@@ -250,30 +250,32 @@ namespace MoreMountains.TopDownEngine
 					}
 				}
 			}
-
-			foreach (TypedDamage typedDamage in typedDamages)
+			else
 			{
-				foreach (DamageResistance resistance in DamageResistanceList)
+				foreach (TypedDamage typedDamage in typedDamages)
 				{
-					if (!resistance.gameObject.activeInHierarchy)
+					foreach (DamageResistance resistance in DamageResistanceList)
 					{
-						continue;
-					}
-
-					if (typedDamage == null)
-					{
-						if ((resistance.DamageTypeMode == DamageTypeModes.BaseDamage) &&
-						    (resistance.ImmuneToKnockback))
+						if (!resistance.gameObject.activeInHierarchy)
 						{
-							return true;	
+							continue;
 						}
-					}
-					else
-					{
-						if ((resistance.TypeResistance == typedDamage.AssociatedDamageType) &&
-						    (resistance.ImmuneToKnockback))
+
+						if (typedDamage == null)
 						{
-							return true;
+							if ((resistance.DamageTypeMode == DamageTypeModes.BaseDamage) &&
+							    (resistance.ImmuneToKnockback))
+							{
+								return true;	
+							}
+						}
+						else
+						{
+							if ((resistance.TypeResistance == typedDamage.AssociatedDamageType) &&
+							    (resistance.ImmuneToKnockback))
+							{
+								return true;
+							}
 						}
 					}
 				}

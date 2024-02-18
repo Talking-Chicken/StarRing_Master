@@ -34,9 +34,9 @@ namespace MoreMountains.TopDownEngine
 		[MMCondition("ModelShouldFlip", true)]
 		[Tooltip("the scale value to apply to the model when facing left")]
 		public Vector3 ModelFlipValueLeft = new Vector3(-1, 1, 1);
-		/// the scale value to apply to the model when facing right
+		/// the scale value to apply to the model when facing east
 		[MMCondition("ModelShouldFlip", true)]
-		[Tooltip("the scale value to apply to the model when facing right")]
+		[Tooltip("the scale value to apply to the model when facing east")]
 		public Vector3 ModelFlipValueRight = new Vector3(1, 1, 1);
 		/// whether we should rotate the model on direction change or not		
 		[Tooltip("whether we should rotate the model on direction change or not")]
@@ -56,9 +56,9 @@ namespace MoreMountains.TopDownEngine
         
 		[Header("Direction")]
 
-		/// true if the player is facing right
-		[MMInformation("It's usually good practice to build all your characters facing right. If that's not the case of this character, select Left instead.", MoreMountains.Tools.MMInformationAttribute.InformationType.Info, false)]
-		[Tooltip("true if the player is facing right")]
+		/// true if the player is facing east
+		[MMInformation("It's usually good practice to build all your characters facing east. If that's not the case of this character, select West instead.", MoreMountains.Tools.MMInformationAttribute.InformationType.Info, false)]
+		[Tooltip("true if the player is facing east")]
 		public Character.FacingDirections InitialFacingDirection = Character.FacingDirections.East;
 		/// the threshold at which movement is considered
 		[Tooltip("the threshold at which movement is considered")]
@@ -70,9 +70,9 @@ namespace MoreMountains.TopDownEngine
 		[MMReadOnly]
 		[Tooltip("the direction this character is currently facing")]
 		public Character.FacingDirections CurrentFacingDirection = Character.FacingDirections.East;
-		/// whether or not this character is facing right
+		/// whether or not this character is facing east
 		[MMReadOnly]
-		[Tooltip("whether or not this character is facing right")]
+		[Tooltip("whether or not this character is facing east")]
 		public bool IsFacingRight = true;
 
 		protected Vector3 _targetModelRotation;

@@ -29,8 +29,17 @@ namespace MoreMountains.TopDownEngine
 		public string PlayerID = "Player1";
 
 		protected CharacterSwap[] _characterSwapArray;
-		protected List<CharacterSwap> _characterSwapList;
+		protected MMCircularList<CharacterSwap> _characterSwapList;
 		protected TopDownEngineEvent _swapEvent = new TopDownEngineEvent(TopDownEngineEventTypes.CharacterSwap, null);
+		
+		/// <summary>
+		/// Statics initialization to support enter play modes
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			_instance = null;
+		}
 
 		/// <summary>
 		/// Grabs all CharacterSwap equipped characters in the scene and stores them in a list, sorted by Order
@@ -38,7 +47,7 @@ namespace MoreMountains.TopDownEngine
 		public virtual void UpdateList()
 		{
 			_characterSwapArray = FindObjectsOfType<CharacterSwap>();
-			_characterSwapList = new List<CharacterSwap>();
+			_characterSwapList = new MMCircularList<CharacterSwap>();
 
 			// stores the array into the list if the PlayerID matches
 			for (int i = 0; i < _characterSwapArray.Length; i++)
@@ -105,21 +114,25 @@ namespace MoreMountains.TopDownEngine
 				return;
 			}
 
-			int newIndex = -1;
+			int currentIndex = GetCurrentIndex();
+			_characterSwapList.CurrentIndex = currentIndex;
+			_characterSwapList.IncrementCurrentIndex();
+			int newIndex = currentIndex;
 
-			for (int i = 0; i < _characterSwapList.Count; i++)
+			int i = 0;
+			while (i < _characterSwapList.Count)
 			{
-				if (_characterSwapList[i].Current())
+				if (_characterSwapList.Current.enabled)
 				{
-					_characterSwapList[i].ResetCharacterSwap();
-					newIndex = i + 1;
+					newIndex = _characterSwapList.CurrentIndex;
+					break;
 				}
-			}
 
-			if (newIndex >= _characterSwapList.Count)
-			{
-				newIndex = 0;
+				_characterSwapList.IncrementCurrentIndex();
+				i++;
 			}
+			
+			_characterSwapList[currentIndex].ResetCharacterSwap();
 			_characterSwapList[newIndex].SwapToThisCharacter();
 
 			LevelManager.Instance.Players[0] = _characterSwapList[newIndex].gameObject.GetComponentInParent<Character>();
@@ -128,10 +141,27 @@ namespace MoreMountains.TopDownEngine
 		}
 
 		/// <summary>
+		/// Finds which character is currently active and considered the current one
+		/// </summary>
+		/// <returns></returns>
+		public virtual int GetCurrentIndex()
+		{
+			int currentIndex = -1;
+			for (int i=0; i<_characterSwapList.Count; i++)
+			{
+				if (_characterSwapList[i].Current())
+				{
+					return i;
+				}
+			}
+			return currentIndex;
+		}
+
+		/// <summary>
 		/// On Level Start, we initialize our list
 		/// </summary>
 		/// <param name="eventType"></param>
-		public void OnMMEvent(TopDownEngineEvent engineEvent)
+		public virtual void OnMMEvent(TopDownEngineEvent engineEvent)
 		{
 			switch (engineEvent.EventType)
 			{

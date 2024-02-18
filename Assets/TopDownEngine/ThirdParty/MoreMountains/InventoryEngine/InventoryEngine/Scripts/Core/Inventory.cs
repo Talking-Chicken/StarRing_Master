@@ -17,6 +17,12 @@ namespace MoreMountains.InventoryEngine
 	public class Inventory : MonoBehaviour, MMEventListener<MMInventoryEvent>, MMEventListener<MMGameEvent>
 	{
 		public static List<Inventory> RegisteredInventories;
+		
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		protected static void InitializeStatics()
+		{
+			RegisteredInventories = null;
+		}
         
 		/// The different possible inventory types, main are regular, equipment will have special behaviours (use them for slots where you put the equipped weapon/armor/etc).
 		public enum InventoryTypes { Main, Equipment }
@@ -41,7 +47,7 @@ namespace MoreMountains.InventoryEngine
 		/// the transform at which objects will be spawned when dropped
 		public Transform TargetTransform;
 
-		[Header("Persistency")]
+		[Header("Persistence")]
 		[Tooltip("Here you can define whether or not this inventory should respond to Load and Save events. If you don't want to have your inventory saved to disk, set this to false. You can also have it reset on start, to make sure it's always empty at the start of this level.")]
 		/// whether this inventory will be saved and loaded
 		public bool Persistent = true;
@@ -675,7 +681,7 @@ namespace MoreMountains.InventoryEngine
 		public virtual void ResetSavedInventory()
 		{
 			MMSaveLoadManager.DeleteSave(DetermineSaveName(), _saveFolderName);
-			Debug.LogFormat("save file deleted");
+			Debug.LogFormat("Inventory save file deleted");
 		}
 
 		/// <summary>
@@ -767,11 +773,6 @@ namespace MoreMountains.InventoryEngine
 						return;
 					}
 				}
-				// call the equip method of the item
-				if (!item.Equip(PlayerID))
-				{
-					return;
-				}
 				// if this is a mono slot inventory, we prepare to swap
 				if (item.TargetEquipmentInventory(PlayerID).Content.Length == 1)
 				{
@@ -785,6 +786,7 @@ namespace MoreMountains.InventoryEngine
 						{
 							// we store the item in the equipment inventory
 							oldItem = item.TargetEquipmentInventory(PlayerID).Content[0].Copy();
+							oldItem.UnEquip(PlayerID);
 							item.TargetEquipmentInventory(PlayerID).EmptyInventory();
 						}
 					}
@@ -807,6 +809,11 @@ namespace MoreMountains.InventoryEngine
 					{
 						AddItem(oldItem, oldItem.Quantity);    
 					}
+				}
+				// call the equip method of the item
+				if (!item.Equip(PlayerID))
+				{
+					return;
 				}
 				MMInventoryEvent.Trigger(MMInventoryEventType.ItemEquipped, slot, this.name, item, item.Quantity, index, PlayerID);
 			}
@@ -874,8 +881,22 @@ namespace MoreMountains.InventoryEngine
 			// if there's a target inventory, we'll try to add the item back to it
 			if (item.TargetInventory(PlayerID) != null)
 			{
+				bool itemAdded = false;
+				if (item.ForceSlotIndex)
+				{
+					itemAdded = item.TargetInventory(PlayerID).AddItemAt(item, item.Quantity, item.TargetIndex);
+					if (!itemAdded)
+					{
+						itemAdded = item.TargetInventory(PlayerID).AddItem(item, item.Quantity);    	
+					}
+				}
+				else
+				{
+					itemAdded = item.TargetInventory(PlayerID).AddItem(item, item.Quantity);    
+				}
+				
 				// if we managed to add the item
-				if (item.TargetInventory(PlayerID).AddItem(item, item.Quantity))
+				if (itemAdded)
 				{
 					DestroyItem(index);
 				}

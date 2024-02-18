@@ -1,0 +1,50 @@
+title: Start
+tags: 
+colorID: 0
+position: 0,0
+---
+// <<Me>> and <<Them>> are custom commands implemented in PhoneChatDialogueHelper.cs
+
+// set current speaker to "Me", the player
+<<Me>>
+Hello?
+<<wait 1>>
+Rita help me!
+
+// set current speaker to "Them", the person the player is talking to
+<<Them>>
+<<wait 1>>
+Amo!
+<<wait 2>>
+What did u get urself into again!
+<<wait 4>>
+And what is this weird UI stuff!
+<<wait 4>>
+and there's a script that clones the message bubble
+<<wait 2>>
+you'll figure it out
+<<Me>>
+<<wait 4>>
+I guess i willjust read the documentation... www.yarnspinner.dev !
+<<wait 5>>
+I should maybe add an automatic delay before a message, based on the length of the message, in PhoneChatDialogueHelper.RunLine()
+
+
+<<wait 1>>
+
+
+<<jump Bye>>
+===
+
+
+title: Bye
+tags: 
+colorID: 0
+position: 0,0
+---
+<<Them>>
+<<wait 2>>
+sorry I have to go now, bye
+<<wait 2>>
+good luck with your game!
+===

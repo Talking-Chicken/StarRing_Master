@@ -83,6 +83,11 @@ namespace MoreMountains.TopDownEngine
 		/// </summary>
 		protected override void GetCurrentAim()
 		{
+			if (!AimControlActive)
+			{
+				return;
+			}
+			
 			if (_weapon.Owner == null)
 			{
 				return;
@@ -195,6 +200,11 @@ namespace MoreMountains.TopDownEngine
 		/// <param name="newAim">New aim.</param>
 		public override void SetCurrentAim(Vector3 newAim, bool setAimAsLastNonNullMovement = false)
 		{
+			if (!AimControlActive)
+			{
+				return;
+			}
+			
 			base.SetCurrentAim(newAim, setAimAsLastNonNullMovement);
 	        
 			_lastNonNullMovement.x = newAim.x;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 114277323309942634}
   - component: {fileID: 114426053428167632}
   - component: {fileID: 114591608567984394}
+  - component: {fileID: -3322179434486976974}
   m_Layer: 0
   m_Name: TankCannon
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: 
   WeaponCurrentlyActive: 1
+  InputAuthorized: 1
   TriggerMode: 1
   DelayBeforeUse: 0
   DelayBeforeUseReleaseInterruption: 1
@@ -58,6 +60,7 @@ MonoBehaviour:
   MagazineBased: 0
   MagazineSize: 30
   AutoReload: 0
+  NoInputReload: 0
   ReloadTime: 2
   AmmoConsumedPerShot: 1
   AutoDestroyWhenEmpty: 0
@@ -68,6 +71,7 @@ MonoBehaviour:
   RightFacingFlipValue: {x: 1, y: 1, z: 1}
   LeftFacingFlipValue: {x: -1, y: 1, z: 1}
   WeaponUseTransform: {fileID: 0}
+  WeaponShouldFlip: 1
   LeftHandHandle: {fileID: 0}
   RightHandHandle: {fileID: 0}
   ModifyMovementWhileAttacking: 1
@@ -77,6 +81,7 @@ MonoBehaviour:
   RecoilForce: 0
   Animators: []
   PerformAnimatorSanityChecks: 0
+  MirrorCharacterAnimatorParameters: 0
   WeaponAnimationID: 0
   IdleAnimationParameter: 
   StartAnimationParameter: 
@@ -90,6 +95,7 @@ MonoBehaviour:
   ReloadStopAnimationParameter: 
   WeaponAngleAnimationParameter: 
   WeaponAngleRelativeAnimationParameter: 
+  EquippedAnimationParameter: 
   WeaponStartMMFeedback: {fileID: 0}
   WeaponUsedMMFeedback: {fileID: 0}
   WeaponUsedMMFeedbackAlt: {fileID: 0}
@@ -100,6 +106,7 @@ MonoBehaviour:
   Interruptable: 0
   Flipped: 0
   ProjectileSpawnOffset: {x: 0, y: 0.16, z: 0.57}
+  DefaultProjectileDirection: {x: 0, y: 0, z: 1}
   ProjectilesPerShot: 1
   SpawnTransforms: []
   SpawnTransformsMode: 1
@@ -107,6 +114,7 @@ MonoBehaviour:
   RotateWeaponOnSpread: 0
   RandomSpread: 1
   SpawnPosition: {x: 0, y: 0.16, z: 0.57}
+  ObjectPooler: {fileID: 0}
   SpawnFeedbacks: []
   TestShootButton: 0
 --- !u!114 &114426053428167632
@@ -122,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AimControl: 5
+  AimControlActive: 1
   RotationMode: 0
   WeaponRotationSpeed: 5
   MinimumAngle: -180
@@ -146,6 +155,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   MaximumSlopeElevation: 50
+  AvoidNullAim: 1
 --- !u!114 &114591608567984394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +175,18 @@ MonoBehaviour:
     type: 3}
   PoolSize: 20
   PoolCanExpand: 1
+--- !u!114 &-3322179434486976974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421979490917578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e471cd75c6d63b444a011599dabb4f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckMouse: 1
+  CheckPrimaryAxis: 0
+  CheckSecondaryAxis: 1
