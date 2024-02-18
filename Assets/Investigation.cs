@@ -1,29 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
-public class Investigation : MonoBehaviour
+public class Investigation : Interactable
 {
     // Start is called before the first frame update
     public string interact_name;
     public Transform ui_location;
-    void Start()
-    {
-        
-    }
+ 
+    /*[SerializeField] GameObject bubbleText;
+    private bool once = true;
+    DialogueRunner bubbleRunner;*/
+    [SerializeField] string shortnodeName;
+    [SerializeField] string longnodeName;
+    PlayerProperty player;
+    // GameObject spawnedObject;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-      
+        player=FindObjectOfType<PlayerProperty>();
     }
 
     public void InvestigationContent() 
     {
-        Debug.Log("test, lamp");
+      //  base.Interact(player);
+        StartDialogue(shortnodeName);
+      //  ChangeState(stateDialogue);
     }
+   
     public void ActualInvestigationContent()
     {
-        Debug.Log("test, lamp");
+        StartDialogue(longnodeName);
     }
 }
