@@ -145,6 +145,7 @@ public class Interactable : MonoBehaviour
     protected void Investigate(Investigation targetInvestigation)
     {
         targetInvestigation.Investigate(this);
+        interactingInvestigation = detectingInvestigation;
         ChangeState(stateInvestigating);
     }
 
