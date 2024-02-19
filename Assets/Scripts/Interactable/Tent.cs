@@ -9,7 +9,6 @@ public class Tent : Interactable
     [SerializeField] MMF_Player feedbacks;
     private Quaternion initialRotation;
     [SerializeField] GameObject tentCamera;
-    public InteractableStateInvest stateInvest = new InteractableStateInvest();
     protected override void Start()
     {
         base.Start();
@@ -22,5 +21,6 @@ public class Tent : Interactable
         feedbacks.PlayFeedbacks();
         tentCamera.transform.rotation = initialRotation;
         tentCamera.GetComponent<FPSCameraControl>().Activied = true;
+        ChangeState(stateInvest);
     }
 }

@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableStateInvest : InteractableStateBase
+public class InteractableStateInvestigating : InteractableStateBase
 {
     public override void EnterState(Interactable interactable)
     {
-        Debug.Log("Started Investigation");
+        Debug.Log("Started Investigating");
     }
     public override void UpdateState(Interactable interactable)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            interactable.DetectInvestigatable();
-        }
+        interactable.InvestigatableUpdate();
     }
     public override void LeaveState(Interactable interactable) { }
 }

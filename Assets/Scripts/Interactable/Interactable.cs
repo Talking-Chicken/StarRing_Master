@@ -15,6 +15,9 @@ public class Interactable : MonoBehaviour
     [SerializeField, BoxGroup("Interaction Settings"), Tooltip("whether this interactable needs update each frame")] private bool requiresUpdate = false;
     [SerializeField, BoxGroup("Interaction Settings")] private List<Transform> interactPositions;
     [SerializeField, BoxGroup("Interaction Settings"), Tooltip("player needs to move closer than this number to start interact")] private float minInteractDistance = 0.2f;
+    [SerializeField, BoxGroup("Investigation")] protected Investigation interactingInvestigation = null, detectingInvestigation = null;
+    [BoxGroup("Investigation")] protected Ray mouseRay;
+    [BoxGroup("Investigation")] protected RaycastHit mouseHit;
     [SerializeField, Foldout("Listeners")] protected InteractableActionListener _interactListener;
     [SerializeField, Foldout("Listeners")] protected DialogueActionListener _dialogueListener;
     [SerializeField, Foldout("Listeners")] protected PlayerActionListener _playerListener;
@@ -29,6 +32,8 @@ public class Interactable : MonoBehaviour
     public InteractableStateBase previousState;
     public InteractableStateIdle stateIdle = new InteractableStateIdle();
     public InteractableStateDialogue stateDialogue = new InteractableStateDialogue();
+    public InteractableStateInvest stateInvest = new InteractableStateInvest();
+    public InteractableStateInvestigating stateInvestigating = new InteractableStateInvestigating();
 
     public void ChangeState(InteractableStateBase newState)
     {
@@ -78,6 +83,7 @@ public class Interactable : MonoBehaviour
         currentState.UpdateState(this);
     }
 
+    #region Interact
     public virtual void Interact(PlayerProperty player) {
         if (player == null)
             return;
@@ -103,7 +109,9 @@ public class Interactable : MonoBehaviour
             return;
         StopInteract();
     }
+    #endregion
 
+    #region Dialogue
     public virtual void StartDialogue(string startNode) {
         _dialogueListener.startDialogue.Invoke(startNode);
         ChangeState(stateDialogue);
@@ -119,6 +127,32 @@ public class Interactable : MonoBehaviour
     public virtual void NextDialogueLine() {
         _dialogueListener.nextLine.Invoke();
     }
+    #endregion
+
+    #region Invest
+    public void DetectInvestigatable()
+    {
+        mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(mouseRay, out mouseHit))
+        {
+            if (mouseHit.transform.TryGetComponent<Investigation>(out detectingInvestigation))
+            {
+                Investigate(detectingInvestigation);
+            }
+        }
+    }
+
+    protected void Investigate(Investigation targetInvestigation)
+    {
+        targetInvestigation.Investigate(this);
+        ChangeState(stateInvestigating);
+    }
+
+    public void InvestigatableUpdate()
+    {
+        interactingInvestigation.InvestigationUpdate();
+    }
+    #endregion
 
     public virtual Transform GetNearestInteractingPoint(Transform interactor)
     {
