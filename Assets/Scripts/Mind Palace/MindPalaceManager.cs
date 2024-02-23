@@ -8,6 +8,18 @@ public class MindPalaceManager : MonoBehaviour
 {
     List<Node> nodes = new();
     public static MindPalaceManager activeManager;
+
+    MindPalaceListener _listener;
+    public MindPalaceListener MindPalaceListener
+    {
+        get
+        {
+            if (!_listener)
+                _listener = GetComponent<MindPalaceListener>();
+            return _listener;
+        }
+        set => _listener = value;
+    }
     private void Awake()
     {
         activeManager = this;
@@ -44,10 +56,11 @@ public class MindPalaceManager : MonoBehaviour
     }
     public void ActiveNode(string name)
     {
-        Node node = nodes.Find(node => node.ID.Equals(name,System.StringComparison.OrdinalIgnoreCase));
+        Node node = nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase));
         if (node != null)
         {
             node.gameObject.SetActive(true);
+            node.GetComponent<MindPalaceNodeListener>().InvokeActiveEvent();
         }
         else
         {
@@ -57,6 +70,23 @@ public class MindPalaceManager : MonoBehaviour
     public bool GetNodeActive(string name)
     {
         return nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase)).gameObject.activeSelf;
+    }
+
+
+    public bool TryGetNode(string name, out MindPalaceNode node)
+    {
+        Node findNode = nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+        if (findNode == null)
+        {
+            node = null;
+            return false;
+        }
+        node = findNode.GetComponent<MindPalaceNode>();
+        return node != null;
+    }
+    public MindPalaceNode GetNode(string name)
+    {
+        return nodes.Find(node => node.ID.Equals(name, System.StringComparison.OrdinalIgnoreCase)).GetComponent<MindPalaceNode>();
     }
     public void SetNodeState(string name, int state)
     {

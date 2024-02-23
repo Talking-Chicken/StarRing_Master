@@ -14,7 +14,8 @@ using UnityEditor.TerrainTools;
 public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
 {
     Node _node;
-    public Node Node {
+    public Node Node
+    {
         get
         {
             if (!_node)
@@ -22,6 +23,11 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
             return _node;
         }
         set => _node = value;
+    }
+
+    public string ID
+    {
+        get { return _node.ID; }
     }
 
     public bool active;
@@ -40,6 +46,19 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
     //range of related node
     const float relatedRange = 800f;
     const float reactiveTime = 2.5f;
+
+    MindPalaceNodeListener _nodeListener;
+    public MindPalaceNodeListener NodeListener
+    {
+        get
+        {
+            if (!_nodeListener)
+                _nodeListener = GetComponent<MindPalaceNodeListener>();
+            return _nodeListener;
+        }
+        set => _nodeListener = value;
+    }
+
 
     public bool Reacting { get; private set; } = false;
     // Start is called before the first frame update
@@ -79,7 +98,14 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
     {
         if (onDragging && Input.GetMouseButtonUp(0))
         {
+            NodeListener.SetDraggingTimer(0);
             onDragging = false;
+            MindPalaceManager.activeManager.MindPalaceListener.dragging = false;
+        }
+        else if (onDragging)
+        {
+            NodeListener.SetDraggingTimer(NodeListener.DraggingTimer + Time.deltaTime);
+            MindPalaceManager.activeManager.MindPalaceListener.dragging = true;
         }
         if (onDragging && !Reacting)
         {
@@ -127,7 +153,7 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
         }
         else
         {
-            Debug.LogError(Node.ID+$":state index {index} out of range");
+            Debug.LogError(Node.ID + $":state index {index} out of range");
         }
     }
 
@@ -162,7 +188,7 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         onDragging = true;
-        Debug.Log(this.gameObject.name + " Was Clicked.");
+        Debug.Log(ID + "(" + this.gameObject.name + ")" + " Was Clicked.");
     }
 
     //save a connection
