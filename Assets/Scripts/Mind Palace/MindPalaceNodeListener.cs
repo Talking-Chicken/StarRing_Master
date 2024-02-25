@@ -41,7 +41,7 @@ public class MindPalaceNodeListener : MonoBehaviour
     }
     public void InvokeActiveEvent()
     {
-        foreach(UnityEvent activeEvent in onactiveEvent)
+        foreach (UnityEvent activeEvent in onactiveEvent)
         {
             activeEvent.Invoke();
         }
@@ -94,10 +94,10 @@ public class MindPalaceConditionCheck
 
 
 [Serializable]
-public class MindPalaceDraggingConditionCheck: MindPalaceConditionCheck
+public class MindPalaceDraggingConditionCheck : MindPalaceConditionCheck
 {
-    [Range(0.1f,30f)]
-    [SerializeField] public float draggingTime=.2f;
+    [Range(0.1f, 30f)]
+    [SerializeField] public float draggingTime = .2f;
     private bool draggingInvoked;
     public bool CheckCondition(float timer)
     {
@@ -109,6 +109,7 @@ public class MindPalaceDraggingConditionCheck: MindPalaceConditionCheck
         {
             return false;
         }
+        draggingInvoked = true;
         return base.CheckCondition();
     }
     public override void Reset()

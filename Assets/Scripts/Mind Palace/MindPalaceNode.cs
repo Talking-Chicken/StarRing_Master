@@ -132,6 +132,7 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
             {
                 //react
                 nextNode.gameObject.SetActive(true);
+                nextNode.GetComponent<MindPalaceNodeListener>().InvokeActiveEvent();
                 Debug.Log("react");
                 break;
             }

@@ -8,9 +8,9 @@ public class MindPalaceListener : MonoBehaviour
 {
     MindPalaceManager _manager;
 
-    public bool dragging = false;
+    [HideInInspector]public bool dragging = false;
     public float triggerIntervalTime = 15;
-    public int invokedTimes;
+    private int invokedTimes;
     public UnityEvent idleEvent;
     public MindPalaceManager Manager
     {
