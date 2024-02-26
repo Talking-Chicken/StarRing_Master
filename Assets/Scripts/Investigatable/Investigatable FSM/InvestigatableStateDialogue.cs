@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class InvestigatableStateDialogue : InvestigatableStateBase
 {
-    public override void EnterState(Investigation investigation) {}
+    public override void EnterState(Investigation investigation) {
+        investigation.RegisterDialogueCompleteEvent();
+    }
     public override void UpdateState(Investigation investigation) 
     {
         if (Input.GetMouseButtonDown(0))
@@ -13,5 +15,7 @@ public class InvestigatableStateDialogue : InvestigatableStateBase
             investigation.NextDialogueLine();
         }
     }
-    public override void LeaveState(Investigation investigation) {}
+    public override void LeaveState(Investigation investigation) {
+        investigation.UnRegisterDialogueCompleteEvent();
+    }
 }

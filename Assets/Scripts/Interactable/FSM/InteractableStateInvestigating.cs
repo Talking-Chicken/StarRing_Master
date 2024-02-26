@@ -12,5 +12,7 @@ public class InteractableStateInvestigating : InteractableStateBase
     {
         interactable.InvestigatableUpdate();
     }
-    public override void LeaveState(Interactable interactable) { }
+    public override void LeaveState(Interactable interactable) {
+        Debug.Log("Ended Investigating");
+    }
 }

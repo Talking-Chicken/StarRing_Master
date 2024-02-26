@@ -6,6 +6,7 @@ using UnityEngine;
 public class InteractableStateDialogue : InteractableStateBase
 {
     public override void EnterState(Interactable interactable){
+        interactable.RegisterDialogueCompleteEvent();
         Debug.Log("Started dialogue");
     }
     public override void UpdateState(Interactable interactable){
@@ -13,5 +14,7 @@ public class InteractableStateDialogue : InteractableStateBase
             interactable.NextDialogueLine();
         }
     }
-    public override void LeaveState(Interactable interactable){}
+    public override void LeaveState(Interactable interactable){
+        interactable.UnRegisterDialogueCompleteEvent();
+    }
 }

@@ -21,6 +21,7 @@ public class Interactable : MonoBehaviour
     [SerializeField, Foldout("Listeners")] protected InteractableActionListener _interactListener;
     [SerializeField, Foldout("Listeners")] protected DialogueActionListener _dialogueListener;
     [SerializeField, Foldout("Listeners")] protected PlayerActionListener _playerListener;
+    [SerializeField, BoxGroup("Debug"), ReadOnly] private string currentStateName;
 
     // getters & setters
     public InteractableType Type {get=>type; protected set=>type=value;}
@@ -45,6 +46,7 @@ public class Interactable : MonoBehaviour
 
             previousState = currentState;
             currentState = newState;
+            currentStateName = currentState.ToString();
 
             if (currentState != null)
             {
@@ -63,13 +65,13 @@ public class Interactable : MonoBehaviour
     protected virtual void OnEnable() {
         _interactListener.interact.AddListener(Interact);
         _interactListener.stopInteract.AddListener(StopInteract);
-        _dialogueListener.dialogueCompleted.AddListener(OnDialogueCompleted);
+        _playerListener.stopInvestigate.AddListener(StopInvestigate);
     }
 
     protected virtual void OnDisable() {
         _interactListener.interact.RemoveListener(Interact);
         _interactListener.stopInteract.RemoveListener(StopInteract);
-        _dialogueListener.dialogueCompleted.RemoveListener(OnDialogueCompleted);
+        _playerListener.stopInvestigate.RemoveListener(StopInvestigate);
     }
 
     protected virtual void Start() {
@@ -99,7 +101,7 @@ public class Interactable : MonoBehaviour
         Interact(player);
     }
 
-    public virtual void StopInteract() {
+    protected virtual void StopInteract() {
         StopDialogue();
         _playerListener.stopInteract.Invoke(this);
     }
@@ -120,6 +122,16 @@ public class Interactable : MonoBehaviour
     public virtual void StopDialogue() {
         _dialogueListener.stopDialogue.Invoke();    
         ChangeState(stateIdle);
+    }
+
+    public void RegisterDialogueCompleteEvent()
+    {
+        _dialogueListener.dialogueCompleted.AddListener(OnDialogueCompleted);
+    }
+
+    public void UnRegisterDialogueCompleteEvent()
+    {
+        _dialogueListener.dialogueCompleted.RemoveListener(OnDialogueCompleted);
     }
 
     protected virtual void OnDialogueCompleted() {}
@@ -152,6 +164,14 @@ public class Interactable : MonoBehaviour
     public void InvestigatableUpdate()
     {
         interactingInvestigation.InvestigationUpdate();
+    }
+
+    protected void StopInvestigate(Investigation targetInvestigation)
+    {
+        if (interactingInvestigation != targetInvestigation)
+            return;
+        
+        ChangeState(stateInvest);
     }
     #endregion
 

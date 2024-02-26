@@ -150,8 +150,8 @@ public class PlayerManager : MonoBehaviour
 
         _mainCamera = Camera.main;
 
-        //add exit dialogue state function to dialogue runner's OnDialogueComplete event
-        _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
+        // //add exit dialogue state function to dialogue runner's OnDialogueComplete event
+        // _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
 
     
@@ -218,27 +218,6 @@ public class PlayerManager : MonoBehaviour
         
         Vector3 targetDirection = target.position - transform.position;
         _characterMovement.SetMovement(targetDirection);
-        print("AAAAAAAAAAAAA");
-        // _characterOrientation.Face(Vector3.one * 180);
-        // _characterMovement.move
-        // // Direction from the current object to the target
-        // Vector3 targetDirection = target.position - transform.position;
-
-        // // Calculate a rotation looking at the target direction
-        // Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
-
-        // // Smoothly interpolate the object's rotation towards the target rotation
-        // StartCoroutine(RotateSlerp(lookRotation, 1));
-    }
-
-    IEnumerator RotateSlerp(Quaternion lookRotation, float duration) {
-        float currentTime = 0.0f;
-        while (currentTime < duration) {
-            currentTime += Time.deltaTime;
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, currentTime / duration);
-            print("AAAAAAAAAAAAAAAAA");
-            yield return null;
-        }
     }
  
     /// ray cast from camera to mouse world position,
