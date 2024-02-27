@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lamp : Investigation
+public class CampInvest : Investigation
 {
     private FPSCameraControl cameraControl;
     [SerializeField] private string shortnodeName;

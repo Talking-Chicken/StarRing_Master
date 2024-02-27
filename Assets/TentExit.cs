@@ -7,6 +7,10 @@ public class TentExit : Investigation
     private FPSCameraControl cameraControl;
     [SerializeField] private string shortnodeName;
     [SerializeField] private string longNodeName;
+    private void Update()
+    {
+        
+    }
     public override void Investigate(Interactable interactable)
     {
         base.Investigate(interactable);

@@ -13,8 +13,26 @@ public class RitaInteractionNightTent : Interactable
 
         base.Interact(player);
 
-        // _dialogueListener.startDialogue.Invoke("Argument1");
-        StartDialogue("Argument1");
+        if (MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
+        {
+            if (MindPalaceManager.activeManager.GetNodeActive("repair_service") || MindPalaceManager.activeManager.GetNodeActive("magic_research")|| MindPalaceManager.activeManager.GetNodeActive("you_are_a_spy") || MindPalaceManager.activeManager.GetNodeActive("refund_soda"))
+            {
+                StartDialogue("Ritabeforesolution");
+            }
+            else 
+            {
+                StartDialogue("Ritahavesolution");
+            }
+        }
+        else {
+            StartDialogue("RitaNight");
+        }
+       
         //  StopInteract();
+    }
+    protected override void OnDialogueCompleted()
+    {
+        base.OnDialogueCompleted();
+        StopInteract();
     }
 }
