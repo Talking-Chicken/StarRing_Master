@@ -132,5 +132,10 @@ public class YarnCommandManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+    [YarnCommand("TentStopInteraction")]
+    public void TentStopInteract(GameObject Interactable)
+    {
+        Interactable.GetComponent<Tent>().StopInteraction();
+    }
 }
 

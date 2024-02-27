@@ -36,12 +36,7 @@ public class FPSCameraControl : MonoBehaviour
             if (Activied) 
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                if (Input.GetMouseButtonDown(1)) 
-                {
-                    Cursor.lockState= CursorLockMode.None;
-
-                    Activied = false;
-                }
+              
             }
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

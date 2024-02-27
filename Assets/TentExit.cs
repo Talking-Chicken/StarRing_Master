@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lamp : Investigation
+public class TentExit : Investigation
 {
     private FPSCameraControl cameraControl;
     [SerializeField] private string shortnodeName;
@@ -23,6 +23,7 @@ public class Lamp : Investigation
     {
         base.StopInvestigate();
         cameraControl.canControl = true;
+      
     }
 
     protected override void OnDialogueCompleted()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sign : Interactable
+public class SignalDevice : Interactable
 {
     protected override void Start()
     {
@@ -12,7 +12,7 @@ public class Sign : Interactable
     {
         base.Interact(player);
         // _dialogueListener.startDialogue.Invoke("Argument1");
-        StartDialogue("NoCampingSign");
+        StartDialogue("SignalDevice");
         //  StopInteract();
     }
     protected override void OnDialogueCompleted()

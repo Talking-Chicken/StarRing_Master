@@ -1,40 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MoreMountains.TopDownEngine;
+using TMPro;
 using MoreMountains.Feedbacks;
 
-public class Tent : Interactable
+public class LaptopInteraction : Interactable
 {
     [SerializeField] MMF_Player feedbacks;
-    private Quaternion initialRotation;
-    [SerializeField] public FPSCameraControl tentCamera;
-    
+    [SerializeField] TextMeshProUGUI photoTitle;
     protected override void Start()
     {
         base.Start();
-        initialRotation = tentCamera.transform.rotation; 
+       
 
     }
     private void Update()
     {
-        
-
+        if (photoTitle.text=="Magic Detecion Hardware"&& !MindPalaceManager.activeManager.GetNodeActive("ResearchNote")) 
+        {
+            StartDialogue("LaptopInvestiagtion");
+        }
+      
     }
     public override void Interact(PlayerProperty player)
     {
         base.Interact(player);
         feedbacks.PlayFeedbacks();
-        tentCamera.transform.rotation = initialRotation;
-        tentCamera.Activied = true;
-        ChangeState(stateInvest);
-        
+
+
     }
     public void StopInteraction()
     {
-        tentCamera.Activied = false;
+        
         feedbacks.RestoreInitialValues();
         StopInteract();
-        Cursor.lockState = CursorLockMode.None;
-    }    
+        
+    }
 }
