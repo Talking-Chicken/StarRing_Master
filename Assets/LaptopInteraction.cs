@@ -24,9 +24,12 @@ public class LaptopInteraction : Interactable
     }
     public override void Interact(PlayerProperty player)
     {
-        base.Interact(player);
-        feedbacks.PlayFeedbacks();
+        if (!MindPalaceManager.activeManager.GetNodeActive("ResearchNote")) 
+        {
+            base.Interact(player);
+            feedbacks.PlayFeedbacks();
 
+        }
 
     }
     public void StopInteraction()
