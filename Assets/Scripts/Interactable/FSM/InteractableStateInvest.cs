@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class InteractableStateInvest : InteractableStateBase
 {
-    private float cd = 3;
+    private float cd = 0.5f;
     public override void EnterState(Interactable interactable)
     {
-        cd = 3;
+        cd = 0.5f;
     }
     public override void UpdateState(Interactable interactable)
     {
-        if (cd >= 3)
+        if (cd >= 0)
         {
             cd -= Time.deltaTime;
         }
