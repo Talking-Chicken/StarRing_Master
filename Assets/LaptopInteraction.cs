@@ -30,12 +30,12 @@ public class LaptopInteraction : Interactable
             StartDialogue("talktoRita");
         }
         else {
-            if (!MindPalaceManager.activeManager.GetNodeActive("ResearchNote"))
-            {
+          
                 base.Interact(player);
                 feedbacks.PlayFeedbacks();
 
-            }
+            
+            
         }
     }
     protected override void OnDialogueCompleted()
