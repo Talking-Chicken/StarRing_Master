@@ -24,13 +24,27 @@ public class LaptopInteraction : Interactable
     }
     public override void Interact(PlayerProperty player)
     {
-        if (!MindPalaceManager.activeManager.GetNodeActive("ResearchNote")) 
+       
+        if (!MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
         {
-            base.Interact(player);
-            feedbacks.PlayFeedbacks();
-
+            StartDialogue("talktoRita");
         }
+        else {
+            if (!MindPalaceManager.activeManager.GetNodeActive("ResearchNote"))
+            {
+                base.Interact(player);
+                feedbacks.PlayFeedbacks();
 
+            }
+        }
+    }
+    protected override void OnDialogueCompleted()
+    {
+        if (!MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
+        {
+            base.OnDialogueCompleted();
+            StopInteract();
+        }
     }
     public void StopInteraction()
     {

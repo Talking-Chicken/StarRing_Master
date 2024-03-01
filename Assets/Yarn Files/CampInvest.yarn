@@ -15,7 +15,7 @@ tags:
 position: -64,128
 ---
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem Camping_Lamp>>
+<<nodeStatus StarRingDialogueSystem Camping_Lamp $tempBool>>
 <<if $tempBool>>
     Mr. Rabbit: I've just added a malfunctioning camping lantern to our Logic Map. Although I don't know why.
 <<else>>
@@ -48,7 +48,7 @@ tags:
 position: -64,128
 ---
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem SignalDevice>>
+<<nodeStatus StarRingDialogueSystem SignalDevice $tempBool>>
 <<if $tempBool>>
     Amo: It looks like Rita is trying to restore power to this signal interception device. Wonder what she plans to do with this kind of specialized equipment.
 <<else>>
@@ -70,12 +70,12 @@ tags:
 position: -64,128
 ---
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem Soda>>
+<<nodeStatus StarRingDialogueSystem Soda $tempBool>>
 <<if $tempBool>>
-    Mr. Rabbit: I've just added a malfunctioning camping lantern to our Logic Map. Although I don't know why.
+    Mr. Rabbit: I've now integrated the least popular soda in history into our logic map.
 <<else>>
-    Amo: Maybe this malfunctioning lantern is related to why Rita came to our store?
-    Mr. Rabbit: Maybe... Yeah, wait, how so?
+    Mr. Rabbit: Wait a second, Amo, are you sure you want to add the soda to our logic map?
+    Amo: I really don't know. Maybe the presence of these sodas signifies why Rita came to the convenience store.
     <<activeNode StarRingDialogueSystem Soda>>
 <<endif>>
 ===
@@ -93,7 +93,7 @@ tags:
 position: -64,128
 ---
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem WeirdDevice>>
+<<nodeStatus StarRingDialogueSystem WeirdDevice $tempBool>>
 <<if $tempBool>>
     Mr. Rabbit: Great, now our shared brain is filled with everything under the sun.
 <<else>>

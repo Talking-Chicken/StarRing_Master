@@ -23,12 +23,18 @@ public class Tent : Interactable
     }
     public override void Interact(PlayerProperty player)
     {
-        base.Interact(player);
-        feedbacks.PlayFeedbacks();
-        tentCamera.transform.rotation = initialRotation;
-        tentCamera.Activied = true;
-        ChangeState(stateInvest);
-        
+        if (MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
+        {
+            base.Interact(player);
+            feedbacks.PlayFeedbacks();
+            tentCamera.transform.rotation = initialRotation;
+            tentCamera.Activied = true;
+            ChangeState(stateInvest);
+        }
+        else 
+        {
+            StartDialogue("talktoRita");
+        }
     }
     public void StopInteraction()
     {
@@ -36,5 +42,13 @@ public class Tent : Interactable
         feedbacks.RestoreInitialValues();
         StopInteract();
         Cursor.lockState = CursorLockMode.None;
-    }    
+    }
+    protected override void OnDialogueCompleted()
+    {
+        if (!MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
+        {
+            base.OnDialogueCompleted();
+            StopInteract();
+        }
+    }
 }

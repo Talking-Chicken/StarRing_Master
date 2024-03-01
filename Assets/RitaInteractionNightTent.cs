@@ -12,16 +12,17 @@ public class RitaInteractionNightTent : Interactable
     {
 
         base.Interact(player);
-
+        //StopDialogue();
         if (MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
         {
             if (MindPalaceManager.activeManager.GetNodeActive("repair_service") || MindPalaceManager.activeManager.GetNodeActive("magic_research")|| MindPalaceManager.activeManager.GetNodeActive("you_are_a_spy") || MindPalaceManager.activeManager.GetNodeActive("refund_soda"))
             {
-                StartDialogue("Ritabeforesolution");
+                StartDialogue("Ritahavesolution");
+                
             }
             else 
             {
-                StartDialogue("Ritahavesolution");
+                StartDialogue("Ritabeforesolution");
             }
         }
         else {

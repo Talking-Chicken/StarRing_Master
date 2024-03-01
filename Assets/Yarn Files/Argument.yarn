@@ -2,7 +2,7 @@ title: Argument1
 tags:
 ---
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
+<<nodeStatus StarRingDialogueSystem Camper_in_the_store $tempBool>>
 
 <<if $tempBool>>
         <<feedbackPlayer StarRingDialogueSystem ArgumentCameraFeedback>>
@@ -44,12 +44,12 @@ tags:
 <<feedbackPlayer StarRingDialogueSystem SignCameraFeedback>>
 Amo:Hmmm.
 <<set $tempBool = false>>
-<<nodeStatus StarRingDialogueSystem Camper_in_the_store>>
+<<nodeStatus StarRingDialogueSystem Camper_in_the_store $tempBool>>
 <<if $tempBool>>
 Amo: Is this the 'No Camping' sign they are talking about?
 <<set $tempBool = false>>
     <<activeNode StarRingDialogueSystem No_camping_sign>>
-    <<nodeStatus StarRingDialogueSystem remove_sign>>
+    <<nodeStatus StarRingDialogueSystem remove_sign $tempBool>>>
     -> do something
         <<if $tempBool>>
         Lacey: Amo, I've handled the customer complaint and I'm heading to the front to help with checkout.
@@ -100,7 +100,7 @@ tags:
 ---
 <<feedbackPlayer StarRingDialogueSystem CameraFadeIn>>
 <<Rita stands up in an animated fashion>>
- <<feedbackPlayer StarRingDialogueSystem CameraFadeOut>>
+<<feedbackPlayer StarRingDialogueSystem CameraFadeOut>>
 Mr. Rabbit: Wow, this lady sure doesn't hold back. Give her a camping spot, and she takes over the whole dining area.
 Rita: Hey, you're the other clerk, right? Not the annoying one who keeps telling me what I can't do all day, but the other one.
 Amo: Ah... ha... I think we only have two clerks in total.

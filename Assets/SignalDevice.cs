@@ -11,8 +11,14 @@ public class SignalDevice : Interactable
     public override void Interact(PlayerProperty player)
     {
         base.Interact(player);
-        // _dialogueListener.startDialogue.Invoke("Argument1");
-        StartDialogue("SignalDevice");
+        if (MindPalaceManager.activeManager.GetNodeActive("question_Rita_store"))
+        {
+            StartDialogue("SignalDevice"); 
+        }
+        else {
+            StartDialogue("talktoRita"); 
+        }
+            
         //  StopInteract();
     }
     protected override void OnDialogueCompleted()
