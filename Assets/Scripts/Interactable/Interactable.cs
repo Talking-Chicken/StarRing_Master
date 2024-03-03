@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public enum InteractableType {OBJ, NPC, EXM}
+public enum InteractableType {OBJ, NPC, EXM, DOOR, INTERACTION, Normal}
 
 /// this is the parent class for all interactable objects
 public class Interactable : MonoBehaviour

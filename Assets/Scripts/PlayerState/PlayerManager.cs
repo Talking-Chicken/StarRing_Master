@@ -233,6 +233,7 @@ public class PlayerManager : MonoBehaviour
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, interactionRaycastMask))
         {
             hitInfo.transform.TryGetComponent<Interactable>(out interactable);
+            
         }
         return interactable;
     }
@@ -241,11 +242,12 @@ public class PlayerManager : MonoBehaviour
     public void OnMouseStartHoverInterOBJ() {
         if (HoveringInteractable != null) {
             // draw outlines
-            foreach (Material mat in HoveringInteractable.OutlineMats)
-                mat.SetFloat("_OutlineWidth", 2.5f);
-            
-            // invoke events
-            // _playerListener.OnMouseStartHoverInteractable(HoveringInteractable);
+            //  foreach (Material mat in HoveringInteractable.OutlineMats)
+            //    mat.SetFloat("_OutlineWidth", 2.5f);
+          
+           
+               HoveringInteractable.GetComponent<AddOutline>().enableHighlight = true;
+            PointerChanger.Instance.ChangeCursor(HoveringInteractable.GetComponent<Interactable>().Type);
         }
     }
 
@@ -255,7 +257,11 @@ public class PlayerManager : MonoBehaviour
             // clear outlines
             foreach (Material mat in PreHoveringInteractable.OutlineMats)
                 mat.SetFloat("_OutlineWidth", 0.0f);
-
+            PreHoveringInteractable.GetComponent<AddOutline>().enableHighlight = false;
+            if (HoveringInteractable == null)
+            {
+                PointerChanger.Instance.ChangeCursor(InteractableType.Normal);
+            }
             // invoke events
             // _playerListener.OnMouseEndHoverInteractable(HoveringInteractable);
         }
