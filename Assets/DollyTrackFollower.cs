@@ -28,7 +28,7 @@ public class DollyTrackFollower : MonoBehaviour
             targetPosition = new Vector3(playerPosition.x + initialDistance.x,transform.position.y,transform.position.z);
 
 
-            Debug.Log("initialDistance"+ playerPosition);
+         //   Debug.Log("initialDistance"+ playerPosition);
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
         }
     }

@@ -30,7 +30,7 @@ public class BubbleText : MonoBehaviour
                 Amo = FindObjectOfType<PlayerManager>();
             }
 
-            if (Vector3.Distance(transform.position, Amo.transform.position) < 1&&once)
+            if (Vector3.Distance(transform.position, Amo.transform.position) < 2&&once)
             {
                 once = false;
                 spawnedObject = Instantiate(bubbleText);

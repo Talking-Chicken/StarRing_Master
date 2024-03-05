@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CashierDesk : InteractableObj, IInteractable
+public class CashierDesk : Interactable
 {
     protected override void Start()
     {

@@ -15,4 +15,9 @@ public class Sign : Interactable
         StartDialogue("NoCampingSign");
         //  StopInteract();
     }
+    protected override void OnDialogueCompleted()
+    {
+        base.OnDialogueCompleted();
+        StopInteract();
+    }
 }

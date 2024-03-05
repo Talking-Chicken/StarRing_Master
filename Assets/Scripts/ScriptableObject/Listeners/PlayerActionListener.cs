@@ -9,16 +9,24 @@ public class PlayerActionListener : ScriptableObject
     [System.NonSerialized]
     public UnityEvent<PlayerManager, Interactable> onInteractWithInteractable; //param: PlayerManager player, Interactable things that player interacting with
     [System.NonSerialized]
-    public UnityEvent<Interactable> stopInteract; //param: Interactable the interactable that just stop interacting with
+    public UnityEvent<Interactable> stopInteract; //param: Interactable the interactable that just stopped interacting with
+    [System.NonSerialized]
+    public UnityEvent<Investigation> stopInvestigate; //param: Investigation the investigatable that just stopped investigate
     [System.NonSerialized]
     public UnityEvent<Transform> moveToDestination; //param: Transform destination transform
+    [System.NonSerialized]
+    public UnityEvent<Transform> rotateToward; //param: Transform aim target
 
     void OnEnable() {
         if (onInteractWithInteractable == null)
             onInteractWithInteractable = new UnityEvent<PlayerManager, Interactable>();
         if (stopInteract == null)
             stopInteract = new UnityEvent<Interactable>();
+        if (stopInvestigate == null)
+            stopInvestigate = new UnityEvent<Investigation>();
         if (moveToDestination == null)
             moveToDestination = new UnityEvent<Transform>();
+        if (rotateToward == null)
+            rotateToward = new UnityEvent<Transform>();
     }
 }

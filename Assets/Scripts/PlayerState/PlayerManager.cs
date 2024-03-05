@@ -11,20 +11,19 @@ using MoreMountains.Feedbacks;
 using UnityEngine.EventSystems;
 using System.Linq;
 
+[RequireComponent (typeof(PlayerProperty))]
 public class PlayerManager : MonoBehaviour
 {
     //info
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterPathfinder3D _characterPathFinder;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterMovement _characterMovement;
     [ReadOnly, SerializeField, Foldout("Info")] private MouseControls3D _mouseControl3D;
-    [ReadOnly, SerializeField, Foldout("Info")] private DialogueUIManager _dialogueManager;
     [ReadOnly, SerializeField, Foldout("Info")] private DialogueRunner _dialogueRunner;
     [ReadOnly, SerializeField, Foldout("Info")] private CharacterOrientation3D _characterOrientation;
     [SerializeField] private PlayerProperty property;
     // [SerializeField, Foldout("Listeners")] private PlayerListener _playerListener;
     [SerializeField, Foldout("Listeners")] private PlayerActionListener _playerListener;
     [SerializeField, Foldout("Listeners")] private DialogueListener _dialogueListener;
-    [SerializeField, Foldout("Listeners")] private UIListener _uiListener;
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactListener;
     private Camera _mainCamera;
 
@@ -38,7 +37,6 @@ public class PlayerManager : MonoBehaviour
 
     //Dialogues
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private LineView _lineView;
-    [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NavMeshHit navHit;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private NPC targetNpc;
     [ReadOnly, SerializeField, BoxGroup("Dialogue")] private TalkingSetting targetTalkingSetting;
     [SerializeField, BoxGroup("Dialogue")] private GameObject targetTalkPosition;
@@ -104,10 +102,12 @@ public class PlayerManager : MonoBehaviour
     #region Awake, Start, and Update...
     void OnEnable() {
         _playerListener.stopInteract.AddListener(StopInteract);
+        _playerListener.rotateToward.AddListener(RotateToward);
     }
 
     void OnDisable() {
         _playerListener.stopInteract.RemoveListener(StopInteract);
+        _playerListener.rotateToward.RemoveListener(RotateToward);
     }
 
     void Start()
@@ -150,8 +150,8 @@ public class PlayerManager : MonoBehaviour
 
         _mainCamera = Camera.main;
 
-        //add exit dialogue state function to dialogue runner's OnDialogueComplete event
-        _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
+        // //add exit dialogue state function to dialogue runner's OnDialogueComplete event
+        // _dialogueRunner.onDialogueComplete.AddListener(ChangeToPreviousState);
     }
 
     
@@ -214,8 +214,10 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("rotation toward target is null");
             return;
         }
-        Vector3 targetAngle = new Vector3(target.position.x -target.position.x, 0, target.position.z - target.position.z).normalized;
-        PlayerFace(new Vector2(targetAngle.x,targetAngle.z));
+        
+        
+        Vector3 targetDirection = target.position - transform.position;
+        _characterMovement.SetMovement(targetDirection);
     }
  
     /// ray cast from camera to mouse world position,
@@ -231,6 +233,7 @@ public class PlayerManager : MonoBehaviour
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, interactionRaycastMask))
         {
             hitInfo.transform.TryGetComponent<Interactable>(out interactable);
+            
         }
         return interactable;
     }
@@ -239,11 +242,12 @@ public class PlayerManager : MonoBehaviour
     public void OnMouseStartHoverInterOBJ() {
         if (HoveringInteractable != null) {
             // draw outlines
-            foreach (Material mat in HoveringInteractable.OutlineMats)
-                mat.SetFloat("_OutlineWidth", 2.5f);
-            
-            // invoke events
-            // _playerListener.OnMouseStartHoverInteractable(HoveringInteractable);
+            //  foreach (Material mat in HoveringInteractable.OutlineMats)
+            //    mat.SetFloat("_OutlineWidth", 2.5f);
+          
+           
+               HoveringInteractable.GetComponent<AddOutline>().enableHighlight = true;
+            PointerChanger.Instance.ChangeCursor(HoveringInteractable.GetComponent<Interactable>().Type);
         }
     }
 
@@ -253,7 +257,11 @@ public class PlayerManager : MonoBehaviour
             // clear outlines
             foreach (Material mat in PreHoveringInteractable.OutlineMats)
                 mat.SetFloat("_OutlineWidth", 0.0f);
-
+            PreHoveringInteractable.GetComponent<AddOutline>().enableHighlight = false;
+            if (HoveringInteractable == null)
+            {
+                PointerChanger.Instance.ChangeCursor(InteractableType.Normal);
+            }
             // invoke events
             // _playerListener.OnMouseEndHoverInteractable(HoveringInteractable);
         }
@@ -266,28 +274,6 @@ public class PlayerManager : MonoBehaviour
         InteractionPosition = null;
         ChangeState(stateExplore);
     }
-
-    /// go to the interacting position
-    public void WalkToInteractingPosition(Transform interactingPosition) {
-        _characterPathFinder.SetNewDestination(interactingPosition);
-    }
-
-    /// return whether player is close enough to interact
-    public bool IsReadyToInteract(Transform destination) {
-        if (Vector3.Distance(transform.position, destination.position) <= 0.3f) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // private void TryInteract(Interactable interactable)
-    // {
-    //     if (_characterPathFinder.DistanceToNextWaypoint <= 0.5f)
-    //     {
-
-    //     }
-    // }
 
     IEnumerator TryInteract(Interactable interactable)
     {

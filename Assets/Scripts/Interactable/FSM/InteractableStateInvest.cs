@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class InteractableStateInvest : InteractableStateBase
 {
+    private float cd = 0.5f;
     public override void EnterState(Interactable interactable)
     {
-        Debug.Log("Started Investigation");
+        cd = 0.5f;
     }
     public override void UpdateState(Interactable interactable)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (cd >= 0)
         {
-            interactable.NextDialogueLine();
+            cd -= Time.deltaTime;
+        }
+        else
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                interactable.DetectInvestigatable();
+            }
         }
     }
-    public override void LeaveState(Interactable interactable) { }
+    public override void LeaveState(Interactable interactable) {}
 }

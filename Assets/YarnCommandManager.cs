@@ -49,10 +49,10 @@ public class YarnCommandManager : MonoBehaviour
     }
 
     [YarnCommand("nodeStatus")]
-    public void NodeStatus(string nodeName)
+    public void NodeStatus(string nodeName,string tempvalue)
     {
        
-        variableStorage.SetValue("$tempBool", MindPalaceManager.activeManager.GetNodeActive(nodeName));
+        variableStorage.SetValue(tempvalue, MindPalaceManager.activeManager.GetNodeActive(nodeName));
     }
     [YarnCommand("activeNode")]
     public void ActiveNode(string nodeName)
@@ -131,6 +131,11 @@ public class YarnCommandManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+    [YarnCommand("TentStopInteraction")]
+    public void TentStopInteract(GameObject Interactable)
+    {
+        Interactable.GetComponent<Tent>().StopInteraction();
     }
 }
 

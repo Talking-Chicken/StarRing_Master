@@ -1,0 +1,97 @@
+﻿title: RitaNight
+tags:
+---
+Mr. Rabbit: Wow, this lady sure doesn't hold back. Give her a camping spot, and she takes over the whole dining area.
+<<lookat StarRingDialogueSystem Rita Player>> 
+Rita: Hey, you're the other clerk, right? Not the annoying one who keeps telling me what I can't do all day, but the other one.
+Amo: Ah... ha... I think we only have two clerks in total.
+Rita: I noticed you moved the convenience store sign. Not sure why you did it, but thanks to you, I was able to.... conduct my research.
+Amo: Um... if you don't mind me asking... what... um... what's the purpose of bringing all this equipment to the store?
+Rita: While I appreciate your help, I'm sorry, adding more people to the loop at this critical moment only increases the risk.
+Rita: But I promise, once I make a breakthrough with my research by tomorrow morning, you'll be the first to know!
+Mr. Rabbit: Looks like we just have to wait for dawn to find out her plan. Oh, wait, there's a serial killer about to attack us from outside. Looks like you might not have a tomorrow.
+Rita: If you could excuse me, I need to find a way to restore power to my devices. If I can't get them set up by midnight, the past few months will have been for nothing.
+Amo: Ah, alright then! I won't disturb you!
+Mr. Rabbit: Are you just going to let her get back to work? Amo, you helped her out so she could set up her tent here! You could stand to be a bit firmer.
+Amo: I was thinking maybe we could try to guess why she's here. If we guess right, she might not have a reason to keep her plans from us anymore.
+Mr. Rabbit: What? Amo, I didn't expect you to catch on so quickly. Since she said we could look around, why don't you investigate? I'll keep track of everything on the Logic Map.
+Mr. Rabbit: Once we've gathered enough information, you can use your Logic Map to deduce what we need to do next. Look at you, already falling in love with the process.
+Amo: I wouldn't go that far. Having someone in your head discussing things with you feels really odd. I wonder how people of this era got used to it.
+<<activeNode StarRingDialogueSystem Making_Progress>>
+<<activeNode StarRingDialogueSystem question_Rita_store>>
+===
+title: Ritabeforesolution
+tags:
+---
+Amo: I can look around a bit. Once I've got some clues, I can piece together some conclusions in my logic map and then share my thoughts with Rita.
+===
+title: Ritahavesolution
+tags:
+---
+Amo: Rita, I think... I think I know why you came to the store!
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem repair_service $tempBool>>
+<<set $tempBool1 = false>>
+<<nodeStatus StarRingDialogueSystem magic_research $tempBool1>>
+<<set $tempBool2 = false>>
+<<nodeStatus StarRingDialogueSystem refund_soda $tempBool2>>
+<<set $tempBool3 = false>>
+<<nodeStatus StarRingDialogueSystem you_are_a_spy $tempBool3>>
+    -> If you're looking to get your camping light fixed, now might not be the best time.<<if $tempBool>>
+        Rita: Huh? What are you talking about? What camping light?
+        Amo: The one in your tent... the green camping light? The one that's flickering?
+        Rita: Oh, that? I just grabbed it this morning from my dad's garage while I was picking up the tent.
+        Amo: Right, since it's already evening, if you want it fixed, you might have to wait until tomorrow morning. Our repair services are only available during the day.
+        Rita: Ah, so you think I carried all this equipment from three stops away, set it all up, and even brought a tent to stay overnight in the store just to get a... camping light fixed?
+        Mr. Rabbit: Yep, he actually thought that.
+        Amo: Well, when you put it like that... it doesn't sound very reasonable.
+        Amo: I'm so embarrassed! Sorry to bother you. I'll be going now! We can talk later!
+        Rita: Eh, maybe let's not talk about this topic later...
+        Mr. Rabbit: Do you remember this girl mentioned she came here to conduct some sort of research? Best gather information on that front.
+    -> I know about your magic device.<<if $tempBool1>>
+        Amo: While I don't know the specifics, I know you came to this convenience store to investigate its connection to magic.
+        Rita: .......
+        Amo: Wait, did I get that wrong? Oh my, what have I said, this is so embarrassing.
+        Amo: Ah, it's all your fault, Rabbit! What magic device? What kind of chuunibyou statement is that?
+        Rita: Wait, how did you know my device could detect the flow of magical energy, unless...
+        Amo: I'm embarrassed to say, I peeked at your computer. I found the design blueprints for your device in there.
+        Rita: My goodness!
+        Amo: Ugh, I'm really sorry! I hope you don't mind, I didn't touch anything else after I saw the document...
+        Rita: My goodness, you can actually use a computer!!
+        Amo: Huh?
+        Rita: You can actually use a computer! I thought no one in this era knew how to use them anymore. I only learned how to save files under my dad's guidance.
+        Mr. Rabbit: Do all high schoolers exaggerate like this? Personal electronic devices only phased out of society about 30 years ago.
+        Amo: Well, where I was before... neural implants weren't very common, so... there were a lot of these old electronic devices. But how do you still have your own electronic device in this era?
+        Beep beep, click click, connection successful
+        Rita: Oh my gosh, my device is connected. It turns out I never turned on the circuit breaker. Damn, if someone had reminded me, I wouldn't have had to waste an entire night here. It's almost midnight.
+        Rita: I really wish I had the chance to talk more about how my dad managed to keep this computer, but now that I've finally connected to my device, I need to hurry and start intercepting data.
+        Mr. Rabbit: Midnight? Not good, we've wasted too much time. If we don't hurry, the Raincoat Killer will be here soon.
+    -> You're conducting a study on nutrition! That's why you hate our store's soda.<<if $tempBool2>>
+        Rita: Huh?
+        Amo: I saw the unopened drinks in your tent. You must really dislike our store's Miso Lemon soda.
+        Rita: I do hate that soda, but so what?
+        Amo: So, your research in the store is actually about nutrition! You're here to study why this soda tastes so bad.
+        Amo: You could be infringing on the company's trade secrets! You really shouldn't be doing that. As for those unopened sodas, I'll try to get you a refund.
+        Amo: Ah, that's not it?
+        Rita: No, it's not. But honestly, I am quite curious about what kind of recipe makes a soda taste this bad.
+        Amo: Oh, okay... Then I'll just... maybe I should leave....
+        Mr. Rabbit: Uh oh, looks like someone's crashing.
+        Rita: What about the refund, can you still do that?
+        Mr. Rabbit: Seems like that theory wasn't quite right. Maybe think it over and come back to question Rita when you have a new conclusion.
+        Amo: I'm so embarrassed. There's no place for me in this world anymore.
+    -> Just confess, Rita, you're actually an industrial spy.<<if $tempBool3>>
+        Rita: Huh?
+        Amo: I saw the equipment you brought! You plan to use that device to intercept the store's communications.
+        Rita: I indeed am... wait, what does that prove?
+        Amo: While I don't know what you plan to do with the intercepted messages, it could be illegal. If you're here to steal our store's business secrets, I'll stop you.
+        Mr. Rabbit: Amo, don't be too hard on her! We actually need her to do some 'illegal' stuff to help us get into the manager's office.
+        Rita: I do intend to listen in on the store's communications, but that's because I have every reason to believe this store is connected to ma... ah, supernatural scientific phenomena!
+        Rita: For that, I need to gather some data for my research. But I assure you, I'll only use the data for academic purposes, I won't sell it to other companies for profit.
+        Rita: Now, if you don't mind, I need to continue testing my device's connection, just like I promised, once I have results, you'll be the first to know tomorrow.
+        Mr. Rabbit: Looks like we're getting closer to the truth, but it seems this isn't why Rita came to the store. Let's try another direction.
+===
+title: talktoRita
+tags:
+---
+Amo: Maybe I should have talked to Rita before messing with her stuff.
+===

@@ -9,6 +9,8 @@ namespace MeadowGames.UINodeConnect4.SampleScene.ScrollViewGraph
     {
         int maximumTouchCount = 2;
 
+        const PointerEventData.InputButton button = PointerEventData.InputButton.Right;
+
         public Vector2 MultiTouchPosition
         {
             get
@@ -26,7 +28,7 @@ namespace MeadowGames.UINodeConnect4.SampleScene.ScrollViewGraph
 
         public override void OnBeginDrag(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Middle)
+            if (eventData.button == button)
             {
                 eventData.button = PointerEventData.InputButton.Left;
                 base.OnBeginDrag(eventData);
@@ -40,7 +42,7 @@ namespace MeadowGames.UINodeConnect4.SampleScene.ScrollViewGraph
 
         public override void OnEndDrag(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Middle)
+            if (eventData.button == button)
             {
                 eventData.button = PointerEventData.InputButton.Left;
                 base.OnEndDrag(eventData);
@@ -54,7 +56,7 @@ namespace MeadowGames.UINodeConnect4.SampleScene.ScrollViewGraph
 
         public override void OnDrag(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Middle)
+            if (eventData.button == button)
             {
                 eventData.button = PointerEventData.InputButton.Left;
                 base.OnDrag(eventData);

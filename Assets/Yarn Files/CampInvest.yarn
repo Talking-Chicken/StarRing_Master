@@ -7,5 +7,98 @@ title: LampInvestigation
 tags:
 position: -64,128
 ---
-Amo: A camping lamp that is flashing.
+Amo: This camping lantern reminds me of when I used to participate in night watch activities before I started working here. I'd often forget to charge it, leading to a bit of panic when I actually needed to use it.
+Mr. Rabbit: Judging by how this lantern is flickering, even if you did remember to charge it, I doubt it would last until dawn.
+===
+title: LampLongInvestigation
+tags:
+position: -64,128
+---
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem Camping_Lamp $tempBool>>
+<<if $tempBool>>
+    Mr. Rabbit: I've just added a malfunctioning camping lantern to our Logic Map. Although I don't know why.
+<<else>>
+    Amo: Maybe this malfunctioning lantern is related to why Rita came to our store?
+    Mr. Rabbit: Maybe... Yeah, wait, how so?
+    <<activeNode StarRingDialogueSystem Camping_Lamp>>
+<<endif>>
+===
+title: AmoExit
+tags:
+position: -64,128
+---
+Mr. Rabbit: Leave the tent?
+-> Sure
+    <<TentStopInteraction StarRingDialogueSystem tent>>
+    <<feedbackRestore StarRingDialogueSystem TentCameraFeedback>>
+    <<feedbackPlayer StarRingDialogueSystem DinningAreaCameraFeedback>>
+-> Nay
+===
+title: LaptopInvestiagtion
+tags:
+position: -64,128
+---
+Amo: Looks like this is one of Rita's log documents. It seems to be about some installation steps for a device she's been tinkering with.
+Mr. Rabbit: And this device is called a "Magic Detection Device"? That's pretty out there.
+<<activeNode StarRingDialogueSystem ResearchNote>>
+===
+title: SignalDevice
+tags:
+position: -64,128
+---
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem SignalDevice $tempBool>>
+<<if $tempBool>>
+    Amo: It looks like Rita is trying to restore power to this signal interception device. Wonder what she plans to do with this kind of specialized equipment.
+<<else>>
+    Mr. Rabbit: The Standard-3 Signal Interception Device, mass-produced by Rabbit Heavy Industries last year, can intercept all communications within a certain range by targeting specific signals.
+    Amo: Wow, is this something a high schooler can get their hands on? What's she doing bringing this to the shop?
+    Mr. Rabbit: To steal the shop's communications? Whatever it is, it's definitely related to why she came here.
+    <<activeNode StarRingDialogueSystem SignalDevice>>
+<<endif>>
+===
+title: SodaInvestigation
+tags:
+position: -64,128
+---
+Amo: Look at this, not a single one of these soda cans is opened. Seems like Rita must really dislike them. To be honest, I can't say I blame her.
+Mr. Rabbit: Working in a convenience store where the signature product is Miso Lemon soda might not be the pinnacle of career aspirations.
+===
+title: SodaLongInvestigation
+tags:
+position: -64,128
+---
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem Soda $tempBool>>
+<<if $tempBool>>
+    Mr. Rabbit: I've now integrated the least popular soda in history into our logic map.
+<<else>>
+    Mr. Rabbit: Wait a second, Amo, are you sure you want to add the soda to our logic map?
+    Amo: I really don't know. Maybe the presence of these sodas signifies why Rita came to the convenience store.
+    <<activeNode StarRingDialogueSystem Soda>>
+<<endif>>
+===
+title: DeviceInvestigation
+tags:
+position: -64,128
+---
+Amo: Wow, I've never seen anything like these before. Wait, is that a tomato can connected to a fan? What's that for?
+Mr. Rabbit: Such a crude piece of equipment. Look at those exposed wires. She must have made this herself, but why?
+Amo: I'm not sure, maybe there's a manual or some notes around here that could tell us what it's for?
+Mr. Rabbit: Yeah, right. I'm sure you'll find a document explaining how a tomato can as a machine casing solves the cooling problem.
+===
+title: DeviceLongInvestigation
+tags:
+position: -64,128
+---
+<<set $tempBool = false>>
+<<nodeStatus StarRingDialogueSystem WeirdDevice $tempBool>>
+<<if $tempBool>>
+    Mr. Rabbit: Great, now our shared brain is filled with everything under the sun.
+<<else>>
+    Mr. Rabbit: Amo! You can't just add everything you see to the Logic Map; your brain will get cluttered.
+    Amo: Huh? You never know what might come in handy for our deductions. Isn't the safest bet to gather all the clues we can? That's how all the old detective games I've played work.
+    <<activeNode StarRingDialogueSystem WeirdDevice>>
+<<endif>>
 ===
