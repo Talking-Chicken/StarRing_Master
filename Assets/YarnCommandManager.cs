@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
@@ -16,7 +16,7 @@ public class YarnCommandManager : MonoBehaviour
     Animator characterAnimator;
     IK_Manager IKManger;
     CinemachineBrain cinemachineBrain;
-    
+   
 
     [SerializeField, Foldout("Listeners")] private InteractableActionListener _interactableListener;
     
@@ -136,6 +136,50 @@ public class YarnCommandManager : MonoBehaviour
     public void TentStopInteract(GameObject Interactable)
     {
         Interactable.GetComponent<Tent>().StopInteraction();
+    }
+    [YarnCommand("RabbitShow")]
+    public void RabbitShow(GameObject MrRabbit)
+    {
+        StartCoroutine(ScaleUp(MrRabbit));
+
+    }
+     IEnumerator ScaleUp(GameObject MrRabbit)
+    {
+        float scaleTime = 0.3f; // 完成缩放的时间
+        float currentTime = 0f;
+
+        while (currentTime <= scaleTime)
+        {
+            float yScale = Mathf.Lerp(0, 0.3f, currentTime / scaleTime);
+            MrRabbit.transform.localScale = new Vector3(0.3f, yScale, 0.3f);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 确保缩放到精确的1
+        MrRabbit.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+    }
+    [YarnCommand("RabbitShow")]
+    public void RabbitDis(GameObject MrRabbit)
+    {
+        StartCoroutine(ScaleDown(MrRabbit));
+
+    }
+    IEnumerator ScaleDown(GameObject MrRabbit)
+    {
+        float scaleTime = 0.3f; // 完成缩放的时间
+        float currentTime = 0f;
+
+        while (currentTime <= scaleTime)
+        {
+            float yScale = Mathf.Lerp(0, 0, currentTime / scaleTime);
+            MrRabbit.transform.localScale = new Vector3(0.3f, yScale, 0.3f);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 确保缩放到精确的1
+        MrRabbit.transform.localScale = new Vector3(0.3f, 0, 0.3f);
     }
 }
 
