@@ -23,6 +23,7 @@ public class FPSCameraControl : MonoBehaviour
     public bool Activied=false;
     public bool canControl = true;
     public static bool isLongPressed = false;
+    public float smoothTime = 0.1f;
     void Start()
     {
        // 
@@ -43,10 +44,16 @@ public class FPSCameraControl : MonoBehaviour
 
             xRotation -= mouseY;
             yRotation += mouseX;
-            // xRotation = Mathf.Clamp(xRotation, -90f, 90f); 
-            transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-            playerBody.Rotate(Vector3.up * mouseX);
-        //  canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
+
+            // xRotation = Mathf.Clamp(xRotation, -90f, 90f); // 保持这个限制以避免翻转
+
+            Quaternion targetRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+            // 使用Quaternion.Slerp插值到目标旋转
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smoothTime);
+
+            // 玩家身体的水平旋转也许需要平滑处理，这取决于你的需求
+            playerBody.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+            //  canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             
             if (Physics.Raycast(ray, out hit))
