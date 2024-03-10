@@ -1,0 +1,24 @@
+﻿title: shaman
+tags:
+---
+<<set $lookshaman = false>>
+Mr. Rabbit: Never be shame for taking a break, Amo. 
+    -> Sure
+    <<set $lookshaman = true>>
+    <<jump shamanAuto1>> 
+    -> There are still things I need to do in this time period.
+
+===
+title: shamanAuto1
+tags:
+---
+Mr. Rabbit: Never be shame for taking a break, Amo. 
+<<wait 4>>
+<<jump shamanAuto2>>
+===
+title: shamanAuto2
+tags:
+---
+Mr. Rabbit: why am I here though. 
+<<wait 4>>
+===

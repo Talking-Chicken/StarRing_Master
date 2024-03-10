@@ -159,7 +159,7 @@ public class YarnCommandManager : MonoBehaviour
         // 确保缩放到精确的1
         MrRabbit.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
     }
-    [YarnCommand("RabbitShow")]
+    [YarnCommand("RabbitDis")]
     public void RabbitDis(GameObject MrRabbit)
     {
         StartCoroutine(ScaleDown(MrRabbit));
