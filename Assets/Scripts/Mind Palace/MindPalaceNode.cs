@@ -96,6 +96,10 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
     }
     private void Update()
     {
+        if (Reacting)
+        {
+            Debug.Log(Node.name+" is reacting");
+        }
         if (onDragging && Input.GetMouseButtonUp(0))
         {
             NodeListener.SetDraggingTimer(0);
@@ -121,9 +125,19 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
             }
         }
     }
+    public bool GetOnDragging()
+    {
+        return onDragging;
+    }
+    public void SetReacting(bool reacting)
+    {
+        Reacting = reacting;
+    }
     private IEnumerator ReactToRelatedNode(MindPalaceNode node, Node nextNode)
     {
         Reacting = true;
+        node.SetReacting(true);
+        //Debug.Log(nextNode.name);
         float timer = 0;
         while (node && onDragging && Vector2.Distance(node.rectTransform.anchoredPosition, rectTransform.anchoredPosition) < relatedRange)
         {
@@ -141,6 +155,7 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
         }
         GetComponent<Image>().color = node.GetComponent<Image>().color = Color.white;
         Reacting = false;
+        node.SetReacting(false);
     }
 
     // set current state of the node to index, and active the corresponding content group;

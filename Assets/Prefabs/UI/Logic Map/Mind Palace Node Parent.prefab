@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 9012719565896918023}
   - component: {fileID: 2199401444454182194}
   - component: {fileID: 7948714771427541784}
+  - component: {fileID: 3049330245039183185}
   m_Layer: 5
   m_Name: Mind Palace Node Parent
   m_TagString: Untagged
@@ -201,10 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 8db505c484495e5419327cada47fc2af, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 50, y: 50, z: 50, w: 50}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -301,10 +302,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 40
+    m_Left: 50
+    m_Right: 50
+    m_Top: 50
+    m_Bottom: 100
   m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
@@ -326,6 +327,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbc227b3815013489802a341addbfb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  draggingEventList: []
+  onactiveEvent: []
+--- !u!114 &3049330245039183185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395089161178413307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c71c33602985a542adb18a9bad03fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedRatio: 1
+  maxMoveSpeed: 0
+  glitchSpeed: 0
 --- !u!1 &1395089161709885844
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 429.7198, y: -21.267944}
+  m_AnchoredPosition: {x: 484, y: -76}
   m_SizeDelta: {x: 30.1407, y: 18.177}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1670403798797065827
