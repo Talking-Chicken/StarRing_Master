@@ -47,7 +47,7 @@ public class ShamanFirstInteraction : Interactable
                 {
                     // 读取autoAdvance的值
                     bool autoAdvanceValue = (bool)autoAdvanceField.GetValue(dialogueline);
-                    Debug.Log("Current autoAdvance value: " + autoAdvanceValue);
+                   
 
                     // 修改autoAdvance的值
                     autoAdvanceField.SetValue(dialogueline, true);

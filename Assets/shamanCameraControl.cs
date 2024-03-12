@@ -34,50 +34,54 @@ public class shamanCameraControl : MonoBehaviour
     void Update()
     {
 
-        //   Cursor.lockState = CursorLockMode.Locked;
+        //   
 
-
-        // 获取鼠标输入
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-        // 总是应用飘逸效果，无论是否有鼠标输入
-        float driftX = Random.Range(-driftAmount, driftAmount) * driftSensitivity * Time.deltaTime;
-        float driftY = Random.Range(-driftAmount, driftAmount) * driftSensitivity * Time.deltaTime;
-
-        // 将飘逸效果应用到旋转逻辑上
-        xRotation -= (mouseY + driftY);
-        yRotation += (mouseX + driftX);
-
-        xRotation = Mathf.Clamp(xRotation, -20f, 20f); // 保持这个限制以避免翻转
-        yRotation = Mathf.Clamp(yRotation, 80f, 100f);
-        Quaternion targetRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-        // 使用Quaternion.Slerp插值到目标旋转
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smoothTime);
-
-        // 玩家身体的水平旋转也许需要平滑处理，这取决于你的需求
-        //playerBody.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
-        //  canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
-        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-        if (Physics.Raycast(ray, out hit))
+        if (Activied)
         {
-            if (hit.collider.tag == "Mask")
+            Cursor.lockState = CursorLockMode.Locked;
+            // 获取鼠标输入
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+            // 总是应用飘逸效果，无论是否有鼠标输入
+            float driftX = Random.Range(-driftAmount, driftAmount) * driftSensitivity * Time.deltaTime;
+            float driftY = Random.Range(-driftAmount, driftAmount) * driftSensitivity * Time.deltaTime;
+
+            // 将飘逸效果应用到旋转逻辑上
+            xRotation -= (mouseY + driftY);
+            yRotation += (mouseX + driftX);
+
+            xRotation = Mathf.Clamp(xRotation, -10f, 40f); // 保持这个限制以避免翻转
+            yRotation = Mathf.Clamp(yRotation, 60f, 120f);
+            Quaternion targetRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+            // 使用Quaternion.Slerp插值到目标旋转
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smoothTime);
+
+            // 玩家身体的水平旋转也许需要平滑处理，这取决于你的需求
+            //playerBody.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+            //  canvas.transform.position = hit.collider.GetComponent<Investigation>().ui_location.position;
+            Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+            if (Physics.Raycast(ray, out hit))
             {
-                pressTimer = 0;
-                Debug.Log("see");
-            }
-            else 
-            {
-                pressTimer += Time.deltaTime;
-                if (pressTimer >= longPressDuration)
+                if (hit.collider.tag == "Mask")
                 {
                     pressTimer = 0;
-                    dialogue.Stop();
-                    dialogue.StartDialogue("Amodaydream");                    Debug.Log("not see");
+                    Debug.Log("Ray hit: " + hit.collider.name);
+                    Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
+                }
+                else
+                {
+                    pressTimer += Time.deltaTime;
+                    if (pressTimer >= longPressDuration)
+                    {
+                        pressTimer = 0;
+                        dialogue.Stop();
+                        dialogue.StartDialogue("AmoDayDream");
+                        Debug.Log("not see");
+                    }
                 }
             }
+
         }
-
-
     }
 }
