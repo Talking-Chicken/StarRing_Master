@@ -18,7 +18,9 @@ public class MPNodeShaderControl : MonoBehaviour
     public float speedRatio;
     public float maxMoveSpeed;
     float randomSeed;
-    [Range(1, 10)] public float glitchSpeed;
+    [Range(0.01f, 10)] public float glitchSpeed;
+
+    private float glitchSpeedInfluencer = 1;
     public MindPalaceNode MindPalaceNode
     {
         get
@@ -62,10 +64,12 @@ public class MPNodeShaderControl : MonoBehaviour
 
         bool onReacting = MindPalaceNode.Reacting;
         _mat.SetFloat("_DoGlitch", (onReacting) ? 1 : 0);
-        _mat.SetFloat("_DoSquareGlitchInside", (onReacting) ? 1 : 0);
+        _mat.SetFloat("_DoSquareGlitchInside", (onReacting && MindPalaceNode.ReactingProgress > .5f) ? 1 : 0);
         if (onReacting)
         {
-            _mat.SetFloat("_RandomSeed", Time.time + randomSeed);
+            glitchSpeedInfluencer = Mathf.Lerp(.1f, 1f, MindPalaceNode.ReactingProgress);
+            float timeSeed = Mathf.Round(Time.time * glitchSpeed * glitchSpeedInfluencer);
+            _mat.SetFloat("_RandomSeed", timeSeed + randomSeed);
         }
 
         image.material = _mat;

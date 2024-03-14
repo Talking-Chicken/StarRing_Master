@@ -45,7 +45,9 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
     private RectTransform rectTransform;
     //range of related node
     const float relatedRange = 800f;
-    const float reactiveTime = 2.5f;
+    const float reactiveTime = 4f;
+
+    public float ReactingProgress { get; set; }
 
     MindPalaceNodeListener _nodeListener;
     public MindPalaceNodeListener NodeListener
@@ -142,6 +144,7 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
         while (node && onDragging && Vector2.Distance(node.rectTransform.anchoredPosition, rectTransform.anchoredPosition) < relatedRange)
         {
             GetComponent<Image>().color = node.GetComponent<Image>().color = Color.Lerp(Color.white, Color.green, timer / reactiveTime);
+            ReactingProgress = node.ReactingProgress = timer / reactiveTime;
             if (timer > reactiveTime)
             {
                 //react
@@ -153,6 +156,7 @@ public class MindPalaceNode : MonoBehaviour, IPointerDownHandler
             timer += Time.deltaTime;
             yield return null;
         }
+        ReactingProgress = node.ReactingProgress = 0;
         GetComponent<Image>().color = node.GetComponent<Image>().color = Color.white;
         Reacting = false;
         node.SetReacting(false);
