@@ -17,4 +17,12 @@ public class RitaInteractionAfternoon : Interactable
         StartDialogue("Argument1");
         //  StopInteract();
     }
+    protected override void OnDialogueCompleted()
+    {
+      
+            base.OnDialogueCompleted();
+            StopInteract();
+        
+    }
+
 }
