@@ -104,6 +104,7 @@ namespace MeadowGames.UINodeConnect4.GraphicRenderer
 
             // scales the line renderer
             // scale the line renderer for world space
+
             if (Canvas.renderMode != RenderMode.WorldSpace)
             {
                 _rectTransform.localScale = Vector3.one / Canvas.scaleFactor;
@@ -133,6 +134,7 @@ namespace MeadowGames.UINodeConnect4.GraphicRenderer
                         if (rt.localScale.x != 0)
                             _rectTransform.localScale = _rectTransform.localScale / rt.localScale.x;
                     }
+                    _rectTransform.localScale *= .75f;
                 }
             }
 
