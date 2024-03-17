@@ -159,14 +159,7 @@ public class PlayerManager : MonoBehaviour
     {
         currentState.UpdateState(this);
 
-        if (Input.GetKeyDown(KeyCode.J)) {
-            if (TargetNPC != null)
-                WalkToNearestTalkPosition(TargetNPC);
-        }
-
-        currentStateName = currentState.ToString();
-
-        // print(Display.currentResolution);    
+        currentStateName = currentState.ToString();    
     }
     #endregion
 
@@ -215,9 +208,8 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         
-        
         Vector3 targetDirection = target.position - transform.position;
-        _characterMovement.SetMovement(targetDirection);
+        _characterMovement.SetMovement(new Vector2(targetDirection.x, targetDirection.z));
     }
  
     /// ray cast from camera to mouse world position,
@@ -293,85 +285,32 @@ public class PlayerManager : MonoBehaviour
     }
 
     #region Dialogue
-    /// compare all talking positions of the NPC
-    /// return the nearrest transform
-    public TalkingSetting FindNearestTalkSetting(NPC npc) {
-        if (npc.TalkingSettings.Count <= 0)
-            return null;
-        
-        Vector3 nearestPosition = transform.position;
-        TalkingSetting nearestTalkingSetting = null;
-        float minDistance = -1.0f;
-        for (int i = 0; i < npc.TalkingSettings.Count; i++) {
-            NavMeshPath path = new NavMeshPath();
-            NavMesh.CalculatePath(transform.position, npc.TalkingSettings[i].TalkingPosition, NavMesh.AllAreas, path);
+    // /*nave mesh find the npc's nearest talking position (all talking positions are inside NPC)
+    //   if there's no talking point in the scene, instantiate one
+    //   if there's one, change the position of it*/
+    // public Transform WalkToNearestTalkPosition(NPC npc) {
+    //     NavMeshHit myNavHit;
+    //     FindNearestTalkSetting(npc);
+    //     Vector3 targetPosition = TargetTalkingSetting.TalkingPosition;
 
-            //get the total distance of the path
-            float distance = 0.0f;
-            for (int j = 0; j < path.corners.Length - 1; j++)
-                distance += Vector3.Distance(path.corners[j], path.corners[j + 1]);
+    //     if (TargetTalkingSetting == null)
+    //         return null;
+    //     if (targetPosition == null)
+    //         return null;
 
-            //compare minDistance with the current path distance
-            if (minDistance < 0 || minDistance > distance) {
-                minDistance = distance;
-                nearestPosition = npc.TalkingSettings[i].TalkingPosition;
-                nearestTalkingSetting = npc.TalkingSettings[i];
-            }
-        }
-        return TargetTalkingSetting = nearestTalkingSetting;
-    }
-
-    /*nave mesh find the npc's nearest talking position (all talking positions are inside NPC)
-      if there's no talking point in the scene, instantiate one
-      if there's one, change the position of it*/
-    public Transform WalkToNearestTalkPosition(NPC npc) {
-        NavMeshHit myNavHit;
-        FindNearestTalkSetting(npc);
-        Vector3 targetPosition = TargetTalkingSetting.TalkingPosition;
-
-        if (TargetTalkingSetting == null)
-            return null;
-        if (targetPosition == null)
-            return null;
-
-        if(NavMesh.SamplePosition(targetPosition, out myNavHit, 100 , -1))
-        {
-            GameObject talkingPosition = GameObject.Find("TalkingPosition");
-            if (talkingPosition == null) {
-                talkingPosition = Instantiate(targetTalkPosition, myNavHit.position, Quaternion.identity);
-                talkingPosition.name = "TalkingPosition";
-            } else
-                talkingPosition.transform.position = myNavHit.position;
-            _characterPathFinder.SetNewDestination(talkingPosition.transform);
-            return talkingPosition.transform;
-        }
-        return null;
-    }
-
-    public bool IsReadyToTalk(Transform destination) {
-        if (Vector3.Distance(transform.position, destination.position) <= 0.25f) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public bool IsReadyToTalk(Vector3 destination) {
-        if (Vector3.Distance(transform.position, destination) <= 0.25f) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public bool StartDialogue(NPC npc) {
-        if (!_dialogueRunner.IsDialogueRunning) {
-            _dialogueRunner.StartDialogue(npc.StartNodeBase + "_" + (npc.GetProgress(npc.StartNodeBase)+1));
-            ChangeState(stateDialogue);
-            return true;
-        }
-        return false;
-    }
+    //     if(NavMesh.SamplePosition(targetPosition, out myNavHit, 100 , -1))
+    //     {
+    //         GameObject talkingPosition = GameObject.Find("TalkingPosition");
+    //         if (talkingPosition == null) {
+    //             talkingPosition = Instantiate(targetTalkPosition, myNavHit.position, Quaternion.identity);
+    //             talkingPosition.name = "TalkingPosition";
+    //         } else
+    //             talkingPosition.transform.position = myNavHit.position;
+    //         _characterPathFinder.SetNewDestination(talkingPosition.transform);
+    //         return talkingPosition.transform;
+    //     }
+    //     return null;
+    // }
 
     public void PlayerFace(Vector2 angle) {
         _characterMovement.SetMovement(angle);
